@@ -56,8 +56,16 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // Kakao Login
+    // Login
     implementation "com.kakao.sdk:v2-user:2.13.0" // 카카오 로그인
 
     implementation "androidx.security:security-crypto:1.0.0" // Encrypted Shared Preference
+
+    // MVVM 패턴 관련 의존성
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1" // 라이프사이클
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1" // 라이프사이클
+    implementation "androidx.databinding:databinding-runtime:8.0.2" // 데이터 바인딩
+    implementation 'androidx.activity:activity-ktx:1.7.2'
+    implementation 'androidx.fragment:fragment-ktx:1.6.0'
+
 }
