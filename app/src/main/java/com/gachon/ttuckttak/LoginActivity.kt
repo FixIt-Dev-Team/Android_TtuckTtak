@@ -21,8 +21,8 @@ import kotlinx.coroutines.launch
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 
     private val TAG = "LOGIN"
-    private val userManager = UserManager(this)
-    private val tokenManager = TokenManager(this)
+    private val userManager: UserManager by lazy { UserManager(this) }
+    private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

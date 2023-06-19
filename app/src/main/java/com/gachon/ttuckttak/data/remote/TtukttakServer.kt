@@ -11,6 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object TtukttakServer {
+    // Todo: URL 작성
     private const val URL = ""
 
     private val retrofit = Retrofit.Builder()
