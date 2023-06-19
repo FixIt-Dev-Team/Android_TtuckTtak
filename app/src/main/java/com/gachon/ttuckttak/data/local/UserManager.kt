@@ -1,12 +1,18 @@
 package com.gachon.ttuckttak.data.local
 
 import android.content.Context
-import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 
 class UserManager(context: Context) {
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(
-        "UserPrefs",
-        Context.MODE_PRIVATE
+    private val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
+    private val masterKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
+    private val sharedPreferences = EncryptedSharedPreferences.create(
+        "encryptedShared",
+        masterKeyAlias,
+        context,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
     fun saveUserIdx(data: String) {
