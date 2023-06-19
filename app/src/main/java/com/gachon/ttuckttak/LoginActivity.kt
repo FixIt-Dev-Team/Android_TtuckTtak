@@ -42,6 +42,43 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         binding.buttonKakaoLogin.setOnClickListener {
             kakaoLogin()
         }
+
+        binding.buttonGoogleLogin.setOnClickListener {
+            googleLogin()
+        }
+    }
+
+    private fun googleLogin() {
+
+    }
+
+    /**
+     * 생성된 구글 인가 코드를 이용해 뚝딱 서비스만의 token 발급받기
+     */
+    private fun loginWithGoogle(authorizationCode: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            Log.i(TAG, "구글 인가 코드를 사용해 뚝딱 서비스 로그인을 시도합니다.")
+            val result = TtukttakServer.loginWithGoogle(authorizationCode)
+
+            // 구글 인가 코드를 사용해 정상적으로 뚝딱 서비스에 로그인한 경우
+            if (result.isSuccess) {
+                Log.i(TAG, "구글 인가 코드를 사용하여 뚝딱 서비스에 로그인 하였습니다")
+                Log.i(TAG, result.toString())
+
+                // 사용자 식별자와 토큰 정보를 앱에 저장
+                saveInfo(data = result.data!!)
+                Log.i(TAG, "사용자 식별자와 토큰 정보를 저장하였습니다.")
+
+                // Todo: 다음 화면으로 넘어가기
+            }
+
+            // 구글 인가 코드를 사용해 정상적으로 뚝딱 서비스에 로그인하지 못한 경우
+            else {
+                Log.e(TAG, "구글 인가 코드를 사용하여 뚝딱 서비스에 로그인 하는 데 실패하였습니다")
+                Log.e(TAG, "${result.code} ${result.message}")
+                Toast.makeText(this@LoginActivity, result.message, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun kakaoLogin() {

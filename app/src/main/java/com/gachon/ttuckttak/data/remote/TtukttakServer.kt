@@ -26,4 +26,8 @@ object TtukttakServer {
         loginService.kakaoLogin(accessToken = authorizationCode)
     }
 
+    suspend fun loginWithGoogle(authorizationCode: String): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
+        loginService.googleLogin(accessToken = authorizationCode)
+    }
+
 }

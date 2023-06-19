@@ -11,4 +11,9 @@ interface LoginService {
     suspend fun kakaoLogin(
         @Header("Kakao-auth-code") accessToken: String,
     ): BaseResponse<LoginRes>
+
+    @POST("/oauth2/login/google")
+    suspend fun googleLogin(
+        @Header("Google-auth-code") accessToken: String,
+    ): BaseResponse<LoginRes>
 }
