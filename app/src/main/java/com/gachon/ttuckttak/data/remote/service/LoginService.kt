@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface LoginService {
 
-    @POST("/oauth2/login/kakao")
+    @POST("auths/oauth2/login/kakao")
     suspend fun kakaoLogin(
         @Header("Kakao-auth-code") accessToken: String,
     ): BaseResponse<LoginRes>
