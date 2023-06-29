@@ -50,18 +50,33 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         }
     }
 
+    /***
+     * Oauth를 이용한 로그인
+     *
+     * param: 카카오 인가코드 or 구글 open id token
+     * method: 카카오 or 구글
+     */
     private fun loginWithOauth(param: String, method: LoginMethod) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result: BaseResponse<LoginRes> = when (method) {
-                LoginMethod.KAKAO -> TtukttakServer.loginWithKakao(authCode = param)
-            }
+            try {
+                val result: BaseResponse<LoginRes> = when (method) {
+                    LoginMethod.KAKAO -> TtukttakServer.loginWithKakao(authCode = param)
+                }
 
-            withContext(Dispatchers.Main) {
-                if (result.isSuccess) {
-                    Log.d(TAG, result.data!!.toString())
-                    saveInfo(data = result.data)
-                } else {
-                    Log.e(TAG, "로그인 실패!")
+                withContext(Dispatchers.Main) {
+                    if (result.isSuccess) {
+                        Log.d(TAG, result.data!!.toString())
+                        saveInfo(data = result.data)
+                    } else {
+                        Log.e(TAG, "로그인 실패!")
+                        Log.e(TAG, "${result.code} ${result.message}")
+                        Toast.makeText(this@LoginActivity, "로그인 하는데 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(TAG, "서버 통신 오류: ${e.message}")
                     Toast.makeText(this@LoginActivity, "로그인 하는데 실패하였습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -70,6 +85,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     /**
      * 뚝딱 서비스의 사용자 식별자와 토큰 정보를 앱 내에 저장
+     *
+     * data: 사용자 정보 - 식별자, access token, refresh token
      */
     private fun saveInfo(data: LoginRes) {
         userManager.saveUserIdx(data.userIdx)
