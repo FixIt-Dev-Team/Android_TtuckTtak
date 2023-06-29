@@ -11,8 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object TtukttakServer {
-    // Todo: URL 작성
-    private const val URL = ""
+
+    private const val URL = "http://43.202.10.227:6543/api/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(URL)
@@ -22,8 +22,8 @@ object TtukttakServer {
 
     private val loginService: LoginService = retrofit.create(LoginService::class.java)
 
-    suspend fun loginWithKakao(authorizationCode: String): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
-        loginService.kakaoLogin(accessToken = authorizationCode)
+    suspend fun loginWithKakao(authCode: String): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
+        loginService.kakaoLogin(authCode)
     }
 
 }

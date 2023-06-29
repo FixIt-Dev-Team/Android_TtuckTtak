@@ -9,6 +9,6 @@ interface LoginService {
 
     @POST("auths/oauth2/login/kakao")
     suspend fun kakaoLogin(
-        @Header("Kakao-auth-code") accessToken: String,
+        @Header("Kakao-auth-code") authCode: String,
     ): BaseResponse<LoginRes>
 }
