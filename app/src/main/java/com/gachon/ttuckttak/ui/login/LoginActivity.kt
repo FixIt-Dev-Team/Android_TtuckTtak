@@ -60,8 +60,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         }
 
         buttonGoogleLogin.setOnClickListener {
-            val signInIntent: Intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
-            startActivityForResult(signInIntent, REQ_GOOGLE_OPEN_ID)
+            val intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
+            startActivityForResult(intent, REQ_GOOGLE_OPEN_ID)
         }
     }
 
@@ -81,7 +81,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
             if (result != null && result.isSuccess) {
                 val idToken = result.signInAccount?.idToken
-                Log.i(TAG, "구글 id token: $idToken")
+
+                if (idToken != null) {
+                    Log.i(TAG, "구글 id token: $idToken")
+                    loginWithOauth(param = idToken, method = LoginMethod.GOOGLE)
+                }
+                else {
+                    Log.e(TAG, "구글 id token 발급 실패")
+                    showToast("로그인 실패")
+                }
 
             } else {
                 Log.e(TAG, "구글 로그인 실패")
@@ -101,11 +109,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             try {
                 val result: BaseResponse<LoginRes> = when (method) {
                     LoginMethod.KAKAO -> TtukttakServer.loginWithKakao(authCode = param)
+                    LoginMethod.GOOGLE -> TtukttakServer.loginWithGoogle(idToken = param)
                 }
 
                 withContext(Dispatchers.Main) {
                     if (result.isSuccess) {
-                        Log.d(TAG, result.data!!.toString())
+                        val data = result.data!!
+                        Log.i(TAG, "userIdx: ${data.userIdx}")
+                        Log.i(TAG, "accessToken: ${data.tokenInfo.accessToken}")
+                        Log.i(TAG, "refreshToken: ${data.tokenInfo.refreshToken}")
                         saveInfo(data = result.data)
 
                     } else {
@@ -141,6 +153,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     enum class LoginMethod {
-        KAKAO
+        KAKAO, GOOGLE
     }
 }
