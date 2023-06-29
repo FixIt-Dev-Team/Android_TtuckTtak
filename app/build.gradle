@@ -20,6 +20,8 @@ android {
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
         buildConfigField "String", "KAKAO_NATIVE_APP_KEY", "\"${properties.getProperty("KAKAO_NATIVE_APP_KEY")}\""
+        buildConfigField "String", "KAKAO_REST_API_KEY", "\"${properties.getProperty("KAKAO_REST_API_KEY")}\""
+        buildConfigField "String", "KAKAO_REDIRECT_URI", "\"${properties.getProperty("KAKAO_REDIRECT_URI")}\""
 
         defaultConfig {
             manifestPlaceholders = ["KAKAO_REDIRECT_URI" : "${properties.getProperty("KAKAO_REDIRECT_URI")}"]
