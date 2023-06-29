@@ -19,12 +19,12 @@ android {
         // Local.properties에서 정보를 가져오기 위해
         Properties properties = new Properties()
         properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        buildConfigField "String", "KAKAO_NATIVE_APP_KEY", "\"${properties.getProperty("KAKAO_NATIVE_APP_KEY")}\""
-        buildConfigField "String", "KAKAO_REST_API_KEY", "\"${properties.getProperty("KAKAO_REST_API_KEY")}\""
-        buildConfigField "String", "KAKAO_REDIRECT_URI", "\"${properties.getProperty("KAKAO_REDIRECT_URI")}\""
 
         defaultConfig {
-            manifestPlaceholders = ["KAKAO_REDIRECT_URI" : "${properties.getProperty("KAKAO_REDIRECT_URI")}"]
+            buildConfigField "String", "KAKAO_NATIVE_APP_KEY", "\"${properties.getProperty("KAKAO_NATIVE_APP_KEY")}\""
+            buildConfigField "String", "KAKAO_REST_API_KEY", "\"${properties.getProperty("KAKAO_REST_API_KEY")}\""
+            buildConfigField "String", "KAKAO_REDIRECT_URI", "\"${properties.getProperty("KAKAO_REDIRECT_URI")}\""
+            buildConfigField "String", "GOOGLE_CLIENT_ID", "\"${properties.getProperty("GOOGLE_CLIENT_ID")}\""
         }
     }
 
@@ -58,8 +58,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // Kakao Login
+    // Login
     implementation "com.kakao.sdk:v2-user:2.13.0" // 카카오 로그인
+    implementation 'com.google.android.gms:play-services-auth:20.6.0' // 구글 로그인
 
     implementation "androidx.security:security-crypto:1.0.0" // Encrypted Shared Preference
 }
