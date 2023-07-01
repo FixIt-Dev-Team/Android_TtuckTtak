@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import com.gachon.ttuckttak.ui.login.LoginActivity
+import com.gachon.ttuckttak.ui.login.RegisterActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed({ //delay를 위한 handler
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }, SPLASH_VIEW_TIME)
     }

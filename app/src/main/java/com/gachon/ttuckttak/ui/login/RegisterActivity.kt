@@ -10,8 +10,8 @@ import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
-import com.gachon.ttuckttak.databinding.ActivityLoginBinding
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
+import com.gachon.ttuckttak.databinding.ActivityRegisterBinding
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.ConnectionResult
@@ -24,7 +24,7 @@ import kotlinx.coroutines.withContext
 
 // FixMe: Deprecated된 함수들 최신화
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
+class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterBinding::inflate) {
 
     private val userManager: UserManager by lazy { UserManager(this) }
     private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
@@ -55,7 +55,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     override fun initAfterBinding() = with(binding) {
         buttonKakaoLogin.setOnClickListener {
-            val intent = Intent(this@LoginActivity, KakaoLoginWebViewActivity::class.java)
+            val intent = Intent(this@RegisterActivity, KakaoLoginWebViewActivity::class.java)
             startActivityForResult(intent, REQ_KAKAO_AUTH_CODE)
         }
 
