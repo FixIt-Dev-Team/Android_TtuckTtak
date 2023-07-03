@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object TtukttakServer {
 
-    private const val URL = "http://43.202.10.227:6543/api/"
+    private const val URL = "https://ttukttak.store/api/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(URL)
