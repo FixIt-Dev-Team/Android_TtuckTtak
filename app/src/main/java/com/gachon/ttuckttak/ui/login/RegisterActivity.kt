@@ -1,9 +1,10 @@
 package com.gachon.ttuckttak.ui.login
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.BuildConfig
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
@@ -12,100 +13,74 @@ import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
 import com.gachon.ttuckttak.databinding.ActivityRegisterBinding
-import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.GoogleApiClient
 import com.kakao.sdk.common.KakaoSdk
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-
-// FixMe: Deprecated된 함수들 최신화
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterBinding::inflate) {
 
     private val userManager: UserManager by lazy { UserManager(this) }
     private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
-
-    private lateinit var googleApiClient: GoogleApiClient
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY) // Local.properties에서 값을 가져와 초기화하기
+        KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
             .requestEmail()
             .build()
 
-        googleApiClient = GoogleApiClient.Builder(this)
-            .enableAutoManage(this,
-                object : GoogleApiClient.OnConnectionFailedListener {
-                    override fun onConnectionFailed(connectionResult: ConnectionResult) {
-                        // 연결 실패 처리
-                        Log.e(TAG, "구글 연결 실패")
-                        showToast("로그인 실패!")
-                    }
-                })
-            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
     override fun initAfterBinding() = with(binding) {
         buttonKakaoLogin.setOnClickListener {
             val intent = Intent(this@RegisterActivity, KakaoLoginWebViewActivity::class.java)
-            startActivityForResult(intent, REQ_KAKAO_AUTH_CODE)
+            kakaoLoginLauncher.launch(intent)
         }
 
         buttonGoogleLogin.setOnClickListener {
-            val intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient)
-            startActivityForResult(intent, REQ_GOOGLE_OPEN_ID)
+            val intent = googleSignInClient.signInIntent
+            googleLoginLauncher.launch(intent)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQ_KAKAO_AUTH_CODE && resultCode == Activity.RESULT_OK) {
-            val authCode = data?.getStringExtra("authCode")
-            if (authCode != null) {
+    private val kakaoLoginLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            result.data?.getStringExtra("authCode")?.let { authCode ->
                 Log.i(TAG, "Received kakao auth code: $authCode")
                 loginWithOauth(param = authCode, method = LoginMethod.KAKAO)
             }
         }
+    }
 
-        if (requestCode == REQ_GOOGLE_OPEN_ID) {
-            val result = Auth.GoogleSignInApi.getSignInResultFromIntent(data as Intent)
-
-            if (result != null && result.isSuccess) {
-                val idToken = result.signInAccount?.idToken
-
+    private val googleLoginLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        GoogleSignIn.getSignedInAccountFromIntent(result.data).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val idToken = task.result?.idToken
                 if (idToken != null) {
                     Log.i(TAG, "구글 id token: $idToken")
                     loginWithOauth(param = idToken, method = LoginMethod.GOOGLE)
-                }
-                else {
+                } else {
                     Log.e(TAG, "구글 id token 발급 실패")
                     showToast("로그인 실패")
                 }
-
-            } else {
-                Log.e(TAG, "구글 로그인 실패")
-                showToast("로그인 실패")
             }
         }
     }
 
-    /***
-     * Oauth를 이용한 로그인
-     *
-     * param: 카카오 인가코드 or 구글 open id token
-     * method: 카카오 or 구글
-     */
     private fun loginWithOauth(param: String, method: LoginMethod) {
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val result: BaseResponse<LoginRes> = when (method) {
                     LoginMethod.KAKAO -> TtukttakServer.loginWithKakao(authCode = param)
@@ -118,7 +93,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
                         Log.i(TAG, "userIdx: ${data.userIdx}")
                         Log.i(TAG, "accessToken: ${data.tokenInfo.accessToken}")
                         Log.i(TAG, "refreshToken: ${data.tokenInfo.refreshToken}")
-                        saveInfo(data = result.data)
+                        saveInfo(data)
 
                     } else {
                         Log.e(TAG, "로그인 실패!")
@@ -147,8 +122,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
     }
 
     companion object {
-        const val REQ_KAKAO_AUTH_CODE = 100
-        const val REQ_GOOGLE_OPEN_ID = 101
         const val TAG = "LOGIN"
     }
 
