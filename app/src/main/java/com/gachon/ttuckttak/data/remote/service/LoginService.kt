@@ -2,14 +2,16 @@ package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface LoginService {
 
-    @POST("auths/oauth2/kakao")
+    @GET("auths/oauth2/kakao")
     suspend fun kakaoLogin(
-        @Header("Kakao-auth-code") authCode: String,
+        @Query("code") authCode: String,
     ): BaseResponse<LoginRes>
 
     @POST("auths/oauth2/google")
