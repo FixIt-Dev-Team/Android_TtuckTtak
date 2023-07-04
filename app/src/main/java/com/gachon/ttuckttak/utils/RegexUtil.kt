@@ -10,4 +10,11 @@ object RegexUtil {
         val matcher: Matcher = pattern.matcher(target.toString())
         return matcher.matches()
     }
+
+    fun isValidPw(target: String?): Boolean {
+        val regex = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{9,}"
+        val pattern: Pattern = Pattern.compile(regex)
+        val matcher: Matcher = pattern.matcher(target.toString())
+        return matcher.matches()
+    }
 }

@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.ui.login
 
+import androidx.core.widget.doOnTextChanged
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityLoginBinding
@@ -10,6 +11,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     override fun initAfterBinding() {
         setClickListener()
         setFocusChangeListener()
+        setTextChangeListener()
     }
 
     private fun setClickListener() = with(binding) {
@@ -39,11 +41,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                 if (RegexUtil.isValidEmail(email) || email.isBlank()) { // 올바른 이메일 형식이거나 비어 있는 경우
                     emailInputLayout.error = null
                 } else { // 올바르지 않은 이메일 형식을 입력한 경우
-                    emailInputLayout.error = getString(R.string.invalid_email)
+                    emailInputLayout.error = getString(R.string.invalid_email_format)
                 }
             }
         }
+    }
 
-        // Todo: 비밀번호 Regex 처리 여부
+    private fun setTextChangeListener() = with(binding) {
+        pwEditText.doOnTextChanged { pw, _, _, _ ->
+            if (RegexUtil.isValidPw(pw.toString()) || pw.isNullOrBlank()) {
+                pwInputLayout.error = null
+            } else {
+                pwInputLayout.error = getString(R.string.invalid_pw_format)
+            }
+        }
     }
 }
