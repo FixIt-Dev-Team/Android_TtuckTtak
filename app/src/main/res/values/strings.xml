@@ -7,4 +7,6 @@
     <string name="pw">비밀번호</string>
     <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
+
+    <string name="find_id_or_pw"><u>아이디 및 비밀번호 찾기</u></string>
 </resources>

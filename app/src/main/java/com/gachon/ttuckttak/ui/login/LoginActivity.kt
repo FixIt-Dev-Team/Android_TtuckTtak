@@ -27,6 +27,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         buttonBack.setOnClickListener {
             finish()
         }
+
+        textFindIdOrPw.setOnClickListener {
+            // Todo: 아이디 및 비밀번호 찾기 화면 이동
+        }
     }
 
     private fun setFocusChangeListener() = with(binding) {
