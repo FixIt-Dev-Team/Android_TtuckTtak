@@ -12,7 +12,7 @@ import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
-import com.gachon.ttuckttak.databinding.ActivityRegisterBinding
+import com.gachon.ttuckttak.databinding.ActivityStartBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -21,7 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterBinding::inflate) {
+class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::inflate) {
 
     private val userManager: UserManager by lazy { UserManager(this) }
     private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
@@ -41,7 +41,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
 
     override fun initAfterBinding() = with(binding) {
         buttonKakaoLogin.setOnClickListener {
-            val intent = Intent(this@RegisterActivity, KakaoLoginWebViewActivity::class.java)
+            val intent = Intent(this@StartActivity, KakaoLoginWebViewActivity::class.java)
             kakaoLoginLauncher.launch(intent)
         }
 
