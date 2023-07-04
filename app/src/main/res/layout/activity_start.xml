@@ -25,6 +25,13 @@
             android:layout_marginBottom="30dp"
             android:src="@drawable/img_kakao_login_button" />
 
+        <TextView
+            android:id="@+id/text_already_have_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/already_have_account" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

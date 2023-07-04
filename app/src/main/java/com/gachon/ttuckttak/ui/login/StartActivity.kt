@@ -49,6 +49,10 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
             val intent = googleSignInClient.signInIntent
             googleLoginLauncher.launch(intent)
         }
+
+        textAlreadyHaveAccount.setOnClickListener {
+            startNextActivity(LoginActivity::class.java)
+        }
     }
 
     private val kakaoLoginLauncher = registerForActivityResult(
@@ -56,9 +60,12 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             result.data?.getStringExtra("authCode")?.let { authCode ->
-                Log.i(TAG, "Received kakao auth code: $authCode")
+                Log.i(TAG, "카카오 auth code: $authCode")
                 loginWithOauth(param = authCode, method = LoginMethod.KAKAO)
             }
+        } else {
+            Log.e(TAG, "카카오 auth code 발급 실패")
+            showToast("로그인 실패")
         }
     }
 
