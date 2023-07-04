@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Android_TtuckTtak</string>
+
+    <string name="already_have_account">이미 계정이 있으신가요?</string>
+
+    <string name="email">이메일 주소</string>
+    <string name="pw">비밀번호</string>
+    <string name="invalid_email">올바르지 않은 이메일 형식 입니다!</string>
+    <string name="invalid_pw">비밀번호가 틀렸습니다!</string>
 </resources>
