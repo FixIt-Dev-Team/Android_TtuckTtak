@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/alertAndConsumer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/green_box_double"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="296dp">
+
+        <RelativeLayout
+            android:id="@+id/alertSettingsFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_box_frame">
+
+            <TextView
+                android:id="@+id/alertSettingsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="21dp"
+                android:text="알림 설정"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/goAlertSettingsButton"
+                android:layout_width="9dp"
+                android:layout_height="14dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="303dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_front_white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/consumerCenterFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="52dp"
+            android:background="@drawable/white_box_frame">
+
+            <TextView
+                android:id="@+id/consumerCenterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="21dp"
+                android:text="고객 센터"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/goConsumerCenterButtons"
+                android:layout_width="9dp"
+                android:layout_height="14dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="303dp"
+                android:src="@drawable/ic_front_white" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/changeSettingsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="788dp"
+        android:gravity="top"
+        android:text="설정 변경"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.93" />
+
+    <ImageView
+        android:id="@+id/iconBackButton"
+        android:layout_width="11.4dp"
+        android:layout_height="18.72dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/changeSettingsText"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <RelativeLayout
+        android:id="@+id/profileFrameBox"
+        android:layout_width="333dp"
+        android:layout_height="95dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/black_box_frame"
+        android:clipToOutline="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeSettingsText"
+        app:layout_constraintVertical_bias="0.063">
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="59dp"
+            android:layout_height="59dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="251dp"
+            android:layout_marginBottom="18dp"
+            android:src="@drawable/profile_image" />
+
+        <TextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="167dp"
+            android:layout_marginBottom="48dp"
+            android:gravity="top"
+            android:text="김뚝딱이"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+
+        <TextView
+            android:id="@+id/profileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="107dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="86dp"
+            android:layout_marginBottom="21dp"
+            android:gravity="top"
+            android:text="ttukttak@ttukttak.com"
+            android:textColor="#CC000000"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/goProfileButtons"
+            android:layout_width="9dp"
+            android:layout_height="14dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="303dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginEnd="21dp"
+            android:layout_marginBottom="39dp"
+            android:src="@drawable/ic_front" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/reviewHelpUsing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/green_box_triple"
+        android:clipToOutline="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="430dp">
+
+        <RelativeLayout
+            android:id="@+id/reviewAndEvaluate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_box_frame"
+            android:clipToOutline="true">
+
+            <TextView
+                android:id="@+id/reviewAndEvaluateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="15dp"
+                android:text="리뷰 및 평가하기"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/goReviewAndEvaluteButtons"
+                android:layout_width="9dp"
+                android:layout_height="14dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="303dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_front_white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/usingRules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="104dp"
+            android:background="@drawable/white_box_frame">
+
+            <TextView
+                android:id="@+id/usingRulesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="15dp"
+                android:text="이용 수칙"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/goUsingRulesButtons"
+                android:layout_width="9dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="303dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_front_white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/helpAndExplain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:background="@drawable/white_box_frame"
+            android:clipToOutline="true">
+
+            <TextView
+                android:id="@+id/helpAndExplainText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="15dp"
+                android:text="도움 및 설명"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/goHelpAndExplainButtons"
+                android:layout_width="9dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="303dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_front_white" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/ttukttakVersionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="Ttukttak ver 2.0 (1.11.11)"
+        android:textColor="#7D000000"
+        android:textSize="12sp"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="666dp" />
+
+    <TextView
+        android:id="@+id/logoutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:text="@string/logout"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="179dp"
+        tools:layout_editor_absoluteY="692dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
