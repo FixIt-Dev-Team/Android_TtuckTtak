@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- drawable/textbox_var.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="318dp"
+    android:height="48dp"
+    android:viewportWidth="318"
+    android:viewportHeight="48"
+    >
+    <group>
+        <clip-path
+            android:pathData="M12 0H306C312.627 0 318 5.37258 318 12V36C318 42.6274 312.627 48 306 48H12C5.37258 48 0 42.6274 0 36V12C0 5.37258 5.37258 0 12 0Z"
+            />
+        <path
+            android:pathData="M0 0V48H318V0"
+            android:fillColor="#70A2A7"
+            />
+    </group>
+</vector>
