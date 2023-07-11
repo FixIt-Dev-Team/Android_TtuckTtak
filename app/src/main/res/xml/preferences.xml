@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <SwitchPreferenceCompat
+        app:key="notifications"
+        app:title="@string/event_push_alert"
+        app:summary="@string/event_push_alert_desc"/>
+
+    <SwitchPreferenceCompat
+        app:key="notifications"
+        app:title="@string/night_push_alert"
+        app:summary="@string/night_push_alert_desc"/>
+</PreferenceScreen>
