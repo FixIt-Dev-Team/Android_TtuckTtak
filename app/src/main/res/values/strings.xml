@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Android_TtuckTtak</string>
+    <string name="text_welcome1">뚝딱하실\n준비되셨나요</string>
+    <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
+    <string name="text_welcome3"><u>이미 계정이 있으신가요?</u></string>
 
-    <string name="already_have_account">이미 계정이 있으신가요?</string>
 
     <string name="email">이메일 주소</string>
     <string name="pw">비밀번호</string>
