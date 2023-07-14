@@ -1,0 +1,44 @@
+package com.gachon.ttuckttak.ui.login.settings
+
+import android.os.Bundle
+import android.view.View
+import android.widget.CompoundButton
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.gachon.ttuckttak.databinding.FragmentSettingsAlertBinding
+import com.gachon.ttuckttak.R
+
+class SettingsAlertFragment : Fragment(), View.OnClickListener {
+
+    //Switch eventFunctionSwitch;
+
+    private val binding: FragmentSettingsAlertBinding by lazy { FragmentSettingsAlertBinding.inflate(layoutInflater) }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // 뒤로가기 버튼을 누르는 경우
+        backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsAlertFragment_to_settingsFragment)
+        }
+
+        // switch를 누르는 경우
+        eventAndFunctionPushSwitch.setOnCheckedChangeListener{_, isChecked ->
+            if(isChecked) {
+                // switch가 체크된 경우
+            }
+            else {
+                // switch가 체크되지 않은 경우
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
+    override fun onClick(v: View?) {
+        TODO("Not yet implemented")
+    }
+
+}

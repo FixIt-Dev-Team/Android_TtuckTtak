@@ -5,213 +5,197 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/onboarding_">
+    android:id="@+id/onboarding_"
+    tools:ignore="MissingClass">
 
-    <ImageView
-        android:id="@+id/iconBackButton"
-        android:layout_width="11.4dp"
-        android:layout_height="18.72dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067" />
 
     <TextView
-        android:id="@+id/profileSettingsTextContext"
+        android:id="@+id/profileSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="프로필 설정"
-        android:textColor="#000000"
+        android:fontFamily="@font/NotoSansBold"
+        android:text="@string/profile_settings"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toEndOf="@+id/iconBackButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061" />
-
-    <ImageView
-        android:id="@+id/checkImage"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/check_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toEndOf="@+id/profileSettingsTextContext"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061" />
-
-    <ImageView
-        android:id="@+id/profileImage"
-        android:layout_width="166.5dp"
-        android:layout_height="166dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/profile_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileSettingsTextContext"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/profileSetting"
+        app:layout_constraintEnd_toStartOf="@+id/profileSetting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/profileSetting" />
+
+    <FrameLayout
+        android:id="@+id/checkPointFrame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/profileSetting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileSetting"
+        app:layout_constraintTop_toTopOf="@+id/profileSetting">
+
+        <ImageView
+            android:id="@+id/checkPointCircle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:backgroundTint="@color/black"
+            android:background="@drawable/ic_circle_full" />
+
+        <ImageView
+            android:id="@+id/checkPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/ic_check" />
+    </FrameLayout>
 
     <ImageView
-        android:id="@+id/proflieImagePlusImage"
+        android:id="@+id/imgProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="33.5dp"
+        android:background="@drawable/img_profile"
+        app:layout_constraintEnd_toEndOf="@+id/profileSetting"
+        app:layout_constraintStart_toStartOf="@+id/profileSetting"
+        app:layout_constraintTop_toBottomOf="@+id/profileSetting" />
+
+    <ImageButton
+        android:id="@+id/imgProfilePlusFrame"
         android:layout_width="47dp"
         android:layout_height="47dp"
-        android:src="@drawable/profile_image_plus"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284" />
+        android:background="@drawable/ic_circle_full"
+        android:backgroundTint="@color/main_theme_blue"
+        app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
+        app:layout_constraintEnd_toEndOf="@+id/imgProfile" />
 
-    <RelativeLayout
-        android:id="@+id/textboxNikname"
+    <ImageButton
+        android:id="@+id/imgProfilePlus"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:background="@drawable/ic_plus"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imgProfilePlusFrame"
+        app:layout_constraintEnd_toEndOf="@+id/imgProfilePlusFrame" />
+
+    <LinearLayout
+        android:id="@+id/niknameFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_box"
-        android:clipToOutline="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage"
-        app:layout_constraintVertical_bias="0.072">
-
-        <ImageView
-            android:id="@+id/goNiknameButtons"
-            android:layout_width="7.62dp"
-            android:layout_height="12.79dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="303dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_front" />
+        android:layout_marginTop="43dp"
+        android:background="@drawable/box_white"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgProfile"
+        app:layout_constraintStart_toStartOf="@+id/imgProfile"
+        app:layout_constraintTop_toBottomOf="@+id/imgProfile">
 
         <TextView
-            android:id="@+id/niknameText"
+            android:id="@+id/nikname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="15dp"
-            android:gravity="top"
-            android:text="닉네임"
-            android:textColor="#000000"
-            android:textSize="14sp" />
+            android:text="@string/input_nikname"
+            android:fontFamily="@font/NotoSansBold"
+            android:textSize="14sp"
+            android:textColor="@color/black"/>
 
         <View
-            android:id="@+id/rectangle1"
+            android:id="@+id/blueBar1"
             android:layout_width="1dp"
             android:layout_height="18dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="70dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="17dp"
-            android:background="#1DB9DB" />
+            android:layout_marginStart="11dp"
+            android:background="@color/main_theme_blue" />
 
         <TextView
-            android:id="@+id/niknameTtukttak"
+            android:id="@+id/inputNikname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="85dp"
-            android:gravity="top"
-            android:text="김뚝딱이"
-            android:textColor="#000000"
+            android:layout_marginStart="11dp"
+            android:fontFamily="@font/NotoSansBold"
+            android:text="@string/user_name"
+            android:textColor="@color/black"
             android:textSize="14sp" />
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/textboxEmail"
+        <ImageButton
+            android:id="@+id/goNikname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="163.2dp"
+            android:background="@drawable/ic_front" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/emailFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/white_box"
-        android:clipToOutline="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textboxNikname"
-        app:layout_constraintVertical_bias="0.049">
+        android:layout_marginTop="11dp"
+        android:padding="15dp"
+        android:background="@drawable/box_white"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/niknameFrame"
+        app:layout_constraintStart_toStartOf="@+id/niknameFrame"
+        app:layout_constraintTop_toBottomOf="@+id/niknameFrame">
 
         <TextView
-            android:id="@+id/emailText"
+            android:id="@+id/email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="15dp"
-            android:gravity="top"
-            android:text="이메일"
-            android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/NotoSansBold"
+            android:text="@string/input_email" />
 
         <View
-            android:id="@+id/rectangle_4"
+            android:id="@+id/blueBar2"
             android:layout_width="1dp"
             android:layout_height="18dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="70dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="17dp"
-            android:background="#1DB9DB" />
+            android:layout_marginStart="11dp"
+            android:background="@color/main_theme_blue" />
 
         <TextView
-            android:id="@+id/emailContext"
+            android:id="@+id/inputEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="15dp"
-            android:gravity="top"
-            android:text="ttukttak@ttukttak.com"
-            android:textColor="#000000"
-            android:textSize="14sp" />
-    </RelativeLayout>
+            android:layout_marginStart="11dp"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/NotoSansBold"
+            android:text="@string/user_email" />
 
-    <RelativeLayout
-        android:id="@+id/passwordTextbox"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="127dp"
-        android:background="@drawable/green_box"
-        android:clipToOutline="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textboxEmail"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_marginTop="79dp"
+        android:orientation="vertical"
+        android:background="@drawable/box_green_full"
+        app:layout_constraintEnd_toEndOf="@+id/emailFrame"
+        app:layout_constraintStart_toStartOf="@+id/emailFrame"
+        app:layout_constraintTop_toBottomOf="@+id/emailFrame">
 
-        <TextView
-            android:id="@+id/passwordButtonsText"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/passwordResetButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="99dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="99dp"
-            android:gravity="top"
-            android:text="비밀번호 재설정하기"
-            android:textColor="#FFFFFF"
+            android:layout_margin="5dp"
+            android:background="None"
+            android:drawableEnd="@drawable/ic_front"
+            android:drawableTint="@color/white"
+            android:text="@string/password_reset"
+            android:fontFamily="@font/NotoSansBold"
+            android:textAlignment="center"
             android:textSize="14sp" />
-
-        <ImageView
-            android:id="@+id/goPasswordButtons"
-            android:layout_width="7.62dp"
-            android:layout_height="12.79dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="303dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/ic_front_white" />
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

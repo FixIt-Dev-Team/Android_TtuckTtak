@@ -8,60 +8,54 @@
     android:id="@+id/onboarding_">
 
     <TextView
-        android:id="@+id/alertSettingsText"
+        android:id="@+id/alertSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="top"
-        android:text="알림 설정"
-        android:textColor="#000000"
+        android:text="@string/alert_setting"
+        android:textColor="@color/black"
         android:textSize="16sp"
+        android:fontFamily="@font/NotoSansBold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.09" />
 
-    <ImageView
-        android:id="@+id/iconBackButton"
-        android:layout_width="11.4dp"
-        android:layout_height="18.72dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/alertSettingsText"
-        app:layout_constraintHorizontal_bias="0.288"
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_back"
+        android:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/alertSetting"
+        app:layout_constraintEnd_toStartOf="@+id/alertSetting"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067" />
+        app:layout_constraintTop_toTopOf="@+id/alertSetting" />
 
     <TextView
         android:id="@+id/eventPushAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:text="이벤트 및 기능추가 Push 알림"
-        android:textColor="#000000"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="49.5dp"
+        android:fontFamily="@font/NotoSansBold"
+        android:text="@string/event_push_alert"
+        android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alertSettingsText"
-        app:layout_constraintVertical_bias="0.078" />
+        app:layout_constraintTop_toBottomOf="@+id/alertSetting" />
 
     <TextView
         android:id="@+id/eventPushAlertAdditional"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:text="프로모션 및 새 업데이트에 대해 알려드려요"
-        android:textColor="#327A81"
+        android:text="@string/push_alert_add"
+        android:textColor="@color/teal_700"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
+        android:fontFamily="@font/NotoSansBold"
+        app:layout_constraintStart_toStartOf="@+id/eventPushAlert"
+        app:layout_constraintTop_toBottomOf="@+id/eventPushAlert" />
 
     <Switch
         android:id="@+id/eventAndFunctionPushSwitch"
@@ -70,41 +64,34 @@
         android:switchPadding="8dp"
         android:thumb="@drawable/switch_thumb"
         android:track="@drawable/selector_switch"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/eventPushAlert"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.877"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177" />
+        app:layout_constraintStart_toEndOf="@+id/eventPushAlertAdditional"
+        app:layout_constraintTop_toTopOf="@+id/eventPushAlert" />
 
     <TextView
         android:id="@+id/nightTimePushAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="648dp"
-        android:gravity="top"
-        android:text="야간시간(20:00-24:00) Push 알림"
-        android:textColor="#000000"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="55dp"
+        android:fontFamily="@font/NotoSansBold"
+        android:text="@string/night_time_alert"
+        android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/eventPushAlertAdditional"
+        app:layout_constraintTop_toBottomOf="@+id/eventPushAlertAdditional" />
 
     <TextView
-        android:id="@+id/nightPushTimeAlertAdditional"
+        android:id="@+id/nightTimePushAlertAdditional"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:text="프로모션 및 새 업데이트에 대해 알려드려요"
-        android:textColor="#327A81"
+        android:fontFamily="@font/NotoSansBold"
+        android:text="@string/push_alert_add"
+        android:textColor="@color/teal_700"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintStart_toStartOf="@+id/nightTimePushAlert"
+        app:layout_constraintTop_toBottomOf="@+id/nightTimePushAlert" />
 
     <Switch
         android:id="@+id/nightTimePushAlertSwitch"
@@ -113,11 +100,9 @@
         android:switchPadding="8dp"
         android:thumb="@drawable/switch_thumb"
         android:track="@drawable/selector_switch"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/nightTimePushAlert"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.877"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/eventAndFunctionPushSwitch"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintStart_toEndOf="@+id/nightTimePushAlertAdditional"
+        app:layout_constraintTop_toTopOf="@+id/nightTimePushAlert" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

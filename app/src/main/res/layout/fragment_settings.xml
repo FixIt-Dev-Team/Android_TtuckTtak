@@ -7,302 +7,239 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout
-        android:id="@+id/alertAndConsumer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/green_box_double"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="296dp">
-
-        <RelativeLayout
-            android:id="@+id/alertSettingsFrame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_box_frame">
-
-            <TextView
-                android:id="@+id/alertSettingsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="21dp"
-                android:text="알림 설정"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/goAlertSettingsButton"
-                android:layout_width="9dp"
-                android:layout_height="14dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="303dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_front_white" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/consumerCenterFrame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="52dp"
-            android:background="@drawable/white_box_frame">
-
-            <TextView
-                android:id="@+id/consumerCenterText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="21dp"
-                android:text="고객 센터"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/goConsumerCenterButtons"
-                android:layout_width="9dp"
-                android:layout_height="14dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="303dp"
-                android:src="@drawable/ic_front_white" />
-        </RelativeLayout>
-
-    </RelativeLayout>
-
     <TextView
-        android:id="@+id/changeSettingsText"
+        android:id="@+id/textChangeSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="788dp"
-        android:gravity="top"
-        android:text="설정 변경"
-        android:textColor="#000000"
+        android:fontFamily="@font/NotoSansBold"
+        android:text="@string/change_settings"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.93" />
+        app:layout_constraintVertical_bias="0.09" />
 
-    <ImageView
-        android:id="@+id/iconBackButton"
-        android:layout_width="11.4dp"
-        android:layout_height="18.72dp"
-        android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/changeSettingsText"
-        app:layout_constraintHorizontal_bias="0.55"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.091" />
-
-    <RelativeLayout
-        android:id="@+id/profileFrameBox"
-        android:layout_width="333dp"
-        android:layout_height="95dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/black_box_frame"
-        android:clipToOutline="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeSettingsText"
-        app:layout_constraintVertical_bias="0.063">
-
-        <ImageView
-            android:id="@+id/profileImage"
-            android:layout_width="59dp"
-            android:layout_height="59dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="251dp"
-            android:layout_marginBottom="18dp"
-            android:src="@drawable/profile_image" />
-
-        <TextView
-            android:id="@+id/profileName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="107dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="167dp"
-            android:layout_marginBottom="48dp"
-            android:gravity="top"
-            android:text="김뚝딱이"
-            android:textColor="#000000"
-            android:textSize="15sp" />
-
-
-        <TextView
-            android:id="@+id/profileEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="107dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginEnd="86dp"
-            android:layout_marginBottom="21dp"
-            android:gravity="top"
-            android:text="ttukttak@ttukttak.com"
-            android:textColor="#CC000000"
-            android:textSize="14sp" />
-
-        <ImageView
-            android:id="@+id/goProfileButtons"
-            android:layout_width="9dp"
-            android:layout_height="14dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="303dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="39dp"
-            android:src="@drawable/ic_front" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/reviewHelpUsing"
+    <ImageButton
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/green_box_triple"
-        android:clipToOutline="true"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textChangeSettings"
+        app:layout_constraintEnd_toStartOf="@+id/textChangeSettings"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="430dp">
+        app:layout_constraintTop_toTopOf="@+id/textChangeSettings"
+        android:background="@drawable/ic_back" />
 
-        <RelativeLayout
-            android:id="@+id/reviewAndEvaluate"
+    <GridLayout
+        android:id="@+id/profileFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:padding="15dp"
+        android:columnCount="3"
+        android:background="@drawable/frame_black_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textChangeSettings">
+
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/img_profile" />
+
+        <LinearLayout
+            android:id="@+id/profileInfo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/white_box_frame"
-            android:clipToOutline="true">
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
 
             <TextView
-                android:id="@+id/reviewAndEvaluateText"
-                android:layout_width="wrap_content"
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="15dp"
-                android:text="리뷰 및 평가하기"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:id="@+id/goReviewAndEvaluteButtons"
-                android:layout_width="9dp"
-                android:layout_height="14dp"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="303dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_front_white" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/usingRules"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="104dp"
-            android:background="@drawable/white_box_frame">
+                android:textColor="@color/black"
+                android:textSize= "18sp"
+                android:text="김뚝딱이"/> <!-- 임시 지정 -->
 
             <TextView
-                android:id="@+id/usingRulesText"
-                android:layout_width="wrap_content"
+                android:id="@+id/userEmail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="15dp"
-                android:text="이용 수칙"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp" />
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="ttukttak@ttukttak.com"/> <!-- 임시 지정 -->
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/goUsingRulesButtons"
-                android:layout_width="9dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="303dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_front_white" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/helpAndExplain"
+        <ImageButton
+            android:id="@+id/buttonProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:background="@drawable/white_box_frame"
-            android:clipToOutline="true">
+            android:layout_gravity="center_vertical|end"
+            android:background="@drawable/ic_front"/>
+    </GridLayout>
 
-            <TextView
-                android:id="@+id/helpAndExplainText"
-                android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/alertAndConsumer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="61dp"
+        android:background="@drawable/box_green_full_double"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/profileFrame"
+        app:layout_constraintStart_toStartOf="@+id/profileFrame"
+        app:layout_constraintTop_toBottomOf="@+id/profileFrame">
+
+
+        <LinearLayout
+            android:id="@+id/alertSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/frame_white_box">
+
+            <Button
+                android:id="@+id/alertSetting"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="15dp"
-                android:text="도움 및 설명"
-                android:textColor="#FFFFFF"
+                android:layout_margin="5dp"
+                android:background="None"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:text="@string/alert_setting"
+                android:fontFamily="@font/NotoSansBold"
+                android:textAlignment="viewStart"
                 android:textSize="16sp" />
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/goHelpAndExplainButtons"
-                android:layout_width="9dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="303dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_front_white" />
-        </RelativeLayout>
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/consumerCenters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/consumerCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="None"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:text="@string/consumer_center"
+                android:fontFamily="@font/NotoSansBold"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/reviewHelpUse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/box_green_full_triple"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@+id/alertAndConsumer"
+        app:layout_constraintStart_toStartOf="@+id/alertAndConsumer"
+        app:layout_constraintTop_toBottomOf="@+id/alertAndConsumer">
+
+        <LinearLayout
+            android:id="@+id/reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/frame_white_box">
+
+            <Button
+                android:id="@+id/review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="None"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:text="@string/review"
+                android:fontFamily="@font/NotoSansBold"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/helps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/frame_white_box">
+
+            <Button
+                android:id="@+id/help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="None"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:text="@string/help"
+                android:fontFamily="@font/NotoSansBold"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/uses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/frame_white_box">
+
+            <Button
+                android:id="@+id/use"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="None"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:text="@string/use"
+                android:fontFamily="@font/NotoSansBold"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/ttukttakVersionText"
+        android:id="@+id/ttuckttakVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="top"
-        android:text="Ttukttak ver 2.0 (1.11.11)"
-        android:textColor="#7D000000"
+        android:layout_marginTop="52dp"
+        android:text="@string/ttuckttak_version"
         android:textSize="12sp"
-        tools:layout_editor_absoluteX="138dp"
-        tools:layout_editor_absoluteY="666dp" />
+        android:textColor="@color/gray"
+        android:fontFamily="@font/NotoSansBold"
+        app:layout_constraintEnd_toEndOf="@+id/reviewHelpUse"
+        app:layout_constraintStart_toStartOf="@+id/reviewHelpUse"
+        app:layout_constraintTop_toBottomOf="@+id/reviewHelpUse" />
 
-    <TextView
-        android:id="@+id/logoutText"
+    <Button
+        android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="top"
+        android:background="none"
+        android:fontFamily="@font/NotoSansBold"
         android:text="@string/logout"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        tools:layout_editor_absoluteX="179dp"
-        tools:layout_editor_absoluteY="692dp" />
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/ttuckttakVersion"
+        app:layout_constraintStart_toStartOf="@+id/ttuckttakVersion"
+        app:layout_constraintTop_toBottomOf="@+id/ttuckttakVersion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
