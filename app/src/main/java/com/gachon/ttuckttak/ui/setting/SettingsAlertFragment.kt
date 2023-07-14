@@ -1,8 +1,7 @@
-package com.gachon.ttuckttak.ui.login.settings
+package com.gachon.ttuckttak.ui.setting
 
 import android.os.Bundle
 import android.view.View
-import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.gachon.ttuckttak.databinding.FragmentSettingsAlertBinding
@@ -10,15 +9,13 @@ import com.gachon.ttuckttak.R
 
 class SettingsAlertFragment : Fragment(), View.OnClickListener {
 
-    //Switch eventFunctionSwitch;
-
     private val binding: FragmentSettingsAlertBinding by lazy { FragmentSettingsAlertBinding.inflate(layoutInflater) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
 
         // 뒤로가기 버튼을 누르는 경우
-        backButton.setOnClickListener {
+        backButtonFrame.setOnClickListener {
             findNavController().navigate(R.id.action_settingsAlertFragment_to_settingsFragment)
         }
 

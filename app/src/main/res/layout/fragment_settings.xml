@@ -11,7 +11,7 @@
         android:id="@+id/textChangeSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/change_settings"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -22,15 +22,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09" />
 
-    <ImageButton
-        android:id="@+id/backButton"
+    <FrameLayout
+        android:id="@+id/backButtonFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/textChangeSettings"
         app:layout_constraintEnd_toStartOf="@+id/textChangeSettings"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textChangeSettings"
-        android:background="@drawable/ic_back" />
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="@+id/textChangeSettings">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_back"
+            android:clickable="false"
+            android:contentDescription="gamza" />
+    </FrameLayout>
 
     <GridLayout
         android:id="@+id/profileFrame"
@@ -55,34 +64,46 @@
             android:id="@+id/profileInfo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="5dp"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="김뚝딱이"
                 android:textColor="@color/black"
-                android:textSize= "18sp"
-                android:text="김뚝딱이"/> <!-- 임시 지정 -->
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/userEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:text="ttukttak@ttukttak.com"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:text="ttukttak@ttukttak.com"/> <!-- 임시 지정 -->
+                android:textSize="16sp" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/buttonProfile"
+        <FrameLayout
+            android:id="@+id/buttonProfileFrame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:background="@drawable/ic_front"/>
+            android:padding="24dp"
+            android:layout_gravity="center_vertical|end">
+
+            <ImageButton
+                android:id="@+id/buttonProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:adjustViewBound="true"
+                android:background="@drawable/ic_front"
+                android:clickable="false"
+                android:contentDescription="gamza" />
+        </FrameLayout>
+
     </GridLayout>
 
     <LinearLayout
@@ -114,7 +135,7 @@
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
                 android:text="@string/alert_setting"
-                android:fontFamily="@font/NotoSansBold"
+                android:fontFamily="@font/noto_sans_bold"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -135,7 +156,7 @@
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
                 android:text="@string/consumer_center"
-                android:fontFamily="@font/NotoSansBold"
+                android:fontFamily="@font/noto_sans_bold"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -169,7 +190,7 @@
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
                 android:text="@string/review"
-                android:fontFamily="@font/NotoSansBold"
+                android:fontFamily="@font/noto_sans_bold"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -190,7 +211,7 @@
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
                 android:text="@string/help"
-                android:fontFamily="@font/NotoSansBold"
+                android:fontFamily="@font/noto_sans_bold"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -211,7 +232,7 @@
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
                 android:text="@string/use"
-                android:fontFamily="@font/NotoSansBold"
+                android:fontFamily="@font/noto_sans_bold"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -225,7 +246,7 @@
         android:text="@string/ttuckttak_version"
         android:textSize="12sp"
         android:textColor="@color/gray"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         app:layout_constraintEnd_toEndOf="@+id/reviewHelpUse"
         app:layout_constraintStart_toStartOf="@+id/reviewHelpUse"
         app:layout_constraintTop_toBottomOf="@+id/reviewHelpUse" />
@@ -235,7 +256,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="none"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/logout"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/ttuckttakVersion"

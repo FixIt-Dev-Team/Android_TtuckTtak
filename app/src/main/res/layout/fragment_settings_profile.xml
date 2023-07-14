@@ -5,15 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/onboarding_"
-    tools:ignore="MissingClass">
-
+    android:id="@+id/onboarding_">
 
     <TextView
         android:id="@+id/profileSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/profile_settings"
         android:textColor="@color/black"
         android:textSize="16sp"
@@ -24,15 +22,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09" />
 
-    <ImageButton
-        android:id="@+id/backButton"
+    <FrameLayout
+        android:id="@+id/backButtonFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_back"
+        android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/profileSetting"
         app:layout_constraintEnd_toStartOf="@+id/profileSetting"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/profileSetting" />
+        app:layout_constraintTop_toTopOf="@+id/profileSetting">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_back"
+            android:clickable="false"
+            android:contentDescription="gamza" />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/checkPointFrame"
@@ -69,23 +76,30 @@
         app:layout_constraintStart_toStartOf="@+id/profileSetting"
         app:layout_constraintTop_toBottomOf="@+id/profileSetting" />
 
-    <ImageButton
+    <FrameLayout
         android:id="@+id/imgProfilePlusFrame"
-        android:layout_width="47dp"
-        android:layout_height="47dp"
-        android:background="@drawable/ic_circle_full"
-        android:backgroundTint="@color/main_theme_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
-        app:layout_constraintEnd_toEndOf="@+id/imgProfile" />
+        app:layout_constraintEnd_toEndOf="@+id/imgProfile">
 
-    <ImageButton
-        android:id="@+id/imgProfilePlus"
-        android:layout_width="47dp"
-        android:layout_height="47dp"
-        android:background="@drawable/ic_plus"
-        android:backgroundTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/imgProfilePlusFrame"
-        app:layout_constraintEnd_toEndOf="@+id/imgProfilePlusFrame" />
+        <ImageButton
+            android:id="@+id/imgProfilePlusCircle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_circle_full"
+            android:backgroundTint="@color/main_theme_blue"
+            android:clickable="false"
+            android:contentDescription="gamza" />
+
+        <ImageButton
+            android:id="@+id/imgProfilePlus"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/ic_plus"
+            android:backgroundTint="@color/white"
+            android:contentDescription="gamza" />
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/niknameFrame"
@@ -104,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/input_nikname"
-            android:fontFamily="@font/NotoSansBold"
+            android:fontFamily="@font/noto_sans_bold"
             android:textSize="14sp"
             android:textColor="@color/black"/>
 
@@ -120,18 +134,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:fontFamily="@font/NotoSansBold"
+            android:fontFamily="@font/noto_sans_bold"
             android:text="@string/user_name"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
-        <ImageButton
-            android:id="@+id/goNikname"
+        <FrameLayout
+            android:id="@+id/goNiknameFrame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="163.2dp"
-            android:background="@drawable/ic_front" />
+            android:layout_marginStart="163.2dp">
 
+            <ImageButton
+                android:id="@+id/goNikname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_front"
+                android:clickable="false"
+                android:contentDescription="gamza" />
+        </FrameLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -152,7 +173,7 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/NotoSansBold"
+            android:fontFamily="@font/noto_sans_bold"
             android:text="@string/input_email" />
 
         <View
@@ -169,7 +190,7 @@
             android:layout_marginStart="11dp"
             android:textSize="14sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/NotoSansBold"
+            android:fontFamily="@font/noto_sans_bold"
             android:text="@string/user_email" />
 
     </LinearLayout>
@@ -194,7 +215,7 @@
             android:drawableEnd="@drawable/ic_front"
             android:drawableTint="@color/white"
             android:text="@string/password_reset"
-            android:fontFamily="@font/NotoSansBold"
+            android:fontFamily="@font/noto_sans_bold"
             android:textAlignment="center"
             android:textSize="14sp" />
     </LinearLayout>
