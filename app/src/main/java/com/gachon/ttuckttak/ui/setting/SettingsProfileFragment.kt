@@ -1,4 +1,4 @@
-package com.gachon.ttuckttak.ui.login.settings
+package com.gachon.ttuckttak.ui.setting
 
 import android.os.Bundle
 import android.view.View
@@ -16,7 +16,7 @@ class SettingsProfileFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // 뒤로가기 버튼을 누르는 경우
-        backButton.setOnClickListener {
+        backButtonFrame.setOnClickListener {
             findNavController().navigate(R.id.action_settingsProfileFragment_to_settingsFragment)
         }
 
@@ -28,12 +28,12 @@ class SettingsProfileFragment : Fragment(), View.OnClickListener {
         }
 
         // 프로필 사진 변경 버튼을 클릭하는 경우
-        imgProfilePlus.setOnClickListener {
+        imgProfilePlusFrame.setOnClickListener {
             //findNavController().navigate()
         }
 
         // 닉네임 변경 버튼을 누르는 경우
-        goNikname.setOnClickListener {
+        goNiknameFrame.setOnClickListener {
             //findNavController().navigate()
         }
 
@@ -50,7 +50,7 @@ class SettingsProfileFragment : Fragment(), View.OnClickListener {
                 // nikname 중복 검사
 
                 // 중복 검사 뒤, 중복이 아닐 경우, 관련 화면으로 전환
-                goNikname.setOnClickListener {
+                goNiknameFrame.setOnClickListener {
                     //findNavController().navigate()
                 }
 
