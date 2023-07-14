@@ -1,4 +1,4 @@
-package com.gachon.ttuckttak.ui.login.settings
+package com.gachon.ttuckttak.ui.setting
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,12 +15,12 @@ class SettingsFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // 뒤로가기 버튼을 누르는 경우
-        backButton.setOnClickListener {
+        backButtonFrame.setOnClickListener {
             //findNavController().navigate()
         }
 
         // 프로필 버튼을 누르는 경우
-        buttonProfile.setOnClickListener {
+        buttonProfileFrame.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_settingsProfileFragment)
         }
 

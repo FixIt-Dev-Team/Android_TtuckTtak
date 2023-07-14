@@ -15,23 +15,32 @@
         android:text="@string/alert_setting"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09" />
 
-    <ImageButton
-        android:id="@+id/backButton"
+    <FrameLayout
+        android:id="@+id/backButtonFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_back"
-        android:backgroundTint="@color/black"
+        android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/alertSetting"
         app:layout_constraintEnd_toStartOf="@+id/alertSetting"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/alertSetting" />
+        app:layout_constraintTop_toTopOf="@+id/alertSetting">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:background="@drawable/ic_back"
+            android:backgroundTint="@color/black"
+            android:contentDescription="gamza" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/eventPushAlert"
@@ -39,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="49.5dp"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/event_push_alert"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -53,15 +62,14 @@
         android:text="@string/push_alert_add"
         android:textColor="@color/teal_700"
         android:textSize="10sp"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         app:layout_constraintStart_toStartOf="@+id/eventPushAlert"
         app:layout_constraintTop_toBottomOf="@+id/eventPushAlert" />
 
     <Switch
         android:id="@+id/eventAndFunctionPushSwitch"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:switchPadding="8dp"
+        android:layout_height="48dp"
         android:thumb="@drawable/switch_thumb"
         android:track="@drawable/selector_switch"
         app:layout_constraintBottom_toBottomOf="@+id/eventPushAlert"
@@ -75,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="55dp"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/night_time_alert"
         android:textColor="@color/black"
         android:textSize="14sp"
@@ -86,7 +94,7 @@
         android:id="@+id/nightTimePushAlertAdditional"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/NotoSansBold"
+        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/push_alert_add"
         android:textColor="@color/teal_700"
         android:textSize="10sp"
@@ -96,13 +104,12 @@
     <Switch
         android:id="@+id/nightTimePushAlertSwitch"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:switchPadding="8dp"
+        android:layout_height="48dp"
         android:thumb="@drawable/switch_thumb"
         android:track="@drawable/selector_switch"
         app:layout_constraintBottom_toBottomOf="@+id/nightTimePushAlert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nightTimePushAlertAdditional"
-        app:layout_constraintTop_toTopOf="@+id/nightTimePushAlert" />
+        app:layout_constraintTop_toTopOf="@+id/nightTimePushAlert"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
