@@ -211,12 +211,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="None"
+            android:backgroundTint="@color/main_theme_subblue"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:drawableEnd="@drawable/ic_front"
             android:drawableTint="@color/white"
             android:text="@string/password_reset"
             android:fontFamily="@font/noto_sans_bold"
-            android:textAlignment="center"
-            android:textSize="14sp" />
+            android:textAlignment="center" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
