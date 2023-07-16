@@ -30,6 +30,9 @@
         <activity android:name=".ui.login.StartActivity" />
         <activity android:name=".ui.login.KakaoLoginWebViewActivity" />
         <activity android:name=".ui.login.LoginActivity" />
+        <activity
+            android:name=".ui.login.HomeActivity"
+            android:theme="@style/Theme.Android_TtuckTtak.Home"/>
 
     </application>
 
