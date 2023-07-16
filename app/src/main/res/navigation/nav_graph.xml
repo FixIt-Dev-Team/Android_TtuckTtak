@@ -2,33 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/settingsFragment">
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.gachon.ttuckttak.ui.setting.SettingsFragment"
-        android:label="fragment_settings">
-        <action
-            android:id="@+id/action_settingsFragment_to_settingsProfileFragment"
-            app:destination="@id/settingsProfileFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_settingsAlertFragment"
-            app:destination="@id/settingsAlertFragment" />
-    </fragment>
+    android:id="@+id/nav_graph">
+
     <fragment
         android:id="@+id/settingsAlertFragment"
         android:name="com.gachon.ttuckttak.ui.setting.SettingsAlertFragment"
         android:label="fragment_settings_alert">
-        <action
-            android:id="@+id/action_settingsAlertFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/settingsProfileFragment"
         android:name="com.gachon.ttuckttak.ui.setting.SettingsProfileFragment"
         android:label="fragment_settings_profile">
-        <action
-            android:id="@+id/action_settingsProfileFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>

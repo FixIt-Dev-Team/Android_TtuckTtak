@@ -5,7 +5,7 @@
     android:id="@+id/onboarding_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.setting.SettingsActivity">
 
     <TextView
         android:id="@+id/textChangeSettings"
@@ -26,10 +26,10 @@
         android:id="@+id/backButtonFrame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/textChangeSettings"
         app:layout_constraintEnd_toStartOf="@+id/textChangeSettings"
         app:layout_constraintStart_toStartOf="parent"
-        android:padding="24dp"
         app:layout_constraintTop_toTopOf="@+id/textChangeSettings">
 
         <ImageButton
@@ -45,11 +45,11 @@
         android:id="@+id/profileFrame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="20dp"
-        android:padding="15dp"
-        android:columnCount="3"
+        android:layout_marginTop="30dp"
         android:background="@drawable/frame_black_box"
+        android:columnCount="3"
+        android:padding="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textChangeSettings">
 
@@ -58,7 +58,8 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
-            android:background="@drawable/img_profile" />
+            android:background="@drawable/img_profile"
+            android:contentDescription="gamza" />
 
         <LinearLayout
             android:id="@+id/profileInfo"
@@ -72,36 +73,39 @@
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="김뚝딱이"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/user_name"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/userEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="ttukttak@ttukttak.com"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/user_email"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/buttonProfileFrame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:layout_gravity="center_vertical|end">
+            android:layout_gravity="center_vertical|end"
+            android:padding="24dp">
 
             <ImageButton
                 android:id="@+id/buttonProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
-                android:adjustViewBound="true"
-                android:background="@drawable/ic_front"
+                android:adjustViewBounds="true"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:src="@drawable/ic_front"
                 android:clickable="false"
-                android:contentDescription="gamza" />
+                android:contentDescription="@string/blank_text" />
         </FrameLayout>
 
     </GridLayout>
@@ -123,19 +127,20 @@
             android:id="@+id/alertSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/frame_white_box">
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/alertSetting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="None"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
-                android:text="@string/alert_setting"
                 android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/alert_setting"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -152,11 +157,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="None"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
-                android:text="@string/consumer_center"
                 android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/consumer_center"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -166,8 +172,8 @@
         android:id="@+id/reviewHelpUse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/box_green_full_triple"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@+id/alertAndConsumer"
@@ -178,19 +184,20 @@
             android:id="@+id/reviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/frame_white_box">
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="None"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
-                android:text="@string/review"
                 android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/review"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -199,19 +206,20 @@
             android:id="@+id/helps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/frame_white_box">
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="None"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
-                android:text="@string/help"
                 android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/help"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -220,19 +228,20 @@
             android:id="@+id/uses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/frame_white_box">
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/use"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="None"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
-                android:text="@string/use"
                 android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/use"
                 android:textAlignment="viewStart"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -243,10 +252,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="@string/ttuckttak_version"
-        android:textSize="12sp"
-        android:textColor="@color/gray"
         android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/ttuckttak_version"
+        android:textColor="@color/gray"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/reviewHelpUse"
         app:layout_constraintStart_toStartOf="@+id/reviewHelpUse"
         app:layout_constraintTop_toBottomOf="@+id/reviewHelpUse" />
@@ -255,7 +264,8 @@
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="none"
+        android:backgroundTint="@color/white"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:fontFamily="@font/noto_sans_bold"
         android:text="@string/logout"
         android:textColor="@color/black"
