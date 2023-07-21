@@ -8,7 +8,7 @@
     tools:context=".ui.setting.SettingsActivity">
 
     <TextView
-        android:id="@+id/textChangeSettings"
+        android:id="@+id/textview_ChangeSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -22,27 +22,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.09" />
 
-    <FrameLayout
-        android:id="@+id/backButtonFrame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textChangeSettings"
-        app:layout_constraintEnd_toStartOf="@+id/textChangeSettings"
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="false"
+        android:contentDescription="@string/blank_text"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_ChangeSettings"
+        app:layout_constraintEnd_toStartOf="@+id/textview_ChangeSettings"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textChangeSettings">
-
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_back"
-            android:clickable="false"
-            android:contentDescription="gamza" />
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="@+id/textview_ChangeSettings" />
 
     <GridLayout
-        android:id="@+id/profileFrame"
+        android:id="@+id/layout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -51,18 +46,18 @@
         android:columnCount="3"
         android:padding="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textChangeSettings">
+        app:layout_constraintTop_toBottomOf="@id/textview_ChangeSettings">
 
         <ImageView
-            android:id="@+id/imgProfile"
+            android:id="@+id/imageview_Profile"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_margin="5dp"
             android:background="@drawable/img_profile"
-            android:contentDescription="gamza" />
+            android:contentDescription="@string/blank_text" />
 
         <LinearLayout
-            android:id="@+id/profileInfo"
+            android:id="@+id/layout_profileInfo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -70,7 +65,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/textview_userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_bold"
@@ -79,7 +74,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/userEmail"
+                android:id="@+id/textview_userEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -89,49 +84,41 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/buttonProfileFrame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/button_settingProfile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_vertical|end"
-            android:padding="24dp">
-
-            <ImageButton
-                android:id="@+id/buttonProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|end"
-                android:adjustViewBounds="true"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:src="@drawable/ic_front"
-                android:clickable="false"
-                android:contentDescription="@string/blank_text" />
-        </FrameLayout>
-
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_front"
+            android:backgroundTint="@android:color/transparent"
+            android:clickable="false"
+            android:contentDescription="@string/blank_text" />
     </GridLayout>
 
     <LinearLayout
-        android:id="@+id/alertAndConsumer"
+        android:id="@+id/layout_alertAndConsumer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="61dp"
         android:background="@drawable/box_green_full_double"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/profileFrame"
-        app:layout_constraintStart_toStartOf="@+id/profileFrame"
-        app:layout_constraintTop_toBottomOf="@+id/profileFrame">
+        app:layout_constraintEnd_toEndOf="@id/layout_profile"
+        app:layout_constraintStart_toStartOf="@id/layout_profile"
+        app:layout_constraintTop_toBottomOf="@id/layout_profile">
 
 
         <LinearLayout
-            android:id="@+id/alertSettings"
+            android:id="@+id/layout_alertSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/frame_white_box"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/alertSetting"
+                android:id="@+id/button_alertSetting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -146,14 +133,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/consumerCenters"
+            android:id="@+id/layout_consumerCenters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/frame_white_box"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/consumerCenter"
+                android:id="@+id/button_consumerCenter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -169,26 +156,26 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/reviewHelpUse"
+        android:id="@+id/layout_reviewHelpUse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/box_green_full_triple"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@+id/alertAndConsumer"
-        app:layout_constraintStart_toStartOf="@+id/alertAndConsumer"
-        app:layout_constraintTop_toBottomOf="@+id/alertAndConsumer">
+        app:layout_constraintEnd_toEndOf="@id/layout_alertAndConsumer"
+        app:layout_constraintStart_toStartOf="@id/layout_alertAndConsumer"
+        app:layout_constraintTop_toBottomOf="@id/layout_alertAndConsumer">
 
         <LinearLayout
-            android:id="@+id/reviews"
+            android:id="@+id/layout_reviews"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/frame_white_box"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/review"
+                android:id="@+id/layout_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -203,14 +190,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/helps"
+            android:id="@+id/layout_helps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/frame_white_box"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/help"
+                android:id="@+id/button_help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -225,14 +212,14 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/uses"
+            android:id="@+id/layout_uses"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/frame_white_box"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/use"
+                android:id="@+id/button_use"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -248,20 +235,20 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/ttuckttakVersion"
+        android:id="@+id/textview_ttuckttakVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:fontFamily="@font/noto_sans_bold"
         android:text="@string/ttuckttak_version"
-        android:textColor="@color/gray"
+        android:textColor="@color/main_theme_gray"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/reviewHelpUse"
-        app:layout_constraintStart_toStartOf="@+id/reviewHelpUse"
-        app:layout_constraintTop_toBottomOf="@+id/reviewHelpUse" />
+        app:layout_constraintEnd_toEndOf="@id/layout_reviewHelpUse"
+        app:layout_constraintStart_toStartOf="@id/layout_reviewHelpUse"
+        app:layout_constraintTop_toBottomOf="@id/layout_reviewHelpUse" />
 
     <Button
-        android:id="@+id/logoutButton"
+        android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
@@ -270,8 +257,8 @@
         android:text="@string/logout"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/ttuckttakVersion"
-        app:layout_constraintStart_toStartOf="@+id/ttuckttakVersion"
-        app:layout_constraintTop_toBottomOf="@+id/ttuckttakVersion" />
+        app:layout_constraintEnd_toEndOf="@id/textview_ttuckttakVersion"
+        app:layout_constraintStart_toStartOf="@id/textview_ttuckttakVersion"
+        app:layout_constraintTop_toBottomOf="@id/textview_ttuckttakVersion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
