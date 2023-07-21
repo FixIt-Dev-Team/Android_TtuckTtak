@@ -6,13 +6,12 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import android.util.Log
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.BuildConfig
+import com.gachon.ttuckttak.MyFirebaseMessagingService
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
@@ -24,6 +23,7 @@ import com.gachon.ttuckttak.databinding.ActivityStartBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.FirebaseApp
 import com.kakao.sdk.common.KakaoSdk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,6 +37,8 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
     lateinit var textView: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Todo: 추후 카카오 초기화 위치 변경
         KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -45,6 +47,10 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        // Todo: 추후 Firebase 초기화 위치 변경
+        FirebaseApp.initializeApp(this@StartActivity)
+        MyFirebaseMessagingService.getToken()
 
         // 1. TextView 참조
         textView = findViewById(R.id.text_welcome1)
