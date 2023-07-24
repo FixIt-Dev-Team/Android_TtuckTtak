@@ -12,4 +12,5 @@
     <color name="general_theme_error">#B3261E</color>
     <color name="main_theme_subblue">#70A2A7</color>
     <color name="main_theme_gray">#6E6E6E</color>
+    <color name="main_theme_subcyan">#327A81</color>
 </resources>

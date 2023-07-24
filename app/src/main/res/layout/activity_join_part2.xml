@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.join.JoinPart2Activity">
+
+    <View
+        android:id="@+id/view_progressBar"
+        android:layout_width="120dp"
+        android:layout_height="5dp"
+        android:background="@color/main_theme_blue"
+        app:layout_constraintBottom_toTopOf="@+id/textview_joinMembership"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_joinMembership"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/join_membership"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.084" />
+
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="false"
+        android:contentDescription="@string/blank_text"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/textview_joinMembership"
+        app:layout_constraintEnd_toStartOf="@id/textview_joinMembership"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textview_joinMembership" />
+
+    <TextView
+        android:id="@+id/textview_sendCertification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/send_certification_code"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+
+        app:layout_constraintEnd_toEndOf="@+id/textview_joinMembership"
+        app:layout_constraintTop_toBottomOf="@id/textview_joinMembership" />
+
+    <LinearLayout
+        android:id="@+id/layout_joinEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_white"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textview_sendCertification"
+        app:layout_constraintStart_toStartOf="@id/textview_sendCertification">
+
+        <TextView
+            android:id="@+id/textview_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/user_email" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_certificationCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_white"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/layout_joinEmail"
+        app:layout_constraintStart_toStartOf="@+id/layout_joinEmail"
+        app:layout_constraintTop_toBottomOf="@+id/layout_joinEmail">
+
+        <EditText
+            android:id="@+id/edittext_certificationCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/input_certification_code"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview_errorCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/error_code"
+        android:textColor="@color/general_theme_error"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/layout_certificationCode"
+        app:layout_constraintTop_toBottomOf="@id/layout_certificationCode" />
+
+    <TextView
+        android:id="@+id/textview_runOutCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/run_out_code"
+        android:textColor="@color/general_theme_error"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@id/layout_certificationCode"
+        app:layout_constraintTop_toBottomOf="@id/layout_certificationCode" />
+
+    <TextView
+        android:id="@+id/textview_certificationCodeProblem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/certification_code_problem"
+        android:textColor="@color/general_theme_error"
+        android:textSize="12sp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/layout_certificationCode"
+        app:layout_constraintStart_toStartOf="@+id/layout_certificationCode"
+        app:layout_constraintTop_toBottomOf="@+id/layout_certificationCode" />
+
+    <TextView
+        android:id="@+id/textview_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/timer"
+        android:layout_marginEnd="19dp"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/noto_sans_bold"
+        app:layout_constraintBottom_toBottomOf="@+id/layout_certificationCode"
+        app:layout_constraintEnd_toEndOf="@+id/layout_certificationCode"
+        app:layout_constraintTop_toTopOf="@+id/layout_certificationCode" />
+
+    <Button
+        android:id="@+id/button_certification"
+        android:layout_width="318dp"
+        android:layout_height="56dp"
+        android:backgroundTint="#d8d8d8"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/certification"
+        android:textColor="@color/main_theme_gray"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/layout_certificationCode"
+        app:layout_constraintStart_toStartOf="@+id/layout_certificationCode"
+        app:layout_constraintTop_toBottomOf="@+id/textview_certificationCodeProblem" />
+
+    <LinearLayout
+        android:id="@+id/layout_alert"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:orientation="vertical"
+        android:background="@drawable/box_alert"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/textview_reconfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_bold"
+            android:layout_marginTop="47dp"
+            android:text="@string/certification_code_resend"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textview_reconfirm_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/email_reconfirm" />
+
+        <Button
+            android:id="@+id/button_resend"
+            android:layout_width="318dp"
+            android:layout_height="56dp"
+            android:backgroundTint="@color/main_theme_blue"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/certification_resend"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="38dp"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

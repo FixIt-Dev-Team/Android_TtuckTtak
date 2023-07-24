@@ -31,6 +31,11 @@
         <activity android:name=".ui.login.KakaoLoginWebViewActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.setting.SettingsActivity" />
+        <activity android:name=".ui.setting.SettingsAlertActivity" />
+        <activity android:name=".ui.setting.SettingsProfileActivity" />
+        <activity android:name=".ui.join.JoinPart1Activity" />
+        <activity android:name=".ui.join.JoinPart2Activity" />
+        <activity android:name=".ui.join.JoinPart3Activity" />
 
     </application>
 
