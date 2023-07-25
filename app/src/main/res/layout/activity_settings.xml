@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.setting.SettingsActivity">
+
+    <TextView
+        android:id="@+id/textview_ChangeSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/change_settings"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="false"
+        android:contentDescription="@string/blank_text"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/textview_ChangeSettings"
+        app:layout_constraintEnd_toStartOf="@+id/textview_ChangeSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textview_ChangeSettings" />
+
+    <GridLayout
+        android:id="@+id/layout_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/frame_black_box"
+        android:columnCount="3"
+        android:padding="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_ChangeSettings">
+
+        <ImageView
+            android:id="@+id/imageview_Profile"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/img_profile"
+            android:contentDescription="@string/blank_text" />
+
+        <LinearLayout
+            android:id="@+id/layout_profileInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textview_userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/user_name"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textview_userEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/user_email"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/button_settingProfile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|end"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_front"
+            android:backgroundTint="@android:color/transparent"
+            android:clickable="false"
+            android:contentDescription="@string/blank_text" />
+    </GridLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_alertAndConsumer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="61dp"
+        android:background="@drawable/box_green_full_double"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@id/layout_profile"
+        app:layout_constraintStart_toStartOf="@id/layout_profile"
+        app:layout_constraintTop_toBottomOf="@id/layout_profile">
+
+
+        <LinearLayout
+            android:id="@+id/layout_alertSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_alertSetting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/alert_setting"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_consumerCenters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_consumerCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/consumer_center"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_reviewHelpUse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/box_green_full_triple"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@id/layout_alertAndConsumer"
+        app:layout_constraintStart_toStartOf="@id/layout_alertAndConsumer"
+        app:layout_constraintTop_toBottomOf="@id/layout_alertAndConsumer">
+
+        <LinearLayout
+            android:id="@+id/layout_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/layout_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/review"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_helps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_help"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/help"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_uses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/frame_white_box"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_use"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:backgroundTint="@color/main_theme_subblue"
+                android:drawableEnd="@drawable/ic_front"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/noto_sans_bold"
+                android:text="@string/use"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview_ttuckttakVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/ttuckttak_version"
+        android:textColor="@color/main_theme_gray"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@id/layout_reviewHelpUse"
+        app:layout_constraintStart_toStartOf="@id/layout_reviewHelpUse"
+        app:layout_constraintTop_toBottomOf="@id/layout_reviewHelpUse" />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/logout"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/textview_ttuckttakVersion"
+        app:layout_constraintStart_toStartOf="@id/textview_ttuckttakVersion"
+        app:layout_constraintTop_toBottomOf="@id/textview_ttuckttakVersion" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
