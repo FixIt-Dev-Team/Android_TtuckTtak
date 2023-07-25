@@ -3,12 +3,14 @@
     <string name="text_welcome1">뚝딱하실\n준비되셨나요</string>
     <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
     <string name="text_welcome3"><u>이미 계정이 있으신가요?</u></string>
+    <string name="text_start">탭해서 진단을 시작해보세요!</string>
 
 
     <string name="email">이메일 주소</string>
     <string name="pw">비밀번호</string>
     <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
+    <string name="latest_result">최근 진단내역</string>
 
     <string name="user_name">예) 김뚝딱이</string>
     <string name="user_email">예) ttuck@ttuckttak.com</string>
