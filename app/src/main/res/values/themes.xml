@@ -10,9 +10,18 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/transparent</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
+        <!-- Window background color. -->
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <!-- Home theme. -->
+    <style name="Theme.Android_TtuckTtak.Home" parent="Theme.Android_TtuckTtak">
+        <item name="android:statusBarColor">@color/main_theme_blue</item>
+        <item name="android:windowBackground">@color/main_theme_blue</item>
     </style>
 
     <!-- Splash theme. -->
