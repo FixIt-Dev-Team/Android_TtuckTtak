@@ -1,4 +1,4 @@
-package com.gachon.ttuckttak.ui.login
+package com.gachon.ttuckttak.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
