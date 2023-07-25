@@ -5,6 +5,8 @@ import androidx.core.content.ContextCompat
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
+import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
+import com.gachon.ttuckttak.ui.terms.TermsUseActivity
 
 class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
     override fun initAfterBinding() = with(binding) {
@@ -48,7 +50,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
             // 비밀번호 적합 여부 확인 -- 임시설정
             // 적합하는 경우
-            if(true) {
+            /*if(true) {
                 // 사용가능한 비밀번호 visible
                 textviewPasswordUsable.visibility = View.VISIBLE
 
@@ -70,10 +72,22 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
                 // 가입하기 버튼 누르는 경우
                 buttonJoin.setOnClickListener {
+                    // 가입하기 버튼 숨기기
+                    buttonJoin.visibility = View.VISIBLE
                     // 약관 동의 창 띄우기
                     layoutAlert.visibility = View.VISIBLE
                     // 서비스 약관 동의 -- Q.몰르겟어요
                     radiobuttonAgreeTerms.setOnCheckedChangeListener { buttonView, isChecked -> }
+
+                    // 서비스 이용 약관 text를 눌렀을 경우 -- 해당 액티비티로 이동
+                    textviewUseTerms.setOnClickListener {
+                        startNextActivity(TermsUseActivity::class.java)
+                    }
+
+                    // 서비스 홍보 약관 text를 눌렀을 경우 -- 해당 액티비티로 이동
+                    textviewPromoteTerms.setOnClickListener {
+                        startNextActivity(TermsPromoteActivity::class.java)
+                    }
                 }
             }
             else {
@@ -82,7 +96,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
                 // 비밀번호 textbox 색 변경하기
                 layoutJoinPassword.setBackgroundResource(R.drawable.box_error_text)
-            }
+            }*/
         }
 
 

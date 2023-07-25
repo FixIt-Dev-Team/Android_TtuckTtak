@@ -23,11 +23,11 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
             // edittextEmail 값 가져오기
             val email = edittextEmail.text.toString()
 
-            // email을 입력하는 경우 -- textbox 테두리 색 변경
+            // textbox 테두리 색 변경
             layoutJoinEmail.setBackgroundResource(R.drawable.box_input_text)
 
             // email이 중복일 경우 -- 임시설정
-            if(true) {
+            /*if(true) {
                 // textbox 테두리 및 글자 색 변경
                 layoutJoinEmail.setBackgroundResource(R.drawable.box_error_text)
                 edittextEmail.setTextColor(ContextCompat.getColor(applicationContext, R.color.general_theme_error))
@@ -50,7 +50,7 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
                 buttonCertificationCode.setTextColor(getColor(R.color.white))
                 // 인증코드 보내기 버튼 활성화
                 buttonCertificationCode.setClickable(true)
-            }
+            }*/
         }
 
         // 인증코드 보내기 버튼을 눌렀을 경우

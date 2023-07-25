@@ -37,16 +37,22 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
         // 인증번호에 문제가 생겼을 경우 -- 해당 버튼 클릭
         textviewCertificationCodeProblem.setOnClickListener {
+            // 인증하기 버튼 invisible
+            buttonCertification.visibility = View.INVISIBLE
             // 아래에 있던 레이아웃 visible
             layoutAlert.visibility = View.VISIBLE
 
             // 인증번호 재전송 버튼을 눌렀을 경우 -- 임시설정
-            //buttonResend.setOnClickListener {  }
+            buttonResend.setOnClickListener {
+                // layoutAlert invisible 처리 및 인증하기 버튼 visible
+                layoutAlert.visibility = View.INVISIBLE
+                buttonCertification.visibility = View.VISIBLE
+            }
         }
 
         // 인증코드 확인 여부 -- 임시설정
         // 인증코드가 일치하는 경우
-        if(true) {
+        /*if(true) {
             // 인증코드가 일치할 경우 -- textbox 색 변경하기
             layoutCertificationCode.setBackgroundResource(R.drawable.box_input_text)
 
@@ -70,10 +76,10 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
             // 잘못된 코드 입력 시 -- error code visible
             textviewErrorCode.visibility = View.VISIBLE
-        }
+        }*/
     }
 
-    // timer 함수 구현
+    // timer 함수 구현 -- Q.멀르겟숴여
     fun startTimer() = with(binding) {
        timerTask = timer(period = 10) {
            time++
