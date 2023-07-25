@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_theme_blue" >
+
+    <FrameLayout
+        android:id="@+id/field_button_back"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_back"
+            android:clickable="false" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskr_medium"
+        android:includeFontPadding="false"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:text="@string/whatis_problem"
+        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/group_button" />
+
+    <!-- 버튼 그리드 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- 전원 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_power_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/bg_rectangle_round"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_power"
+                app:layout_constraintVertical_bias="0.625"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/text_power"/>
+
+            <TextView
+                android:id="@+id/text_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="@string/prob_power"
+                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 화면 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_display_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/bg_rectangle_round"
+            app:layout_constraintStart_toEndOf="@id/button_power_prob"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_display"
+                app:layout_constraintVertical_bias="0.625"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/text_display"/>
+
+            <TextView
+                android:id="@+id/text_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="@string/prob_display"
+                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 사용 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_use_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/bg_rectangle_round"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_power_prob"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_usage"
+                app:layout_constraintVertical_bias="0.625"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/text_use"/>
+
+            <TextView
+                android:id="@+id/text_use"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="@string/prob_use"
+                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 주변기기 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_acc_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/bg_rectangle_round"
+            app:layout_constraintStart_toEndOf="@id/button_use_prob"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_power_prob"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_acc"
+                app:layout_constraintVertical_bias="0.625"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/text_acc"/>
+
+            <TextView
+                android:id="@+id/text_acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="@string/prob_acc"
+                app:layout_constraintVertical_bias="0.85"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskr_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/main_theme_gray"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:text="@string/windows"
+        app:layout_constraintVertical_bias="0.27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group_button"
+        app:layout_constraintBottom_toTopOf="@id/button_ask" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanskr_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        android:text="@string/contact_ttukttak"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group_button"
+        app:layout_constraintBottom_toTopOf="@id/button_ask" />
+    
+    <Button
+        android:id="@+id/button_ask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/bg_rectangle_round"
+        app:backgroundTint="@color/gray_light"
+        android:fontFamily="@font/notosanskr_bold"
+        android:includeFontPadding="false"
+        android:textColor="@color/main_theme_blue"
+        android:textSize="18sp"
+        android:text="@string/ask"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group_button"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
