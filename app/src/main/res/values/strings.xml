@@ -12,10 +12,10 @@
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
     <string name="latest_result">최근 진단내역</string>
 
-    <string name="user_name">김뚝딱이</string>
-    <string name="user_email">ttuck@ttuckttak.com</string>
+    <string name="user_name">예) 김뚝딱이</string>
+    <string name="user_email">예) ttuck@ttuckttak.com</string>
     <string name="alert_setting">알림 설정</string>
-    <string name="consumer_center">고객 센터</string>
+    <string name="consumer_center">뚝딱 센터</string>
     <string name="review">리뷰 및 평가하기</string>
     <string name="help">도움 및 설명</string>
     <string name="use">이용 수칙</string>
@@ -24,6 +24,14 @@
     <string name="profile_settings">프로필 설정</string>
     <string name="input_nikname">닉네임</string>
     <string name="input_email">이메일</string>
+    <string name="overlap_nikname">이미 사용중인 닉네임입니다.</string>
+    <string name="overlap_email">이미 사용중인 계정입니다.</string>
+    <string name="certification_code">인증코드 보내기</string>
+    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
+    <string name="input_certification_code">예) 1234</string>
+    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
+    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
+    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
     <string name="password_reset">비밀번호 재설정하기</string>
     <string name="event_push_alert">이벤트 및 기능추가 push 알림</string>
     <string name="night_time_alert">야간시간(20:00-24:00) Push 알림</string>
@@ -43,6 +51,10 @@
     <string name="yes">네</string>
     <string name="no">아니오</string>
 
+    <string name="join_membership">회원가입</string>
+    <string name="join_email">사용하실 이메일을 정해주세요</string>
+
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="blank_text">blank_text</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
