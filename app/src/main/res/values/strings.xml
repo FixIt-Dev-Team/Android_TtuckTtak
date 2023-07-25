@@ -30,6 +30,19 @@
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
     <string name="find_id_or_pw"><u>아이디 및 비밀번호 찾기</u></string>
     <string name="logout"><u>로그아웃</u></string>
+
+    <string name="whatis_problem">현재 PC에서\n어떤 문제가 발생하고 있나요?</string>
+    <string name="prob_power"><big><b>전원</b></big> 에\n문제가 있어요</string>
+    <string name="prob_display"><big><b>화면</b></big> 에\n문제가 있어요</string>
+    <string name="prob_use"><big><b>사용</b></big> 에\n문제가 있어요</string>
+    <string name="prob_acc"><big><b>주변기기</b></big> 에\n문제가 있어요</string>
+    <string name="windows">현재 버전의 뚝딱은 Window 기반의 데스크탑 위주로\n진단 및 문제 해결을 도와드리고 있어요.</string>
+    <string name="contact_ttukttak">도움 받으실 수 없을 경우, 뚝딱 센터에 연락주세요!</string>
+    <string name="ask">문의하기</string>
+
+    <string name="yes">네</string>
+    <string name="no">아니오</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
