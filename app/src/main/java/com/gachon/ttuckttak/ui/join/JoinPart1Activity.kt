@@ -1,57 +1,39 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.content.Intent
-import com.gachon.ttuckttak.R
+import android.text.Editable
+import android.text.TextWatcher
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
+import com.gachon.ttuckttak.utils.RegexUtil
 
 class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate) {
     override fun initAfterBinding() = with(binding) {
-        // 인증코드 보내기 버튼 비활성화
-        buttonCertificationCode.setClickable(false)
-
         // 뒤로가기 버튼을 눌렀을 경우
         buttonBack.setOnClickListener {
             finish()
         }
 
-        // 이메일 입력창을 클릭했을 경우
-        edittextEmail.setOnClickListener {
-            // edittextEmail 값 가져오기
-            val email = edittextEmail.text.toString()
+        // 올바른 email인 경우에만 인증코드 보내기 버튼 활성화
+        edittextEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { // 입력하기 전에 동작
 
-            // textbox 테두리 색 변경
-            edittextEmail.setBackgroundResource(R.drawable.box_input_text)
-
-            // email이 중복일 경우 -- 임시설정
-            /*if(true) {
-                // textbox 테두리 및 글자 색 변경
-                layoutJoinEmail.setBackgroundResource(R.drawable.box_error_text)
-                edittextEmail.setTextColor(ContextCompat.getColor(applicationContext, R.color.general_theme_error))
-
-                // invisible 되어 있던 error message 보이기
-                textviewOverlapEmail.visibility = View.VISIBLE
             }
-            // email이 중복이 아닐 경우
-            else {
-                // error message invisible하기
-                textviewOverlapEmail.visibility = View.INVISIBLE
 
-                // email이 적합할 경우 -- textbox 및 글자 색 변경하기
-                layoutJoinEmail.setBackgroundResource(R.drawable.box_input_text)
-                edittextEmail.setTextColor(ContextCompat.getColor(applicationContext, R.color.black))
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { // 입력 중 동작
 
-                // 인증코드 보내기 버튼 색 변경
-                buttonCertificationCode.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.main_theme_blue))
-                // 인증코드 보내기 버튼 글자 색 변경
-                buttonCertificationCode.setTextColor(getColor(R.color.white))
-                // 인증코드 보내기 버튼 활성화
-                buttonCertificationCode.setClickable(true)
-            }*/
-        }
+            }
+
+            override fun afterTextChanged(p0: Editable?) { // 입력 후 동작
+                val email = p0.toString()
+                buttonCertificationCode.isEnabled = RegexUtil.isValidEmail(email)
+            }
+        })
 
         // 인증코드 보내기 버튼을 눌렀을 경우
         buttonCertificationCode.setOnClickListener {
+            // Todo: 서버에 이메일 인증번호 요청하고 intent에 같이 전송
+
             val intent = Intent(this@JoinPart1Activity, JoinPart2Activity::class.java)
             intent.putExtra("email", edittextEmail.text.toString()) // 입력한 email 값 전달하기
             startActivity(intent) // JoinPart2Activity로 이동

@@ -12,7 +12,7 @@ object RegexUtil {
     }
 
     fun isValidPw(target: String?): Boolean {
-        val regex = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{9,}"
+        val regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\W).{9,500}\$"
         val pattern: Pattern = Pattern.compile(regex)
         val matcher: Matcher = pattern.matcher(target.toString())
         return matcher.matches()
