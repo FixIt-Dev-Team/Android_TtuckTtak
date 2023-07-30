@@ -8,9 +8,9 @@ import com.gachon.ttuckttak.ui.login.LoginActivity
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsBinding::inflate) {
 
     override fun initAfterBinding() = with(binding) {
-        // 뒤로가기 버튼을 누르는 경우 - 이전 화면으로 이동 <임시 설정>
+        // 뒤로가기 버튼을 누르는 경우
         buttonBack.setOnClickListener {
-            //startNextActivity()
+            finish()
         }
 
         // 프로필 박스의 화살표를 누르는 경우 - 프로필 설정 액티비티로 이동
