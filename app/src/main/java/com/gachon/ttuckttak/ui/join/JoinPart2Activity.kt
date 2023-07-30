@@ -39,12 +39,12 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
             // 인증하기 버튼 invisible
             buttonCertification.visibility = View.INVISIBLE
             // 아래에 있던 레이아웃 visible
-            layoutAlert.visibility = View.VISIBLE
+            layoutAlert.root.visibility = View.VISIBLE
 
             // 인증번호 재전송 버튼을 눌렀을 경우 -- 임시설정
-            buttonResend.setOnClickListener {
+            layoutAlert.buttonResend.setOnClickListener {
                 // layoutAlert invisible 처리 및 인증하기 버튼 visible
-                layoutAlert.visibility = View.INVISIBLE
+                layoutAlert.root.visibility = View.INVISIBLE
                 buttonCertification.visibility = View.VISIBLE
             }
         }
