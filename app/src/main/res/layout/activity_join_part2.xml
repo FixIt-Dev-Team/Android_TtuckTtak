@@ -145,7 +145,7 @@
 
     <include
         android:id="@+id/layout_alert"
-        layout="@layout/dialog_alert"
+        layout="@layout/dialog_email"
         android:layout_width="0dp"
         android:layout_height="260dp"
         android:visibility="invisible"
