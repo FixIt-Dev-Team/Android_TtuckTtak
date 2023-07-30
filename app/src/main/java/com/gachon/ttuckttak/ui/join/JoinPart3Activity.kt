@@ -16,8 +16,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
         // 뒤로가기 버튼을 눌렀을 경우
         buttonBack.setOnClickListener {
-            // 이전 화면으로 이동
-            startActivityWithClear(JoinPart2Activity::class.java)
+            finish()
         }
 
         // 닉네임 입력창을 눌렀을 경우 -- textbox 색 변경하기

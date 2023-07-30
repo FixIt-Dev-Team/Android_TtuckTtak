@@ -20,8 +20,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
         // 뒤로가기 버튼을 눌렀을 경우
         buttonBack.setOnClickListener {
-            // 이전 화면으로 이동
-            startActivityWithClear(JoinPart1Activity::class.java)
+            finish()
         }
 
         // JoinPart1Activity에서 입력받았던 email 값 받기

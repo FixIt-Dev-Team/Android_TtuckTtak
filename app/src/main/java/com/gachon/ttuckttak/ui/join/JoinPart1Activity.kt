@@ -3,7 +3,6 @@ package com.gachon.ttuckttak.ui.join
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
-import com.gachon.ttuckttak.ui.login.StartActivity
 
 class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate) {
     override fun initAfterBinding() = with(binding) {
@@ -12,9 +11,8 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
 
         // 뒤로가기 버튼을 눌렀을 경우
         buttonBack.setOnClickListener {
-           // 시작 화면으로 이동
-            startActivityWithClear(StartActivity::class.java)
-       }
+            finish()
+        }
 
         // 이메일 입력창을 클릭했을 경우
         edittextEmail.setOnClickListener {
