@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.ui.join
 
+import android.content.Intent
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
@@ -51,11 +52,9 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
 
         // 인증코드 보내기 버튼을 눌렀을 경우
         buttonCertificationCode.setOnClickListener {
-            // 입력한 email 값 전달하기
-            intent.putExtra("email", edittextEmail.text.toString())
-
-            // JoinPart2Activity로 이동
-            startNextActivity(JoinPart2Activity::class.java)
+            val intent = Intent(this@JoinPart1Activity, JoinPart2Activity::class.java)
+            intent.putExtra("email", edittextEmail.text.toString()) // 입력한 email 값 전달하기
+            startActivity(intent) // JoinPart2Activity로 이동
         }
     }
 }
