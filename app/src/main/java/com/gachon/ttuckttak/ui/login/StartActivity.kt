@@ -21,6 +21,7 @@ import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
 import com.gachon.ttuckttak.databinding.ActivityStartBinding
+import com.gachon.ttuckttak.ui.join.JoinPart1Activity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -64,6 +65,10 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
     }
 
     override fun initAfterBinding() = with(binding) {
+        imgButtonRegular.setOnClickListener {
+            startNextActivity(JoinPart1Activity::class.java)
+        }
+
         imgButtonKakao.setOnClickListener {
             val intent = Intent(this@StartActivity, KakaoLoginWebViewActivity::class.java)
             kakaoLoginLauncher.launch(intent)
