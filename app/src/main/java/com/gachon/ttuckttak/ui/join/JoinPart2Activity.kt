@@ -1,7 +1,6 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart2Binding
@@ -30,10 +29,10 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         // textviewEmail 값을 위의 email 값으로 변경하기
         textviewEmail.setText(email)
         // email textbox 테두리 색 변경하기
-        layoutJoinEmail.setBackgroundResource(R.drawable.box_input_text)
+        textviewEmail.setBackgroundResource(R.drawable.box_input_text)
 
         // 인증코드를 눌렀을 경우 -- textbox 색 변경하기
-        layoutCertificationCode.setBackgroundResource(R.drawable.box_input_text)
+        edittextCertificationCode.setBackgroundResource(R.drawable.box_input_text)
 
         // 인증번호에 문제가 생겼을 경우 -- 해당 버튼 클릭
         textviewCertificationCodeProblem.setOnClickListener {

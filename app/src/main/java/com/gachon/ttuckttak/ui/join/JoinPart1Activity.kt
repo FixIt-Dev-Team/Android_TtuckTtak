@@ -1,7 +1,5 @@
 package com.gachon.ttuckttak.ui.join
 
-import android.view.View
-import androidx.core.content.ContextCompat
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
@@ -19,12 +17,12 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
        }
 
         // 이메일 입력창을 클릭했을 경우
-        layoutJoinEmail.setOnClickListener {
+        edittextEmail.setOnClickListener {
             // edittextEmail 값 가져오기
             val email = edittextEmail.text.toString()
 
             // textbox 테두리 색 변경
-            layoutJoinEmail.setBackgroundResource(R.drawable.box_input_text)
+            edittextEmail.setBackgroundResource(R.drawable.box_input_text)
 
             // email이 중복일 경우 -- 임시설정
             /*if(true) {

@@ -1,21 +1,18 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
-import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
-import com.gachon.ttuckttak.ui.terms.TermsUseActivity
 
 class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
     override fun initAfterBinding() = with(binding) {
         // 가입하기 버튼 비활성화
         buttonJoin.setClickable(false)
         // 비밀번호 입력창 비활성화
-        layoutJoinPassword.setClickable(false)
+        edittextPassword.setClickable(false)
         // 비밀번호 확인 입력창 비활성화
-        layoutPasswordCheck.setClickable(false)
+        edittextPasswordCheck.setClickable(false)
 
         // 뒤로가기 버튼을 눌렀을 경우
         buttonBack.setOnClickListener {
@@ -24,7 +21,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         }
 
         // 닉네임 입력창을 눌렀을 경우 -- textbox 색 변경하기
-        layoutJoinName.setBackgroundResource(R.drawable.box_input_text)
+        edittextName.setBackgroundResource(R.drawable.box_input_text)
         // 입력받은 닉네임 값 받기
         val nikname = edittextName.text.toString()
 
@@ -32,7 +29,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         // 닉네임이 중복이거나 부적합한 경우
         if(true) {
             // 닉네임 입력 textbox 색 변경
-            layoutJoinName.setBackgroundResource(R.drawable.box_error_text)
+            edittextName.setBackgroundResource(R.drawable.box_error_text)
 
             // error message visible -- 임시설정
             // 중복된 코드 입력 시
@@ -42,11 +39,11 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         }
         else {
             // 닉네임이 적합하는 경우 -- textbox 색 변경하기
-            layoutJoinName.setBackgroundResource(R.drawable.box_input_text)
+            edittextName.setBackgroundResource(R.drawable.box_input_text)
             // 비밀번호 입력창 활성화
-            layoutJoinPassword.setClickable(true)
+            edittextPassword.setClickable(true)
             // 비밀번호 입력창을 누르는 경우
-            layoutJoinPassword.setBackgroundResource(R.drawable.box_input_text)
+            edittextPassword.setBackgroundResource(R.drawable.box_input_text)
 
             // 비밀번호 적합 여부 확인 -- 임시설정
             // 적합하는 경우
