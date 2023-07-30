@@ -129,15 +129,12 @@
         app:layout_constraintEnd_toEndOf="@+id/edittext_certificationCode"
         app:layout_constraintTop_toTopOf="@+id/edittext_certificationCode" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_certification"
+        style="@style/TtuckTtakButton"
         android:layout_width="318dp"
-        android:layout_height="56dp"
-        android:backgroundTint="@color/main_theme_lightgray"
-        android:fontFamily="@font/noto_sans_bold"
+        android:layout_height="wrap_content"
         android:text="@string/certification"
-        android:textColor="@color/main_theme_gray"
-        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/edittext_certificationCode"
         app:layout_constraintStart_toStartOf="@+id/edittext_certificationCode"

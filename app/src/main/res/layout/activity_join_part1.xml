@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.join.JoinPart1Activity">
@@ -81,19 +80,15 @@
         app:layout_constraintEnd_toEndOf="@+id/edittext_email"
         app:layout_constraintTop_toBottomOf="@+id/edittext_email" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_certificationCode"
+        style="@style/TtuckTtakButton"
         android:layout_width="318dp"
-        android:layout_height="56dp"
-        android:backgroundTint="@color/main_theme_lightgray"
+        android:layout_height="wrap_content"
         android:text="@string/certification_code"
-        android:textColor="@color/main_theme_gray"
-        android:textSize="18sp"
-        android:fontFamily="@font/noto_sans_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/edittext_email"
         app:layout_constraintStart_toStartOf="@+id/edittext_email"
         app:layout_constraintTop_toBottomOf="@+id/edittext_email" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

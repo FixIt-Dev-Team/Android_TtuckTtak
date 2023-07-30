@@ -34,17 +34,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_reconfirm" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_resend"
+        style="@style/TtuckTtakButton"
         android:layout_width="318dp"
         android:layout_height="56dp"
-        android:layout_gravity="center"
         android:layout_marginTop="38dp"
-        android:backgroundTint="@color/main_theme_blue"
-        android:fontFamily="@font/noto_sans_bold"
         android:text="@string/certification_resend"
-        android:textColor="@color/white"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_reconfirm_email" />
