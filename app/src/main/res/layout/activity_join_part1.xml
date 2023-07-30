@@ -85,7 +85,7 @@
         android:id="@+id/button_certificationCode"
         android:layout_width="318dp"
         android:layout_height="56dp"
-        android:backgroundTint="#d8d8d8"
+        android:backgroundTint="@color/main_theme_lightgray"
         android:text="@string/certification_code"
         android:textColor="@color/main_theme_gray"
         android:textSize="18sp"
