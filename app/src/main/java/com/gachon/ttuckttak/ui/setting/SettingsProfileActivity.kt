@@ -4,7 +4,6 @@ import android.view.View
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivitySettingsProfileBinding
-import com.gachon.ttuckttak.ui.login.LoginActivity
 
 class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(ActivitySettingsProfileBinding::inflate) {
 
@@ -12,7 +11,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
 
         // 뒤로가기 버튼을 누르는 경우
         buttonBack.setOnClickListener {
-            startActivityWithClear(LoginActivity::class.java)
+            finish()
         }
 
         // 변경 사항이 일어난 경우

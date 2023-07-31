@@ -4,25 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_theme_blue" >
+    android:background="@color/main_theme_blue">
 
-    <FrameLayout
+    <ImageButton
         android:id="@+id/field_button_back"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
+        android:backgroundTint="@android:color/transparent"
+        android:clickable="false"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_back"
-            android:clickable="false" />
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/title"
@@ -32,38 +26,38 @@
         android:includeFontPadding="false"
         android:textColor="@color/main_theme_gray"
         android:textSize="16sp"
-        tools:text="AB_title"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/field_button_back"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/field_button_back"
-        app:layout_constraintBottom_toBottomOf="@id/field_button_back" />
+        tools:text="AB_title" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="30dp"
         android:fontFamily="@font/notosanskr_medium"
         android:includeFontPadding="false"
+        android:paddingHorizontal="30dp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="18sp"
-        tools:text="AB_subtitle"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/group_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintBottom_toTopOf="@id/group_button" />
+        tools:text="AB_subtitle" />
 
     <!-- 버튼 그리드 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/group_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintVertical_bias="0.6"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintVertical_bias="0.6">
 
         <!-- YES 버튼 -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,26 +67,26 @@
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/bg_rectangle_round"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/frame_yes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintVertical_bias="0.4"
+                app:layout_constraintBottom_toTopOf="@id/true_divider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/true_divider" >
+                app:layout_constraintVertical_bias="0.4">
 
                 <ImageView
                     android:id="@+id/img_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_yes"
-                    app:layout_constraintVertical_bias="0.3"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.3" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -100,13 +94,13 @@
                     android:layout_marginTop="27dp"
                     android:fontFamily="@font/notosanskr_bold"
                     android:includeFontPadding="false"
+                    android:text="@string/yes"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:text="@string/yes"
-                    app:layout_constraintVertical_bias="0.6"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/img_yes" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_yes"
+                    app:layout_constraintVertical_bias="0.6" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,29 +112,29 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/main_theme_blue"
                 android:textSize="12sp"
-                tools:text="AB_true_subtitle"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/true_divider"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_yes"
-                app:layout_constraintBottom_toTopOf="@id/true_divider" />
+                tools:text="AB_true_subtitle" />
 
             <View
                 android:id="@+id/true_divider"
                 android:layout_width="60dp"
                 android:layout_height="1dp"
                 android:background="@color/main_theme_gray"
-                app:layout_constraintVertical_bias="0.6"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintVertical_bias="0.6" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/true_divider" >
+                app:layout_constraintTop_toBottomOf="@id/true_divider">
 
                 <TextView
                     android:id="@+id/true_content_1"
@@ -152,8 +146,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/main_theme_gray"
                     android:textSize="11sp"
-                    tools:text="AB_true_content_1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="AB_true_content_1" />
 
                 <TextView
                     android:id="@+id/true_content_2"
@@ -165,8 +159,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/main_theme_gray"
                     android:textSize="11sp"
-                    tools:text="AB_true_content_2"
-                    app:layout_constraintTop_toBottomOf="@id/true_content_1" />
+                    app:layout_constraintTop_toBottomOf="@id/true_content_1"
+                    tools:text="AB_true_content_2" />
 
                 <TextView
                     android:id="@+id/true_content_3"
@@ -178,8 +172,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/main_theme_gray"
                     android:textSize="11sp"
-                    tools:text="AB_true_content_3"
-                    app:layout_constraintTop_toBottomOf="@id/true_content_2" />
+                    app:layout_constraintTop_toBottomOf="@id/true_content_2"
+                    tools:text="AB_true_content_3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -193,28 +187,28 @@
             android:layout_height="470dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/bg_rectangle_round"
-            app:layout_constraintStart_toEndOf="@id/button_y"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintStart_toEndOf="@id/button_y"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/frame_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintVertical_bias="0.4"
+                app:layout_constraintBottom_toTopOf="@id/false_divider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/false_divider" >
+                app:layout_constraintVertical_bias="0.4">
 
                 <ImageView
                     android:id="@+id/img_no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_no"
-                    app:layout_constraintVertical_bias="0.3"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.3" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -222,13 +216,13 @@
                     android:layout_marginTop="27dp"
                     android:fontFamily="@font/notosanskr_bold"
                     android:includeFontPadding="false"
+                    android:text="@string/no"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:text="@string/no"
-                    app:layout_constraintVertical_bias="0.6"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/img_no" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_no"
+                    app:layout_constraintVertical_bias="0.6" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -240,29 +234,29 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/main_theme_blue"
                 android:textSize="12sp"
-                tools:text="AB_true_subtitle"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/false_divider"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_no"
-                app:layout_constraintBottom_toTopOf="@id/false_divider" />
+                tools:text="AB_true_subtitle" />
 
             <View
                 android:id="@+id/false_divider"
                 android:layout_width="60dp"
                 android:layout_height="1dp"
                 android:background="@color/main_theme_gray"
-                app:layout_constraintVertical_bias="0.6"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintVertical_bias="0.6" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/false_divider" >
+                app:layout_constraintTop_toBottomOf="@id/false_divider">
 
                 <TextView
                     android:id="@+id/false_content_1"
@@ -274,8 +268,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/main_theme_gray"
                     android:textSize="11sp"
-                    tools:text="AB_false_content_1"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="AB_false_content_1" />
 
                 <TextView
                     android:id="@+id/false_content_2"
@@ -287,8 +281,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/main_theme_gray"
                     android:textSize="11sp"
-                    tools:text="AB_false_content_2"
-                    app:layout_constraintTop_toBottomOf="@id/false_content_1" />
+                    app:layout_constraintTop_toBottomOf="@id/false_content_1"
+                    tools:text="AB_false_content_2" />
 
                 <TextView
                     android:id="@+id/false_content_3"
@@ -300,8 +294,8 @@
                     android:textAlignment="center"
                     android:textColor="@color/main_theme_gray"
                     android:textSize="11sp"
-                    tools:text="AB_false_content_3"
-                    app:layout_constraintTop_toBottomOf="@id/false_content_2" />
+                    app:layout_constraintTop_toBottomOf="@id/false_content_2"
+                    tools:text="AB_false_content_3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
