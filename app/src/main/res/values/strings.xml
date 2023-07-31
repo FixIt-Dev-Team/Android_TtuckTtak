@@ -31,6 +31,7 @@
     <string name="find_id_or_pw"><u>아이디 및 비밀번호 찾기</u></string>
     <string name="logout"><u>로그아웃</u></string>
 
+    <!-- Problem Category 화면 -->
     <string name="whatis_problem">현재 PC에서\n어떤 문제가 발생하고 있나요?</string>
     <string name="prob_power"><big><b>전원</b></big> 에\n문제가 있어요</string>
     <string name="prob_display"><big><b>화면</b></big> 에\n문제가 있어요</string>
@@ -40,8 +41,26 @@
     <string name="contact_ttukttak">도움 받으실 수 없을 경우, 뚝딱 센터에 연락주세요!</string>
     <string name="ask">문의하기</string>
 
+    <!-- Problem Y/N 화면 -->
     <string name="yes">네</string>
     <string name="no">아니오</string>
+    
+    <string name="power">전원</string>
+    <string name="power_prob_1">본체에 전원이 들어오나요? (팬 작동, led 켜짐 등)</string>
+    <string name="display">화면</string>
+    <string name="usage">사용</string>
+    <string name="acc">주변기기</string>
+    <string name="title">%1$s에 문제가 있어요</string>
+    
+    <!-- 간단 솔루션 -->
+    <string name="simple_diagnose">빠른 해결을 위해 간단 점검 해볼게요!</string>
+    <string name="avail_problems">현재 단계에서 발생 가능한 문제에요.</string>
+    <string name="find_solution">해결법 찾기</string>
+    <string name="complete">수리 완료</string>
+
+    <!-- 솔루션 화면 -->
+    <string name="solutions">문제에 대한 %1$d가지 해결법이에요!</string>
+    <string name="go_next">다음으로 넘어가기</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
