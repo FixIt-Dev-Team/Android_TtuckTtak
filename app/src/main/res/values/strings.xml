@@ -14,6 +14,10 @@
 
     <string name="user_name">김뚝딱이</string>
     <string name="user_email">ttuck@ttuckttak.com</string>
+
+    <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
+    <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
+
     <string name="alert_setting">알림 설정</string>
     <string name="consumer_center">고객 센터</string>
     <string name="review">리뷰 및 평가하기</string>
@@ -28,7 +32,8 @@
     <string name="event_push_alert">이벤트 및 기능추가 push 알림</string>
     <string name="night_time_alert">야간시간(20:00-24:00) Push 알림</string>
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
-    <string name="find_id_or_pw"><u>아이디 및 비밀번호 찾기</u></string>
+    <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
+    <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
     <string name="logout"><u>로그아웃</u></string>
 
     <!-- Problem Category 화면 -->
@@ -64,4 +69,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="insert_email">찾으실 이메일을 입력해주세요</string>
 </resources>

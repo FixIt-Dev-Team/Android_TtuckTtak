@@ -10,87 +10,164 @@
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:background="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintVertical_bias="0.05"
+        />
 
     <ImageView
-        android:id="@+id/image_logo"
+        android:id="@+id/imageView_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:background="@drawable/ic_logo"
-        app:layout_constraintBottom_toTopOf="@id/emailInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_back" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textInputLayout_email"
+        android:layout_marginBottom="62dp"
+        />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInputLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/textInputLayout_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="50dp"
         android:hint="@string/email"
-        app:boxStrokeColor="@color/main_theme_blue"
-        app:boxStrokeErrorColor="@color/general_theme_error"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:layout_constraintBottom_toTopOf="@id/pwInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image_logo">
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/editText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pwInputLayout"
+        android:id="@+id/textInputLayout_pwd"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
         android:hint="@string/pw"
-        app:boxStrokeColor="@color/main_theme_blue"
-        app:boxStrokeErrorColor="@color/general_theme_error"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailInputLayout">
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_email"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pwEditText"
+            android:id="@+id/editText_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/button_login"
-        android:layout_width="0dp"
+    <ImageButton
+        android:id="@+id/img_button_login"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/ic_button_login"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pwInputLayout" />
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_pwd"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="50dp"
+        />
 
     <TextView
         android:id="@+id/text_find_id_or_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/find_id_or_pw"
+        android:layout_marginTop="18dp"
+        android:text="@string/find_id_or_pw1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_login" />
+        app:layout_constraintTop_toBottomOf="@id/img_button_login" />
+
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/image_logo"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="70dp"-->
+<!--        android:background="@drawable/ic_logo"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/emailInputLayout"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/button_back" />-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/emailInputLayout"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:hint="@string/email"-->
+<!--        app:boxStrokeColor="@color/main_theme_blue"-->
+<!--        app:boxStrokeErrorColor="@color/general_theme_error"-->
+<!--        app:endIconMode="clear_text"-->
+<!--        app:errorEnabled="true"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/pwInputLayout"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/image_logo">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/emailEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="text" />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/pwInputLayout"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        android:hint="@string/pw"-->
+<!--        app:boxStrokeColor="@color/main_theme_blue"-->
+<!--        app:boxStrokeErrorColor="@color/general_theme_error"-->
+<!--        app:endIconMode="clear_text"-->
+<!--        app:errorEnabled="true"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/emailInputLayout">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:id="@+id/pwEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:inputType="textPassword" />-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/button_login"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginHorizontal="20dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/pwInputLayout" />-->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
