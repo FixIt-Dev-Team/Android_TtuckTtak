@@ -27,12 +27,24 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.login.StartActivity" />
+        <activity android:name=".ui.login.StartActivity"/>
         <activity android:name=".ui.login.KakaoLoginWebViewActivity" />
         <activity android:name=".ui.login.LoginActivity" />
-        <activity
-            android:name=".ui.main.HomeActivity"
-            android:theme="@style/Theme.Android_TtuckTtak.Home"/>
+        <activity android:name=".ui.main.HomeActivity"
+            android:theme="@style/Theme.Android_TtuckTtak.Home" />
+        <activity android:name=".ui.setting.SettingsActivity" />
+
+        <activity android:name=".ui.setting.SettingsAlertActivity" />
+        <activity android:name=".ui.setting.SettingsProfileActivity" />
+        <activity android:name=".ui.join.JoinPart1Activity" />
+        <activity android:name=".ui.join.JoinPart2Activity" />
+        <activity android:name=".ui.join.JoinPart3Activity" />
+
+        <activity android:name=".ui.problem.ProblemCategoryActivity"
+            android:theme="@style/Theme.Android_TtuckTtak.Home" />
+        <activity android:name=".ui.problem.ProblemYNActivity"
+            android:theme="@style/Theme.Android_TtuckTtak.Home" />
+
 
     </application>
 
