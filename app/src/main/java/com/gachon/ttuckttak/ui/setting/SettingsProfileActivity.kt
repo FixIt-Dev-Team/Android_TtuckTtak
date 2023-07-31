@@ -40,7 +40,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
             // nikname이 공백이 아닐 경우
             if(!nikname.isBlank() ) {
 // nikname 중복 검사
-                layoutSettingNikname.setOnClickListener {
+                buttonSettingNikname.setOnClickListener {
                     // 중복인 경우
                     if(true) { // <임시설정>
                         // 중복 에러 메시지
