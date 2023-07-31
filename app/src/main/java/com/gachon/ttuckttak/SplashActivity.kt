@@ -8,7 +8,7 @@ import com.gachon.ttuckttak.ui.login.StartActivity
 
 class SplashActivity : AppCompatActivity() {
 
-    val SPLASH_VIEW_TIME: Long = 2000
+    val SPLASH_VIEW_TIME: Long = 1000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
