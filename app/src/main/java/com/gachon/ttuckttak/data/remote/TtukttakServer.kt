@@ -1,6 +1,7 @@
 package com.gachon.ttuckttak.data.remote
 
 import com.gachon.ttuckttak.base.BaseResponse
+import com.gachon.ttuckttak.data.remote.dto.EmailConfirmRes
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
 import com.gachon.ttuckttak.data.remote.service.LoginService
 import com.google.gson.GsonBuilder
@@ -28,6 +29,10 @@ object TtukttakServer {
 
     suspend fun loginWithGoogle(idToken: String): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
         loginService.googleLogin(idToken)
+    }
+
+    suspend fun emailConfirm(email: String) : BaseResponse<EmailConfirmRes> = withContext(Dispatchers.IO) {
+        loginService.emailConfirm(email)
     }
 
 }

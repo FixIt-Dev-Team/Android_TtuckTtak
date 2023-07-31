@@ -1,6 +1,7 @@
 package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
+import com.gachon.ttuckttak.data.remote.dto.EmailConfirmRes
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -18,5 +19,10 @@ interface LoginService {
     suspend fun googleLogin(
         @Header("Google-id-token") idToken: String,
     ): BaseResponse<LoginRes>
+
+    @POST("auths/email-confirm")
+    suspend fun emailConfirm(
+        @Query("to") email: String
+    ): BaseResponse<EmailConfirmRes>
 
 }
