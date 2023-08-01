@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import android.util.Log
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.BuildConfig
 import com.gachon.ttuckttak.R
@@ -20,7 +18,7 @@ import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
-import com.gachon.ttuckttak.databinding.ActivityStartBinding
+import com.gachon.ttuckttak.databinding.ActivityLandingBinding
 import com.gachon.ttuckttak.ui.join.JoinPart1Activity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -30,7 +28,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::inflate) {
+class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBinding::inflate) {
 
     private val userManager: UserManager by lazy { UserManager(this) }
     private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
@@ -70,7 +68,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
         }
 
         imgButtonKakao.setOnClickListener {
-            val intent = Intent(this@StartActivity, KakaoLoginWebViewActivity::class.java)
+            val intent = Intent(this@LandingActivity, KakaoLoginWebViewActivity::class.java)
             kakaoLoginLauncher.launch(intent)
         }
 

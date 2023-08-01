@@ -8,7 +8,7 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.databinding.ActivityJoinPart2Binding
-import com.gachon.ttuckttak.ui.login.StartActivity
+import com.gachon.ttuckttak.ui.login.LandingActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -56,7 +56,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
-                        Log.e(StartActivity.TAG, "서버 통신 오류: ${e.message}")
+                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
                         showToast("이메일 인증 요청 실패")
                     }
                 }
