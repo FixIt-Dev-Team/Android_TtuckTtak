@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
-import com.gachon.ttuckttak.ui.login.StartActivity
+import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.utils.RegexUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
 
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
-                        Log.e(StartActivity.TAG, "서버 통신 오류: ${e.message}")
+                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
                         showToast("이메일 인증 요청 실패")
                     }
                 }

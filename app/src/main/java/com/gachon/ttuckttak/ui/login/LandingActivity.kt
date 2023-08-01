@@ -1,27 +1,20 @@
 package com.gachon.ttuckttak.ui.login
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import android.util.Log
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.BuildConfig
-import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
-import com.gachon.ttuckttak.databinding.ActivityStartBinding
+import com.gachon.ttuckttak.databinding.ActivityLandingBinding
 import com.gachon.ttuckttak.ui.join.JoinPart1Activity
+import com.gachon.ttuckttak.ui.main.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -30,12 +23,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::inflate) {
+class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBinding::inflate) {
 
     private val userManager: UserManager by lazy { UserManager(this) }
     private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
     private lateinit var googleSignInClient: GoogleSignInClient
-    lateinit var textView: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY)
@@ -46,22 +39,6 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
             .build()
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        // 1. TextView 참조
-        textView = findViewById(R.id.text_welcome1)
-
-        // 2. String 문자열 데이터 취득
-        val textData: String = textView.text.toString()
-
-        // 3. SpannableStringBuilder 타입으로 변환
-        val builder = SpannableStringBuilder(textData)
-
-        // 4-3 해당하는 문자열에 빨간색 적용
-        val colorBlueSpan = ForegroundColorSpan(Color.parseColor("#1DB9DB"))
-        builder.setSpan(colorBlueSpan, 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        // 5. TextView에 적용
-        textView.text = builder
     }
 
     override fun initAfterBinding() = with(binding) {
@@ -70,7 +47,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
         }
 
         imgButtonKakao.setOnClickListener {
-            val intent = Intent(this@StartActivity, KakaoLoginWebViewActivity::class.java)
+            val intent = Intent(this@LandingActivity, KakaoLoginWebViewActivity::class.java)
             kakaoLoginLauncher.launch(intent)
         }
 
@@ -130,6 +107,9 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
                         Log.i(TAG, "accessToken: ${data.tokenInfo.accessToken}")
                         Log.i(TAG, "refreshToken: ${data.tokenInfo.refreshToken}")
                         saveInfo(data)
+
+                        // Todo: 추후 HomeActivity 이전 화면이 생성되면 해당 화면으로 이동하게 작업
+                        startNextActivity(HomeActivity::class.java)
 
                     } else {
                         Log.e(TAG, "로그인 실패!")

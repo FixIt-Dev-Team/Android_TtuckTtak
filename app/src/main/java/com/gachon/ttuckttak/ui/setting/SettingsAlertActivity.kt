@@ -8,7 +8,7 @@ import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.NoticeReq
 import com.gachon.ttuckttak.databinding.ActivitySettingsAlertBinding
-import com.gachon.ttuckttak.ui.login.StartActivity
+import com.gachon.ttuckttak.ui.login.LandingActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -47,7 +47,7 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e(StartActivity.TAG, "서버 통신 오류: ${e.message}")
+                    Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
                     showToast("push 요청 실패")
                 }
             }
