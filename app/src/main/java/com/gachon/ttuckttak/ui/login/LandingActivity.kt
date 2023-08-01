@@ -14,6 +14,7 @@ import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
 import com.gachon.ttuckttak.databinding.ActivityLandingBinding
 import com.gachon.ttuckttak.ui.join.JoinPart1Activity
+import com.gachon.ttuckttak.ui.main.HomeActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -106,6 +107,9 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
                         Log.i(TAG, "accessToken: ${data.tokenInfo.accessToken}")
                         Log.i(TAG, "refreshToken: ${data.tokenInfo.refreshToken}")
                         saveInfo(data)
+
+                        // Todo: 추후 HomeActivity 이전 화면이 생성되면 해당 화면으로 이동하게 작업
+                        startNextActivity(HomeActivity::class.java)
 
                     } else {
                         Log.e(TAG, "로그인 실패!")
