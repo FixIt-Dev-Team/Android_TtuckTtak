@@ -27,22 +27,36 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
 
         // event switch를 누르는 경우
         switchEventAndFunctionPush.setOnCheckedChangeListener{CompoundButton, onSwitch ->
-            switchEventAndFunctionPush.setChecked(!onSwitch)
-            launcher(onSwitch)
+            launcherEvent(onSwitch)
         }
 
         // night time switch를 누르는 경우
         switchNightTimePushAlert.setOnCheckedChangeListener { CompoundButton, onSwitch ->
-            switchNightTimePushAlert.setChecked(!onSwitch)
-            launcher(onSwitch)
+            launcherNight(onSwitch)
         }
     }
 
-    private fun launcher(value: Boolean) {
+    private fun launcherEvent(value: Boolean) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // 서버에 push 요청
                 val response = TtukttakServer.push(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
+                Log.i("response", response.toString())
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                    showToast("push 요청 실패")
+                }
+            }
+        }
+    }
+
+    private fun launcherNight(value: Boolean) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // 서버에 push 요청
+                val response = TtukttakServer.pushNight(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
                 Log.i("response", response.toString())
 
             } catch (e: Exception) {

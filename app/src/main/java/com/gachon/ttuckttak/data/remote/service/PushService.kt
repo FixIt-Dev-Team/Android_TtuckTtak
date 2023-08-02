@@ -15,4 +15,9 @@ interface PushService {
         @Body noticeReq: NoticeReq
     ) : BaseResponse<NoticeRes>
 
+    @PATCH("/api/members/push/night")
+    suspend fun  nightAlert(
+        @Header("Authorization") token: String,
+        @Body noticeReq: NoticeReq
+    ) : BaseResponse<NoticeRes>
 }

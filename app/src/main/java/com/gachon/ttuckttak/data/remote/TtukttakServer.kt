@@ -43,4 +43,7 @@ object TtukttakServer {
         pushService.eventAlert(token, noticeReq)
     }
 
+    suspend fun pushNight(token: String, noticeReq: NoticeReq): BaseResponse<NoticeRes> = withContext(Dispatchers.IO) {
+        pushService.nightAlert(token, noticeReq)
+    }
 }
