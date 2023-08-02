@@ -35,6 +35,7 @@
             android:theme="@style/Theme.Android_TtuckTtak.Home" />
         <activity android:name=".ui.login.FindPwActivity" />
         <activity android:name=".ui.setting.SettingsActivity" />
+        <activity android:name=".ui.login.ResetPwActivity" />
 
         <activity android:name=".ui.setting.SettingsAlertActivity" />
         <activity android:name=".ui.setting.SettingsProfileActivity" />

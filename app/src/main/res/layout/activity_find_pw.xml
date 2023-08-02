@@ -50,38 +50,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_email"
+    <EditText
+        android:id="@+id/edittext_findEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/box_white"
+        android:hint="@string/email_reconfirm2"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@id/text_find_id_or_pw"
+        app:layout_constraintStart_toStartOf="@id/text_find_id_or_pw"
+        app:layout_constraintTop_toBottomOf="@id/text_insert_email" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_findgen"
+        style="@style/TtuckTtakButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/email_reconfirm2"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_insert_email"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageButton
-        android:id="@+id/img_button_findgen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_button_findgen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_email"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="180sp"
-        />
+        android:enabled="false"
+        android:text="@string/find_pw"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/edittext_findEmail"
+        app:layout_constraintStart_toStartOf="@id/edittext_findEmail"
+        app:layout_constraintTop_toBottomOf="@id/edittext_findEmail" />
 
 
 
