@@ -82,7 +82,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_certificationCode"
-        style="@style/TtuckTtakButton"
+        style="@style/DefaultButton"
         android:layout_width="318dp"
         android:layout_height="wrap_content"
         android:enabled="false"
