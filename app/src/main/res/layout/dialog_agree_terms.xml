@@ -27,12 +27,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/textview_agreeTerms" />
 
+    <!-- Todo: color #E7E7E7 color에 등록 후 수정   -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_serviceTerms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:background="@drawable/box_service_terms"
+        android:background="@drawable/bg_rectangle_round"
+        android:backgroundTint="#E7E7E7"
         app:layout_constraintEnd_toEndOf="@id/radiobutton_agreeTerms"
         app:layout_constraintStart_toStartOf="@id/textview_agreeTerms"
         app:layout_constraintTop_toBottomOf="@id/textview_agreeTerms">

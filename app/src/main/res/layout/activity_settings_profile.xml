@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/onboarding_"
     tools:context=".ui.setting.SettingsProfileActivity">
 
     <TextView
@@ -50,8 +49,8 @@
             android:id="@+id/imageview_checkPointCircle"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/ic_circle_full" />
+            android:background="@drawable/ic_circle_full"
+            android:backgroundTint="@color/black" />
 
         <ImageView
             android:id="@+id/imageview_checkPoint"
@@ -105,8 +104,8 @@
         android:background="@drawable/box_white"
         android:orientation="horizontal"
         android:padding="15dp"
-        app:layout_constraintStart_toStartOf="@id/imageview_profile"
         app:layout_constraintEnd_toEndOf="@id/imageview_profile"
+        app:layout_constraintStart_toStartOf="@id/imageview_profile"
         app:layout_constraintTop_toBottomOf="@id/imageview_profile">
 
         <TextView
@@ -163,17 +162,17 @@
         android:textColor="@color/general_theme_error"
         android:textSize="10sp"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/layout_nikname"
-        app:layout_constraintEnd_toEndOf="@id/layout_nikname" />
+        app:layout_constraintEnd_toEndOf="@id/layout_nikname"
+        app:layout_constraintTop_toBottomOf="@id/layout_nikname" />
 
     <LinearLayout
         android:id="@+id/layout_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:padding="15dp"
         android:background="@drawable/box_white"
         android:orientation="horizontal"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@id/layout_nikname"
         app:layout_constraintStart_toStartOf="@id/layout_nikname"
         app:layout_constraintTop_toBottomOf="@id/layout_nikname">
@@ -182,10 +181,10 @@
             android:id="@+id/textview_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/black"
             android:fontFamily="@font/noto_sans_bold"
-            android:text="@string/input_email" />
+            android:text="@string/input_email"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <View
             android:id="@+id/view_blueBar2"
@@ -199,37 +198,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:textSize="14sp"
             android:background="@android:color/transparent"
             android:enabled="true"
-            android:textColor="@color/black"
             android:fontFamily="@font/noto_sans_bold"
+            android:hint="@string/user_email"
             android:inputType="textEmailAddress"
-            android:hint="@string/user_email" />
+            android:textColor="@color/black"
+            android:textSize="14sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_passwordReset"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_passwordReset"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="79dp"
-        android:orientation="vertical"
-        android:background="@drawable/box_green_full"
+        android:background="@drawable/bg_rectangle_round"
+        android:backgroundTint="@color/main_theme_subblue"
+        android:drawableEnd="@drawable/ic_front"
+        android:drawableTint="@color/white"
+        android:fontFamily="@font/noto_sans_bold"
+        android:padding="5dp"
+        android:text="@string/password_reset"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="@id/layout_email"
         app:layout_constraintStart_toStartOf="@id/layout_email"
-        app:layout_constraintTop_toBottomOf="@id/layout_email">
+        app:layout_constraintTop_toBottomOf="@id/layout_email" />
 
-        <Button
-            android:id="@+id/button_passwordReset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="@android:color/transparent"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:drawableEnd="@drawable/ic_front"
-            android:drawableTint="@color/white"
-            android:text="@string/password_reset"
-            android:fontFamily="@font/noto_sans_bold"
-            android:textAlignment="center" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

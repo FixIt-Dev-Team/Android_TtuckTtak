@@ -42,7 +42,7 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
     }
 
     override fun initAfterBinding() = with(binding) {
-        imgButtonRegular.setOnClickListener {
+        buttonRegular.setOnClickListener {
             startNextActivity(JoinPart1Activity::class.java)
         }
 

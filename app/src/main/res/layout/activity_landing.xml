@@ -72,17 +72,23 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/img_button_regular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <!-- Todo: 피그마 비율대로 했는데 조금 다름. 수정 필요   -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_regular"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="110dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_regular"
+        android:background="@drawable/bg_rectangle_round"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/noto_sans_bold"
+        android:text="@string/sign_up"
+        android:textColor="@color/main_theme_blue"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_welcome" />
+        app:layout_constraintTop_toBottomOf="@id/layout_welcome"
+        app:layout_constraintWidth_percent="0.88" />
 
     <ImageButton
         android:id="@+id/img_button_google"
@@ -93,7 +99,7 @@
         android:src="@drawable/ic_button_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_button_regular" />
+        app:layout_constraintTop_toBottomOf="@id/button_regular" />
 
     <ImageButton
         android:id="@+id/img_button_kakao"

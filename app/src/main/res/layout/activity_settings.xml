@@ -90,11 +90,11 @@
             android:layout_height="48dp"
             android:layout_gravity="center_vertical|end"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_front"
             android:backgroundTint="@android:color/transparent"
             android:clickable="false"
-            android:contentDescription="@string/blank_text" />
+            android:contentDescription="@string/blank_text"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_front" />
     </GridLayout>
 
     <LinearLayout
@@ -103,7 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="61dp"
-        android:background="@drawable/box_green_full_double"
+        android:background="@drawable/bg_rectangle_round"
+        android:backgroundTint="@color/main_theme_subblue"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@id/layout_profile"
         app:layout_constraintStart_toStartOf="@id/layout_profile"
@@ -119,10 +120,10 @@
 
             <Button
                 android:id="@+id/button_alertSetting"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
@@ -141,10 +142,10 @@
 
             <Button
                 android:id="@+id/button_consumerCenter"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
@@ -161,7 +162,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/box_green_full_triple"
+        android:background="@drawable/bg_rectangle_round"
+        android:backgroundTint="@color/main_theme_subblue"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@id/layout_alertAndConsumer"
         app:layout_constraintStart_toStartOf="@id/layout_alertAndConsumer"
@@ -176,10 +178,10 @@
 
             <Button
                 android:id="@+id/layout_review"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
@@ -198,10 +200,10 @@
 
             <Button
                 android:id="@+id/button_help"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
@@ -220,10 +222,10 @@
 
             <Button
                 android:id="@+id/button_use"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                style="@style/Widget.AppCompat.Button.Borderless"
                 android:backgroundTint="@color/main_theme_subblue"
                 android:drawableEnd="@drawable/ic_front"
                 android:drawableTint="@color/white"
@@ -249,10 +251,10 @@
 
     <Button
         android:id="@+id/button_logout"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:fontFamily="@font/noto_sans_bold"
         android:text="@string/logout"
         android:textColor="@color/black"
