@@ -20,6 +20,7 @@
 
     <RadioButton
         android:id="@+id/radiobutton_agreeTerms"
+        style="@style/DefaultRadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -56,6 +57,7 @@
 
         <RadioButton
             android:id="@+id/radiobutton_useTerms"
+            style="@style/DefaultRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="9dp"
@@ -80,6 +82,7 @@
 
         <RadioButton
             android:id="@+id/radiobutton_promoteTerms"
+            style="@style/DefaultRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="84dp"

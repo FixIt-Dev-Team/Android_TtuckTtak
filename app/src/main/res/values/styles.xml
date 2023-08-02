@@ -6,4 +6,9 @@
         <item name="android:fontFamily">@font/noto_sans_bold</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="DefaultRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/selector_default_radio_button</item>
+        <item name="android:button">null</item>
+    </style>
 </resources>
