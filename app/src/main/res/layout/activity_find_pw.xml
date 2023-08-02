@@ -4,35 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintVertical_bias="0.05"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/text_find_id_or_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/find_id_or_pw2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.05"
         android:fontFamily="@font/notosanskr_bold"
         android:includeFontPadding="false"
-        android:textSize="16sp"
+        android:text="@string/find_id_or_pw2"
         android:textColor="@color/black"
-        />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/text_insert_email"
@@ -52,16 +49,15 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_email"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/email_reconfirm2"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_insert_email"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        >
+        android:hint="@string/email_reconfirm2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_insert_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_email"
@@ -70,19 +66,17 @@
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageButton
-        android:id="@+id/img_button_findgen"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_certificationCode"
+        style="@style/DefaultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_button_findgen"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="180sp"
+        android:enabled="false"
+        android:text="@string/certification_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_email"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="180sp"
-        />
-
-
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

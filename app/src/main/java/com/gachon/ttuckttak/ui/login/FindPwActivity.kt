@@ -14,12 +14,8 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
     }
 
     private fun setClickListener() = with(binding) {
-        imgButtonFindgen.setOnClickListener {
-            val email = editTextEmail.text
+        buttonCertificationCode.setOnClickListener {
 
-            // Todo: 서버에 로그인 요청
-
-            // Todo: 결과에 따른 처리
         }
 
         buttonBack.setOnClickListener {

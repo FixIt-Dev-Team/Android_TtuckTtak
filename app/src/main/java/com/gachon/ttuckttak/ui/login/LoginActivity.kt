@@ -13,7 +13,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     private fun setClickListener() = with(binding) {
-        imgButtonLogin.setOnClickListener {
+        buttonLogin.setOnClickListener {
             val email = editTextEmail.text
             val pw = editTextPwd.text
 

@@ -5,6 +5,10 @@
     <string name="text_welcome3"><u>이미 계정이 있으신가요?</u></string>
     <string name="text_start">탭해서 진단을 시작해보세요!</string>
 
+    <!--  로그인 화면  -->
+    <string name="login">로그인하기</string>
+    <!--    -->
+
 
     <string name="email">이메일 주소</string>
     <string name="pw">비밀번호</string>
