@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/change_settings"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +64,7 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/user_name"
-            android:textColor="@color/black"
+            android:textColor="@color/general_theme_black"
             android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/textview_userEmail"
             app:layout_constraintEnd_toStartOf="@+id/button_settingProfile"
@@ -79,7 +79,7 @@
             android:layout_marginTop="5dp"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/user_email"
-            android:textColor="@color/black"
+            android:textColor="@color/system_theme_darkgray"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@id/imageview_Profile"
             app:layout_constraintEnd_toStartOf="@id/button_settingProfile"
@@ -122,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_front"
-            android:drawableTint="@color/white"
+            android:drawableTint="@color/general_theme_white"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/alert_setting"
             android:textAlignment="viewStart"
@@ -131,7 +131,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/white" />
+            android:background="@color/general_theme_white" />
 
         <Button
             android:id="@+id/button_consumerCenter"
@@ -139,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_front"
-            android:drawableTint="@color/white"
+            android:drawableTint="@color/general_theme_white"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/consumer_center"
             android:textAlignment="viewStart"
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_front"
-            android:drawableTint="@color/white"
+            android:drawableTint="@color/general_theme_white"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/review"
             android:textAlignment="viewStart"
@@ -175,7 +175,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/white" />
+            android:background="@color/general_theme_white" />
 
         <Button
             android:id="@+id/button_help"
@@ -183,7 +183,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_front"
-            android:drawableTint="@color/white"
+            android:drawableTint="@color/general_theme_white"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/help"
             android:textAlignment="viewStart"
@@ -192,7 +192,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/white" />
+            android:background="@color/general_theme_white" />
 
         <Button
             android:id="@+id/button_use"
@@ -200,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_front"
-            android:drawableTint="@color/white"
+            android:drawableTint="@color/general_theme_white"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/use"
             android:textAlignment="viewStart"
@@ -215,7 +215,7 @@
         android:layout_marginTop="52dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/ttuckttak_version"
-        android:textColor="@color/main_theme_gray"
+        android:textColor="@color/system_theme_gray"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@id/layout_reviewHelpUse"
         app:layout_constraintStart_toStartOf="@id/layout_reviewHelpUse"
@@ -226,10 +226,10 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/general_theme_white"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/logout"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/textview_ttuckttakVersion"
         app:layout_constraintStart_toStartOf="@id/textview_ttuckttakVersion"

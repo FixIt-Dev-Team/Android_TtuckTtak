@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/general_theme_white">
 
     <ImageButton
         android:id="@+id/button_back"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_medium"
         android:includeFontPadding="false"
-        android:textColor="@color/main_theme_gray"
+        android:textColor="@color/system_theme_gray"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/textview_subtitle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
         android:layout_marginTop="22dp"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
-        android:textColor="@color/main_theme_gray"
+        android:textColor="@color/system_theme_gray"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +100,7 @@
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
         android:textAlignment="textStart"
-        android:textColor="@color/general_theme_error"
+        android:textColor="@color/general_theme_red"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

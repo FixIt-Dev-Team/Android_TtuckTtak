@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_medium"
             android:includeFontPadding="false"
-            android:textColor="@color/main_theme_gray"
+            android:textColor="@color/system_theme_gray"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/subtitle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_regular"
             android:includeFontPadding="false"
-            android:textColor="@color/white"
+            android:textColor="@color/general_theme_white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/field_button_back"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +96,7 @@
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:includeFontPadding="false"
                     android:text="@string/simple_diagnose"
-                    android:textColor="@color/white"
+                    android:textColor="@color/general_theme_white"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -123,9 +123,9 @@
                         android:includeFontPadding="false"
                         android:padding="15dp"
                         android:textAlignment="textStart"
-                        android:textColor="@color/black"
+                        android:textColor="@color/general_theme_black"
                         android:textSize="14sp"
-                        app:backgroundTint="@color/main_subwhite"
+                        app:backgroundTint="@color/system_theme_subwhite"
                         tools:text="점검 사항 (1)\nsersfsdfasdfjlksjdlkfjsdssdkf" />
 
                 </LinearLayout>
@@ -138,7 +138,7 @@
                     android:fontFamily="@font/noto_sans_kr_regular"
                     android:includeFontPadding="false"
                     android:text="@string/avail_problems"
-                    android:textColor="@color/main_theme_gray"
+                    android:textColor="@color/system_theme_gray"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toTopOf="@id/text_avail_problems"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +155,7 @@
                     android:fontFamily="@font/noto_sans_kr_regular"
                     android:includeFontPadding="false"
                     android:textAlignment="center"
-                    android:textColor="@color/white"
+                    android:textColor="@color/general_theme_white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toTopOf="@id/button_find_solution"
                     app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +174,7 @@
                     android:text="@string/find_solution"
                     android:textColor="@color/main_theme_blue"
                     android:textSize="18sp"
-                    app:backgroundTint="@color/white"
+                    app:backgroundTint="@color/general_theme_white"
                     app:layout_constraintBottom_toTopOf="@id/button_complete"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -187,9 +187,9 @@
                     android:includeFontPadding="false"
                     android:paddingHorizontal="38dp"
                     android:text="@string/complete"
-                    android:textColor="@color/white"
+                    android:textColor="@color/general_theme_white"
                     android:textSize="16sp"
-                    app:backgroundTint="@color/white"
+                    app:backgroundTint="@color/general_theme_white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -231,7 +231,7 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
+                android:background="@android:color/transparent"
                 android:src="@drawable/ic_setting"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
