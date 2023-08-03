@@ -48,7 +48,7 @@
             android:id="@+id/imageview_checkPointCircle"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/ic_circle_full"
+            android:background="@drawable/circle"
             android:backgroundTint="@color/general_theme_black" />
 
         <ImageView
@@ -82,7 +82,7 @@
             android:id="@+id/button_imgProfilePlusCircle"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/ic_circle_full"
+            android:background="@drawable/circle"
             android:backgroundTint="@color/main_theme_blue"
             android:clickable="false"
             android:contentDescription="@string/blank_text" />
