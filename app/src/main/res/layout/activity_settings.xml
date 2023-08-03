@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
-        android:background="@drawable/frame_black_box"
+        android:background="@drawable/textbox_state_normal"
         android:columnCount="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_ChangeSettings">

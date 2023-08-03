@@ -56,15 +56,16 @@
 
     <EditText
         android:id="@+id/edittext_email"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/box_white"
+        android:background="@drawable/textbox_state_normal"
         android:hint="@string/user_email"
         android:inputType="textEmailAddress"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_join_email" />
+        app:layout_constraintTop_toBottomOf="@id/textview_join_email"
+        app:layout_constraintWidth_percent="0.91" />
 
     <TextView
         android:id="@+id/textview_overlap_email"

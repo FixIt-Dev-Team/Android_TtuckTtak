@@ -38,7 +38,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         textviewEmail.setText(email)
 
         // 인증코드를 눌렀을 경우 -- textbox 색 변경하기
-        edittextCertificationCode.setBackgroundResource(R.drawable.box_input_text)
+        edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_focused)
 
         // 인증번호에 문제가 생겼을 경우 -- 해당 버튼 클릭
         textviewCertificationCodeProblem.setOnClickListener {

@@ -55,25 +55,29 @@
 
     <TextView
         android:id="@+id/textview_email"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/box_input_text"
+        android:background="@drawable/textbox_state_focused"
         android:padding="15dp"
         android:textColor="@color/general_theme_black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/textview_send_certification"
-        app:layout_constraintTop_toBottomOf="@id/textview_send_certification" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_send_certification"
+        app:layout_constraintWidth_percent="0.91"
+        tools:text="ttukttak@ttukttak.com" />
 
     <EditText
         android:id="@+id/edittext_certification_code"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/box_white"
+        android:background="@drawable/textbox_state_normal"
         android:hint="@string/input_certification_code"
         android:inputType="number"
         android:padding="15dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/textview_email"
         app:layout_constraintStart_toStartOf="@+id/textview_email"
         app:layout_constraintTop_toBottomOf="@+id/textview_email" />

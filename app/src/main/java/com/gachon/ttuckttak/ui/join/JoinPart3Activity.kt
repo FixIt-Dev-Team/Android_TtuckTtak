@@ -20,7 +20,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         }
 
         // 닉네임 입력창을 눌렀을 경우 -- textbox 색 변경하기
-        edittextName.setBackgroundResource(R.drawable.box_input_text)
+        edittextName.setBackgroundResource(R.drawable.textbox_state_focused)
         // 입력받은 닉네임 값 받기
         val nikname = edittextName.text.toString()
 
@@ -28,7 +28,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         // 닉네임이 중복이거나 부적합한 경우
         if(true) {
             // 닉네임 입력 textbox 색 변경
-            edittextName.setBackgroundResource(R.drawable.box_error_text)
+            edittextName.setBackgroundResource(R.drawable.textbox_state_error)
 
             // error message visible -- 임시설정
             // 중복된 코드 입력 시
@@ -38,11 +38,11 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         }
         else {
             // 닉네임이 적합하는 경우 -- textbox 색 변경하기
-            edittextName.setBackgroundResource(R.drawable.box_input_text)
+            edittextName.setBackgroundResource(R.drawable.textbox_state_focused)
             // 비밀번호 입력창 활성화
             edittextPassword.setClickable(true)
             // 비밀번호 입력창을 누르는 경우
-            edittextPassword.setBackgroundResource(R.drawable.box_input_text)
+            edittextPassword.setBackgroundResource(R.drawable.textbox_state_focused)
 
             // 비밀번호 적합 여부 확인 -- 임시설정
             // 적합하는 경우
