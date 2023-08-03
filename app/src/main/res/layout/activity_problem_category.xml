@@ -229,19 +229,18 @@
         app:layout_constraintTop_toBottomOf="@id/group_button"
         app:layout_constraintVertical_bias="0.8" />
 
-    <!--  Todo: design 문제, stroke 있는 버튼으로 변경  -->
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_ask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
-        android:background="@drawable/bg_rectangle_round"
+        android:background="@drawable/bg_rectangle_round_line"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="@string/ask"
-        android:textColor="@color/main_theme_blue"
+        android:textColor="@color/system_theme_subwhite"
         android:textSize="18sp"
-        app:backgroundTint="@color/gray_light"
+        app:backgroundTint="@color/system_theme_subwhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/group_button"

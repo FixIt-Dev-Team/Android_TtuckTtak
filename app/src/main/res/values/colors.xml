@@ -18,7 +18,4 @@
     <color name="general_theme_white">#FFFFFF</color>
     <color name="general_theme_black">#000000</color>
     <color name="general_theme_red">#B3261E</color>
-
-    <!-- Todo: stroke 버튼으로 바꾸면서 제거   -->
-    <color name="gray_light">#D9D9D9</color>
 </resources>
