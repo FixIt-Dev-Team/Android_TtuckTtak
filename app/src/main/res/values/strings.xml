@@ -84,6 +84,7 @@
     <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
     <string name="run_out_code">인증 시간이 만료되었습니다.</string>
     <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+    <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
     <string name="timer">00:00</string>
     <string name="certification">인증하기</string>
     <string name="certification_resend">인증코드 재전송</string>
