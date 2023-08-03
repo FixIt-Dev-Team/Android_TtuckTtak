@@ -4,35 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
         android:id="@+id/button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/ic_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintVertical_bias="0.05"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/text_find_id_or_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/find_id_or_pw2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.05"
         android:fontFamily="@font/notosanskr_bold"
         android:includeFontPadding="false"
-        android:textSize="16sp"
+        android:text="@string/find_id_or_pw2"
         android:textColor="@color/black"
-        />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/text_insert_email"
@@ -51,7 +48,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <EditText
-        android:id="@+id/edittext_findEmail"
+        android:id="@+id/edittext_find_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -71,10 +68,8 @@
         android:enabled="false"
         android:text="@string/find_pw"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/edittext_findEmail"
-        app:layout_constraintStart_toStartOf="@id/edittext_findEmail"
-        app:layout_constraintTop_toBottomOf="@id/edittext_findEmail" />
-
-
+        app:layout_constraintEnd_toEndOf="@id/edittext_find_email"
+        app:layout_constraintStart_toStartOf="@id/edittext_find_email"
+        app:layout_constraintTop_toBottomOf="@id/edittext_find_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
