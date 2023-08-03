@@ -7,16 +7,15 @@
     tools:context=".ui.join.JoinPart2Activity">
 
     <View
-        android:id="@+id/view_progressBar"
         android:layout_width="120dp"
         android:layout_height="5dp"
         android:background="@color/main_theme_blue"
-        app:layout_constraintBottom_toTopOf="@+id/textview_joinMembership"
+        app:layout_constraintBottom_toTopOf="@id/textview_join_membership"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_joinMembership"
+        android:id="@+id/textview_join_membership"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -34,17 +33,16 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:clickable="false"
         android:contentDescription="@string/blank_text"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/textview_joinMembership"
-        app:layout_constraintEnd_toStartOf="@id/textview_joinMembership"
+        app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
+        app:layout_constraintEnd_toStartOf="@id/textview_join_membership"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_joinMembership" />
+        app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
 
     <TextView
-        android:id="@+id/textview_sendCertification"
+        android:id="@+id/textview_send_certification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
@@ -52,8 +50,8 @@
         android:text="@string/send_certification_code"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textview_joinMembership"
-        app:layout_constraintTop_toBottomOf="@id/textview_joinMembership" />
+        app:layout_constraintEnd_toEndOf="@id/textview_join_membership"
+        app:layout_constraintTop_toBottomOf="@id/textview_join_membership" />
 
     <TextView
         android:id="@+id/textview_email"
@@ -64,11 +62,11 @@
         android:padding="15dp"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/textview_sendCertification"
-        app:layout_constraintTop_toBottomOf="@id/textview_sendCertification" />
+        app:layout_constraintStart_toStartOf="@id/textview_send_certification"
+        app:layout_constraintTop_toBottomOf="@id/textview_send_certification" />
 
     <EditText
-        android:id="@+id/edittext_certificationCode"
+        android:id="@+id/edittext_certification_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -89,11 +87,11 @@
         android:textColor="@color/general_theme_error"
         android:textSize="12sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_certificationCode"
-        app:layout_constraintTop_toBottomOf="@id/edittext_certificationCode" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
+        app:layout_constraintTop_toBottomOf="@id/edittext_certification_code" />
 
     <TextView
-        android:id="@+id/textview_runOutCode"
+        android:id="@+id/textview_run_out_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -101,11 +99,11 @@
         android:textColor="@color/general_theme_error"
         android:textSize="12sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_certificationCode"
-        app:layout_constraintTop_toBottomOf="@id/edittext_certificationCode" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
+        app:layout_constraintTop_toBottomOf="@id/edittext_certification_code" />
 
     <TextView
-        android:id="@+id/textview_certificationCodeProblem"
+        android:id="@+id/textview_certification_code_problem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -113,9 +111,9 @@
         android:text="@string/certification_code_problem"
         android:textColor="@color/general_theme_error"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_certificationCode"
-        app:layout_constraintStart_toStartOf="@+id/edittext_certificationCode"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_certificationCode" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
+        app:layout_constraintStart_toStartOf="@id/edittext_certification_code"
+        app:layout_constraintTop_toBottomOf="@id/edittext_certification_code" />
 
     <TextView
         android:id="@+id/textview_timer"
@@ -126,9 +124,9 @@
         android:text="@string/timer"
         android:textColor="@color/black"
         android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edittext_certificationCode"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_certificationCode"
-        app:layout_constraintTop_toTopOf="@+id/edittext_certificationCode" />
+        app:layout_constraintBottom_toBottomOf="@id/edittext_certification_code"
+        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
+        app:layout_constraintTop_toTopOf="@id/edittext_certification_code" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_certification"
@@ -137,9 +135,9 @@
         android:layout_height="wrap_content"
         android:text="@string/certification"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_certificationCode"
-        app:layout_constraintStart_toStartOf="@+id/edittext_certificationCode"
-        app:layout_constraintTop_toBottomOf="@+id/textview_certificationCodeProblem" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
+        app:layout_constraintStart_toStartOf="@id/edittext_certification_code"
+        app:layout_constraintTop_toBottomOf="@id/textview_certification_code_problem" />
 
     <include
         android:id="@+id/layout_alert"

@@ -2,7 +2,6 @@ package com.gachon.ttuckttak.ui.login
 
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.ui.login.LoginActivity
 import com.gachon.ttuckttak.databinding.ActivityFindPwBinding
 import com.gachon.ttuckttak.utils.RegexUtil
 
@@ -14,11 +13,11 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
     }
 
     private fun setClickListener() = with(binding) {
-        buttonCertificationCode.setOnClickListener {
+        buttonSend.setOnClickListener {
 
         }
 
-        buttonBack.setOnClickListener {
+        imagebuttonBack.setOnClickListener {
             finish()
         }
 
@@ -35,9 +34,9 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
                 val email = editTextEmail.text.toString()
 
                 if (RegexUtil.isValidEmail(email) || email.isBlank()) { // 올바른 이메일 형식이거나 비어 있는 경우
-                    textInputLayoutEmail.error = null
+                    textinputlayoutEmail.error = null
                 } else { // 올바르지 않은 이메일 형식을 입력한 경우
-                    textInputLayoutEmail.error = getString(R.string.invalid_email_format)
+                    textinputlayoutEmail.error = getString(R.string.invalid_email_format)
                 }
             }
         }

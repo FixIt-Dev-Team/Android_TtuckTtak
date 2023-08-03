@@ -19,41 +19,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanskr_bold"
-                android:includeFontPadding="false"
-                android:text="뚝딱"
-                android:textColor="@color/main_theme_blue"
-                android:textFontWeight="700"
-                android:textSize="38sp"
-                tools:ignore="HardcodedText" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanskr_bold"
-                android:includeFontPadding="false"
-                android:text="하실"
-                android:textColor="@color/white"
-                android:textFontWeight="700"
-                android:textSize="38sp"
-                tools:ignore="HardcodedText" />
-
-        </LinearLayout>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanskr_bold"
             android:includeFontPadding="false"
-            android:text="준비 되셨나요?"
+            android:text="@string/text_welcome1"
             android:textColor="@color/white"
             android:textFontWeight="700"
             android:textSize="38sp"
@@ -91,29 +62,29 @@
         app:layout_constraintWidth_percent="0.88" />
 
     <ImageButton
-        android:id="@+id/img_button_google"
-        android:layout_width="wrap_content"
+        android:id="@+id/imagebutton_google"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_google"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/btn_google"
+        app:layout_constraintEnd_toEndOf="@id/button_regular"
+        app:layout_constraintStart_toStartOf="@id/button_regular"
         app:layout_constraintTop_toBottomOf="@id/button_regular" />
 
     <ImageButton
-        android:id="@+id/img_button_kakao"
-        android:layout_width="wrap_content"
+        android:id="@+id/imagebutton_kakao"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_kakao"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_button_google" />
+        android:src="@drawable/btn_kakao"
+        app:layout_constraintEnd_toEndOf="@id/imagebutton_google"
+        app:layout_constraintStart_toStartOf="@id/imagebutton_google"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_google" />
 
     <TextView
-        android:id="@+id/text_welcome3"
+        android:id="@+id/textview_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -125,7 +96,6 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/img_button_kakao" />
-
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_kakao" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

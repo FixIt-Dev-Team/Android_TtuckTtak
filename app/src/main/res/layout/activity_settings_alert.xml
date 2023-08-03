@@ -28,7 +28,6 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:clickable="false"
         android:contentDescription="@string/blank_text"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back"

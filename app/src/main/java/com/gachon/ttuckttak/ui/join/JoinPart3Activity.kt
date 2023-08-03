@@ -15,7 +15,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         edittextPasswordCheck.setClickable(false)
 
         // 뒤로가기 버튼을 눌렀을 경우
-        buttonBack.setOnClickListener {
+        imagebuttonBack.setOnClickListener {
             finish()
         }
 

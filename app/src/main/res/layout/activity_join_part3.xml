@@ -7,16 +7,15 @@
     tools:context=".ui.join.JoinPart3Activity">
 
     <View
-        android:id="@+id/view_progressBar"
         android:layout_width="240dp"
         android:layout_height="5dp"
         android:background="@color/main_theme_blue"
-        app:layout_constraintBottom_toTopOf="@+id/textview_joinMembership"
+        app:layout_constraintBottom_toTopOf="@id/textview_join_membership"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_joinMembership"
+        android:id="@+id/textview_join_membership"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -30,21 +29,20 @@
         app:layout_constraintVertical_bias="0.084" />
 
     <ImageButton
-        android:id="@+id/button_back"
+        android:id="@+id/imagebutton_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:clickable="false"
         android:contentDescription="@string/blank_text"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/textview_joinMembership"
-        app:layout_constraintEnd_toStartOf="@id/textview_joinMembership"
+        app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
+        app:layout_constraintEnd_toStartOf="@id/textview_join_membership"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_joinMembership" />
+        app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
 
     <TextView
-        android:id="@+id/textview_joinUserName"
+        android:id="@+id/textview_join_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="131dp"
@@ -52,8 +50,8 @@
         android:text="@string/join_user_name"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/button_back"
-        app:layout_constraintTop_toBottomOf="@+id/button_back" />
+        app:layout_constraintStart_toStartOf="@id/imagebutton_back"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_back" />
 
     <EditText
         android:id="@+id/edittext_name"
@@ -65,10 +63,10 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_joinUserName" />
+        app:layout_constraintTop_toBottomOf="@id/textview_join_user_name" />
 
     <TextView
-        android:id="@+id/textview_overlapName"
+        android:id="@+id/textview_overlap_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -80,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@id/edittext_name" />
 
     <TextView
-        android:id="@+id/textview_invalidName"
+        android:id="@+id/textview_invalid_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -92,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@id/edittext_name" />
 
     <TextView
-        android:id="@+id/textview_joinUserPassword"
+        android:id="@+id/textview_join_user_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
@@ -100,7 +98,7 @@
         android:text="@string/join_user_password"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textview_joinUserName"
+        app:layout_constraintStart_toStartOf="@id/textview_join_user_name"
         app:layout_constraintTop_toBottomOf="@id/edittext_name" />
 
     <EditText
@@ -114,10 +112,10 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_joinUserPassword" />
+        app:layout_constraintTop_toBottomOf="@id/textview_join_user_password" />
 
     <TextView
-        android:id="@+id/textview_passwordRule"
+        android:id="@+id/textview_password_rule"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -127,11 +125,11 @@
         android:textSize="12sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@id/edittext_password"
-        app:layout_constraintStart_toStartOf="@+id/edittext_password"
+        app:layout_constraintStart_toStartOf="@id/edittext_password"
         app:layout_constraintTop_toBottomOf="@id/edittext_password" />
 
     <TextView
-        android:id="@+id/textview_passwordUsable"
+        android:id="@+id/textview_password_usable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -139,11 +137,11 @@
         android:textColor="@color/main_theme_subcyan"
         android:textSize="12sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_password"
+        app:layout_constraintEnd_toEndOf="@id/edittext_password"
         app:layout_constraintTop_toBottomOf="@id/edittext_password" />
 
     <TextView
-        android:id="@+id/textview_passwordError"
+        android:id="@+id/textview_password_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_bold"
@@ -155,7 +153,7 @@
         app:layout_constraintTop_toBottomOf="@id/edittext_password" />
 
     <EditText
-        android:id="@+id/edittext_passwordCheck"
+        android:id="@+id/edittext_password_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -173,9 +171,9 @@
         android:layout_height="wrap_content"
         android:text="@string/join"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_passwordCheck"
-        app:layout_constraintStart_toStartOf="@+id/edittext_passwordCheck"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_passwordCheck" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_password_check"
+        app:layout_constraintStart_toStartOf="@id/edittext_password_check"
+        app:layout_constraintTop_toBottomOf="@id/edittext_password_check" />
 
     <include
         android:id="@+id/layout_alert"

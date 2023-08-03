@@ -27,7 +27,6 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:clickable="false"
         android:contentDescription="@string/blank_text"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back"
@@ -36,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textview_ChangeSettings" />
 
-    <GridLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +43,6 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/frame_black_box"
         android:columnCount="3"
-        android:padding="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_ChangeSettings">
 
@@ -52,50 +50,58 @@
             android:id="@+id/imageview_Profile"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_margin="5dp"
+            android:layout_margin="15dp"
             android:background="@drawable/img_profile"
-            android:contentDescription="@string/blank_text" />
+            android:contentDescription="@string/blank_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/layout_profileInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
+        <TextView
+            android:id="@+id/textview_userName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:orientation="vertical">
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/user_name"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/textview_userEmail"
+            app:layout_constraintEnd_toStartOf="@+id/button_settingProfile"
+            app:layout_constraintStart_toEndOf="@+id/imageview_Profile"
+            app:layout_constraintTop_toTopOf="@id/imageview_Profile" />
 
-            <TextView
-                android:id="@+id/textview_userName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="@string/user_name"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textview_userEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="@string/user_email"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textview_userEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/user_email"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_Profile"
+            app:layout_constraintEnd_toStartOf="@id/button_settingProfile"
+            app:layout_constraintStart_toEndOf="@id/imageview_Profile"
+            app:layout_constraintTop_toBottomOf="@id/textview_userName" />
 
         <ImageButton
             android:id="@+id/button_settingProfile"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_gravity="center_vertical|end"
+            android:layout_margin="15dp"
             android:adjustViewBounds="true"
             android:backgroundTint="@android:color/transparent"
             android:clickable="false"
             android:contentDescription="@string/blank_text"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_front" />
-    </GridLayout>
+            android:src="@drawable/ic_front"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/layout_alertAndConsumer"
@@ -110,50 +116,35 @@
         app:layout_constraintStart_toStartOf="@id/layout_profile"
         app:layout_constraintTop_toBottomOf="@id/layout_profile">
 
-
-        <LinearLayout
-            android:id="@+id/layout_alertSettings"
+        <Button
+            android:id="@+id/button_alertSetting"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame_white_box"
-            android:orientation="horizontal">
+            android:drawableEnd="@drawable/ic_front"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/alert_setting"
+            android:textAlignment="viewStart"
+            android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/button_alertSetting"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/main_theme_subblue"
-                android:drawableEnd="@drawable/ic_front"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="@string/alert_setting"
-                android:textAlignment="viewStart"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/layout_consumerCenters"
+        <Button
+            android:id="@+id/button_consumerCenter"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame_white_box"
-            android:orientation="horizontal">
+            android:drawableEnd="@drawable/ic_front"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/consumer_center"
+            android:textAlignment="viewStart"
+            android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/button_consumerCenter"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/main_theme_subblue"
-                android:drawableEnd="@drawable/ic_front"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="@string/consumer_center"
-                android:textAlignment="viewStart"
-                android:textSize="16sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -169,71 +160,52 @@
         app:layout_constraintStart_toStartOf="@id/layout_alertAndConsumer"
         app:layout_constraintTop_toBottomOf="@id/layout_alertAndConsumer">
 
-        <LinearLayout
-            android:id="@+id/layout_reviews"
+        <Button
+            android:id="@+id/layout_review"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame_white_box"
-            android:orientation="horizontal">
+            android:drawableEnd="@drawable/ic_front"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/review"
+            android:textAlignment="viewStart"
+            android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/layout_review"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/main_theme_subblue"
-                android:drawableEnd="@drawable/ic_front"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="@string/review"
-                android:textAlignment="viewStart"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/layout_helps"
+        <Button
+            android:id="@+id/button_help"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame_white_box"
-            android:orientation="horizontal">
+            android:drawableEnd="@drawable/ic_front"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/help"
+            android:textAlignment="viewStart"
+            android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/button_help"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/main_theme_subblue"
-                android:drawableEnd="@drawable/ic_front"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="@string/help"
-                android:textAlignment="viewStart"
-                android:textSize="16sp" />
-        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/layout_uses"
+        <Button
+            android:id="@+id/button_use"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/frame_white_box"
-            android:orientation="horizontal">
+            android:drawableEnd="@drawable/ic_front"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/noto_sans_bold"
+            android:text="@string/use"
+            android:textAlignment="viewStart"
+            android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/button_use"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:backgroundTint="@color/main_theme_subblue"
-                android:drawableEnd="@drawable/ic_front"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/noto_sans_bold"
-                android:text="@string/use"
-                android:textAlignment="viewStart"
-                android:textSize="16sp" />
-        </LinearLayout>
     </LinearLayout>
 
     <TextView

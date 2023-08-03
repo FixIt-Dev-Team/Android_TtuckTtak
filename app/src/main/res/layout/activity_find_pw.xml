@@ -4,20 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/button_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/imagebutton_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/textview_find_id_or_pw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toTopOf="@id/textview_find_id_or_pw" />
 
     <TextView
-        android:id="@+id/text_find_id_or_pw"
+        android:id="@+id/textview_find_id_or_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanskr_bold"
@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <TextView
-        android:id="@+id/text_insert_email"
+        android:id="@+id/textview_insert_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanskr_regular"
@@ -48,7 +48,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_email"
+        android:id="@+id/textinputlayout_email"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,17 +57,18 @@
         android:hint="@string/email_reconfirm2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_insert_email">
+        app:layout_constraintTop_toBottomOf="@id/textview_insert_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_certificationCode"
+        android:id="@+id/button_send"
         style="@style/DefaultButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -77,6 +78,6 @@
         android:text="@string/certification_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_email" />
+        app:layout_constraintTop_toBottomOf="@id/textinputlayout_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

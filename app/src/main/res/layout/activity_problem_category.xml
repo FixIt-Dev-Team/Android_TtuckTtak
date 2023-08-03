@@ -6,13 +6,12 @@
     android:background="@color/main_theme_blue">
 
     <ImageButton
-        android:id="@+id/field_button_back"
+        android:id="@+id/imagebutton_back"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@android:color/transparent"
-        android:clickable="false"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,10 +47,11 @@
             android:id="@+id/button_power_prob"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="16dp"
+            android:layout_margin="10dp"
             android:background="@drawable/bg_rectangle_round"
             android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/button_use_prob"
+            app:layout_constraintEnd_toStartOf="@id/button_display_prob"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -86,10 +86,10 @@
             android:id="@+id/button_display_prob"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="16dp"
+            android:layout_margin="10dp"
             android:background="@drawable/bg_rectangle_round"
             android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/button_acc_prob"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/button_power_prob"
             app:layout_constraintTop_toTopOf="parent">
@@ -125,11 +125,11 @@
             android:id="@+id/button_use_prob"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="16dp"
+            android:layout_margin="10dp"
             android:background="@drawable/bg_rectangle_round"
             android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_acc_prob"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_power_prob">
 
@@ -164,14 +164,13 @@
             android:id="@+id/button_acc_prob"
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="16dp"
+            android:layout_margin="10dp"
             android:background="@drawable/bg_rectangle_round"
             android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/button_use_prob"
-            app:layout_constraintTop_toBottomOf="@id/button_power_prob">
+            app:layout_constraintTop_toBottomOf="@id/button_display_prob">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -202,7 +201,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanskr_regular"
         android:includeFontPadding="false"
@@ -211,20 +210,21 @@
         android:textColor="@color/main_theme_gray"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/button_ask"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/group_button"
         app:layout_constraintVertical_bias="0.27" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosanskr_regular"
         android:includeFontPadding="false"
         android:text="@string/contact_ttukttak"
-        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/button_ask"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/group_button"
         app:layout_constraintVertical_bias="0.8" />

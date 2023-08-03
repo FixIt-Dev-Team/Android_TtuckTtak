@@ -1,10 +1,7 @@
 package com.gachon.ttuckttak.ui.login
 
-import androidx.core.widget.doOnTextChanged
-import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityLoginBinding
-import com.gachon.ttuckttak.utils.RegexUtil
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 

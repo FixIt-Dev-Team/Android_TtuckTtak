@@ -6,7 +6,7 @@
     android:background="@drawable/box_alert">
 
     <TextView
-        android:id="@+id/textview_agreeTerms"
+        android:id="@+id/textview_agree_terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="33.5dp"
@@ -19,29 +19,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioButton
-        android:id="@+id/radiobutton_agreeTerms"
+        android:id="@+id/button_agree_terms"
         style="@style/DefaultRadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/textview_agreeTerms"
+        app:layout_constraintBottom_toBottomOf="@id/textview_agree_terms"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_agreeTerms" />
+        app:layout_constraintTop_toTopOf="@id/textview_agree_terms" />
 
     <!-- Todo: color #E7E7E7 color에 등록 후 수정   -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_serviceTerms"
+        android:id="@+id/layout_service_terms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/bg_rectangle_round"
         android:backgroundTint="#E7E7E7"
-        app:layout_constraintEnd_toEndOf="@id/radiobutton_agreeTerms"
-        app:layout_constraintStart_toStartOf="@id/textview_agreeTerms"
-        app:layout_constraintTop_toBottomOf="@id/textview_agreeTerms">
+        app:layout_constraintEnd_toEndOf="@id/button_agree_terms"
+        app:layout_constraintStart_toStartOf="@id/textview_agree_terms"
+        app:layout_constraintTop_toBottomOf="@id/textview_agree_terms">
 
         <TextView
-            android:id="@+id/textview_useTerms"
+            android:id="@+id/textview_use_terms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_bold"
@@ -51,22 +51,22 @@
             android:text="@string/service_use_terms"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/radiobutton_useTerms"
+            app:layout_constraintEnd_toStartOf="@id/button_use_terms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <RadioButton
-            android:id="@+id/radiobutton_useTerms"
+            android:id="@+id/button_use_terms"
             style="@style/DefaultRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="9dp"
-            app:layout_constraintBottom_toBottomOf="@id/textview_useTerms"
+            app:layout_constraintBottom_toBottomOf="@id/textview_use_terms"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_useTerms" />
+            app:layout_constraintTop_toTopOf="@id/textview_use_terms" />
 
         <TextView
-            android:id="@+id/textview_promoteTerms"
+            android:id="@+id/textview_promote_terms"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_bold"
@@ -76,20 +76,20 @@
             android:text="@string/service_promote_terms"
             android:textColor="@color/black"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/radiobutton_promoteTerms"
+            app:layout_constraintEnd_toStartOf="@id/button_promote_terms"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_useTerms" />
+            app:layout_constraintTop_toBottomOf="@id/textview_use_terms" />
 
         <RadioButton
-            android:id="@+id/radiobutton_promoteTerms"
+            android:id="@+id/button_promote_terms"
             style="@style/DefaultRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="84dp"
             android:layout_marginEnd="9dp"
-            app:layout_constraintBottom_toBottomOf="@id/textview_promoteTerms"
+            app:layout_constraintBottom_toBottomOf="@id/textview_promote_terms"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_promoteTerms" />
+            app:layout_constraintTop_toTopOf="@id/textview_promote_terms" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -102,6 +102,6 @@
         android:text="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_serviceTerms" />
+        app:layout_constraintTop_toBottomOf="@id/layout_service_terms" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
