@@ -2,11 +2,9 @@ package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.remote.dto.EmailConfirmRes
+import com.gachon.ttuckttak.data.remote.dto.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface LoginService {
 
@@ -25,4 +23,8 @@ interface LoginService {
         @Query("to") email: String
     ): BaseResponse<EmailConfirmRes>
 
+    @POST("auths/login")
+    suspend fun login(
+        @Body loginReq: LoginReq
+    ): BaseResponse<LoginRes>
 }

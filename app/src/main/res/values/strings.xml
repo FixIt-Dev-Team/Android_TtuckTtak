@@ -34,6 +34,9 @@
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
     <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
     <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
+    <string name="login_incorrect">이메일 혹은 비밀번호가 틀렸습니다!</string>
+    <string name="not_account">계정이 존재하지 않습니다!</string>
+    <string name="btn_login">로그인 하기</string>
     <string name="find_pw">계정 찾기</string>
     <string name="logout"><u>로그아웃</u></string>
 

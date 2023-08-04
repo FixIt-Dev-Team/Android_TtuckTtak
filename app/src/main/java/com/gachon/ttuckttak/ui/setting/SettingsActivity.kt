@@ -1,11 +1,16 @@
 package com.gachon.ttuckttak.ui.setting
 
 import com.gachon.ttuckttak.base.BaseActivity
+import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.databinding.ActivitySettingsBinding
 import com.gachon.ttuckttak.ui.login.LoginActivity
 
 
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsBinding::inflate) {
+
+    private val userManager: UserManager by lazy { UserManager(this@SettingsActivity) }
+    private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsActivity) }
 
     override fun initAfterBinding() = with(binding) {
         // 뒤로가기 버튼을 누르는 경우
@@ -45,7 +50,10 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
 
         // 로그아웃 버튼을 누르는 경우 - LoginActivity로 이동
         buttonLogout.setOnClickListener {
+            userManager.clearUserIdx()
+            tokenManager.clearToken()
             startActivityWithClear(LoginActivity::class.java)
         }
     }
+
 }

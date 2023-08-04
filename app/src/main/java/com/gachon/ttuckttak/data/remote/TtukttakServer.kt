@@ -1,10 +1,7 @@
 package com.gachon.ttuckttak.data.remote
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.EmailConfirmRes
-import com.gachon.ttuckttak.data.remote.dto.LoginRes
-import com.gachon.ttuckttak.data.remote.dto.NoticeReq
-import com.gachon.ttuckttak.data.remote.dto.NoticeRes
+import com.gachon.ttuckttak.data.remote.dto.*
 import com.gachon.ttuckttak.data.remote.service.LoginService
 import com.gachon.ttuckttak.data.remote.service.PushService
 import com.google.gson.GsonBuilder
@@ -45,5 +42,9 @@ object TtukttakServer {
 
     suspend fun pushNight(token: String, noticeReq: NoticeReq): BaseResponse<NoticeRes> = withContext(Dispatchers.IO) {
         pushService.nightAlert(token, noticeReq)
+    }
+
+    suspend fun login(loginReq: LoginReq): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
+        loginService.login(loginReq)
     }
 }
