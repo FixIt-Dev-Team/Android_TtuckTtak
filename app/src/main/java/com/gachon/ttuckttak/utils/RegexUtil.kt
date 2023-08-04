@@ -17,4 +17,11 @@ object RegexUtil {
         val matcher: Matcher = pattern.matcher(target.toString())
         return matcher.matches()
     }
+
+    fun isValidNickname(target: String?): Boolean {
+        val regex = ".{4,11}" // 4글자 이상, 12글자 미만
+        val pattern: Pattern = Pattern.compile(regex)
+        val matcher: Matcher = pattern.matcher(target.toString())
+        return matcher.matches()
+    }
 }
