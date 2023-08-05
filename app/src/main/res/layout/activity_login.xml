@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity">
 
     <!--  FixMe: 디자인 수정 필요  -->
 
@@ -20,56 +22,61 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <ImageView
-        android:id="@+id/imageView_logo"
+        android:id="@+id/imageview_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="62dp"
+        android:layout_marginTop="62dp"
         android:background="@drawable/ic_logo"
-        app:layout_constraintBottom_toTopOf="@id/textInputLayout_email"
+        app:layout_constraintBottom_toTopOf="@id/edittext_email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_back" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_email"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <EditText
+        android:id="@+id/edittext_email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45">
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageview_logo"
+        app:layout_constraintWidth_percent="0.91" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout_pwd"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <EditText
+        android:id="@+id/editText_password"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/pw"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_email">
+        android:inputType="textPassword"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_email"
+        app:layout_constraintWidth_percent="0.91" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/textview_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/general_theme_red"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@id/editText_password"
+        app:layout_constraintTop_toBottomOf="@id/editText_password"
+        tools:text="@string/wrong_email_or_password" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_login"
@@ -82,7 +89,7 @@
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textInputLayout_pwd" />
+        app:layout_constraintTop_toBottomOf="@id/editText_password" />
 
     <TextView
         android:id="@+id/text_find_id_or_pw"

@@ -47,25 +47,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textinputlayout_email"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <EditText
+        android:id="@+id/editText_email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_height="0dp"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/email_reconfirm2"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_insert_email">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editText_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:inputType="textEmailAddress"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_insert_email"
+        app:layout_constraintWidth_percent="0.91" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_send"
@@ -78,6 +74,6 @@
         android:text="@string/certification_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textinputlayout_email" />
+        app:layout_constraintTop_toBottomOf="@id/editText_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

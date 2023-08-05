@@ -71,16 +71,19 @@
     <EditText
         android:id="@+id/edittext_certification_code"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/textbox_state_normal"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/input_certification_code"
         android:inputType="number"
-        android:padding="15dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/textview_email"
-        app:layout_constraintStart_toStartOf="@+id/textview_email"
-        app:layout_constraintTop_toBottomOf="@+id/textview_email" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_email"
+        app:layout_constraintWidth_percent="0.91" />
 
     <TextView
         android:id="@+id/textview_errorCode"

@@ -57,12 +57,15 @@
     <EditText
         android:id="@+id/edittext_email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/textbox_state_normal"
+        android:layout_height="0dp"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/user_email"
         android:inputType="textEmailAddress"
-        android:padding="15dp"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_join_email"
         app:layout_constraintWidth_percent="0.91" />
