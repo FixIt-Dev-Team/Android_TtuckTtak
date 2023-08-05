@@ -25,8 +25,14 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     private lateinit var authCode: String
 
     override fun initAfterBinding() = with(binding) {
+        // 인가코드 설정
         authCode = intent.getStringExtra("code")!!
+
+        // 이메일 설정
         textviewEmail.text = email // textviewEmail 값을 위의 email 값으로 변경하기
+        layoutAlert.textviewReconfirmEmail.text = email
+
+        // 기능 설정
         startTimer() // timer 시작
         setClickListener()
         setTextChangeListener()
