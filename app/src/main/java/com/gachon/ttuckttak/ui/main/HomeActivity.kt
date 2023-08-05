@@ -9,7 +9,7 @@ import com.gachon.ttuckttak.ui.setting.SettingsActivity
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate) {
 
     override fun initAfterBinding() = with(binding) {
-        imgButtonStart.setOnClickListener {
+        imagebuttonStart.setOnClickListener {
             val intent = Intent(this@HomeActivity, ProblemCategoryActivity::class.java)
             startActivity(intent)
         }

@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Android_TtuckTtak</string>
-    <string name="text_welcome1">뚝딱하실\n준비되셨나요</string>
+    <string name="text_welcome1"><font color='#1DB9DB'>뚝딱</font>하실\n준비되셨나요?</string>
     <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
+    <string name="sign_up">가입하기</string>
     <string name="text_welcome3"><u>이미 계정이 있으신가요?</u></string>
     <string name="text_start">탭해서 진단을 시작해보세요!</string>
+
+    <!--  로그인 화면  -->
+    <string name="wrong_email_or_password">이메일 혹은 비밀번호가 틀렸습니다.</string>
+    <string name="login">로그인하기</string>
+    <!--    -->
 
 
     <string name="email">이메일 주소</string>

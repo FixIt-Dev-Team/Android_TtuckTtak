@@ -3,79 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_theme_blue" >
+    android:background="@color/main_theme_blue">
 
-    <FrameLayout
-        android:id="@+id/field_button_back"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+    <ImageButton
+        android:id="@+id/button_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_back"
-            android:clickable="false" />
-
-    </FrameLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:includeFontPadding="false"
+        android:textColor="@color/system_theme_gray"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/subtitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/button_back"
+        tools:text="기본 상태 확인 템플릿" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/general_theme_white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/button_back"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/field_button_back"
-        app:layout_constraintBottom_toBottomOf="@id/field_button_back" >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="문제 해결법" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanskr_medium"
-            android:includeFontPadding="false"
-            android:textColor="@color/main_theme_gray"
-            android:textSize="16sp"
-            tools:text="기본 상태 확인 템플릿"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanskr_regular"
-            android:includeFontPadding="false"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            tools:text="문제 해결법"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <FrameLayout
+    <ImageButton
         android:id="@+id/field_button_menu"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/ic_menu"
-            android:clickable="false" />
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- 스크롤 -->
     <ScrollView
@@ -84,10 +62,10 @@
         android:layout_height="0dp"
         android:paddingHorizontal="21dp"
         app:layout_constrainedHeight="true"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/field_button_back"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_back">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -98,73 +76,75 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/notosanskr_medium"
+                android:fontFamily="@font/noto_sans_kr_medium"
                 android:includeFontPadding="false"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="18sp"
                 android:text="@string/solutions"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/general_theme_white"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Todo: RecyclerView로 변환 -->
 
             <LinearLayout
                 android:id="@+id/button_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
+                android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_question"
-                android:orientation="vertical">
-
+                app:layout_constraintTop_toBottomOf="@id/text_question">
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="4dp"
-                    android:padding="15dp"
                     android:background="@drawable/bg_rectangle_round"
-                    app:backgroundTint="@color/main_subwhite"
-                    android:fontFamily="@font/notosanskr_regular"
+                    android:drawableEnd="@drawable/ic_question"
+                    android:fontFamily="@font/noto_sans_kr_regular"
                     android:includeFontPadding="false"
+                    android:padding="15dp"
                     android:textAlignment="textStart"
-                    android:textColor="@color/black"
+                    android:textColor="@color/general_theme_black"
                     android:textSize="14sp"
-                    tools:text="점검 사항 (1)\nsersfsdfasdfjlksjdlkfjsdssdkf"
-                    android:drawableEnd="@drawable/ic_question" />
+                    app:backgroundTint="@color/system_theme_subwhite"
+                    tools:text="점검 사항 (1)\nsersfsdfasdfjlksjdlkfjsdssdkf" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/text_fixed_availprobs"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:fontFamily="@font/notosanskr_regular"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:includeFontPadding="false"
-                android:textColor="@color/main_theme_gray"
-                android:textAlignment="center"
-                android:textSize="12sp"
                 android:text="@string/avail_problems"
+                android:textColor="@color/system_theme_gray"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@id/text_avail_problems"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/button_list_view"
-                app:layout_constraintBottom_toTopOf="@id/text_avail_problems" />
+                app:layout_constraintTop_toBottomOf="@id/button_list_view" />
+
+            <!-- Todo: RecyclerView로 전환 -->
 
             <TextView
                 android:id="@+id/text_avail_problems"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="25dp"
-                android:fontFamily="@font/notosanskr_regular"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
                 android:textAlignment="center"
+                android:textColor="@color/general_theme_white"
                 android:textSize="12sp"
-                tools:text="선택지가 필요하지 않은 고장여부 디스플레이 (1)\n선택지가 필요하지 않은 고장여부 디스플레이 (2)\n선택지가 필요하지 않은 고장여부 디스플레이 (3)"
-                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintBottom_toTopOf="@id/button_find_solution"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_fixed_availprobs"
-                app:layout_constraintBottom_toTopOf="@id/button_find_solution" />
+                app:layout_constraintVertical_bias="0.8"
+                tools:text="선택지가 필요하지 않은 고장여부 디스플레이 (1)\n선택지가 필요하지 않은 고장여부 디스플레이 (2)\n선택지가 필요하지 않은 고장여부 디스플레이 (3)" />
 
             <Button
                 android:id="@+id/button_find_solution"
@@ -172,31 +152,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="22dp"
                 android:background="@drawable/bg_rectangle_round"
-                app:backgroundTint="@color/white"
-                android:fontFamily="@font/notosanskr_bold"
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
+                android:text="@string/ask"
                 android:textColor="@color/main_theme_blue"
                 android:textSize="18sp"
-                android:text="@string/ask"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/button_complete" />
+                app:backgroundTint="@color/general_theme_white"
+                app:layout_constraintBottom_toTopOf="@id/button_complete"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="38dp"
                 android:background="@drawable/bg_rectangle_round_line"
-                app:backgroundTint="@color/white"
-                android:fontFamily="@font/notosanskr_bold"
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
-                android:textColor="@color/white"
-                android:textSize="16sp"
+                android:paddingHorizontal="38dp"
                 android:text="@string/complete"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/general_theme_white"
+                android:textSize="16sp"
+                app:backgroundTint="@color/general_theme_white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

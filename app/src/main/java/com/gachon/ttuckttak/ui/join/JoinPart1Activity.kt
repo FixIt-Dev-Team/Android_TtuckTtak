@@ -20,7 +20,7 @@ class JoinPart1Activity :
     BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate) {
     override fun initAfterBinding() = with(binding) {
         // 뒤로가기 버튼을 눌렀을 경우
-        buttonBack.setOnClickListener {
+        imagebuttonBack.setOnClickListener {
             finish()
         }
 
@@ -44,15 +44,12 @@ class JoinPart1Activity :
 
             override fun afterTextChanged(p0: Editable?) { // 입력 후 동작
                 val email = p0.toString()
-                // if(email이 중복되지 않은 경우)
-                edittextEmail.setBackgroundResource(R.drawable.box_input_text)
-                textviewOverlapEmail.visibility = View.INVISIBLE
-                buttonCertificationCode.isEnabled = RegexUtil.isValidEmail(email)
+                buttonSend.isEnabled = RegexUtil.isValidEmail(email)
             }
         })
 
         // 인증코드 보내기 버튼을 눌렀을 경우
-        buttonCertificationCode.setOnClickListener {
+        buttonSend.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     // 서버에 이메일 인증코드 전송 요청

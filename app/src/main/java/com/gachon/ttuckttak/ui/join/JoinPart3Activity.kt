@@ -14,10 +14,10 @@ class JoinPart3Activity :
     override fun initAfterBinding() = with(binding) {
 
         // 뒤로가기 버튼을 눌렀을 경우
-        buttonBack.setOnClickListener {
+        imagebuttonBack.setOnClickListener {
             finish()
         }
-
+        
         edittextName.setOnFocusChangeListener(object : View.OnFocusChangeListener {
             override fun onFocusChange(view: View, hasFocus: Boolean) {
                 if (hasFocus) {

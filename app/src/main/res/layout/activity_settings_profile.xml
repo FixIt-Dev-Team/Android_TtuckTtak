@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboarding_"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/onboarding_"
     tools:context=".ui.setting.SettingsProfileActivity">
 
     <TextView
         android:id="@+id/textview_profileSetting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/profile_settings"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +27,6 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:clickable="false"
         android:contentDescription="@string/blank_text"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back"
@@ -50,17 +48,18 @@
             android:id="@+id/imageview_checkPointCircle"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/ic_circle_full" />
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/general_theme_black" />
 
         <ImageView
             android:id="@+id/imageview_checkPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/general_theme_white"
             app:srcCompat="@drawable/ic_check" />
     </FrameLayout>
 
+    <!-- Todo: 외곽 stroke(system_theme_lightgray) 작업 필요, image clip 작업 필요 -->
     <ImageView
         android:id="@+id/imageview_profile"
         android:layout_width="wrap_content"
@@ -83,7 +82,7 @@
             android:id="@+id/button_imgProfilePlusCircle"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/ic_circle_full"
+            android:background="@drawable/circle"
             android:backgroundTint="@color/main_theme_blue"
             android:clickable="false"
             android:contentDescription="@string/blank_text" />
@@ -93,7 +92,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/ic_plus"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/general_theme_white"
             android:contentDescription="@string/blank_text" />
     </FrameLayout>
 
@@ -102,20 +101,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
-        android:background="@drawable/box_white"
+        android:background="@drawable/textbox_state_normal"
         android:orientation="horizontal"
         android:padding="15dp"
-        app:layout_constraintStart_toStartOf="@id/imageview_profile"
         app:layout_constraintEnd_toEndOf="@id/imageview_profile"
+        app:layout_constraintStart_toStartOf="@id/imageview_profile"
         app:layout_constraintTop_toBottomOf="@id/imageview_profile">
 
         <TextView
             android:id="@+id/textview_nikname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_bold"
+            android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/input_nikname"
-            android:textColor="@color/black"
+            android:textColor="@color/general_theme_black"
             android:textSize="14sp" />
 
         <View
@@ -132,10 +131,10 @@
             android:layout_marginStart="11dp"
             android:background="@android:color/transparent"
             android:enabled="true"
-            android:fontFamily="@font/noto_sans_bold"
+            android:fontFamily="@font/noto_sans_kr_bold"
             android:hint="@string/user_name"
             android:inputType="textPersonName"
-            android:textColor="@color/black"
+            android:textColor="@color/general_theme_black"
             android:textSize="14sp" />
 
         <FrameLayout
@@ -158,22 +157,22 @@
         android:id="@+id/textview_overlapNikname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/overlap_nikname"
-        android:textColor="@color/general_theme_error"
+        android:textColor="@color/general_theme_red"
         android:textSize="10sp"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/layout_nikname"
-        app:layout_constraintEnd_toEndOf="@id/layout_nikname" />
+        app:layout_constraintEnd_toEndOf="@id/layout_nikname"
+        app:layout_constraintTop_toBottomOf="@id/layout_nikname" />
 
     <LinearLayout
         android:id="@+id/layout_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:padding="15dp"
-        android:background="@drawable/box_white"
+        android:background="@drawable/textbox_state_normal"
         android:orientation="horizontal"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@id/layout_nikname"
         app:layout_constraintStart_toStartOf="@id/layout_nikname"
         app:layout_constraintTop_toBottomOf="@id/layout_nikname">
@@ -182,10 +181,10 @@
             android:id="@+id/textview_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_bold"
-            android:text="@string/input_email" />
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="@string/input_email"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp" />
 
         <View
             android:id="@+id/view_blueBar2"
@@ -199,37 +198,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:textSize="14sp"
             android:background="@android:color/transparent"
             android:enabled="true"
-            android:textColor="@color/black"
-            android:fontFamily="@font/noto_sans_bold"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:hint="@string/user_email"
             android:inputType="textEmailAddress"
-            android:hint="@string/user_email" />
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_passwordReset"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_passwordReset"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="79dp"
-        android:orientation="vertical"
-        android:background="@drawable/box_green_full"
+        android:background="@drawable/bg_rectangle_round"
+        android:backgroundTint="@color/main_theme_subblue"
+        android:drawableEnd="@drawable/ic_front"
+        android:drawableTint="@color/general_theme_white"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:padding="5dp"
+        android:text="@string/password_reset"
+        android:textColor="@color/general_theme_white"
         app:layout_constraintEnd_toEndOf="@id/layout_email"
         app:layout_constraintStart_toStartOf="@id/layout_email"
-        app:layout_constraintTop_toBottomOf="@id/layout_email">
+        app:layout_constraintTop_toBottomOf="@id/layout_email" />
 
-        <Button
-            android:id="@+id/button_passwordReset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:backgroundTint="@android:color/transparent"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:drawableEnd="@drawable/ic_front"
-            android:drawableTint="@color/white"
-            android:text="@string/password_reset"
-            android:fontFamily="@font/noto_sans_bold"
-            android:textAlignment="center" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

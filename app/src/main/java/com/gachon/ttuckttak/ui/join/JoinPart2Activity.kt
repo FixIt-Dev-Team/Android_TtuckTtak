@@ -41,22 +41,6 @@ class JoinPart2Activity :
         // textviewEmail 값을 위의 email 값으로 변경하기
         textviewEmail.setText(email)
 
-        // 올바른 인증코드인 경우에만 인증코드 보내기 버튼 활성화
-        edittextCertificationCode.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            } // 입력하기 전에 동작
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                edittextCertificationCode.setBackgroundResource(R.drawable.box_input_text)
-
-            } // 입력 중 동작
-
-            override fun afterTextChanged(p0: Editable?) { // 입력 후 동작
-                val code = p0.toString()
-                buttonCertification.isEnabled = (code.length == 8)
-            }
-        })
-
         // 인증번호 재전송 버튼을 눌렀을 경우
         layoutAlert.buttonResend.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
