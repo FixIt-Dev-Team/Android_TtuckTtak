@@ -19,7 +19,7 @@ import kotlin.concurrent.timer
 
 class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate) {
     private var time = 300 // 5분
-    private var timerTask: Timer? = null
+    private lateinit var timerTask: Timer
 
     private val email: String by lazy { intent.getStringExtra("email")!! }
     private lateinit var authCode: String
@@ -49,7 +49,12 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         // 인증번호 재전송 버튼을 눌렀을 경우
         layoutAlert.buttonResend.setOnClickListener {
             resendAuthCode()
-            startTimer()
+            resetTimer()
+
+            // 인증코드 입력화면 초기화
+            edittextCertificationCode.text = null // 입력한 인증코드 지우기
+            edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_normal)
+            textviewErrorMessage.visibility = View.INVISIBLE
 
             // Todo: hide popup with 아래로 내려가는 애니메이션
             layoutAlert.root.visibility = View.INVISIBLE
@@ -103,6 +108,12 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         }
     }
 
+    private fun resetTimer() = with(binding) {
+        timerTask.cancel() // 기존에 실행 중인 타이머 취소
+        time = 300 // 5분 재설정
+        startTimer()
+    }
+
     private fun updateTimerText() {
         runOnUiThread {
             binding.textviewTimer.text = "${time / 60} : ${time % 60}"
@@ -118,7 +129,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
                 textviewErrorMessage.visibility = View.VISIBLE
                 textviewErrorMessage.text = getString(R.string.run_out_code)
             }
-            timerTask!!.cancel()
+            timerTask.cancel()
         }
     }
 
