@@ -20,9 +20,10 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     private var timerTask: Timer? = null
 
     private val email: String by lazy { intent.getStringExtra("email")!! }
-    private var authCode = intent.getStringExtra("code")!!
+    private lateinit var authCode: String
 
     override fun initAfterBinding() = with(binding) {
+        authCode = intent.getStringExtra("code")!!
         textviewEmail.text = email // textviewEmail 값을 위의 email 값으로 변경하기
         startTimer() // timer 시작
         setClickListener()
@@ -66,19 +67,18 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     }
 
     private fun handleAuthCodeVerification() = with(binding) {
-        if (edittextCertificationCode.text.toString() == authCode) {
-            moveToJoinPart3Activity()
-        } else {
-            edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
-            textviewErrorCode.visibility = View.VISIBLE
-        }
-    }
+        if (edittextCertificationCode.text.toString() == authCode) { // 올바른 인증코드인 경우
+            val intent = Intent(this@JoinPart2Activity, JoinPart3Activity::class.java).apply {
+                putExtra("email", email)
+            }
 
-    private fun moveToJoinPart3Activity() {
-        val intent = Intent(this@JoinPart2Activity, JoinPart3Activity::class.java).apply {
-            putExtra("email", email)
+            startActivity(intent)
+
+        } else { // 올바르지 않은 인증코드인 경우
+            edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
+            textviewErrorMessage.visibility = View.VISIBLE
+            textviewErrorMessage.text = getString(R.string.error_code)
         }
-        startActivity(intent)
     }
 
     // timer 함수 구현
@@ -100,7 +100,8 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         if (time == 0) {
             runOnUiThread {
                 edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
-                textviewRunOutCode.visibility = View.VISIBLE
+                textviewErrorMessage.visibility = View.VISIBLE
+                textviewErrorMessage.text = getString(R.string.run_out_code)
             }
             timerTask!!.cancel()
         }
