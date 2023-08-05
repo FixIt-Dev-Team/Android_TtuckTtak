@@ -12,7 +12,7 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
 
     private fun setClickListener() = with(binding) {
         buttonSend.setOnClickListener {
-            val email = edittextFindEmail.text.toString()
+            val email = edittextEmail.text.toString()
 
             // Todo: 서버에 계정 찾기 요청
 

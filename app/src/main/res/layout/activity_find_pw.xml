@@ -48,7 +48,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <EditText
-        android:id="@+id/editText_email"
+        android:id="@+id/edittext_email"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/selector_default_textbox"
@@ -74,6 +74,6 @@
         android:text="@string/certification_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editText_email" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

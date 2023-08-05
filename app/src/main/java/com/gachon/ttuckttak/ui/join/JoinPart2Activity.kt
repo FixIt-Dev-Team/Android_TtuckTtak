@@ -1,8 +1,6 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.content.Intent
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -11,7 +9,6 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.databinding.ActivityJoinPart2Binding
 import com.gachon.ttuckttak.ui.login.LandingActivity
-import com.gachon.ttuckttak.utils.RegexUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -77,7 +74,7 @@ class JoinPart2Activity :
             }
             // 인증코드가 다른 경우
             else {
-                edittextCertificationCode.setBackgroundResource(R.drawable.box_error_text)
+                edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
                 textviewErrorCode.visibility = View.VISIBLE
 
             }
@@ -98,7 +95,7 @@ class JoinPart2Activity :
             }
 
             if (time == 0) {
-                edittextCertificationCode.setBackgroundResource(R.drawable.box_error_text)
+                edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
                 textviewRunOutCode.visibility = View.VISIBLE
                 timerTask!!.cancel()
             }

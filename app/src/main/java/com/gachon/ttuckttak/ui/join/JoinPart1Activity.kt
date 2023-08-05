@@ -26,19 +26,13 @@ class JoinPart1Activity :
 
         // 올바른 email인 경우에만 인증코드 보내기 버튼 활성화
         edittextEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(
-                p0: CharSequence?,
-                p1: Int,
-                p2: Int,
-                p3: Int
-            ) {
-            } // 입력하기 전에 동작
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {} // 입력하기 전에 동작
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                edittextEmail.setBackgroundResource(R.drawable.box_input_text)
+                edittextEmail.setBackgroundResource(R.drawable.textbox_state_focused)
 
                 // if(email이 중복된 경우)
-                edittextEmail.setBackgroundResource(R.drawable.box_error_text)
+                edittextEmail.setBackgroundResource(R.drawable.textbox_state_error)
                 textviewOverlapEmail.visibility = View.VISIBLE
             } // 입력 중 동작
 

@@ -177,16 +177,16 @@
         app:layout_constraintTop_toBottomOf="@id/edittext_password" />
 
     <TextView
-        android:id="@+id/textview_passwordDiscordance"
+        android:id="@+id/textview_password_discordance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/discordance_pw"
-        android:textColor="@color/general_theme_error"
+        android:textColor="@color/general_theme_red"
         android:textSize="12sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_passwordCheck"
-        app:layout_constraintTop_toBottomOf="@id/edittext_passwordCheck" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_password_check"
+        app:layout_constraintTop_toBottomOf="@id/edittext_password_check" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_join"
