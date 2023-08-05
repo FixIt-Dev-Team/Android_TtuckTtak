@@ -19,7 +19,7 @@
     <string name="latest_result">최근 진단내역</string>
 
     <string name="user_name">김뚝딱이</string>
-    <string name="user_email">ttuck@ttuckttak.com</string>
+    <string name="user_email">ttukttak@ttukttak.com</string>
 
     <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
     <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
@@ -40,7 +40,15 @@
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
     <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
     <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
+    <string name="find_pw">계정 찾기</string>
     <string name="logout"><u>로그아웃</u></string>
+
+    <!-- Reset Pw 화면 -->
+    <string name="pw_reset_link">비밀번호 재설정 링크를\n이메일로 보내드렸어요!</string>
+    <string name="attach_link">보내드린 이메일에 첨부된 링크를 통해\n비밀번호를 재설정 해 주세요!</string>
+    <string name="additional_message">이메일을 받으실수 없는 경우, 스팸메일함과 메일함 용량을\n확인하신 후 다시 계정 및 비밀번호 찾기를 시도해주세요.
+        \n이메일을 받으실 수 없는 경우, <u><b>고객센터</b></u>를 이용해주세요.</string>
+    <string name="btn_close">닫기</string>
 
     <!-- Problem Category 화면 -->
     <string name="whatis_problem">현재 PC에서\n어떤 문제가 발생하고 있나요?</string>
@@ -82,6 +90,7 @@
     <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
     <string name="run_out_code">인증 시간이 만료되었습니다.</string>
     <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+    <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
     <string name="timer">00:00</string>
     <string name="certification">인증하기</string>
     <string name="certification_resend">인증코드 재전송</string>

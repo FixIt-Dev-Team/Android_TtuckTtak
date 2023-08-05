@@ -4,7 +4,9 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.lifecycleScope
+import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
@@ -14,7 +16,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate) {
+class JoinPart1Activity :
+    BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate) {
     override fun initAfterBinding() = with(binding) {
         // 뒤로가기 버튼을 눌렀을 경우
         imagebuttonBack.setOnClickListener {
@@ -23,9 +26,21 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
 
         // 올바른 email인 경우에만 인증코드 보내기 버튼 활성화
         edittextEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { } // 입력하기 전에 동작
+            override fun beforeTextChanged(
+                p0: CharSequence?,
+                p1: Int,
+                p2: Int,
+                p3: Int
+            ) {
+            } // 입력하기 전에 동작
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { } // 입력 중 동작
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                edittextEmail.setBackgroundResource(R.drawable.box_input_text)
+
+                // if(email이 중복된 경우)
+                edittextEmail.setBackgroundResource(R.drawable.box_error_text)
+                textviewOverlapEmail.visibility = View.VISIBLE
+            } // 입력 중 동작
 
             override fun afterTextChanged(p0: Editable?) { // 입력 후 동작
                 val email = p0.toString()
@@ -42,10 +57,16 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
                     Log.i("response", response.toString())
 
                     // email과 인증코드를 넣어 다음 화면 실행
-                    val intent = Intent(this@JoinPart1Activity, JoinPart2Activity::class.java).apply {
-                        putExtra("email", edittextEmail.text.toString()) // 입력한 email 값 전달하기
-                        response.data?.code?.let { putExtra("code", it) } // 인증코드 값이 있는 경우 같이 전달 (null이 아닌 경우 전달)
-                    }
+                    val intent =
+                        Intent(this@JoinPart1Activity, JoinPart2Activity::class.java).apply {
+                            putExtra("email", edittextEmail.text.toString()) // 입력한 email 값 전달하기
+                            response.data?.code?.let {
+                                putExtra(
+                                    "code",
+                                    it
+                                )
+                            } // 인증코드 값이 있는 경우 같이 전달 (null이 아닌 경우 전달)
+                        }
 
                     startActivity(intent) // JoinPart2Activity로 이동
 

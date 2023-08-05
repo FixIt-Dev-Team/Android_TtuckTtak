@@ -1,6 +1,8 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -9,25 +11,27 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.databinding.ActivityJoinPart2Binding
 import com.gachon.ttuckttak.ui.login.LandingActivity
+import com.gachon.ttuckttak.utils.RegexUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.concurrent.timer
 
-class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate) {
-    var time = 0
+class JoinPart2Activity :
+    BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate) {
+    var time = 300
     var timerTask: Timer? = null
 
     private val email: String by lazy { intent.getStringExtra("email")!! }
-    private lateinit var code: String
+    private lateinit var authCode: String
 
     override fun initAfterBinding() = with(binding) {
         // timer 시작
         startTimer()
 
         // 인증 코드 설정
-        code = intent.getStringExtra("code")!!
+        authCode = intent.getStringExtra("code")!!
 
         // 뒤로가기 버튼을 눌렀을 경우
         buttonBack.setOnClickListener {
@@ -37,22 +41,15 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         // textviewEmail 값을 위의 email 값으로 변경하기
         textviewEmail.setText(email)
 
-        // 인증코드를 눌렀을 경우 -- textbox 색 변경하기
-        edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_focused)
-
-        // 인증번호에 문제가 생겼을 경우 -- 해당 버튼 클릭
-        textviewCertificationCodeProblem.setOnClickListener {
-            buttonCertification.visibility = View.INVISIBLE
-            layoutAlert.root.visibility = View.VISIBLE
-        }
-
         // 인증번호 재전송 버튼을 눌렀을 경우
         layoutAlert.buttonResend.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     // 서버에 이메일 인증코드 전송 요청
-                    TtukttakServer.emailConfirm(email).data?.code?.let { code = it } // null이 아닌 인증 코드를 새로 발급 받았을 때 update
-                    Log.i("code", code)
+                    TtukttakServer.emailConfirm(email).data?.code?.let {
+                        authCode = it
+                    } // null이 아닌 인증 코드를 새로 발급 받았을 때 update
+                    Log.i("code", authCode)
 
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
@@ -68,31 +65,42 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
         // 인증하기 버튼을 클릭한 경우
         buttonCertification.setOnClickListener {
-            if (edittextCertificationCode.text.toString().equals(code)) { // 인증 코드가 맞는 경우
+            if (edittextCertificationCode.text.toString().equals(authCode)) { // 인증 코드가 맞는 경우
+                textviewErrorCode.visibility = View.INVISIBLE
+
                 // 다음 화면으로 이동하며 email 넘겨주기
                 val intent = Intent(this@JoinPart2Activity, JoinPart3Activity::class.java).apply {
                     putExtra("email", email)
                 }
 
                 startActivity(intent)
+            }
+            // 인증코드가 다른 경우
+            else {
+                edittextCertificationCode.setBackgroundResource(R.drawable.box_error_text)
+                textviewErrorCode.visibility = View.VISIBLE
 
-            } else { // 인증코드가 맞지 않는 경우
-                showToast("올바르지 않은 인증 코드입니다.")
             }
         }
-
     }
 
-    // timer 함수 구현 -- Q.멀르겟숴여
+    // timer 함수 구현
     fun startTimer() = with(binding) {
-        timerTask = timer(period = 10) {
-            time++
+        timerTask = timer(period = 1000) {
 
-            val min = time / 100
+            time--
+
+            val min = time / 60
             val sec = time % 60
 
             runOnUiThread {
                 textviewTimer.setText("${min} : ${sec}")
+            }
+
+            if (time == 0) {
+                edittextCertificationCode.setBackgroundResource(R.drawable.box_error_text)
+                textviewRunOutCode.visibility = View.VISIBLE
+                timerTask!!.cancel()
             }
         }
     }
