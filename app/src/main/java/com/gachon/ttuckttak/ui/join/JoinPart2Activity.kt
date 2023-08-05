@@ -1,6 +1,8 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +18,7 @@ import java.util.*
 import kotlin.concurrent.timer
 
 class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate) {
-    private var time = 300
+    private var time = 300 // 5분
     private var timerTask: Timer? = null
 
     private val email: String by lazy { intent.getStringExtra("email")!! }
@@ -27,6 +29,8 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         textviewEmail.text = email // textviewEmail 값을 위의 email 값으로 변경하기
         startTimer() // timer 시작
         setClickListener()
+        setTextChangeListener()
+        setFocusChangeListener()
     }
 
     private fun setClickListener() = with(binding) {
@@ -35,10 +39,19 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
             finish()
         }
 
+        // 인증코드에 문제가 있나요? 텍스트를 눌렀을 경우
+        textviewCertificationCodeProblem.setOnClickListener {
+            // Todo: show popup with 위로 올라오는 애니메이션
+            layoutAlert.root.visibility = View.VISIBLE
+            buttonCertification.visibility = View.INVISIBLE
+        }
+
         // 인증번호 재전송 버튼을 눌렀을 경우
         layoutAlert.buttonResend.setOnClickListener {
             resendAuthCode()
+            startTimer()
 
+            // Todo: hide popup with 아래로 내려가는 애니메이션
             layoutAlert.root.visibility = View.INVISIBLE
             buttonCertification.visibility = View.VISIBLE
         }
@@ -98,12 +111,38 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
     private fun handleTimerExpiration() = with(binding) {
         if (time == 0) {
+            authCode = "Expired auth code" // 사용자가 입력하지 못하는 글자(8글자 이상)로 바꾸어 인증코드 만료 처리
+
             runOnUiThread {
                 edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
                 textviewErrorMessage.visibility = View.VISIBLE
                 textviewErrorMessage.text = getString(R.string.run_out_code)
             }
             timerTask!!.cancel()
+        }
+    }
+
+    private fun setTextChangeListener() = with(binding) {
+        edittextCertificationCode.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                buttonCertification.isEnabled = (p0.toString().length == 8)
+            }
+        })
+    }
+
+    private fun setFocusChangeListener() = with(binding) {
+        edittextCertificationCode.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_focused) // EditText의 배경 리소스 설정
+                textviewErrorMessage.visibility = View.INVISIBLE
+
+            } else {
+                edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_normal) // EditText의 배경 리소스 설정
+            }
         }
     }
 }
