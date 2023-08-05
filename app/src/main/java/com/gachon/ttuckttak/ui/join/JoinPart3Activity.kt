@@ -22,7 +22,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                 } else {
                     val nickname = edittextName.text.toString()
 
-                    if (RegexUtil.isValidNickname(nickname)) {
+                    if (RegexUtil.isValidNicknameFormat(nickname)) {
                         edittextName.setBackgroundResource(R.drawable.textbox_state_normal)
                     } else {
                         edittextName.setBackgroundResource(R.drawable.textbox_state_error)
@@ -40,7 +40,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                 } else {
                     val password = edittextPassword.text.toString()
 
-                    if (RegexUtil.isValidPw(password)) {
+                    if (RegexUtil.isValidPwFormat(password)) {
                         edittextPassword.setBackgroundResource(R.drawable.textbox_state_normal)
                         textviewPasswordError.visibility = View.INVISIBLE
                         textviewPasswordUsable.visibility = View.VISIBLE
