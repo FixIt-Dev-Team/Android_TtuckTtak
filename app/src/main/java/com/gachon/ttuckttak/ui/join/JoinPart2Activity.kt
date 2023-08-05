@@ -15,46 +15,28 @@ import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.concurrent.timer
 
-class JoinPart2Activity :
-    BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate) {
-    var time = 300
-    var timerTask: Timer? = null
+class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate) {
+    private var time = 300
+    private var timerTask: Timer? = null
 
     private val email: String by lazy { intent.getStringExtra("email")!! }
-    private lateinit var authCode: String
+    private var authCode = intent.getStringExtra("code")!!
 
     override fun initAfterBinding() = with(binding) {
-        // timer 시작
-        startTimer()
+        textviewEmail.text = email // textviewEmail 값을 위의 email 값으로 변경하기
+        startTimer() // timer 시작
+        setClickListener()
+    }
 
-        // 인증 코드 설정
-        authCode = intent.getStringExtra("code")!!
-
+    private fun setClickListener() = with(binding) {
         // 뒤로가기 버튼을 눌렀을 경우
         buttonBack.setOnClickListener {
             finish()
         }
 
-        // textviewEmail 값을 위의 email 값으로 변경하기
-        textviewEmail.setText(email)
-
         // 인증번호 재전송 버튼을 눌렀을 경우
         layoutAlert.buttonResend.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                try {
-                    // 서버에 이메일 인증코드 전송 요청
-                    TtukttakServer.emailConfirm(email).data?.code?.let {
-                        authCode = it
-                    } // null이 아닌 인증 코드를 새로 발급 받았을 때 update
-                    Log.i("code", authCode)
-
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
-                        showToast("이메일 인증 요청 실패")
-                    }
-                }
-            }
+            resendAuthCode()
 
             layoutAlert.root.visibility = View.INVISIBLE
             buttonCertification.visibility = View.VISIBLE
@@ -62,43 +44,65 @@ class JoinPart2Activity :
 
         // 인증하기 버튼을 클릭한 경우
         buttonCertification.setOnClickListener {
-            if (edittextCertificationCode.text.toString().equals(authCode)) { // 인증 코드가 맞는 경우
-                textviewErrorCode.visibility = View.INVISIBLE
+            handleAuthCodeVerification()
+        }
+    }
 
-                // 다음 화면으로 이동하며 email 넘겨주기
-                val intent = Intent(this@JoinPart2Activity, JoinPart3Activity::class.java).apply {
-                    putExtra("email", email)
-                }
+    private fun resendAuthCode() = lifecycleScope.launch(Dispatchers.IO) {
+        try {
+            // 서버에 이메일 인증코드 전송 요청
+            val response = TtukttakServer.emailConfirm(email)
 
-                startActivity(intent)
-            }
-            // 인증코드가 다른 경우
-            else {
-                edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
-                textviewErrorCode.visibility = View.VISIBLE
+            // null이 아닌 인증 코드를 새로 발급 받았을 때 update
+            response.data?.code?.let { authCode = it }
+            Log.i("code", authCode)
 
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                showToast("이메일 인증 요청 실패")
             }
         }
     }
 
+    private fun handleAuthCodeVerification() = with(binding) {
+        if (edittextCertificationCode.text.toString() == authCode) {
+            moveToJoinPart3Activity()
+        } else {
+            edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
+            textviewErrorCode.visibility = View.VISIBLE
+        }
+    }
+
+    private fun moveToJoinPart3Activity() {
+        val intent = Intent(this@JoinPart2Activity, JoinPart3Activity::class.java).apply {
+            putExtra("email", email)
+        }
+        startActivity(intent)
+    }
+
     // timer 함수 구현
-    fun startTimer() = with(binding) {
+    private fun startTimer() {
         timerTask = timer(period = 1000) {
-
             time--
+            updateTimerText()
+            handleTimerExpiration()
+        }
+    }
 
-            val min = time / 60
-            val sec = time % 60
+    private fun updateTimerText() {
+        runOnUiThread {
+            binding.textviewTimer.text = "${time / 60} : ${time % 60}"
+        }
+    }
 
+    private fun handleTimerExpiration() = with(binding) {
+        if (time == 0) {
             runOnUiThread {
-                textviewTimer.setText("${min} : ${sec}")
-            }
-
-            if (time == 0) {
                 edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
                 textviewRunOutCode.visibility = View.VISIBLE
-                timerTask!!.cancel()
             }
+            timerTask!!.cancel()
         }
     }
 }
