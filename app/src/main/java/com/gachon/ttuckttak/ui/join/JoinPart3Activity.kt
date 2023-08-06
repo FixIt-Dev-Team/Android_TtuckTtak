@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
+import com.gachon.ttuckttak.ui.main.StartActivity
 import com.gachon.ttuckttak.utils.RegexUtil
 
 class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
@@ -17,6 +18,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     override fun initAfterBinding() = with(binding) {
         setClickListener()
         setFocusChangeListener()
+        setCheckedChangeListener()
     }
 
     private fun setClickListener() = with(binding) {
@@ -27,7 +29,15 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
         // 가입하기 버튼을 클릭한 경우
         buttonJoin.setOnClickListener {
+            // Todo: show popup with 위로 올라오는 애니메이션
+            buttonJoin.visibility = View.INVISIBLE
+            layoutAlert.root.visibility = View.VISIBLE
+        }
 
+        // 시작하기 버튼을 클릭한 경우
+        layoutAlert.buttonStart.setOnClickListener {
+            // Todo: 회원가입 요청
+            startNextActivity(StartActivity::class.java)
         }
     }
 
@@ -126,5 +136,31 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
     private fun updateJoinButton() = with(binding) {
         buttonJoin.isEnabled = (validNickname && validPasswordFormat && samePassword)
+    }
+
+    private fun setCheckedChangeListener() = with(binding.layoutAlert) {
+        checkboxAgreeTerms.setOnCheckedChangeListener { _, isChecked ->
+            checkboxUseTerms.isChecked = isChecked
+            checkboxPromoteTerms.isChecked = isChecked
+        }
+
+        checkboxUseTerms.setOnCheckedChangeListener { _, isChecked ->
+            buttonStart.isEnabled = isChecked
+            updateAllCheckStatus()
+        }
+
+        checkboxPromoteTerms.setOnCheckedChangeListener { _, _ ->
+            updateAllCheckStatus()
+        }
+    }
+
+    private fun updateAllCheckStatus() = with(binding.layoutAlert) {
+        checkboxAgreeTerms.setOnCheckedChangeListener(null)
+        checkboxAgreeTerms.isChecked = checkboxUseTerms.isChecked && checkboxPromoteTerms.isChecked
+
+        checkboxAgreeTerms.setOnCheckedChangeListener { _, isChecked ->
+            checkboxUseTerms.isChecked = isChecked
+            checkboxPromoteTerms.isChecked = isChecked
+        }
     }
 }
