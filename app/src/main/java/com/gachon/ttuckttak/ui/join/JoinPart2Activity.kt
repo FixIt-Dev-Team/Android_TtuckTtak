@@ -4,6 +4,7 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
@@ -24,6 +25,8 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     private val email: String by lazy { intent.getStringExtra("email")!! }
     private lateinit var authCode: String
 
+    private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
+
     override fun initAfterBinding() = with(binding) {
         // 인가코드 설정
         authCode = intent.getStringExtra("code")!!
@@ -35,6 +38,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         // 기능 설정
         startTimer() // timer 시작
         setClickListener()
+        setTouchListener()
         setTextChangeListener()
         setFocusChangeListener()
     }
@@ -47,9 +51,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
         // 인증코드에 문제가 있나요? 텍스트를 눌렀을 경우
         textviewCertificationCodeProblem.setOnClickListener {
-            // Todo: show popup with 위로 올라오는 애니메이션
-            layoutAlert.root.visibility = View.VISIBLE
-            buttonCertification.visibility = View.INVISIBLE
+            showLayout()
         }
 
         // 인증번호 재전송 버튼을 눌렀을 경우
@@ -62,9 +64,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
             edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_normal)
             textviewErrorMessage.visibility = View.INVISIBLE
 
-            // Todo: hide popup with 아래로 내려가는 애니메이션
-            layoutAlert.root.visibility = View.INVISIBLE
-            buttonCertification.visibility = View.VISIBLE
+            closeLayout()
         }
 
         // 인증하기 버튼을 클릭한 경우
@@ -136,6 +136,41 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
                 textviewErrorMessage.text = getString(R.string.run_out_code)
             }
             timerTask.cancel()
+        }
+    }
+
+    private fun setTouchListener() = with(binding) {
+        // layout alert 화면 외를 클릭 했을 때 layout alert 화면 내리기
+        layoutRoot.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                closeLayout()
+                return@setOnTouchListener true
+            }
+            false
+        }
+
+        // layout alert 화면은 클릭 되어도 그대로
+        layoutAlert.root.setOnTouchListener { _, _ -> true }
+    }
+
+    // layout alert 화면 보여줄 때
+    private fun showLayout() = with(binding.layoutAlert) {
+        if (!isLayoutVisible) {
+            root.visibility = View.VISIBLE
+            root.translationY = root.height.toFloat()
+            root.translationZ = Float.MAX_VALUE // 가장 큰 값을 줌으로써 인증하기 버튼 위로 나오게
+            root.animate().translationY(0f).setDuration(300).start()
+            isLayoutVisible = true
+        }
+    }
+
+    // layout alert 화면 내릴 때
+    private fun closeLayout() = with(binding.layoutAlert) {
+        if (isLayoutVisible) {
+            root.animate().translationY(root.height.toFloat()).setDuration(300).withEndAction {
+                root.visibility = View.GONE
+            }.start()
+            isLayoutVisible = false
         }
     }
 

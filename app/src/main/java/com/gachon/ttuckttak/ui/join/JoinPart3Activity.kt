@@ -1,6 +1,7 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.gachon.ttuckttak.R
@@ -15,8 +16,11 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private var validPasswordFormat = false
     private var samePassword = false
 
+    private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
+
     override fun initAfterBinding() = with(binding) {
         setClickListener()
+        setTouchListener()
         setFocusChangeListener()
         setCheckedChangeListener()
     }
@@ -29,9 +33,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
         // 가입하기 버튼을 클릭한 경우
         buttonJoin.setOnClickListener {
-            // Todo: show popup with 위로 올라오는 애니메이션
-            buttonJoin.visibility = View.INVISIBLE
-            layoutAlert.root.visibility = View.VISIBLE
+            showLayout()
         }
 
         // 시작하기 버튼을 클릭한 경우
@@ -39,6 +41,41 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
             // Todo: 회원가입 요청
             startNextActivity(StartActivity::class.java)
         }
+    }
+
+    // layout alert 화면 보여줄 때
+    private fun showLayout() = with(binding.layoutAlert) {
+        if (!isLayoutVisible) {
+            root.visibility = View.VISIBLE
+            root.translationY = root.height.toFloat()
+            root.translationZ = Float.MAX_VALUE // 가장 큰 값을 줌으로써 인증하기 버튼 위로 나오게
+            root.animate().translationY(0f).setDuration(300).start()
+            isLayoutVisible = true
+        }
+    }
+
+    // layout alert 화면 내릴 때
+    private fun closeLayout() = with(binding.layoutAlert) {
+        if (isLayoutVisible) {
+            root.animate().translationY(root.height.toFloat()).setDuration(300).withEndAction {
+                root.visibility = View.GONE
+            }.start()
+            isLayoutVisible = false
+        }
+    }
+
+    private fun setTouchListener() = with(binding) {
+        // layout alert 화면 외를 클릭 했을 때 layout alert 화면 내리기
+        layoutRoot.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                closeLayout()
+                return@setOnTouchListener true
+            }
+            false
+        }
+
+        // layout alert 화면은 클릭 되어도 그대로
+        layoutAlert.root.setOnTouchListener { _, _ -> true }
     }
 
     // Todo: 로직 검증 필요
