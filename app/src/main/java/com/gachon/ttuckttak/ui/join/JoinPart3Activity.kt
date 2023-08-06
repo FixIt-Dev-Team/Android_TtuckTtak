@@ -8,6 +8,8 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
 import com.gachon.ttuckttak.ui.main.StartActivity
+import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
+import com.gachon.ttuckttak.ui.terms.TermsUseActivity
 import com.gachon.ttuckttak.utils.RegexUtil
 
 class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
@@ -40,6 +42,16 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         layoutAlert.buttonStart.setOnClickListener {
             // Todo: 회원가입 요청
             startNextActivity(StartActivity::class.java)
+        }
+
+        // 서비스 이용 약관를 클릭한 경우
+        layoutAlert.textviewUseTerms.setOnClickListener {
+            startNextActivity(TermsUseActivity::class.java)
+        }
+
+
+        layoutAlert.textviewPromoteTerms.setOnClickListener {
+            startNextActivity(TermsPromoteActivity::class.java)
         }
     }
 
