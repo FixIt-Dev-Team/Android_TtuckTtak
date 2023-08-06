@@ -71,28 +71,16 @@
         app:layout_constraintWidth_percent="0.91" />
 
     <TextView
-        android:id="@+id/textview_overlap_name"
+        android:id="@+id/textview_nickname_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/overlap_nikname"
         android:textColor="@color/general_theme_red"
         android:textSize="12sp"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@id/edittext_name"
-        app:layout_constraintTop_toBottomOf="@id/edittext_name" />
-
-    <TextView
-        android:id="@+id/textview_invalid_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/invalid_nikname"
-        android:textColor="@color/general_theme_red"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_name"
-        app:layout_constraintTop_toBottomOf="@id/edittext_name" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_name"
+        tools:text="@string/overlap_nikname" />
 
     <TextView
         android:id="@+id/textview_join_user_password"
@@ -123,41 +111,17 @@
         app:layout_constraintTop_toBottomOf="@id/textview_join_user_password" />
 
     <TextView
-        android:id="@+id/textview_password_rule"
-        android:layout_width="wrap_content"
+        android:id="@+id/textview_password_message"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/noto_sans_kr_bold"
+        android:gravity="center"
         android:text="@string/password_rule"
         android:textColor="@color/general_theme_black"
         android:textSize="12sp"
-        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@id/edittext_password"
         app:layout_constraintStart_toStartOf="@id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
-
-    <TextView
-        android:id="@+id/textview_password_usable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/password_usable"
-        android:textColor="@color/main_theme_subcyan"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
-
-    <TextView
-        android:id="@+id/textview_password_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/password_error"
-        android:textColor="@color/general_theme_red"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_password"
         app:layout_constraintTop_toBottomOf="@id/edittext_password" />
 
     <EditText
@@ -177,7 +141,7 @@
         app:layout_constraintTop_toBottomOf="@id/edittext_password" />
 
     <TextView
-        android:id="@+id/textview_password_discordance"
+        android:id="@+id/textview_check_password_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_bold"

@@ -71,16 +71,15 @@
         app:layout_constraintWidth_percent="0.91" />
 
     <TextView
-        android:id="@+id/textview_overlap_email"
+        android:id="@+id/textview_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/overlap_email"
         android:textColor="@color/general_theme_red"
         android:textSize="12sp"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/edittext_email"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edittext_email"
+        tools:text="@string/overlap_email" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_send"

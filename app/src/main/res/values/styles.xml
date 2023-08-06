@@ -7,8 +7,8 @@
         <item name="android:textSize">18sp</item>
     </style>
 
-    <style name="DefaultRadioButton" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:background">@drawable/selector_default_radio_button</item>
+    <style name="DefaultCheckBox" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:background">@drawable/selector_default_check_box</item>
         <item name="android:button">@null</item>
     </style>
 </resources>

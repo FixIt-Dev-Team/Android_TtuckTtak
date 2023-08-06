@@ -18,9 +18,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
-        android:id="@+id/button_agree_terms"
-        style="@style/DefaultRadioButton"
+    <CheckBox
+        android:id="@+id/checkbox_agree_terms"
+        style="@style/DefaultCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -28,7 +28,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/textview_agree_terms" />
 
-    <!-- Todo: color #E7E7E7 color에 등록 후 수정   -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_service_terms"
         android:layout_width="0dp"
@@ -36,7 +35,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/bg_rectangle_round"
         android:backgroundTint="@color/system_theme_subwhite"
-        app:layout_constraintEnd_toEndOf="@id/button_agree_terms"
+        app:layout_constraintEnd_toEndOf="@id/checkbox_agree_terms"
         app:layout_constraintStart_toStartOf="@id/textview_agree_terms"
         app:layout_constraintTop_toBottomOf="@id/textview_agree_terms">
 
@@ -51,13 +50,13 @@
             android:text="@string/service_use_terms"
             android:textColor="@color/general_theme_black"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/button_use_terms"
+            app:layout_constraintEnd_toStartOf="@id/checkbox_use_terms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/button_use_terms"
-            style="@style/DefaultRadioButton"
+        <CheckBox
+            android:id="@+id/checkbox_use_terms"
+            style="@style/DefaultCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="9dp"
@@ -76,13 +75,13 @@
             android:text="@string/service_promote_terms"
             android:textColor="@color/general_theme_black"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/button_promote_terms"
+            app:layout_constraintEnd_toStartOf="@id/checkbox_promote_terms"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_use_terms" />
 
-        <RadioButton
-            android:id="@+id/button_promote_terms"
-            style="@style/DefaultRadioButton"
+        <CheckBox
+            android:id="@+id/checkbox_promote_terms"
+            style="@style/DefaultCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="84dp"
