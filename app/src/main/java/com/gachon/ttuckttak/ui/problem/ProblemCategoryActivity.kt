@@ -1,7 +1,6 @@
 package com.gachon.ttuckttak.ui.problem
 
 import android.content.Intent
-import android.os.Bundle
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityProblemCategoryBinding
@@ -11,7 +10,7 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
 
     override fun initAfterBinding() = with(binding) {
         // back button
-        fieldButtonBack.setOnClickListener {
+        imagebuttonBack.setOnClickListener {
             val intent = Intent(this@ProblemCategoryActivity, HomeActivity::class.java)
             startActivity(intent)
         }

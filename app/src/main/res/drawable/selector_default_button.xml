@@ -1,0 +1,17 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 버튼이 활성화된 경우 -->
+    <item android:state_enabled="true">
+        <shape>
+            <solid android:color="@color/main_theme_blue" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <!-- 버튼이 비활성화된 경우 -->
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="@color/system_theme_lightgray" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+</selector>

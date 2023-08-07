@@ -6,6 +6,6 @@
     android:useLevel="false" >
 
     <solid
-        android:color="@color/white" />
+        android:color="@color/general_theme_white" />
 
 </shape>

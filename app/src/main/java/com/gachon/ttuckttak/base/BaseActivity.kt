@@ -1,10 +1,14 @@
 package com.gachon.ttuckttak.base
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
@@ -51,5 +55,36 @@ abstract class BaseActivity<T: ViewBinding>(private val inflate: (LayoutInflater
     // 디바이스에서 키보드가 뜨는 것을 자동적으로 숨겨주는 역할
     fun hideKeyboard(v: View){
         imm?.hideSoftInputFromWindow(v.windowToken, 0)
+    }
+
+    // 화면 클릭하여 키보드 숨기기 및 포커스 제거
+    // 터치 이벤트를 처리하는 함수 override
+    override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
+        event?.let {
+            if (it.action == MotionEvent.ACTION_DOWN) { // 손가락이 화면에 닿았을 때의 액션인 경우
+                val currentView = currentFocus
+                if (currentView is EditText) { // 현재 포커스가 있는 뷰가 EditText일 경우
+                    handleFocusChangeForEditText(currentView, it) // EditText 외부를 터치했을 때 포커스 처리
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
+    }
+
+    // EditText 외부를 터치했을 때 포커스를 변경하고 키보드를 숨기는 method
+    private fun handleFocusChangeForEditText(view: EditText, motionEvent: MotionEvent) {
+        val viewRect = Rect()
+        view.getGlobalVisibleRect(viewRect)
+
+        // EditText 외부 영역을 터치한 경우 포커스 제거 및 소프트 키보드 숨기기
+        if (!viewRect.contains(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())) {
+            hideKeyboardAndClearFocus(view)
+        }
+    }
+
+    // 포커스 제거 및 소프트 키보드 숨기는 method
+    private fun hideKeyboardAndClearFocus(view: EditText) {
+        view.clearFocus()
+        hideKeyboard(view)
     }
 }

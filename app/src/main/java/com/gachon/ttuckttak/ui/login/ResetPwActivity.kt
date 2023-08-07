@@ -7,13 +7,20 @@ class ResetPwActivity : BaseActivity<ActivityResetPwBinding>(ActivityResetPwBind
     // 입력한 email 받기
     private val email: String by lazy { intent.getStringExtra("email")!! }
     override fun initAfterBinding() = with(binding) {
-        // email text 변경
-        textviewEmail.setText(email)
+        setUi()
+        setClickListener()
+    }
+
+    private fun setUi() = with(binding) {
+        textviewEmail.setText(email) // email text 변경
+    }
+
+    private fun setClickListener() = with(binding) {
+        // Todo: 고객센터를 클릭했을 때
 
         // 닫기 버튼을 눌렀을 경우
         buttonClose.setOnClickListener {
-            startNextActivity(LandingActivity::class.java)
+            startNextActivity(LoginActivity::class.java)
         }
-
     }
 }

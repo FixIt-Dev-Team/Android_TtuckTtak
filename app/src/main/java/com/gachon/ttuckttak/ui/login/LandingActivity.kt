@@ -42,21 +42,21 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
     }
 
     override fun initAfterBinding() = with(binding) {
-        imgButtonRegular.setOnClickListener {
+        buttonRegular.setOnClickListener {
             startNextActivity(JoinPart1Activity::class.java)
         }
 
-        imgButtonKakao.setOnClickListener {
+        imagebuttonKakao.setOnClickListener {
             val intent = Intent(this@LandingActivity, KakaoLoginWebViewActivity::class.java)
             kakaoLoginLauncher.launch(intent)
         }
 
-        imgButtonGoogle.setOnClickListener {
+        imagebuttonGoogle.setOnClickListener {
             val intent = googleSignInClient.signInIntent
             googleLoginLauncher.launch(intent)
         }
 
-        textWelcome3.setOnClickListener {
+        textviewSignIn.setOnClickListener {
             startNextActivity(LoginActivity::class.java)
         }
     }

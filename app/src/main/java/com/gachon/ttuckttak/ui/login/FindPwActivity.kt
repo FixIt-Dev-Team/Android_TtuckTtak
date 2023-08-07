@@ -17,12 +17,11 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
 
     override fun initAfterBinding() {
         setClickListener()
-        setTextChangeListener()
     }
 
     private fun setClickListener() = with(binding) {
-        buttonFindgen.setOnClickListener {
-            val email = edittextFindEmail.text.toString()
+        buttonSend.setOnClickListener {
+            val email = edittextEmail.text.toString()
 
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
@@ -55,22 +54,8 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
 
         }
 
-        buttonBack.setOnClickListener {
+        imagebuttonBack.setOnClickListener {
             finish()
         }
-    }
-
-    private fun setTextChangeListener() = with(binding) {
-        // 올바른 email인 경우에만 계정 찾기 버튼 활성화
-        edittextFindEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {} // 입력하기 전에 동작
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {} // 입력 중 동작
-
-            override fun afterTextChanged(p0: Editable?) { // 입력 후 동작
-                val email = p0.toString()
-                buttonFindgen.isEnabled = RegexUtil.isValidEmail(email)
-            }
-        })
     }
 }

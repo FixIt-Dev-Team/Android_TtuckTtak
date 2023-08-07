@@ -2,26 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.join.JoinPart3Activity">
 
     <View
-        android:id="@+id/view_progressBar"
         android:layout_width="240dp"
         android:layout_height="5dp"
         android:background="@color/main_theme_blue"
-        app:layout_constraintBottom_toTopOf="@+id/textview_joinMembership"
+        app:layout_constraintBottom_toTopOf="@id/textview_join_membership"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_joinMembership"
+        android:id="@+id/textview_join_membership"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/join_membership"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,164 +30,139 @@
         app:layout_constraintVertical_bias="0.084" />
 
     <ImageButton
-        android:id="@+id/button_back"
+        android:id="@+id/imagebutton_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:clickable="false"
         android:contentDescription="@string/blank_text"
         android:scaleType="centerInside"
         android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/textview_joinMembership"
-        app:layout_constraintEnd_toStartOf="@id/textview_joinMembership"
+        app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
+        app:layout_constraintEnd_toStartOf="@id/textview_join_membership"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_joinMembership" />
+        app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
 
     <TextView
-        android:id="@+id/textview_joinUserName"
+        android:id="@+id/textview_join_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="131dp"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/join_user_name"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/button_back"
-        app:layout_constraintTop_toBottomOf="@+id/button_back" />
+        app:layout_constraintStart_toStartOf="@id/imagebutton_back"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_back" />
 
     <EditText
         android:id="@+id/edittext_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/box_white"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/user_name"
-        android:padding="15dp"
+        android:inputType="text"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_joinUserName" />
+        app:layout_constraintTop_toBottomOf="@id/textview_join_user_name"
+        app:layout_constraintWidth_percent="0.91" />
 
     <TextView
-        android:id="@+id/textview_overlapName"
+        android:id="@+id/textview_nickname_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/overlap_nikname"
-        android:textColor="@color/general_theme_error"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:textColor="@color/general_theme_red"
         android:textSize="12sp"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@id/edittext_name"
-        app:layout_constraintTop_toBottomOf="@id/edittext_name" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_name"
+        tools:text="@string/overlap_nikname" />
 
     <TextView
-        android:id="@+id/textview_invalidName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/invalid_nikname"
-        android:textColor="@color/general_theme_error"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_name"
-        app:layout_constraintTop_toBottomOf="@id/edittext_name" />
-
-    <TextView
-        android:id="@+id/textview_joinUserPassword"
+        android:id="@+id/textview_join_user_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/join_user_password"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/textview_joinUserName"
+        app:layout_constraintStart_toStartOf="@id/textview_join_user_name"
         app:layout_constraintTop_toBottomOf="@id/edittext_name" />
 
     <EditText
         android:id="@+id/edittext_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/box_white"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/pw"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_joinUserPassword" />
+        android:inputType="textPassword"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/edittext_name"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="@id/edittext_name"
+        app:layout_constraintTop_toBottomOf="@id/textview_join_user_password" />
 
     <TextView
-        android:id="@+id/textview_passwordRule"
-        android:layout_width="wrap_content"
+        android:id="@+id/textview_password_message"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:gravity="center"
         android:text="@string/password_rule"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="12sp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_password"
-        app:layout_constraintStart_toStartOf="@+id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
-
-    <TextView
-        android:id="@+id/textview_passwordUsable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/password_usable"
-        android:textColor="@color/main_theme_subcyan"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
-
-    <TextView
-        android:id="@+id/textview_passwordError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
-        android:text="@string/password_error"
-        android:textColor="@color/general_theme_error"
-        android:textSize="12sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
-
-    <EditText
-        android:id="@+id/edittext_passwordCheck"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/box_white"
-        android:hint="@string/password_check"
-        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@id/edittext_password"
         app:layout_constraintStart_toStartOf="@id/edittext_password"
         app:layout_constraintTop_toBottomOf="@id/edittext_password" />
 
+    <EditText
+        android:id="@+id/edittext_password_check"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/selector_default_textbox"
+        android:hint="@string/password_check"
+        android:inputType="textPassword"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/edittext_password"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="@id/edittext_password"
+        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
+
     <TextView
-        android:id="@+id/textview_passwordDiscordance"
+        android:id="@+id/textview_check_password_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/discordance_pw"
-        android:textColor="@color/general_theme_error"
+        android:textColor="@color/general_theme_red"
         android:textSize="12sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_passwordCheck"
-        app:layout_constraintTop_toBottomOf="@id/edittext_passwordCheck" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_password_check"
+        app:layout_constraintTop_toBottomOf="@id/edittext_password_check" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_join"
-        style="@style/TtuckTtakButton"
+        style="@style/DefaultButton"
         android:layout_width="318dp"
         android:layout_height="wrap_content"
         android:text="@string/join"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_passwordCheck"
-        app:layout_constraintStart_toStartOf="@+id/edittext_passwordCheck"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_passwordCheck" />
+        app:layout_constraintEnd_toEndOf="@id/edittext_password_check"
+        app:layout_constraintStart_toStartOf="@id/edittext_password_check"
+        app:layout_constraintTop_toBottomOf="@id/edittext_password_check" />
 
     <include
         android:id="@+id/layout_alert"

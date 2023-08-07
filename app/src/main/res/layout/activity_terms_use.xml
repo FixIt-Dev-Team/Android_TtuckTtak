@@ -1,80 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.terms.TermsUseActivity">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/blank_text"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageview_logo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="19dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_back"
+            app:srcCompat="@drawable/ic_logo" />
 
-            <ImageButton
-                android:id="@+id/button_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="60dp"
-                android:backgroundTint="@android:color/transparent"
-                android:contentDescription="@string/blank_text"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_back" />
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:gravity="center"
+            android:text="@string/use_terms"
+            android:textColor="@color/general_theme_black"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageview_logo" />
 
-            <ImageView
-                android:id="@+id/imageview_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="19dp"
-                app:srcCompat="@drawable/ic_logo" />
+        <TextView
+            android:id="@+id/textview_subTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:gravity="center"
+            android:text="@string/personal_info_terms"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_title" />
 
-            <TextView
-                android:id="@+id/textview_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:gravity="center"
-                android:text="@string/use_terms"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/textview_context"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:lineSpacingExtra="2sp"
+            android:text="@string/use_terms_detail"
+            android:textColor="@color/general_theme_black"
+            android:textSize="8sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_subTitle" />
 
-            <TextView
-                android:id="@+id/textview_subTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_bold"
-                android:gravity="center"
-                android:text="@string/personal_info_terms"
-                android:textColor="@color/black"
-                android:textSize="14sp" />
+        <View
+            android:id="@+id/view_blank"
+            android:layout_width="match_parent"
+            android:layout_height="229dp"
+            app:layout_constraintTop_toBottomOf="@id/textview_context" />
 
-            <TextView
-                android:id="@+id/textview_context"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
-                android:layout_marginTop="13dp"
-                android:fontFamily="@font/noto_sans_bold"
-                android:lineSpacingExtra="2sp"
-                android:text="@string/use_terms_detail"
-                android:textColor="@color/black"
-                android:textSize="8sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:id="@+id/view_blank"
-                android:layout_width="match_parent"
-                android:layout_height="229dp" />
-        </LinearLayout>
-    </ScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -4,26 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/button_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/imagebutton_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/textview_find_id_or_pw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintTop_toTopOf="@id/textview_find_id_or_pw" />
 
     <TextView
-        android:id="@+id/text_find_id_or_pw"
+        android:id="@+id/textview_find_id_or_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/notosanskr_bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="@string/find_id_or_pw2"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,13 +32,13 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <TextView
-        android:id="@+id/text_insert_email"
+        android:id="@+id/textview_insert_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/notosanskr_regular"
+        android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
         android:text="@string/insert_email"
-        android:textColor="@color/black"
+        android:textColor="@color/general_theme_black"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,28 +48,32 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <EditText
-        android:id="@+id/edittext_find_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/box_white"
+        android:id="@+id/edittext_email"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/selector_default_textbox"
         android:hint="@string/email_reconfirm2"
         android:inputType="textEmailAddress"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@id/text_find_id_or_pw"
-        app:layout_constraintStart_toStartOf="@id/text_find_id_or_pw"
-        app:layout_constraintTop_toBottomOf="@id/text_insert_email" />
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_insert_email"
+        app:layout_constraintWidth_percent="0.91" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_findgen"
-        style="@style/TtuckTtakButton"
-        android:layout_width="0dp"
+        android:id="@+id/button_send"
+        style="@style/DefaultButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="180sp"
         android:enabled="false"
-        android:text="@string/find_pw"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/edittext_find_email"
-        app:layout_constraintStart_toStartOf="@id/edittext_find_email"
-        app:layout_constraintTop_toBottomOf="@id/edittext_find_email" />
+        android:text="@string/certification_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
