@@ -44,12 +44,9 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
                         }
 
                         else { // 서버에서 해당 이메일에 인증코드를 보내지 않은 경우
-                            if(code == 400 || code == 409) { // 이메일 형식에 맞지 않은 경우, 이미 사용중인 이메일인 경우
-                                updateErrorState(message)
-                            }
-
-                            if(code == 500) { // 예상치 못한 에러
-                                // Todo: 오류 처리
+                            when (code) {
+                                400, 409 -> updateErrorState(message) // 이메일 형식에 맞지 않은 경우, 이미 사용중인 이메일인 경우
+                                500 -> showToast(getString(R.string.unexpected_error_occurred)) // 예상치 못한 에러
                             }
                         }
                     }
