@@ -25,7 +25,7 @@ import kotlinx.coroutines.withContext
 
 class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBinding::inflate) {
 
-    private val userManager: UserManager by lazy { UserManager(this) }
+    private val userManager: UserManager by lazy { UserManager(this@LandingActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
     private lateinit var googleSignInClient: GoogleSignInClient
 
