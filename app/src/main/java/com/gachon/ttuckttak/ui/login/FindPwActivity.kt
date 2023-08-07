@@ -1,14 +1,15 @@
 package com.gachon.ttuckttak.ui.login
 
 import android.content.Intent
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
+import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.databinding.ActivityFindPwBinding
-import com.gachon.ttuckttak.utils.RegexUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -17,6 +18,7 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
 
     override fun initAfterBinding() {
         setClickListener()
+        setFocusChangeListener()
     }
 
     private fun setClickListener() = with(binding) {
@@ -29,18 +31,25 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
                     val response = TtukttakServer.changePw(email)
                     Log.i("response", response.toString())
 
-                    if(response.isSuccess) {
+                    if (response.isSuccess) {
                         // ResetPwActivity로 이동
                         val intent = Intent(this@FindPwActivity, ResetPwActivity::class.java).apply {
                             putExtra("email", email) // 입력한 email 값 전달하기
                         }
 
                         startActivity(intent)
-                    } else {
-                        runOnUiThread {
-                            showToast(response.message)
-                        }
 
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            when (response.code) {
+                                400 -> {
+                                    // 계정이 존재하지 않는 경우
+                                    textviewErrorMessage.visibility = View.VISIBLE
+                                    edittextEmail.setBackgroundResource(R.drawable.textbox_state_error)
+                                    edittextEmail.setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_red))
+                                }
+                            }
+                        }
                     }
 
                 } catch (e: Exception) {
@@ -50,12 +59,26 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
                     }
                 }
             }
-
-
         }
 
         imagebuttonBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun setFocusChangeListener() = with(binding) {
+        edittextEmail.setOnFocusChangeListener { _, hasFocus ->
+            val email = edittextEmail.text.toString()
+
+            if (hasFocus) {
+                textviewErrorMessage.visibility = View.INVISIBLE
+                edittextEmail.setBackgroundResource(R.drawable.textbox_state_focused)
+                edittextEmail.setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_black))
+
+            } else {
+                edittextEmail.setBackgroundResource(R.drawable.textbox_state_normal)
+                buttonSend.isEnabled = Patterns.EMAIL_ADDRESS.matcher(email).matches() // email 양식에 맞는다면 전송 버튼 활성화
+            }
         }
     }
 }
