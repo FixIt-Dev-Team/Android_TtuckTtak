@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
+import com.gachon.ttuckttak.data.local.database.AppDatabase
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.NoticeReq
 import com.gachon.ttuckttak.databinding.ActivitySettingsAlertBinding
@@ -12,12 +13,17 @@ import com.gachon.ttuckttak.ui.login.LandingActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.coroutineContext
 
 class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(ActivitySettingsAlertBinding::inflate) {
 
     private val userManager: UserManager by lazy { UserManager(this@SettingsAlertActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsAlertActivity) }
+
+    val userDao by lazy {AppDatabase.getDatabase(this@SettingsAlertActivity).userDao()}
     override fun initAfterBinding() = with(binding) {
+
+        setUi()
 
         // 뒤로가기 버튼을 누르는 경우
         buttonBack.setOnClickListener {
@@ -66,5 +72,12 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
                 }
             }
         }
+    }
+
+    private fun setUi() = with(binding) {
+        val user = userDao.getUser()
+
+        switchEventAndFunctionPush.isChecked = user.alertEvent
+        switchNightTimePushAlert.isChecked = user.alertNight
     }
 }
