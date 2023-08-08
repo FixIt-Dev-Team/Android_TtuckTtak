@@ -4,14 +4,12 @@ import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.remote.dto.*
 import com.gachon.ttuckttak.data.remote.service.LoginService
 import com.gachon.ttuckttak.data.remote.service.MemberService
-import com.gachon.ttuckttak.data.remote.service.PushService
 import com.gachon.ttuckttak.data.remote.service.SettingProfileService
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -26,7 +24,6 @@ object TtukttakServer {
         .build()
 
     private val loginService: LoginService = retrofit.create(LoginService::class.java)
-    private val pushService: PushService = retrofit.create(PushService::class.java)
     private val memberService: MemberService = retrofit.create(MemberService::class.java)
     private val settingProfileService: SettingProfileService = retrofit.create(SettingProfileService::class.java)
 
@@ -49,11 +46,11 @@ object TtukttakServer {
     }
 
     suspend fun push(token: String, noticeReq: NoticeReq): BaseResponse<NoticeRes> = withContext(Dispatchers.IO) {
-        pushService.eventAlert(token, noticeReq)
+        memberService.eventAlert(token, noticeReq)
     }
 
     suspend fun pushNight(token: String, noticeReq: NoticeReq): BaseResponse<NoticeRes> = withContext(Dispatchers.IO) {
-        pushService.nightAlert(token, noticeReq)
+        memberService.nightAlert(token, noticeReq)
     }
 
     suspend fun login(loginReq: LoginReq): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
@@ -73,6 +70,6 @@ object TtukttakServer {
     }
 
     suspend fun checkNickname(nickname: String) : BaseResponse<NicknameRes> = withContext(Dispatchers.IO) {
-        settingProfileService.checkNickname(nickname)
+        memberService.checkNickname(nickname)
     }
 }

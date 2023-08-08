@@ -1,9 +1,7 @@
 package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.ProfileDto
-import com.gachon.ttuckttak.data.remote.dto.PutPwEmailRes
 import com.gachon.ttuckttak.data.remote.dto.UserInfoRes
 import com.gachon.ttuckttak.data.remote.dto.UserInfoUpdateRes
 import okhttp3.MultipartBody
@@ -11,7 +9,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
-import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Query
 
@@ -30,9 +27,4 @@ interface SettingProfileService {
         @Part("ReqDto") reqDto: ProfileDto,
         @Part file: MultipartBody.Part?
     ): BaseResponse<UserInfoUpdateRes>
-
-    @GET("members/nickname")
-    suspend fun checkNickname(
-        @Query("nickname") nickname: String,
-    ): BaseResponse<NicknameRes>
 }
