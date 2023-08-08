@@ -24,7 +24,10 @@ import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.ProfileDto
 import com.gachon.ttuckttak.data.remote.dto.UserInfoRes
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
+import com.gachon.ttuckttak.ui.main.SptestActivity
 import com.gachon.ttuckttak.ui.problem.ProblemYNActivity
+import com.sothree.slidinguppanel.SlidingUpPanelLayout
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -44,6 +47,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
 
 
     override fun initAfterBinding() = with(binding) {
+        // 서버로부터 사용자 정보 갱신
         getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
         edittextNickname.setText(userManager.getUserName())
         textviewUserEmail.text = userManager.getUserMail()
@@ -62,19 +66,27 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
     private fun setClickListener() = with(binding) {
         // 뒤로가기 버튼을 누르는 경우
         buttonBack.setOnClickListener {
-            // 저장 버튼 누르지 않음
+            // 저장 필요한 상태
             if (newNickname || newImage) {
-                TODO("나가시겠어요? 팝업")
+                mainFrame.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
             } else {
+                // 저장 필요하지 않은 상태
                 finish()
             }
+        }
+
+        // 팝업 뒤로 가기 버튼
+        buttonBackTrue.setOnClickListener {
+            getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
+            finish()
         }
 
         // 저장 버튼
         imagebuttonSave.setOnClickListener {
             if (newImage) {
                 // 이미지 갱신 있는 경우
-                updateProfile(tokenManager.getAccessToken()!!)
+                TODO("이미지 리사이징 및 request size limit 확인")
+                //updateProfile(tokenManager.getAccessToken()!!)
                 newImage = false
                 newNickname = false
             } else if (newNickname) {

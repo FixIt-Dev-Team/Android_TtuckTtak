@@ -47,6 +47,8 @@
     <string name="btn_login">로그인 하기</string>
     <string name="find_pw">계정 찾기</string>
     <string name="logout"><u>로그아웃</u></string>
+    <string name="undo_change">프로필 설정 화면에서 나가시겠어요?\n변경된 사항은 저장되지 않아요!</string>
+    <string name="undo">뒤로가기</string>
 
     <!-- Reset Pw 화면 -->
     <string name="pw_reset_link">비밀번호 재설정 링크를\n이메일로 보내드렸어요!</string>
