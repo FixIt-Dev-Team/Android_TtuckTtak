@@ -77,14 +77,15 @@
         app:layout_constraintBottom_toBottomOf="@id/frame_profile"
         app:layout_constraintEnd_toEndOf="@id/frame_profile" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_nickname"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/textbox_state_normal"
         android:orientation="horizontal"
-        android:padding="15dp"
+        android:paddingStart="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/frame_profile">
@@ -93,21 +94,28 @@
             android:id="@+id/textview_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="15dp"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="@string/input_nickname"
             android:textColor="@color/general_theme_black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <View
             android:id="@+id/view_blueBar1"
             android:layout_width="1dp"
             android:layout_height="18dp"
             android:layout_marginStart="11dp"
-            android:background="@color/main_theme_blue" />
+            android:background="@color/main_theme_blue"
+            app:layout_constraintStart_toEndOf="@id/textview_nickname"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <EditText
             android:id="@+id/edittext_nickname"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:background="@android:color/transparent"
@@ -116,23 +124,27 @@
             tools:text="@string/user_name"
             android:inputType="textPersonName"
             android:textColor="@color/general_theme_black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:maxLength="12"
+            app:layout_constraintStart_toEndOf="@id/view_blueBar1"
+            app:layout_constraintEnd_toStartOf="@id/button_settingNickname"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <FrameLayout
-            android:id="@+id/layout_settingNickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="163.2dp">
-
-            <ImageButton
-                android:id="@+id/button_settingNickname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_front"
-                android:clickable="false"
-                android:contentDescription="@string/blank_text" />
-        </FrameLayout>
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/button_settingNickname"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_front"
+            android:clickable="false"
+            android:contentDescription="@string/blank_text"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textview_overlapNickname"
@@ -152,11 +164,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/textbox_state_normal"
         android:orientation="horizontal"
         android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@id/layout_nickname"
-        app:layout_constraintStart_toStartOf="@id/layout_nickname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_nickname">
 
         <TextView
@@ -190,12 +203,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_passwordReset"
-        android:layout_width="320dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:background="@drawable/bg_rectangle_round"
         android:backgroundTint="@color/main_theme_subblue"
-        android:drawableEnd="@drawable/ic_front"
-        android:drawableTint="@color/general_theme_white"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:padding="5dp"
         android:text="@string/password_reset"
