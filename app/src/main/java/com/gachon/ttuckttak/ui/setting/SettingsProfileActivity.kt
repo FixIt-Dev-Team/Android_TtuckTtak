@@ -24,13 +24,9 @@ import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.ProfileDto
 import com.gachon.ttuckttak.data.remote.dto.UserInfoRes
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
-import com.gachon.ttuckttak.ui.main.SptestActivity
-import com.gachon.ttuckttak.ui.problem.ProblemYNActivity
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
-import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.lang.Exception

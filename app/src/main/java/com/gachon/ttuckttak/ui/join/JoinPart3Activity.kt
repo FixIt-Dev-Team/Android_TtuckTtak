@@ -78,7 +78,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                                         edittextName.setBackgroundResource(R.drawable.textbox_state_error)
                                         edittextName.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
                                         textviewNicknameErrorMessage.visibility = View.VISIBLE
-                                        textviewNicknameErrorMessage.text = getString(R.string.overlap_nikname)
+                                        textviewNicknameErrorMessage.text = getString(R.string.overlap_nickname)
                                     }
 
                                     500 -> showToast(getString(R.string.unexpected_error_occurred)) // 예상치 못한 에러
