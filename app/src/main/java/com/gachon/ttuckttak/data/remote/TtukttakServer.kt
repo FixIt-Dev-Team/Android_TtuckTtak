@@ -5,10 +5,13 @@ import com.gachon.ttuckttak.data.remote.dto.*
 import com.gachon.ttuckttak.data.remote.service.LoginService
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.data.remote.service.PushService
+import com.gachon.ttuckttak.data.remote.service.SettingProfileService
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -25,6 +28,8 @@ object TtukttakServer {
     private val loginService: LoginService = retrofit.create(LoginService::class.java)
     private val pushService: PushService = retrofit.create(PushService::class.java)
     private val memberService: MemberService = retrofit.create(MemberService::class.java)
+    private val settingProfileService: SettingProfileService = retrofit.create(SettingProfileService::class.java)
+
 
     suspend fun loginWithKakao(authCode: String): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
         loginService.kakaoLogin(authCode)
@@ -52,5 +57,17 @@ object TtukttakServer {
 
     suspend fun changePw(email: String): BaseResponse<PutPwEmailRes> = withContext(Dispatchers.IO) {
         memberService.changePw(email)
+    }
+
+    suspend fun getUserInfo(userId: String, authCode: String) : BaseResponse<UserInfoRes> = withContext(Dispatchers.IO) {
+        settingProfileService.getUserInfo(userId, authCode)
+    }
+
+    suspend fun updateUserInfo(authCode: String, reqDto: ProfileDto, file: MultipartBody.Part?) : BaseResponse<UserInfoUpdateRes> = withContext(Dispatchers.IO) {
+        settingProfileService.updateUserInfo(authCode, reqDto, file)
+    }
+
+    suspend fun checkNickname(nickname: String) : BaseResponse<NicknameRes> = withContext(Dispatchers.IO) {
+        settingProfileService.checkNickname(nickname)
     }
 }

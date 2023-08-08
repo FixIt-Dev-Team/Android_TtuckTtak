@@ -112,7 +112,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                 } else {
                     edittextName.setBackgroundResource(R.drawable.textbox_state_error)
                     textviewNicknameErrorMessage.visibility = View.VISIBLE
-                    textviewNicknameErrorMessage.text = getString(R.string.invalid_nikname)
+                    textviewNicknameErrorMessage.text = getString(R.string.invalid_nickname)
                 }
             }
 

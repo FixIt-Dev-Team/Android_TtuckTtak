@@ -1,70 +1,297 @@
 package com.gachon.ttuckttak.ui.setting
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.provider.MediaStore
+import android.util.Log
 import android.view.View
-import com.gachon.ttuckttak.R
+import androidx.lifecycle.lifecycleScope
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
+import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.databinding.ActivitySettingsProfileBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import com.gachon.ttuckttak.R
+import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.dto.ProfileDto
+import com.gachon.ttuckttak.data.remote.dto.UserInfoRes
+import com.gachon.ttuckttak.ui.login.ResetPwActivity
+import com.gachon.ttuckttak.ui.problem.ProblemYNActivity
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.lang.Exception
 
 class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(ActivitySettingsProfileBinding::inflate) {
 
-    override fun initAfterBinding() = with(binding) {
+    private val userManager: UserManager by lazy { UserManager(this@SettingsProfileActivity) }
+    private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsProfileActivity) }
 
-        // 뒤로가기 버튼을 누르는 경우
-        buttonBack.setOnClickListener {
-            finish()
+    private val permission = Manifest.permission.READ_MEDIA_IMAGES
+
+    private var newNickname = false
+    private var newImage = false
+
+
+    override fun initAfterBinding() = with(binding) {
+        getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
+        edittextNickname.setText(userManager.getUserName())
+        textviewUserEmail.text = userManager.getUserMail()
+        if (userManager.getUserImageUrl().isNullOrEmpty()) {
+            imageProfile.setImageDrawable(AppCompatResources.getDrawable(this@SettingsProfileActivity, R.drawable.img_profile))
+        } else {
+            Glide.with(this@SettingsProfileActivity)
+                .load(userManager.getUserImageUrl())
+                .into(imageProfile)
         }
 
-        // 변경 사항이 일어난 경우
+        setClickListener()
+        setFocusListener()
+    }
 
-        // 변경 사항이 일어난 후, 저장을 하려는 경우
-        layoutCheckPoint.setOnClickListener {
-            imageviewCheckPointCircle.setImageResource(R.drawable.ic_check_blue)
+    private fun setClickListener() = with(binding) {
+        // 뒤로가기 버튼을 누르는 경우
+        buttonBack.setOnClickListener {
+            // 저장 버튼 누르지 않음
+            if (newNickname || newImage) {
+                TODO("나가시겠어요? 팝업")
+            } else {
+                finish()
+            }
+        }
+
+        // 저장 버튼
+        imagebuttonSave.setOnClickListener {
+            if (newImage) {
+                // 이미지 갱신 있는 경우
+                updateProfile(tokenManager.getAccessToken()!!)
+                newImage = false
+                newNickname = false
+            } else if (newNickname) {
+                // 닉네임만 갱신하는 경우
+                updateNickname(tokenManager.getAccessToken()!!)
+                newNickname = false
+            }
         }
 
         // 프로필 사진 변경 버튼을 클릭하는 경우
-        layoutProfilePlus.setOnClickListener {
-
+        buttonProfilePlus.setOnClickListener {
+            changeImage.launch(permission)
         }
 
-        // 닉네임 변경 버튼을 누르는 경우
-        buttonSettingNikname.setOnClickListener {
+        // 비밀번호 재설정 버튼
+        buttonPasswordReset.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                try {
+                    val response = TtukttakServer.changePw(userManager.getUserMail()!!)
 
-        }
+                    withContext(Dispatchers.Main) {
+                        // 전송 성공
+                        if (response.isSuccess) {
+                            val data = response.data!!
+                            Log.i(TAG, "이메일 전송: ${data.sendSuccess}")
 
-        // 닉네임을 입력하는 경우
-        edittextInputNikname.setOnClickListener {
-            // 입력한 nikname 가져오기
-            val nikname = edittextInputNikname.text.toString()
-
-            // nikname 입력 여부 및 중복 여부 확인
-            // nikname이 공백이 아닐 경우
-            if(!nikname.isBlank() ) {
-// nikname 중복 검사
-                layoutSettingNikname.setOnClickListener {
-                    // 중복인 경우
-                    if(true) { // <임시설정>
-                        // 중복 에러 메시지
-                        textviewOverlapNikname.setVisibility(View.VISIBLE)
-                    }
-
-                    // 중복이 아닌 경우
-                    else {
-                        // email 입력
-                        edittextInputEmail.setOnClickListener {
-                            // 입력한 email 가져오기
-                            val email = edittextInputEmail.text.toString()
-
-                            // email이 공백이 아닌 경우
-                            if(!email.isBlank()) {
-                                // 비밀번호 재설정 버튼을 누르는 경우
-                                buttonPasswordReset.setOnClickListener {
-                                   // <관련 화면으로 이동>
-                                }
-                            }
+                            // 비밀번호 재설정 activity 실행
+                            val intent = Intent(this@SettingsProfileActivity, ResetPwActivity::class.java)
+                            intent.putExtra("email", userManager.getUserMail())
+                            startActivity(intent)
+                        } else {
+                            Log.e(TAG, "비밀번호 재설정 실패")
+                            Log.e(TAG, "${response.code} ${response.message}")
+                            showToast("비밀번호 재설정 실패")
                         }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Log.e(TAG, "서버 통신 오류: ${e.message}")
+                        showToast("비밀번호 재설정 실패")
                     }
                 }
             }
         }
+    }
+
+    private fun setFocusListener() = with(binding) {
+        edittextNickname.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                layoutNickname.setBackgroundResource(R.drawable.textbox_state_normal)
+                textviewOverlapNickname.visibility = View.INVISIBLE
+            }
+            else {
+                val nickname = edittextNickname.text.toString()
+
+                // 닉네임이 기준에 맞지 않는 경우
+                if(nickname.length < 4 || nickname.length > 12){
+                    layoutNickname.setBackgroundResource(R.drawable.textbox_state_error)
+                    textviewOverlapNickname.visibility = View.VISIBLE
+                    textviewOverlapNickname.text = getString(R.string.invalid_nickname)
+                }
+                else {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        try {
+                            val response = TtukttakServer.checkNickname(nickname)
+                            Log.i("response", response.toString())
+
+                            if (response.isSuccess) {
+                                // 닉네임이 중복되는 경우
+                                if(!response.data!!.isAvailable) {
+                                    layoutNickname.setBackgroundResource(R.drawable.textbox_state_error)
+                                    textviewOverlapNickname.visibility = View.VISIBLE
+                                    textviewOverlapNickname.text = getString(R.string.overlap_nickname)
+                                }
+
+                                // 닉네임이 적절한 경우
+                                newNickname = true
+                                userManager.saveUserName(nickname)
+                            } else {
+                                showToast("DB Error")
+                            }
+                        } catch (e: Exception) {
+                            runOnUiThread {
+                                Log.e("error", "서버 통신 오류: ${e.message}")
+                                showToast("닉네임 중복 확인 실패")
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    private val readImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == Activity.RESULT_OK) {
+            val data = it.data
+            val imgUri = data?.data
+
+            binding.imageProfile.setImageURI(imgUri)
+
+            newImage = true
+            userManager.saveUserImagePath(getRealPathFromURI(imgUri!!))
+        }
+    }
+    private val changeImage = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+        // 권한이 주어지지 않은 경우
+        if (!isGranted) {
+            showToast("프로필 이미지 변경을 위해선 갤러리 권한이 필요합니다.")
+            finish()
+        }
+        // 권한이 주어진 경우
+        val pick = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        readImage.launch(pick)
+    }
+    private fun getRealPathFromURI(uri: Uri): String {
+        val cursor = contentResolver.query(uri, null, null, null, null)
+        cursor!!.moveToNext()
+        val path = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
+        cursor.close()
+
+        return path
+    }
+
+
+    private fun getProfile(userId: String, token: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = TtukttakServer.getUserInfo(userId, token)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccess) {
+                        val data = response.data!!
+                        Log.i(TAG, "userName: ${data.userName}")
+                        Log.i(TAG, "userMail: ${data.email}")
+                        Log.i(TAG, "userImgUrl: ${data.profileImgUrl}")
+                        Log.i(TAG, "accountType: ${data.accountType}")
+                        saveProfile(data)
+                    } else {
+                        Log.e(TAG, "유저 정보 취득 실패")
+                        Log.e(TAG, "${response.code} ${response.message}")
+                        showToast("유저 정보 취득 실패")
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(TAG, "서버 통신 오류: ${e.message}")
+                    showToast("유저 정보 취득 실패")
+                }
+            }
+        }
+    }
+
+    private fun saveProfile(data: UserInfoRes) {
+        userManager.saveUserName(data.userName)
+        userManager.saveUserMail(data.email)
+        userManager.saveUserImageUrl(data.profileImgUrl)
+    }
+
+    private fun updateNickname(token: String) = with(binding) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = TtukttakServer.updateUserInfo(authCode = token,
+                    reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!, userManager.getUserImageUrl()!!),
+                    file = null)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccess) {
+                        val data = response.data!!
+                        Log.i(TAG, "Upadated: ${data.isSuccess}")
+                        imagebuttonSave.setColorFilter(ContextCompat.getColor(this@SettingsProfileActivity, R.color.main_theme_blue))
+                    } else {
+                        Log.e(TAG, "유저 정보 업데이트 실패")
+                        Log.e(TAG, "${response.code} ${response.message}")
+                        showToast("유저 정보 업데이트 실패")
+                    }
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(TAG, "서버 통신 오류: ${e.message}")
+                    showToast("유저 정보 업데이트 실패")
+                }
+            }
+        }
+    }
+    private fun updateProfile(token: String) = with(binding) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val file = File(userManager.getUserImagePath()!!)
+                val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+                val response = TtukttakServer.updateUserInfo(authCode = token,
+                    reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!, userManager.getUserImageUrl()!!),
+                    file = MultipartBody.Part.create(requestFile))
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccess) {
+                        val data = response.data!!
+                        Log.i(TAG, "Upadated: ${data.isSuccess}")
+                        imagebuttonSave.setColorFilter(ContextCompat.getColor(this@SettingsProfileActivity, R.color.main_theme_blue))
+                    } else {
+                        Log.e(TAG, "유저 정보 업데이트 실패")
+                        Log.e(TAG, "${response.code} ${response.message}")
+                        showToast("유저 정보 업데이트 실패")
+                    }
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(TAG, "서버 통신 오류: ${e.message}")
+                    showToast("유저 정보 업데이트 실패")
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val TAG = "PROFILE"
     }
 }
