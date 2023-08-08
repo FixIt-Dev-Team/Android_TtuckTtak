@@ -1,23 +1,35 @@
 package com.gachon.ttuckttak.ui.join
 
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
+import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.UserManager
+import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.dto.SignUpReq
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
+import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
 import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
 import com.gachon.ttuckttak.ui.terms.TermsUseActivity
 import com.gachon.ttuckttak.utils.RegexUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
 
     private var validNickname = false
     private var validPasswordFormat = false
     private var samePassword = false
-
+    private val email: String by lazy { intent.getStringExtra("email")!! }
+    private val userManager: UserManager by lazy { UserManager(this@JoinPart3Activity) }
+    private val tokenManager: TokenManager by lazy { TokenManager(this@JoinPart3Activity) }
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
     override fun initAfterBinding() = with(binding) {
@@ -40,8 +52,48 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
         // 시작하기 버튼을 클릭한 경우
         layoutAlert.buttonStart.setOnClickListener {
-            // Todo: 회원가입 요청
-            startNextActivity(StartActivity::class.java)
+            val nickname = edittextName.text.toString()
+            val password = edittextPassword.text.toString()
+            val adProvision = layoutAlert.checkboxPromoteTerms.isChecked
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                try {
+                    // 서버에 회원가입 요청
+                    val response =
+                        TtukttakServer.signUp(SignUpReq(email, password, nickname, adProvision))
+                    Log.i("response", response.toString())
+
+                    with(response) {
+                        if (isSuccess) { // 정상적으로 회원가입된 경우
+                            userManager.saveUserIdx(response.data!!.userIdx)
+                            tokenManager.saveToken(response.data.tokenInfo)
+
+                            startNextActivity(StartActivity::class.java)
+
+                        } else { // 회원가입되지 않은 경우
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                closeLayout()
+                                when (code) {
+                                    409 -> { // 이미 닉네임이 존재하는 경우
+                                        edittextName.setBackgroundResource(R.drawable.textbox_state_error)
+                                        edittextName.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
+                                        textviewNicknameErrorMessage.visibility = View.VISIBLE
+                                        textviewNicknameErrorMessage.text = getString(R.string.overlap_nikname)
+                                    }
+
+                                    500 -> showToast(getString(R.string.unexpected_error_occurred)) // 예상치 못한 에러
+                                }
+                            }
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                        showToast("회원가입 요청 실패")
+                    }
+                }
+            }
         }
 
         // 서비스 이용 약관를 클릭한 경우
@@ -98,6 +150,8 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
             if (hasFocus) {
                 edittextName.setBackgroundResource(R.drawable.textbox_state_focused)
+                edittextName.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_black))
+                textviewNicknameErrorMessage.visibility = View.INVISIBLE
 
             } else {
                 val nickname = edittextName.text.toString()
@@ -201,6 +255,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         checkboxPromoteTerms.setOnCheckedChangeListener { _, _ ->
             updateAllCheckStatus()
         }
+
     }
 
     private fun updateAllCheckStatus() = with(binding.layoutAlert) {

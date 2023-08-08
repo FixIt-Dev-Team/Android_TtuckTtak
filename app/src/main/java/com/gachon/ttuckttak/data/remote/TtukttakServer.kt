@@ -26,6 +26,11 @@ object TtukttakServer {
     private val pushService: PushService = retrofit.create(PushService::class.java)
     private val memberService: MemberService = retrofit.create(MemberService::class.java)
 
+    suspend fun signUp(signupReq: SignUpReq): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
+        loginService.signUp(signupReq)
+    }
+
+
     suspend fun loginWithKakao(authCode: String): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
         loginService.kakaoLogin(authCode)
     }
