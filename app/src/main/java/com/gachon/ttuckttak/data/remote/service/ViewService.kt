@@ -12,7 +12,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.Part
 import retrofit2.http.Query
 
-interface SettingProfileService {
+interface ViewService {
 
     @GET("views/setting")
     suspend fun getUserInfo(

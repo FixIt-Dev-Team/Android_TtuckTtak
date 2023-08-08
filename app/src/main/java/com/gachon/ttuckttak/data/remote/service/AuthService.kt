@@ -7,7 +7,7 @@ import com.gachon.ttuckttak.data.remote.dto.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.SignUpReq
 import retrofit2.http.*
 
-interface LoginService {
+interface AuthService {
 
     @GET("auths/oauth2/kakao")
     suspend fun kakaoLogin(
