@@ -34,7 +34,7 @@
     <string name="ttuckttak_version">Ttukttak ver 2.0 (1.11.11)</string>
     <string name="change_settings">설정 변경</string>
     <string name="profile_settings">프로필 설정</string>
-    <string name="input_nikname">닉네임</string>
+    <string name="input_nickname">닉네임</string>
     <string name="input_email">이메일</string>
     <string name="password_reset">비밀번호 재설정하기</string>
     <string name="event_push_alert">이벤트 및 기능추가 push 알림</string>
@@ -47,6 +47,8 @@
     <string name="btn_login">로그인 하기</string>
     <string name="find_pw">계정 찾기</string>
     <string name="logout"><u>로그아웃</u></string>
+    <string name="undo_change">프로필 설정 화면에서 나가시겠어요?\n변경된 사항은 저장되지 않아요!</string>
+    <string name="undo">뒤로가기</string>
 
     <!-- Reset Pw 화면 -->
     <string name="pw_reset_link">비밀번호 재설정 링크를\n이메일로 보내드렸어요!</string>
@@ -87,7 +89,7 @@
     <string name="go_next">다음으로 넘어가기</string>
 
     <!-- -->
-    <string name="overlap_nikname">이미 사용중인 닉네임입니다.</string>
+    <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
     <string name="overlap_email">이미 사용중인 계정입니다.</string>
     <string name="certification_code">인증코드 보내기</string>
     <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
@@ -272,7 +274,7 @@
 ② 서비스는 불특정다수 회원에게 통지를 해야 할 경우 공지 게시판을 통해 7일 이상 게시함으로써 개별 통지에 갈음할 수 있습니다.</p></string>
     <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
     <string name="join_user_password">사용하실 비밀번호를 정해주세요</string>
-    <string name="invalid_nikname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
+    <string name="invalid_nickname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
     <string name="password_rule">대문자 혹은 특수문자가 포함되게 작성해주세요</string>
     <string name="password_usable">사용가능한 비밀번호 입니다!</string>
     <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
