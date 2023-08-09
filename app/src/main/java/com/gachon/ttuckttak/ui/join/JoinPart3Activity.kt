@@ -11,6 +11,7 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.dto.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.SignUpReq
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
 import com.gachon.ttuckttak.ui.login.LandingActivity
@@ -22,7 +23,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
+class JoinPart3Activity :
+    BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
 
     private var validNickname = false
     private var validPasswordFormat = false
@@ -59,8 +61,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     // 서버에 회원가입 요청
-                    val response =
-                        TtukttakServer.signUp(SignUpReq(email, password, nickname, adProvision))
+                    val response = TtukttakServer.signUp(SignUpReq(email, password, nickname, adProvision))
                     Log.i("response", response.toString())
 
                     with(response) {
@@ -160,17 +161,41 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                     edittextName.setBackgroundResource(R.drawable.textbox_state_normal)
 
                 } else if (RegexUtil.isValidNicknameFormat(nickname)) {
-                    validNickname = true // Todo: 디자인 수정 없는 경우 사용 가능한 닉네임인지 서버에 요청 후 사용 가능하면 valid nickname을 true로 변경
-                    edittextName.setBackgroundResource(R.drawable.textbox_state_normal)
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        try { // 서버에 닉네임 사용 가능 여부 확인
+                            lifecycleScope.launch(Dispatchers.Main) {
+                                val response = TtukttakServer.checkNickname(nickname)
+                                Log.i("response", response.toString())
+
+                                if (response.isSuccess && response.data!!.isAvailable) { // 사용 가능한 닉네임인 경우
+                                    validNickname = true
+                                    edittextName.setBackgroundResource(R.drawable.textbox_state_normal)
+                                    textviewNicknameErrorMessage.visibility = View.INVISIBLE
+
+                                } else { // 사용 가능하지 않은 닉네임인 경우
+                                    validNickname = false
+                                    edittextName.setBackgroundResource(R.drawable.textbox_state_error)
+                                    textviewNicknameErrorMessage.visibility = View.VISIBLE
+                                    textviewNicknameErrorMessage.text = getString(R.string.overlap_nickname)
+                                }
+                            }
+
+                        } catch (e: Exception) {
+                            withContext(Dispatchers.Main) {
+                                Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                                showToast("닉네임 사용 가능 요청 실패")
+                            }
+                        }
+                    }
 
                 } else {
                     edittextName.setBackgroundResource(R.drawable.textbox_state_error)
                     textviewNicknameErrorMessage.visibility = View.VISIBLE
                     textviewNicknameErrorMessage.text = getString(R.string.invalid_nickname)
                 }
-            }
 
-            updateJoinButton()
+                updateJoinButton()
+            }
         }
 
         edittextPassword.setOnFocusChangeListener { _, hasFocus ->
@@ -204,9 +229,9 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                     textviewPasswordMessage.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
                     textviewPasswordMessage.gravity = Gravity.END
                 }
-            }
 
-            updateJoinButton()
+                updateJoinButton()
+            }
         }
 
         edittextPasswordCheck.setOnFocusChangeListener { _, hasFocus ->
@@ -231,9 +256,9 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                     edittextPasswordCheck.setBackgroundResource(R.drawable.textbox_state_error)
                     textviewCheckPasswordMessage.visibility = View.VISIBLE
                 }
-            }
 
-            updateJoinButton()
+                updateJoinButton()
+            }
         }
     }
 
