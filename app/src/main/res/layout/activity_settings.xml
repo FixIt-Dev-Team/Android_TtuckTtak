@@ -41,61 +41,66 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="30dp"
+        android:paddingVertical="18dp"
         android:background="@drawable/textbox_state_normal"
         android:columnCount="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_ChangeSettings">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview_Profile"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_margin="15dp"
-            android:background="@drawable/img_profile"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/img_profile"
             android:contentDescription="@string/blank_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textview_userName"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="@string/user_name"
-            android:textColor="@color/general_theme_black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@id/textview_userEmail"
-            app:layout_constraintEnd_toStartOf="@+id/button_settingProfile"
-            app:layout_constraintStart_toEndOf="@+id/imageview_Profile"
-            app:layout_constraintTop_toTopOf="@id/imageview_Profile" />
-
-        <TextView
-            android:id="@+id/textview_userEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="@string/user_email"
-            android:textColor="@color/system_theme_darkgray"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_Profile"
-            app:layout_constraintEnd_toStartOf="@id/button_settingProfile"
+            android:layout_marginStart="20dp"
             app:layout_constraintStart_toEndOf="@id/imageview_Profile"
-            app:layout_constraintTop_toBottomOf="@id/textview_userName" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" >
+
+            <TextView
+                android:id="@+id/textview_userName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/user_name"
+                android:textColor="@color/general_theme_black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textview_userEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/user_email"
+                android:textColor="@color/system_theme_darkgray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_userName" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
             android:id="@+id/button_settingProfile"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_margin="15dp"
             android:adjustViewBounds="true"
             android:backgroundTint="@android:color/transparent"
             android:clickable="false"
             android:contentDescription="@string/blank_text"
-            android:scaleType="centerInside"
             android:src="@drawable/ic_front"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +135,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/general_theme_white" />
 
         <Button
@@ -174,7 +179,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/general_theme_white" />
 
         <Button
@@ -191,7 +196,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:background="@color/general_theme_white" />
 
         <Button
