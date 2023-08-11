@@ -76,4 +76,8 @@ object TtukttakServer {
     suspend fun logout(logoutReq: LogoutReq) : BaseResponse<LogoutRes> = withContext(Dispatchers.IO) {
         authService.logout(logoutReq)
     }
+
+    suspend fun refreshAccessToken(refreshReq: RefreshReq) : BaseResponse<RefreshRes> = withContext(Dispatchers.IO) {
+        authService.refreshAccessToken(refreshReq)
+    }
 }

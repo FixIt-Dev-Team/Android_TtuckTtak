@@ -6,7 +6,10 @@ import com.gachon.ttuckttak.data.remote.dto.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.LogoutReq
 import com.gachon.ttuckttak.data.remote.dto.LogoutRes
+import com.gachon.ttuckttak.data.remote.dto.RefreshReq
+import com.gachon.ttuckttak.data.remote.dto.RefreshRes
 import com.gachon.ttuckttak.data.remote.dto.SignUpReq
+import com.gachon.ttuckttak.data.remote.dto.TokensDto
 import retrofit2.http.*
 
 interface AuthService {
@@ -40,4 +43,9 @@ interface AuthService {
     suspend fun logout(
         @Body logoutReq: LogoutReq
     ): BaseResponse<LogoutRes>
+
+    @POST("auths/token/refresh")
+    suspend fun refreshAccessToken(
+        @Body refreshReq: RefreshReq
+    ): BaseResponse<RefreshRes>
 }
