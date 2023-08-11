@@ -1,7 +1,10 @@
 package com.gachon.ttuckttak.ui.setting
 
 import android.util.Log
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
@@ -25,6 +28,14 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
         getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
         textviewUserName.text = userManager.getUserName()
         textviewUserEmail.text = userManager.getUserMail()
+        if (userManager.getUserImageUrl().isNullOrEmpty()) {
+            imageviewProfile.setImageDrawable(AppCompatResources.getDrawable(this@SettingsActivity, R.drawable.img_profile))
+            Log.i(TAG, "프로필 이미지 로딩 실패")
+        } else {
+            Glide.with(this@SettingsActivity)
+                .load(userManager.getUserImageUrl())
+                .into(imageviewProfile)
+        }
 
         setClickListener()
     }
@@ -81,20 +92,20 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
                         val data = response.data!!
-                        Log.i(SettingsProfileActivity.TAG, "userName: ${data.userName}")
-                        Log.i(SettingsProfileActivity.TAG, "userMail: ${data.email}")
-                        Log.i(SettingsProfileActivity.TAG, "userImgUrl: ${data.profileImgUrl}")
-                        Log.i(SettingsProfileActivity.TAG, "accountType: ${data.accountType}")
+                        Log.i(SettingsActivity.TAG, "userName: ${data.userName}")
+                        Log.i(SettingsActivity.TAG, "userMail: ${data.email}")
+                        Log.i(SettingsActivity.TAG, "userImgUrl: ${data.profileImgUrl}")
+                        Log.i(SettingsActivity.TAG, "accountType: ${data.accountType}")
                         saveProfile(data)
                     } else {
-                        Log.e(SettingsProfileActivity.TAG, "유저 정보 취득 실패")
-                        Log.e(SettingsProfileActivity.TAG, "${response.code} ${response.message}")
+                        Log.e(SettingsActivity.TAG, "유저 정보 취득 실패")
+                        Log.e(SettingsActivity.TAG, "${response.code} ${response.message}")
                         showToast("유저 정보 취득 실패")
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e(SettingsProfileActivity.TAG, "서버 통신 오류: ${e.message}")
+                    Log.e(SettingsActivity.TAG, "서버 통신 오류: ${e.message}")
                     showToast("유저 정보 취득 실패")
                 }
             }
@@ -105,6 +116,10 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
         userManager.saveUserName(data.userName)
         userManager.saveUserMail(data.email)
         userManager.saveUserImageUrl(data.profileImgUrl)
+    }
+
+    companion object {
+        const val TAG = "PROFILE"
     }
 
 }

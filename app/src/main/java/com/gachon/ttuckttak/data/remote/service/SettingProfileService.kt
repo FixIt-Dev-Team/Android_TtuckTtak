@@ -24,7 +24,7 @@ interface SettingProfileService {
     ): BaseResponse<UserInfoRes>
 
     @Multipart
-    @PATCH("views/setting/update")
+    @PATCH("members/updateprofile")
     suspend fun updateUserInfo(
         @Header("Authorization") authCode: String,
         @Part("ReqDto") reqDto: ProfileDto,
