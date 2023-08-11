@@ -72,4 +72,8 @@ object TtukttakServer {
     suspend fun checkNickname(nickname: String) : BaseResponse<NicknameRes> = withContext(Dispatchers.IO) {
         memberService.checkNickname(nickname)
     }
+
+    suspend fun logout(logoutReq: LogoutReq) : BaseResponse<LogoutRes> = withContext(Dispatchers.IO) {
+        authService.logout(logoutReq)
+    }
 }

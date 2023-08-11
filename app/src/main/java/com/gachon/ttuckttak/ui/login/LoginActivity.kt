@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.ui.login
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,7 @@ import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginReq
 import com.gachon.ttuckttak.databinding.ActivityLoginBinding
 import com.gachon.ttuckttak.ui.main.StartActivity
+import com.gachon.ttuckttak.ui.setting.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -44,6 +46,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                         userManager.saveUserIdx(response.data!!.userIdx)
                         tokenManager.saveToken(response.data.tokenInfo)
 
+                        moveToSettingsActivity(email)
+
                         startNextActivity(StartActivity::class.java)
 
                     } else {
@@ -74,13 +78,19 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     }
                 }
             }
-
         }
 
         textFindIdOrPw.setOnClickListener {
             startNextActivity(FindPwActivity::class.java)
         }
     }
+
+    private fun moveToSettingsActivity(email: String) {
+        val intent = Intent(this, SettingsActivity::class.java).apply {
+            putExtra("email", email)
+        }
+    }
+
 
     private fun setFocusChangeListener() = with(binding) {
         edittextEmail.setOnFocusChangeListener { _, hasFocus ->
