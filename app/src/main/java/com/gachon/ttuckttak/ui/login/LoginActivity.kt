@@ -1,7 +1,5 @@
 package com.gachon.ttuckttak.ui.login
 
-import android.content.Intent
-import android.nfc.Tag
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -11,10 +9,8 @@ import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.LoginReq
-import com.gachon.ttuckttak.data.remote.dto.RefreshReq
 import com.gachon.ttuckttak.databinding.ActivityLoginBinding
 import com.gachon.ttuckttak.ui.main.StartActivity
-import com.gachon.ttuckttak.ui.setting.SettingsActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -59,10 +55,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                                     edittextEmail.setBackgroundResource(R.drawable.textbox_state_error)
                                     editTextPassword.setBackgroundResource(R.drawable.textbox_state_error)
                                     textviewErrorMessage.visibility = View.VISIBLE
-                                    textviewErrorMessage.text = getString(R.string.not_account)
+                                    textviewErrorMessage.text = getString(R.string.login_incorrect)
                                 }
-
-                                // Todo: 계정이 존재하지 않는 경우 -> 백엔드 작업 이후 진행
 
                                 500 -> {
                                     showToast(getString(R.string.unexpected_error_occurred))
