@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate, TransitionMode.VERTICAL) {
 
     private val userManager: UserManager by lazy { UserManager(this@LoginActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@LoginActivity) }
