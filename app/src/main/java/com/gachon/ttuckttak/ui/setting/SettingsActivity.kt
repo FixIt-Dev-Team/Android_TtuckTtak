@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.ui.setting
 
+import android.content.Intent
 import android.util.Log
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +24,9 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
 
     private val userManager: UserManager by lazy { UserManager(this@SettingsActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsActivity) }
+
+    private var pushStatus = false
+    private var nightPushStatus = false
 
     override fun initAfterBinding() = with(binding) {
         setUi()
@@ -59,7 +63,12 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
 
         // 알림 설정 버튼을 누르는 경우 - 알림 설정 액티비티로 이동
         buttonAlertSetting.setOnClickListener {
-            startNextActivity(SettingsAlertActivity::class.java)
+            val intent = Intent(this@SettingsActivity, SettingsAlertActivity::class.java).apply {
+                putExtra("pushStatus", pushStatus)
+                putExtra("nightPushStatus", nightPushStatus)
+            }
+
+            startActivity(intent)
         }
 
         // 뚝딱센터 버튼을 누르는 경우 - 고객센터 액티비티로 이동 <임시 설정>
@@ -128,6 +137,9 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
                         val data = response.data!!
                         Log.i(TAG, response.toString())
                         saveProfile(data)
+
+                        pushStatus = response.data.pushStatus
+                        nightPushStatus = response.data.nightPushStatus
 
                     } else {
                         Log.e(TAG, "유저 정보 취득 실패")

@@ -17,16 +17,25 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
 
     private val userManager: UserManager by lazy { UserManager(this@SettingsAlertActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsAlertActivity) }
-    override fun initAfterBinding() = with(binding) {
 
+    override fun initAfterBinding() {
+        setUi()
+        setClickListener()
+    }
+
+    private fun setUi() = with(binding) {
+        switchEventAndFunctionPush.isChecked = intent.getBooleanExtra("pushStatus", false)
+        switchNightTimePushAlert.isChecked = intent.getBooleanExtra("nightPushStatus", false)
+    }
+
+    private fun setClickListener() = with(binding) {
         // 뒤로가기 버튼을 누르는 경우
         buttonBack.setOnClickListener {
-            // 설정 화면으로 이동
-            startNextActivity(SettingsActivity::class.java)
+            finish()
         }
 
         // event switch를 누르는 경우
-        switchEventAndFunctionPush.setOnCheckedChangeListener{CompoundButton, onSwitch ->
+        switchEventAndFunctionPush.setOnCheckedChangeListener { CompoundButton, onSwitch ->
             launcherEvent(onSwitch)
         }
 
