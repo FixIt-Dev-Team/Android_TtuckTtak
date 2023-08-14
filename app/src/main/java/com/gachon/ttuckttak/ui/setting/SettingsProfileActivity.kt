@@ -44,7 +44,6 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
 
     override fun initAfterBinding() = with(binding) {
         // 서버로부터 사용자 정보 갱신
-        getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
         edittextNickname.setText(userManager.getUserName())
         textviewUserEmail.text = userManager.getUserMail()
         if (userManager.getUserImageUrl().isNullOrEmpty()) {
@@ -73,7 +72,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
 
         // 팝업 뒤로 가기 버튼
         buttonBackTrue.setOnClickListener {
-            getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
+            // getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
             finish()
         }
 
@@ -81,8 +80,8 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
         imagebuttonSave.setOnClickListener {
             if (newImage) {
                 // 이미지 갱신 있는 경우
-                TODO("이미지 리사이징 및 request size limit 확인")
-                //updateProfile(tokenManager.getAccessToken()!!)
+                // TODO("이미지 리사이징 및 사진 업로드 문제 확인")
+                updateProfile(tokenManager.getAccessToken()!!)
                 newImage = false
                 newNickname = false
             } else if (newNickname) {
@@ -208,39 +207,39 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
     }
 
 
-    private fun getProfile(userId: String, token: String) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val response = TtukttakServer.getUserInfo(userId, token)
-
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccess) {
-                        val data = response.data!!
-                        Log.i(TAG, "userName: ${data.userName}")
-                        Log.i(TAG, "userMail: ${data.email}")
-                        Log.i(TAG, "userImgUrl: ${data.profileImgUrl}")
-                        Log.i(TAG, "accountType: ${data.accountType}")
-                        saveProfile(data)
-                    } else {
-                        Log.e(TAG, "유저 정보 취득 실패")
-                        Log.e(TAG, "${response.code} ${response.message}")
-                        showToast("유저 정보 취득 실패")
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(TAG, "서버 통신 오류: ${e.message}")
-                    showToast("유저 정보 취득 실패")
-                }
-            }
-        }
-    }
-
-    private fun saveProfile(data: UserInfoRes) {
-        userManager.saveUserName(data.userName)
-        userManager.saveUserMail(data.email)
-        userManager.saveUserImageUrl(data.profileImgUrl)
-    }
+//    private fun getProfile(userId: String, token: String) {
+//        lifecycleScope.launch(Dispatchers.IO) {
+//            try {
+//                val response = TtukttakServer.getUserInfo(userId, token)
+//
+//                withContext(Dispatchers.Main) {
+//                    if (response.isSuccess) {
+//                        val data = response.data!!
+//                        Log.i(TAG, "userName: ${data.userName}")
+//                        Log.i(TAG, "userMail: ${data.email}")
+//                        Log.i(TAG, "userImgUrl: ${data.profileImgUrl}")
+//                        Log.i(TAG, "accountType: ${data.accountType}")
+//                        saveProfile(data)
+//                    } else {
+//                        Log.e(TAG, "유저 정보 취득 실패")
+//                        Log.e(TAG, "${response.code} ${response.message}")
+//                        showToast("유저 정보 취득 실패")
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                withContext(Dispatchers.Main) {
+//                    Log.e(TAG, "서버 통신 오류: ${e.message}")
+//                    showToast("유저 정보 취득 실패")
+//                }
+//            }
+//        }
+//    }
+//
+//    private fun saveProfile(data: UserInfoRes) {
+//        userManager.saveUserName(data.userName)
+//        userManager.saveUserMail(data.email)
+//        userManager.saveUserImageUrl(data.profileImgUrl)
+//    }
 
     private fun updateNickname(token: String) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
