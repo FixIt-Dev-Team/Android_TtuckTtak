@@ -9,9 +9,10 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.dto.LogoutReq
 import com.gachon.ttuckttak.data.remote.dto.UserInfoRes
 import com.gachon.ttuckttak.databinding.ActivitySettingsBinding
-import com.gachon.ttuckttak.ui.login.LoginActivity
+import com.gachon.ttuckttak.ui.login.LandingActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,6 +23,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
 
     private val userManager: UserManager by lazy { UserManager(this@SettingsActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsActivity) }
+
+    private val email: String by lazy { intent.getStringExtra("email")!! }
 
     override fun initAfterBinding() = with(binding) {
         // 서버에서 유저 정보 가져오기
@@ -78,9 +81,37 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
 
         // 로그아웃 버튼을 누르는 경우 - LoginActivity로 이동
         buttonLogout.setOnClickListener {
-            userManager.clearUserIdx()
-            tokenManager.clearToken()
-            startActivityWithClear(LoginActivity::class.java)
+            lifecycleScope.launch(Dispatchers.IO) {
+                try {
+                    // 서버에 로그아웃 인증코드 전송 요청
+                    val response = TtukttakServer.logout(LogoutReq(userManager.getUserIdx()!!))
+                    Log.i("response", response.toString())
+
+                    if (response.isSuccess) {
+                        userManager.clearUserIdx()
+                        tokenManager.clearToken()
+                        startActivityWithClear(LandingActivity::class.java)
+
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            when (response.code) {
+                                400 -> {
+                                    showToast("아이디나 비밀번호를 확인해주세요.")
+                                }
+
+                                500 -> {
+                                    showToast(getString(R.string.unexpected_error_occurred))
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                        showToast("로그아웃 요청 실패")
+                    }
+                }
+            }
         }
     }
 
@@ -92,20 +123,20 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
                         val data = response.data!!
-                        Log.i(SettingsActivity.TAG, "userName: ${data.userName}")
-                        Log.i(SettingsActivity.TAG, "userMail: ${data.email}")
-                        Log.i(SettingsActivity.TAG, "userImgUrl: ${data.profileImgUrl}")
-                        Log.i(SettingsActivity.TAG, "accountType: ${data.accountType}")
+                        Log.i(TAG, "userName: ${data.userName}")
+                        Log.i(TAG, "userMail: ${data.email}")
+                        Log.i(TAG, "userImgUrl: ${data.profileImgUrl}")
+                        Log.i(TAG, "accountType: ${data.accountType}")
                         saveProfile(data)
                     } else {
-                        Log.e(SettingsActivity.TAG, "유저 정보 취득 실패")
-                        Log.e(SettingsActivity.TAG, "${response.code} ${response.message}")
+                        Log.e(TAG, "유저 정보 취득 실패")
+                        Log.e(TAG, "${response.code} ${response.message}")
                         showToast("유저 정보 취득 실패")
                     }
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e(SettingsActivity.TAG, "서버 통신 오류: ${e.message}")
+                    Log.e(TAG, "서버 통신 오류: ${e.message}")
                     showToast("유저 정보 취득 실패")
                 }
             }
