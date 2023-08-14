@@ -84,7 +84,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
         imagebuttonSave.setOnClickListener {
             if (newImage) {
                 // 이미지 갱신 있는 경우
-                // TODO("이미지 리사이징 및 request size limit 확인")
+                // TODO("이미지 리사이징 및 사진 업로드 문제 확인")
                 updateProfile(tokenManager.getAccessToken()!!)
                 newImage = false
                 newNickname = false
