@@ -24,23 +24,26 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
     private val userManager: UserManager by lazy { UserManager(this@SettingsActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsActivity) }
 
-    private val email: String by lazy { intent.getStringExtra("email")!! }
-
     override fun initAfterBinding() = with(binding) {
-        // 서버에서 유저 정보 가져오기
-        getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!)
+        setUi()
+        setClickListener()
+    }
+
+    private fun setUi() = with(binding) {
+        getProfile(userManager.getUserIdx()!!, tokenManager.getAccessToken()!!) // 서버에서 유저 정보 가져오기
+
         textviewUserName.text = userManager.getUserName()
         textviewUserEmail.text = userManager.getUserMail()
+
         if (userManager.getUserImageUrl().isNullOrEmpty()) {
             imageviewProfile.setImageDrawable(AppCompatResources.getDrawable(this@SettingsActivity, R.drawable.img_profile))
             Log.i(TAG, "프로필 이미지 로딩 실패")
+
         } else {
             Glide.with(this@SettingsActivity)
                 .load(userManager.getUserImageUrl())
                 .into(imageviewProfile)
         }
-
-        setClickListener()
     }
 
     private fun setClickListener() = with(binding) {
@@ -123,17 +126,16 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
                         val data = response.data!!
-                        Log.i(TAG, "userName: ${data.userName}")
-                        Log.i(TAG, "userMail: ${data.email}")
-                        Log.i(TAG, "userImgUrl: ${data.profileImgUrl}")
-                        Log.i(TAG, "accountType: ${data.accountType}")
+                        Log.i(TAG, response.toString())
                         saveProfile(data)
+
                     } else {
                         Log.e(TAG, "유저 정보 취득 실패")
                         Log.e(TAG, "${response.code} ${response.message}")
                         showToast("유저 정보 취득 실패")
                     }
                 }
+
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Log.e(TAG, "서버 통신 오류: ${e.message}")
