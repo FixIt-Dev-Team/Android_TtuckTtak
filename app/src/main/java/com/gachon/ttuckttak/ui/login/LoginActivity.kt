@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate, TransitionMode.VERTICAL) {
 
     private val userManager: UserManager by lazy { UserManager(this@LoginActivity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@LoginActivity) }
@@ -43,6 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     if (response.isSuccess) {
                         userManager.saveUserIdx(response.data!!.userIdx)
                         tokenManager.saveToken(response.data.tokenInfo)
+                        Log.i("test", tokenManager.getRefreshToken()!!)
 
                         startNextActivity(StartActivity::class.java)
 
@@ -54,10 +55,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                                     edittextEmail.setBackgroundResource(R.drawable.textbox_state_error)
                                     editTextPassword.setBackgroundResource(R.drawable.textbox_state_error)
                                     textviewErrorMessage.visibility = View.VISIBLE
-                                    textviewErrorMessage.text = getString(R.string.not_account)
+                                    textviewErrorMessage.text = getString(R.string.login_incorrect)
                                 }
-
-                                // Todo: 계정이 존재하지 않는 경우 -> 백엔드 작업 이후 진행
 
                                 500 -> {
                                     showToast(getString(R.string.unexpected_error_occurred))
@@ -81,7 +80,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             startNextActivity(FindPwActivity::class.java)
         }
     }
-
     private fun setFocusChangeListener() = with(binding) {
         edittextEmail.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {

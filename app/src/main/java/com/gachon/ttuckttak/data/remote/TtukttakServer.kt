@@ -27,11 +27,9 @@ object TtukttakServer {
     private val memberService: MemberService = retrofit.create(MemberService::class.java)
     private val viewService: ViewService = retrofit.create(ViewService::class.java)
 
-
     suspend fun signUp(signupReq: SignUpReq): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
         authService.signUp(signupReq)
     }
-
 
     suspend fun loginWithKakao(authCode: String): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
         authService.kakaoLogin(authCode)
@@ -41,7 +39,7 @@ object TtukttakServer {
         authService.googleLogin(idToken)
     }
 
-    suspend fun emailConfirm(email: String) : BaseResponse<EmailConfirmRes> = withContext(Dispatchers.IO) {
+    suspend fun emailConfirm(email: String): BaseResponse<EmailConfirmRes> = withContext(Dispatchers.IO) {
         authService.emailConfirm(email)
     }
 
@@ -61,15 +59,23 @@ object TtukttakServer {
         memberService.changePw(email)
     }
 
-    suspend fun getUserInfo(userId: String, authCode: String) : BaseResponse<UserInfoRes> = withContext(Dispatchers.IO) {
+    suspend fun getUserInfo(userId: String, authCode: String): BaseResponse<UserInfoRes> = withContext(Dispatchers.IO) {
         viewService.getUserInfo(userId, authCode)
     }
 
-    suspend fun updateUserInfo(authCode: String, reqDto: ProfileDto, file: MultipartBody.Part?) : BaseResponse<UserInfoUpdateRes> = withContext(Dispatchers.IO) {
+    suspend fun updateUserInfo(authCode: String, reqDto: ProfileDto, file: MultipartBody.Part?): BaseResponse<UserInfoUpdateRes> = withContext(Dispatchers.IO) {
         viewService.updateUserInfo(authCode, reqDto, file)
     }
 
-    suspend fun checkNickname(nickname: String) : BaseResponse<NicknameRes> = withContext(Dispatchers.IO) {
+    suspend fun checkNickname(nickname: String): BaseResponse<NicknameRes> = withContext(Dispatchers.IO) {
         memberService.checkNickname(nickname)
+    }
+
+    suspend fun logout(logoutReq: LogoutReq): BaseResponse<LogoutRes> = withContext(Dispatchers.IO) {
+        authService.logout(logoutReq)
+    }
+
+    suspend fun refreshAccessToken(refreshReq: RefreshReq): BaseResponse<RefreshRes> = withContext(Dispatchers.IO) {
+        authService.refreshAccessToken(refreshReq)
     }
 }

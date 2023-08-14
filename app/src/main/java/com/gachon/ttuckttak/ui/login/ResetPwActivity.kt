@@ -20,7 +20,7 @@ class ResetPwActivity : BaseActivity<ActivityResetPwBinding>(ActivityResetPwBind
 
         // 닫기 버튼을 눌렀을 경우
         buttonClose.setOnClickListener {
-            finish()
+            startActivityWithClear(LandingActivity::class.java)
         }
     }
 }
