@@ -49,6 +49,8 @@
             android:theme="@style/Theme.Android_TtuckTtak.Home" />
         <activity android:name=".ui.problem.ProblemYNActivity"
             android:theme="@style/Theme.Android_TtuckTtak.Home" />
+        <activity android:name=".ui.solution.SolutionBeforeActivity"
+            android:theme="@style/Theme.Android_TtuckTtak.Home" />
 
 
     </application>

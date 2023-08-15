@@ -18,6 +18,7 @@ import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
+import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.data.remote.service.ViewService
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +41,7 @@ object TtukttakServer {
     private val authService: AuthService = retrofit.create(AuthService::class.java)
     private val memberService: MemberService = retrofit.create(MemberService::class.java)
     private val viewService: ViewService = retrofit.create(ViewService::class.java)
+    private val solutionService: SolutionService = retrofit.create(SolutionService::class.java)
 
     suspend fun signUp(signupReq: SignUpReq): BaseResponse<LoginRes> = withContext(Dispatchers.IO) {
         authService.signUp(signupReq)
@@ -91,5 +93,9 @@ object TtukttakServer {
 
     suspend fun refreshAccessToken(refreshReq: RefreshReq): BaseResponse<RefreshRes> = withContext(Dispatchers.IO) {
         authService.refreshAccessToken(refreshReq)
+    }
+
+    suspend fun getSolbyEntry(entryIdx: Int, authCode: String): BaseResponse<SolutionEntryRes> = withContext(Dispatchers.IO) {
+        solutionService.getSolbyEntry(entryIdx, authCode)
     }
 }
