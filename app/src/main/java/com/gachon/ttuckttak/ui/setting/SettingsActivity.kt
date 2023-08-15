@@ -10,8 +10,8 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
-import com.gachon.ttuckttak.data.remote.dto.LogoutReq
-import com.gachon.ttuckttak.data.remote.dto.UserInfoRes
+import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
+import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 import com.gachon.ttuckttak.databinding.ActivitySettingsBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import kotlinx.coroutines.Dispatchers

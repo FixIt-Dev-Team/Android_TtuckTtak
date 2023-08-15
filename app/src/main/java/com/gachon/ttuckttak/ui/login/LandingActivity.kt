@@ -11,7 +11,7 @@ import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
-import com.gachon.ttuckttak.data.remote.dto.LoginRes
+import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.databinding.ActivityLandingBinding
 import com.gachon.ttuckttak.ui.join.JoinPart1Activity
 import com.gachon.ttuckttak.ui.main.StartActivity

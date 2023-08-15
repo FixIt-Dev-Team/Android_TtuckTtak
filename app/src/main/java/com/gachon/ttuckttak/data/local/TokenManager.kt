@@ -3,7 +3,7 @@ package com.gachon.ttuckttak.data.local
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.gachon.ttuckttak.data.remote.dto.TokensDto
+import com.gachon.ttuckttak.data.remote.dto.auth.TokensDto
 
 class TokenManager(context: Context) {
     private val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC

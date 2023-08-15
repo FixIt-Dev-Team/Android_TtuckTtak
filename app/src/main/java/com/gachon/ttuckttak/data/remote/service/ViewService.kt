@@ -1,9 +1,9 @@
 package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.ProfileDto
-import com.gachon.ttuckttak.data.remote.dto.UserInfoRes
-import com.gachon.ttuckttak.data.remote.dto.UserInfoUpdateRes
+import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
+import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
+import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import okhttp3.MultipartBody
 import retrofit2.http.GET
 import retrofit2.http.Header

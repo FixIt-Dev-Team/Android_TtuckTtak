@@ -6,7 +6,7 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
-import com.gachon.ttuckttak.data.remote.dto.NoticeReq
+import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
 import com.gachon.ttuckttak.databinding.ActivitySettingsAlertBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import kotlinx.coroutines.Dispatchers

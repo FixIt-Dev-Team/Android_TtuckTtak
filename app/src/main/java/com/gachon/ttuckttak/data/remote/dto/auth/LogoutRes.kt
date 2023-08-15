@@ -1,4 +1,4 @@
-package com.gachon.ttuckttak.data.remote.dto
+package com.gachon.ttuckttak.data.remote.dto.auth
 
 data class LogoutRes(
     val Success: Boolean,

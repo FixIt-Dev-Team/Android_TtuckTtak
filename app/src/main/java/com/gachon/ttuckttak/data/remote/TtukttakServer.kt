@@ -1,7 +1,21 @@
 package com.gachon.ttuckttak.data.remote
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.*
+import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
+import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
+import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
+import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
+import com.gachon.ttuckttak.data.remote.dto.auth.LogoutRes
+import com.gachon.ttuckttak.data.remote.dto.auth.RefreshReq
+import com.gachon.ttuckttak.data.remote.dto.auth.RefreshRes
+import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
+import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
+import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
+import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
+import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
+import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
+import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
+import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.data.remote.service.ViewService

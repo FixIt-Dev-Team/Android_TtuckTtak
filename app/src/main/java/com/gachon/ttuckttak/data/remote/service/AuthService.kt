@@ -1,14 +1,14 @@
 package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.EmailConfirmRes
-import com.gachon.ttuckttak.data.remote.dto.LoginReq
-import com.gachon.ttuckttak.data.remote.dto.LoginRes
-import com.gachon.ttuckttak.data.remote.dto.LogoutReq
-import com.gachon.ttuckttak.data.remote.dto.LogoutRes
-import com.gachon.ttuckttak.data.remote.dto.RefreshReq
-import com.gachon.ttuckttak.data.remote.dto.RefreshRes
-import com.gachon.ttuckttak.data.remote.dto.SignUpReq
+import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
+import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
+import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
+import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
+import com.gachon.ttuckttak.data.remote.dto.auth.LogoutRes
+import com.gachon.ttuckttak.data.remote.dto.auth.RefreshReq
+import com.gachon.ttuckttak.data.remote.dto.auth.RefreshRes
+import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import retrofit2.http.*
 
 interface AuthService {

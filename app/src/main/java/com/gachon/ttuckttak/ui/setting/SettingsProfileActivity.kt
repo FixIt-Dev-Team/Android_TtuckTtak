@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.data.remote.TtukttakServer
-import com.gachon.ttuckttak.data.remote.dto.ProfileDto
+import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
 import com.gachon.ttuckttak.utils.RegexUtil
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

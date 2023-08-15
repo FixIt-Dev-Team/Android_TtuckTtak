@@ -1,10 +1,10 @@
 package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.NicknameRes
-import com.gachon.ttuckttak.data.remote.dto.NoticeReq
-import com.gachon.ttuckttak.data.remote.dto.NoticeRes
-import com.gachon.ttuckttak.data.remote.dto.PutPwEmailRes
+import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
+import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
+import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
+import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
