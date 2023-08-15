@@ -39,9 +39,10 @@
             android:fontFamily="@font/noto_sans_kr_bold"
             android:includeFontPadding="false"
             android:text="@string/text_welcome2"
-            android:textColor="@color/general_theme_white"
+            android:textColor="@color/system_theme_gray"
             android:textFontWeight="700"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
 
     </LinearLayout>
 
@@ -58,11 +59,11 @@
         android:text="@string/sign_up"
         android:textColor="@color/main_theme_blue"
         android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_welcome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.5838"
+        app:layout_constraintVertical_bias="0.2808"
         />
 
     <!-- 구글 버튼 레이아웃  -->
@@ -75,9 +76,9 @@
         android:src="@drawable/btn_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.6663"
+        app:layout_constraintVertical_bias="0.0361"
         android:contentDescription="@string/google_content_description"
         />
 
@@ -90,9 +91,9 @@
         android:src="@drawable/btn_kakao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_google"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.7499"
+        app:layout_constraintVertical_bias="0.0474"
         android:contentDescription="@string/kakao_content_description"
          />
 
@@ -103,9 +104,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_kakao"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.8413"
+        app:layout_constraintVertical_bias="0.1241"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="@string/text_welcome3"
