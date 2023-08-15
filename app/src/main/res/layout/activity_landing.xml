@@ -7,6 +7,7 @@
     android:background="@color/general_theme_black"
     tools:context=".ui.login.LandingActivity">
 
+    <!-- 텍스트 레이아웃  -->
     <LinearLayout
         android:id="@+id/layout_welcome"
         android:layout_width="wrap_content"
@@ -14,10 +15,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25">
+        app:layout_constraintHorizontal_bias="0.2389"
+        app:layout_constraintVertical_bias="0.22">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,6 +31,7 @@
             android:textSize="38sp"
             tools:ignore="HardcodedText" />
 
+    <!-- Todo: 마진을 사용할건지 안할건지 의문 -> 마진을 사용 안한다면 레이아웃을 풀고 작업해야할 듯    -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,59 +45,73 @@
 
     </LinearLayout>
 
-    <!-- Todo: 피그마 비율대로 했는데 조금 다름. 수정 필요   -->
+    <!--가입 버튼 레이아웃  -->
+    <!-- TODO: 버튼 크기를 어찌 해야할 지 의문 일단 피그마 크기로 적용   -->
+    <!-- TODO: 배경과 글자색 텍스트 대비비율로 인한 경고 표시 발생   -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_regular"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="110dp"
+        android:layout_width="318dp"
+        android:layout_height="56dp"
         android:background="@drawable/bg_rectangle_round"
         android:backgroundTint="@color/general_theme_white"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/sign_up"
         android:textColor="@color/main_theme_blue"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_welcome"
-        app:layout_constraintWidth_percent="0.88" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5838"
+        />
 
+    <!-- 구글 버튼 레이아웃  -->
+    <!-- TODO: 마진을 안주고 작업을 해본 결과 폰 크기가 너무 작으면 버튼 끼리 접촉하는 문제 발생   -->
     <ImageButton
         android:id="@+id/imagebutton_google"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
         android:src="@drawable/btn_google"
-        app:layout_constraintEnd_toEndOf="@id/button_regular"
-        app:layout_constraintStart_toStartOf="@id/button_regular"
-        app:layout_constraintTop_toBottomOf="@id/button_regular" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.6663"
+        android:contentDescription="@string/google_content_description"
+        />
 
+    <!-- 카카오 버튼 레이아웃  -->
     <ImageButton
         android:id="@+id/imagebutton_kakao"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
         android:src="@drawable/btn_kakao"
-        app:layout_constraintEnd_toEndOf="@id/imagebutton_google"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_google"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_google" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.7499"
+        android:contentDescription="@string/kakao_content_description"
+         />
 
+    <!-- 로그인 화면 이동 버튼 레이아웃  -->
     <TextView
         android:id="@+id/textview_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8413"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="@string/text_welcome3"
         android:textColor="@color/general_theme_white"
         android:textFontWeight="700"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_kakao" />
+ />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
