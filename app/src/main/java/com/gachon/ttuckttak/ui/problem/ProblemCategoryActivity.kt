@@ -36,8 +36,7 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
 
             intent.putExtra("surveyIdx", SolutionManager.DISPLAY)
             intent.putExtra("pattern", "1")
-            // TODO()
-            // intent.putExtra("level", level)
+            intent.putExtra("level", 1)
 
             startActivity(intent)
         }

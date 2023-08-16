@@ -1,4 +1,4 @@
-package com.gachon.ttuckttak.data.remote.dto
+package com.gachon.ttuckttak.data.remote.dto.solution
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

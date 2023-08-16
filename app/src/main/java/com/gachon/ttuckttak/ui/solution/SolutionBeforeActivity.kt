@@ -5,12 +5,10 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
-import com.gachon.ttuckttak.data.remote.dto.SolutionBypassDto
-import com.gachon.ttuckttak.data.remote.dto.SolutionDto
-import com.gachon.ttuckttak.data.remote.dto.SolutionList
-import com.gachon.ttuckttak.data.remote.dto.SolutionPossibleDto
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
 import com.gachon.ttuckttak.databinding.ActivitySolutionBeforeBinding
-import com.gachon.ttuckttak.ui.setting.SettingsProfileActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -20,18 +18,20 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
 
     private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionBeforeActivity) }
 
-    private var solutions: SolutionList? = null
+    private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
     private var solutionBs: MutableList<SolutionBypassDto>? = null
 
     override fun initAfterBinding() = with(binding) {
-        val entryIdx = intent.getIntExtra("surveyIdx", 0)
+        val surveyIdx = intent.getIntExtra("surveyIdx", 0)
         val resPattern = intent.getStringExtra("pattern")!!.toInt(2)
+        val level = intent.getIntExtra("level", 0)
 
         // 솔루션 정보 API 수신 및 뷰 텍스트에 할당
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = TtukttakServer.getSolbyEntry(entryIdx, tokenManager.getAccessToken()!!)
+                val request = SolutionEntryReq(surveyIdx, resPattern, level)
+                val response = TtukttakServer.getSolEntries(tokenManager.getAccessToken()!!, request)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
@@ -43,6 +43,8 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
                         Log.i(TAG, "solution list: ${data.solList}")
                         Log.i(TAG, "possible solution list: ${data.solPList}")
                         Log.i(TAG, "solution bypass list: ${data.solBList}")
+
+                        Log.i(TAG, "data: ${data}")
 
                         solutions = data.solList
                         for (i in data.solPList.indices) {

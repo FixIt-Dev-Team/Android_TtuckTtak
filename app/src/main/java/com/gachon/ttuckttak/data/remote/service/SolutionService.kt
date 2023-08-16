@@ -1,9 +1,9 @@
 package com.gachon.ttuckttak.data.remote.service
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.SolutionDetailRes
-import com.gachon.ttuckttak.data.remote.dto.SolutionEntryReq
-import com.gachon.ttuckttak.data.remote.dto.SolutionEntryRes
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDetailRes
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryRes
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -19,7 +19,7 @@ interface SolutionService {
     ): BaseResponse<SolutionEntryRes>
 
     @GET("solutions/detail")
-    suspend fun getSoldetail(
+    suspend fun getSolDetail(
         @Query("solutionIdx") solutionIdx: String,
         @Header("Authorization") authCode: String
     ): BaseResponse<SolutionDetailRes>

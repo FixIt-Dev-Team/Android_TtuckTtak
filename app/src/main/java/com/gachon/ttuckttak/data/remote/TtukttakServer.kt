@@ -1,6 +1,7 @@
 package com.gachon.ttuckttak.data.remote
 
 import com.gachon.ttuckttak.base.BaseResponse
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryRes
 import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
@@ -13,6 +14,8 @@ import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDetailRes
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
 import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
@@ -97,5 +100,13 @@ object TtukttakServer {
 
     suspend fun getSolbyEntry(entryIdx: Int, authCode: String): BaseResponse<SolutionEntryRes> = withContext(Dispatchers.IO) {
         solutionService.getSolbyEntry(entryIdx, authCode)
+    }
+
+    suspend fun getSolDetail(solutionIdx: String, authCode: String): BaseResponse<SolutionDetailRes> = withContext(Dispatchers.IO) {
+        solutionService.getSolDetail(solutionIdx, authCode)
+    }
+
+    suspend fun getSolEntries(authCode: String, solutionEntryReq: SolutionEntryReq): BaseResponse<SolutionEntryRes> = withContext(Dispatchers.IO) {
+        solutionService.getSolEntries(authCode, solutionEntryReq)
     }
 }

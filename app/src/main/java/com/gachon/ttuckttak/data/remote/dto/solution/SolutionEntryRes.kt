@@ -1,4 +1,4 @@
-package com.gachon.ttuckttak.data.remote.dto
+package com.gachon.ttuckttak.data.remote.dto.solution
 
 import com.google.gson.annotations.SerializedName
 
@@ -6,10 +6,10 @@ data class SolutionEntryRes(
     val entryIdx: Int,
     val level: Int,
     val problemName: String,
-    @SerializedName("Solution List")
-    var solList: SolutionList,
-    @SerializedName("SolutionPossible List")
+    @SerializedName("solutionDtos")
+    val solList: List<SolutionDto> = arrayListOf(),
+    @SerializedName("solutionPossibleDtos")
     val solPList: List<SolutionPossibleDto> = arrayListOf(),
-    @SerializedName("SolutionBypass List")
+    @SerializedName("solutionBypassDtos")
     val solBList: List<SolutionBypassDto>? = arrayListOf()
 )
