@@ -83,7 +83,7 @@ object TtukttakServer {
     }
 
     suspend fun updateUserInfo(authCode: String, reqDto: ProfileDto, file: MultipartBody.Part?): BaseResponse<UserInfoUpdateRes> = withContext(Dispatchers.IO) {
-        viewService.updateUserInfo(authCode, reqDto, file)
+        memberService.updateUserInfo(authCode, reqDto, file)
     }
 
     suspend fun checkNickname(nickname: String): BaseResponse<NicknameRes> = withContext(Dispatchers.IO) {

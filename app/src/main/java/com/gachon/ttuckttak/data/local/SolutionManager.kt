@@ -12,7 +12,7 @@ class SolutionManager(context: Context) {
     )
 
     val questions: List<Map<String, Int>> = listOf(mapOf(),
-        mapOf("1" to R.string.power_prob_2, "11" to R.string.power_prob_3),
+            mapOf("1" to R.string.power_prob_2, "11" to R.string.power_prob_3),
         mapOf(),
         mapOf("0" to R.string.acc_prob_2, "00" to R.string.acc_prob_3),
         mapOf("0" to R.string.usage_prob_2, "00" to R.string.usage_prob_3, "001" to R.string.usage_prob_4, "0011" to R.string.usage_prob_5, "000" to R.string.usage_prob_6, "0000" to R.string.usage_prob_7)
