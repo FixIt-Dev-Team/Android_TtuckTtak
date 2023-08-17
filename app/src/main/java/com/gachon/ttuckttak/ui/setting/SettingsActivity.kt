@@ -135,7 +135,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
                         val data = response.data!!
-                        Log.i(TAG, response.toString())
+                        Log.i(TAG, "유저 정보: ${response.data}")
                         saveProfile(data)
 
                         pushStatus = response.data.pushStatus

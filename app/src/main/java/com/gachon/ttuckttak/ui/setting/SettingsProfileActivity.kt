@@ -11,6 +11,7 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
@@ -89,11 +90,13 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
                 updateProfile(tokenManager.getAccessToken()!!)
                 newImage = false
                 newNickname = false
+                imagebuttonSave.isEnabled = true
 
             } else if (newNickname) {
                 // 닉네임만 갱신하는 경우
                 updateNickname(tokenManager.getAccessToken()!!)
                 newNickname = false
+                imagebuttonSave.isEnabled = true
             }
         }
 
@@ -141,9 +144,8 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
             if (hasFocus) {
                 layoutNickname.setBackgroundResource(R.drawable.textbox_state_normal)
                 textviewOverlapNickname.visibility = View.INVISIBLE
-            }
 
-            else {
+            } else {
                 val nickname = edittextNickname.text.toString()
 
                 // 닉네임이 기준에 맞지 않는 경우
@@ -151,9 +153,8 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
                     layoutNickname.setBackgroundResource(R.drawable.textbox_state_error)
                     textviewOverlapNickname.visibility = View.VISIBLE
                     textviewOverlapNickname.text = getString(R.string.invalid_nickname)
-                }
 
-                else {
+                } else if (nickname != userManager.getUserName()) {
                     lifecycleScope.launch(Dispatchers.IO) {
                         try {
                             val response = TtukttakServer.checkNickname(nickname)
@@ -170,7 +171,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
 
                                     else { // 닉네임이 적절한 경우
                                         newNickname = true
-                                        imagebuttonSave.isEnabled = true
+                                        imagebuttonSave.visibility = View.VISIBLE
                                     }
                                     // userManager.saveUserName(nickname) --> 저장 버튼을 클릭 했을 때 저장되도록
 
@@ -228,7 +229,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
             try {
                 val response = TtukttakServer.updateUserInfo(
                         authCode = token,
-                        reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!, userManager.getUserImageUrl()!!),
+                        reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!),
                         file = null
                 )
 
@@ -236,7 +237,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
                     if (response.isSuccess) {
                         val data = response.data!!
                         Log.i(TAG, "Upadated: ${data.isSuccess}")
-                        imagebuttonSave.isEnabled = true
+                        imagebuttonSave.visibility = View.VISIBLE
 
                     } else {
                         Log.e(TAG, "유저 정보 업데이트 실패")
@@ -260,7 +261,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
                 val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
                 val response = TtukttakServer.updateUserInfo(
                     authCode = token,
-                    reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!, userManager.getUserImageUrl()!!),
+                    reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!),
                     file = MultipartBody.Part.create(requestFile)
                 )
 
@@ -268,7 +269,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
                     if (response.isSuccess) {
                         val data = response.data!!
                         Log.i(TAG, "Upadated: ${data.isSuccess}")
-                        imagebuttonSave.isEnabled = true
+                        imagebuttonSave.visibility = View.VISIBLE
 
                     } else {
                         Log.e(TAG, "유저 정보 업데이트 실패")
