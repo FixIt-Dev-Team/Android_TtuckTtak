@@ -25,12 +25,20 @@
     </style>
 
     <!-- Splash theme. -->
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar"> <!-- Customize your theme here. -->
+    <style name="Theme.Android_TtuckTtak.Splash" parent="Theme.AppCompat.Light.DarkActionBar"> <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">@color/general_theme_white</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- background -->
         <item name="android:windowBackground">@drawable/ic_background_splash</item>
+    </style>
+
+    <!-- Landing theme. -->
+    <style name="Theme.Android_TtuckTtak.Landing">
+        <item name="android:statusBarColor">@color/general_theme_black</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>
