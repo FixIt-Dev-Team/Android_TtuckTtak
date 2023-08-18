@@ -4,15 +4,13 @@ import android.content.Intent
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityProblemCategoryBinding
-import com.gachon.ttuckttak.ui.main.HomeActivity
 
 class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(ActivityProblemCategoryBinding::inflate) {
 
     override fun initAfterBinding() = with(binding) {
         // back button
         imagebuttonBack.setOnClickListener {
-            val intent = Intent(this@ProblemCategoryActivity, HomeActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         // "전원에 문제가 있어요" 버튼
