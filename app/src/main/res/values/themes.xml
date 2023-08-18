@@ -31,6 +31,6 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <!-- background -->
-        <item name="android:windowBackground">@drawable/ic_background_splash</item>
+        <item name="android:windowBackground">@drawable/img_background_splash</item>
     </style>
 </resources>
