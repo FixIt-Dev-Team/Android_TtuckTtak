@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.join.JoinPart1Activity">
 
+    <!-- 뷰 프로그래스 바 레이아웃 -->
     <View
         android:layout_width="0dp"
         android:layout_height="5dp"
         android:background="@color/main_theme_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.33" />
+        app:layout_constraintWidth_percent="0.33"
+        app:layout_constraintHeight_percent="0.066"/>
 
+    <!-- 회원가입 텍스트 레이아웃 -->
     <TextView
         android:id="@+id/textview_join_membership"
         android:layout_width="wrap_content"
@@ -22,82 +25,100 @@
         android:text="@string/join_membership"
         android:textColor="@color/general_theme_black"
         android:textSize="16sp"
+        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.0318" />
 
+    <!-- 뒤로가기 레이아웃 -->
+    <!-- FixMe: 위치가 피그마와 살짝 안맞는 느낌   -->
     <ImageButton
         android:id="@+id/imagebutton_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:contentDescription="@string/blank_text"
-        android:scaleType="centerInside"
         android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
-
-    <TextView
-        android:id="@+id/textview_join_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/join_email"
-        android:textColor="@color/general_theme_black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/edittext_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/edittext_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/selector_default_textbox"
-        android:hint="@string/user_email"
-        android:inputType="textEmailAddress"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
-        android:textSize="14sp"
+        android:contentDescription="@string/bcak_content_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36"
-        app:layout_constraintWidth_percent="0.912" />
+        app:layout_constraintHorizontal_bias="0.0444"
+        app:layout_constraintVertical_bias="0.0199" />
 
+
+    <!-- 이메일 가입 텍스트 레이아웃 -->
+    <TextView
+        android:id="@+id/textview_join_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:text="@string/join_email"
+        android:textColor="@color/general_theme_black"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/textview_join_membership"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0972"
+        app:layout_constraintVertical_bias="0.2782"
+        android:includeFontPadding="false"
+        />
+
+    <!-- 이메일 입력 텍스트 레이아웃 -->
+    <EditText
+        android:id="@+id/edittext_email"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.9111"
+        app:layout_constraintHeight_percent="0.0636"
+        android:background="@drawable/selector_default_textbox"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp"
+        android:paddingHorizontal="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_join_email"
+        app:layout_constraintVertical_bias="0.0163"
+        android:autofillHints="@string/email_autofill"
+        />
+
+    <!-- 오류 메세지 텍스트 레이아웃    -->
+    <!-- FixMe: 오류메세지 다른 모드로 뜨게 하는 작업을 잘 모르겠음  -->
+    <!-- FixMe: 밑에서 두번쨰줄 변경 필요  -->
     <TextView
         android:id="@+id/textview_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="11dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:textColor="@color/general_theme_red"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_email"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_email"
+        app:layout_constraintVertical_bias="0.0069"
+        app:layout_constraintHorizontal_bias="0.8944"
         tools:text="@string/overlap_email" />
 
+    <!-- 인증하기 버튼 텍스트 레이아웃    -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_send"
         style="@style/DefaultButton"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:enabled="false"
         android:text="@string/certification_code"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734"
-        app:layout_constraintWidth_percent="0.884" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_email"
+        app:layout_constraintVertical_bias="0.5379"
+        app:layout_constraintWidth_percent="0.8833"
+        app:layout_constraintHeight_percent="0.0742"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

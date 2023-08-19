@@ -7,14 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.join.JoinPart2Activity">
 
+    <!-- 뷰 프로그래스 바 레이아웃 -->
     <View
         android:layout_width="0dp"
-        android:layout_height="5dp"
+        android:layout_height="0dp"
         android:background="@color/main_theme_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.33" />
+        app:layout_constraintWidth_percent="0.33"
+        app:layout_constraintHeight_percent="0.0066"/>
 
+    <!-- 회원가입 텍스트 레이아웃 -->
     <TextView
         android:id="@+id/textview_join_membership"
         android:layout_width="wrap_content"
@@ -23,137 +26,170 @@
         android:text="@string/join_membership"
         android:textColor="@color/general_theme_black"
         android:textSize="16sp"
+        android:includeFontPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.0318" />
 
+    <!-- 뒤로가기 레이아웃 -->
+    <!-- FixMe: 위치가 피그마와 살짝 안맞는 느낌   -->
+    <!-- FixMe: 뒤로가기 버튼이 각각 이름이 조금씩 다른 듯   -->
     <ImageButton
         android:id="@+id/button_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:contentDescription="@string/blank_text"
-        android:scaleType="centerInside"
         android:src="@drawable/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
-
-    <TextView
-        android:id="@+id/textview_send_certification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/send_certification_code"
-        android:textColor="@color/general_theme_black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/margin_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <View
-        android:id="@+id/margin_1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="@id/textview_email"
-        app:layout_constraintBottom_toTopOf="@id/textview_email"
-        app:layout_constraintHeight_percent="0.010" />
-
-    <TextView
-        android:id="@+id/textview_email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/textbox_state_focused"
-        android:padding="15dp"
-        android:textColor="@color/general_theme_black"
-        android:textSize="14sp"
+        android:contentDescription="@string/bcak_content_description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.286"
-        app:layout_constraintWidth_percent="0.912"
-        tools:text="ttukttak@ttukttak.com" />
+        app:layout_constraintHorizontal_bias="0.0444"
+        app:layout_constraintVertical_bias="0.0199" />
 
+    <!-- 인증코드 텍스트 레이아웃 -->
+    <TextView
+        android:id="@+id/textview_send_certification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:text="@string/send_certification_code"
+        android:textColor="@color/general_theme_black"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_join_membership"
+        app:layout_constraintVertical_bias="0.1992"
+        app:layout_constraintHorizontal_bias="0.0972"/>
+
+    <!-- 이메일 입력 텍스트 레이아웃 -->
+    <!-- FixMe: 사용할 필요가 있는 코드인가 의문이어서 주석으로 처리  -->
+<!--    <View-->
+<!--        android:id="@+id/margin_1"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintStart_toStartOf="@id/textview_email"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/textview_email"-->
+<!--        app:layout_constraintHeight_percent="0.010" />-->
+
+    <!-- 이메일 입력 텍스트 레이아웃 -->
+    <!-- FixMe: 코드를 변경했지만 너무 많이 변경되서 이래도 되나 싶어서 체크할 필요가 있음  -->
+    <TextView
+        android:id="@+id/textview_email"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/textbox_state_focused"
+        android:textColor="@color/general_theme_black"
+        android:textSize="14sp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="19dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_send_certification"
+        app:layout_constraintVertical_bias="0.0146"
+        app:layout_constraintWidth_percent="0.9111"
+        app:layout_constraintHeight_percent="0.0636"
+        tools:text="@string/user_email" />
+
+    <!-- 인증코드 입력 레이아웃 -->
+    <!-- FixMe: 코드를 변경했지만 너무 많이 변경되서 이래도 되나 싶어서 체크할 필요가 있음  -->
     <EditText
         android:id="@+id/edittext_certification_code"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/selector_default_textbox"
         android:hint="@string/input_certification_code"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:inputType="number"
         android:maxLength="8"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
         android:textSize="14sp"
+        android:paddingHorizontal="19dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_email"
-        app:layout_constraintWidth_percent="0.91" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0153"
+        app:layout_constraintWidth_percent="0.911"
+        app:layout_constraintHeight_percent="0.0636"
+        android:autofillHints="@string/code_autofill"/>
 
+    <!-- 에러 메세지 텍스트 레이아웃 -->
+    <!-- FixMe: 코드를 변경했지만 너무 많이 변경되서 이래도 되나 싶어서 체크할 필요가 있음  -->
+    <!-- FixMe: 잘된건지는 모르겠지만 포인트를 잘잡으면 에러메세지 위치가 잘 잡히는듯  -->
     <TextView
         android:id="@+id/textview_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:textColor="@color/general_theme_red"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edittext_certification_code"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.0069"
+        app:layout_constraintHorizontal_bias="0.9250"
         tools:text="@string/run_out_code" />
 
+    <!-- 인증코드 해결 텍스트 레이아웃 -->
     <TextView
         android:id="@+id/textview_certification_code_problem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/certification_code_problem"
         android:textColor="@color/general_theme_red"
         android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
-        app:layout_constraintStart_toStartOf="@id/edittext_certification_code"
-        app:layout_constraintTop_toBottomOf="@id/edittext_certification_code" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_certification_code"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1149" />
 
+    <!-- 타이머 텍스트 레이아웃 -->
+    <!-- FixMe: 코드를 변경했지만 너무 많이 변경되서 이래도 되나 싶어서 체크할 필요가 있음  -->
     <TextView
         android:id="@+id/textview_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="19dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/timer"
         android:textColor="@color/general_theme_black"
         android:textSize="13sp"
+        android:paddingHorizontal="19dp"
         app:layout_constraintBottom_toBottomOf="@id/edittext_certification_code"
         app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
         app:layout_constraintTop_toTopOf="@id/edittext_certification_code" />
 
+    <!-- 인증 코드 확인 버튼 레이아웃 -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_certification"
         style="@style/DefaultButton"
-        android:layout_width="318dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8833"
+        app:layout_constraintHeight_percent="0.0742"
         android:enabled="false"
         android:text="@string/certification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_certification_code_problem"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/edittext_certification_code"
-        app:layout_constraintStart_toStartOf="@id/edittext_certification_code"
-        app:layout_constraintTop_toBottomOf="@id/textview_certification_code_problem" />
+        app:layout_constraintVertical_bias="0.4538" />
 
+    <!-- 팝업  레이아웃 -->
     <include
         android:id="@+id/layout_alert"
         layout="@layout/dialog_email"
         android:layout_width="0dp"
-        android:layout_height="260dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.3444"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

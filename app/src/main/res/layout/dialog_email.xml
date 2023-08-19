@@ -5,12 +5,12 @@
     android:layout_height="260dp"
     android:background="@drawable/box_alert">
 
+    <!-- 확인 메세지 텍스트  레이아웃 -->
     <TextView
         android:id="@+id/textview_reconfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="47dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:text="@string/certification_code_resend"
         android:textAlignment="center"
@@ -18,8 +18,12 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1808"
+        />
 
+    <!-- 이메일  텍스트  레이아웃 -->
     <TextView
         android:id="@+id/textview_reconfirm_email"
         android:layout_width="wrap_content"
@@ -32,17 +36,23 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_reconfirm" />
+        app:layout_constraintTop_toBottomOf="@id/textview_reconfirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1156"/>
 
+    <!-- 인증 코드 재전송 버튼 레이아웃 -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_resend"
         style="@style/DefaultButton"
-        android:layout_width="318dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="38dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8833"
+        app:layout_constraintHeight_percent="0.2154"
         android:text="@string/certification_resend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_reconfirm_email" />
+        app:layout_constraintTop_toBottomOf="@id/textview_reconfirm_email"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.2923"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

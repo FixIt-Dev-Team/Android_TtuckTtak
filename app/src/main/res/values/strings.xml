@@ -21,18 +21,48 @@
     <string name="logo_content_description">로고</string>
     <string name="email_autofill">이메일</string>
     <string name="password_autofill">비밀번호</string>
-
-
+    <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
     <string name="email">이메일 주소</string>
     <string name="pw">비밀번호</string>
     <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
+
+    <!-- join-1 화면 -->
+    <string name="join_membership">회원가입</string>
+    <string name="join_email">사용하실 이메일을 정해주세요</string>
+    <string name="overlap_email">이미 사용중인 계정입니다.</string>
+    <string name="certification_code">인증코드 보내기</string>
+    <!--    <string name="bcak_content_description">뒤로 가기</string>-->
+    <!--    <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>-->
+
+    <!-- join-2 화면 -->
+    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
+    <string name="input_certification_code">예) 12345678</string>
+    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
+    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
+    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+    <string name="user_email">ttukttak@ttukttak.com</string>
+    <string name="code_autofill">인증코드</string>
+    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
+    <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
+    <!--    <string name="join_membership">회원가입</string>-->
+    <!--    <string name="bcak_content_description">뒤로 가기</string> -->
+
+    <!-- join-3 화면 -->
+    <string name="user_nickname">예) 뚝딱이</string>
+    <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
+    <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
+    <string name="name_autofill">이메일</string>
+    <string name="password_rule">대문자 혹은 특수문자가 포함되게 작성해주세요</string>
+    <!--    <string name="join_membership">회원가입</string>-->
+    <!--    <string name="bcak_content_description">뒤로 가기</string> -->
+
+
     <string name="latest_result">최근 진단내역</string>
 
     <string name="user_name">김뚝딱이</string>
-    <string name="user_email">ttukttak@ttukttak.com</string>
 
-    <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
+
     <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
 
     <string name="alert_setting">알림 설정</string>
@@ -49,7 +79,7 @@
     <string name="event_push_alert">이벤트 및 기능추가 push 알림</string>
     <string name="night_time_alert">야간시간(20:00-24:00) Push 알림</string>
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
-    <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
+
     <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
     <string name="login_incorrect">이메일 혹은 비밀번호가 틀렸습니다!</string>
     <string name="not_account">계정이 존재하지 않습니다!</string>
@@ -98,14 +128,8 @@
     <string name="go_next">다음으로 넘어가기</string>
 
     <!-- -->
-    <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
-    <string name="overlap_email">이미 사용중인 계정입니다.</string>
-    <string name="certification_code">인증코드 보내기</string>
-    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
-    <string name="input_certification_code">예) 1234</string>
-    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
-    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
-    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+
+
     <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
     <string name="timer">00:00</string>
     <string name="certification">인증하기</string>
@@ -281,27 +305,22 @@
 제 25 조 (통지)
 ① 서비스가 회원에 대하여 통지를 하는 경우 서비스가 회사에 등록한 전자우편 주소로 할 수 있습니다.
 ② 서비스는 불특정다수 회원에게 통지를 해야 할 경우 공지 게시판을 통해 7일 이상 게시함으로써 개별 통지에 갈음할 수 있습니다.</p></string>
-    <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
+
     <string name="join_user_password">사용하실 비밀번호를 정해주세요</string>
     <string name="invalid_nickname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
-    <string name="password_rule">대문자 혹은 특수문자가 포함되게 작성해주세요</string>
+
     <string name="password_usable">사용가능한 비밀번호 입니다!</string>
     <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
     <string name="password_check">비밀번호 확인</string>
     <string name="join">가입하기</string>
     <string name="start">시작하기</string>
-    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
 
-    <string name="join_membership">회원가입</string>
-    <string name="join_email">사용하실 이메일을 정해주세요</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="blank_text">blank_text</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="insert_email">찾으실 이메일을 입력해주세요</string>
-
-
 
 
 </resources>

@@ -51,8 +51,10 @@
     <!-- TODO: 배경과 글자색 텍스트 대비비율로 인한 경고 표시 발생   -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_regular"
-        android:layout_width="318dp"
-        android:layout_height="56dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8833"
+        app:layout_constraintHeight_percent="0.07"
         android:background="@drawable/bg_rectangle_round"
         android:backgroundTint="@color/general_theme_white"
         android:fontFamily="@font/noto_sans_kr_bold"
@@ -70,8 +72,11 @@
     <!-- TODO: 마진을 안주고 작업을 해본 결과 폰 크기가 너무 작으면 버튼 끼리 접촉하는 문제 발생   -->
     <ImageButton
         android:id="@+id/imagebutton_google"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8833"
+        app:layout_constraintHeight_percent="0.07"
+        android:scaleType="fitXY"
         android:background="@android:color/transparent"
         android:src="@drawable/btn_google"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,8 +90,11 @@
     <!-- 카카오 버튼 레이아웃  -->
     <ImageButton
         android:id="@+id/imagebutton_kakao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8833"
+        app:layout_constraintHeight_percent="0.07"
+        android:scaleType="fitXY"
         android:background="@android:color/transparent"
         android:src="@drawable/btn_kakao"
         app:layout_constraintEnd_toEndOf="parent"
