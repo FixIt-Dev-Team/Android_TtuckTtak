@@ -5,20 +5,25 @@
     android:layout_height="match_parent"
     android:background="@color/main_theme_blue">
 
-    <!--  TODO: 추후 디자인 변경 예정. 디자인 변경 시 추후 작업  -->
+    <!--  TODO: 색상 대비 오류와 퍼센트로 크기 지정으로 인한 경고 오류 -->
 
+    <!-- 시작 버튼 레이아웃   -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_start"
-        android:layout_width="318dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.8833"
+        app:layout_constraintHeight_percent="0.07"
         android:background="@drawable/bg_rectangle_round"
         android:backgroundTint="@color/general_theme_white"
         android:text="@string/start"
         android:textColor="@color/main_theme_blue"
         android:textSize="18sp"
+        android:fontFamily="@font/noto_sans_kr_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.7338"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
