@@ -57,7 +57,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         resetTimer()
 
         // 인증코드 입력화면 초기화
-        edittextCertificationCode.run {
+        edittextCertificationCode.apply {
             text = null
             setBackgroundResource(R.drawable.textbox_state_normal)
         }
@@ -89,7 +89,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
         } else { // 올바르지 않은 인증코드인 경우
             edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
-            textviewErrorMessage.run {
+            textviewErrorMessage.apply {
                 visibility = View.VISIBLE
                 textviewErrorMessage.text = getString(R.string.error_code)
             }
@@ -121,7 +121,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
             runOnUiThread {
                 edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
-                textviewErrorMessage.run {
+                textviewErrorMessage.apply {
                     visibility = View.VISIBLE
                     text = getString(R.string.run_out_code)
                 }

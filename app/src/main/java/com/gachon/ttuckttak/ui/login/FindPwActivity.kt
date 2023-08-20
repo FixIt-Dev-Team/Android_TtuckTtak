@@ -72,7 +72,7 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
     private fun showNonExistingAccountError() {
         with(binding) {
             textviewErrorMessage.visibility = View.VISIBLE
-            edittextEmail.run {
+            edittextEmail.apply {
                 setBackgroundResource(R.drawable.textbox_state_error)
                 setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_red))
             }
@@ -85,7 +85,7 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
 
             if (hasFocus) {
                 textviewErrorMessage.visibility = View.INVISIBLE
-                edittextEmail.run {
+                edittextEmail.apply {
                     setBackgroundResource(R.drawable.textbox_state_focused)
                     setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_black))
                 }

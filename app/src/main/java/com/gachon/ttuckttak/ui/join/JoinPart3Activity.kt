@@ -27,8 +27,6 @@ import kotlinx.coroutines.withContext
 class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
 
     private var validNickname = false
-    private var validPasswordFormat = false
-    private var samePassword = false
     private val email: String by lazy { intent.getStringExtra("email")!! }
     private val userManager: UserManager by lazy { UserManager(this@JoinPart3Activity) }
     private val tokenManager: TokenManager by lazy { TokenManager(this@JoinPart3Activity) }
@@ -84,26 +82,26 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                 startNextActivity(StartActivity::class.java)
 
             } else {
-                showErrorMessage(code)
+                showErrorMessage(response)
             }
         }
     }
 
-    private suspend fun showErrorMessage(code: Int) = with(binding) {
+    private suspend fun showErrorMessage(response: BaseResponse<LoginRes>) = with(binding) {
         withContext(Dispatchers.Main) {
             closeLayout()
-            when (code) {
+            when (response.code) {
                 409 -> {
-                    edittextName.run {
+                    edittextName.apply {
                         setBackgroundResource(R.drawable.textbox_state_error)
                         setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
                     }
-                    textviewNicknameErrorMessage.run {
+                    textviewNicknameErrorMessage.apply {
                         visibility = View.VISIBLE
                         text = getString(R.string.overlap_nickname)
                     }
                 }
-                500 -> showToast(getString(R.string.unexpected_error_occurred))
+                else -> showToast(response.message)
             }
         }
     }
@@ -149,20 +147,25 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     // Todo: 로직 검증 필요
     //  해당 부분은 로직 변경 시 수정될 수 있어 리팩토링 진행 X
     private fun setFocusChangeListener() = with(binding) {
+
+        // Todo: 해당 부분 로직 고민
+        //  서버와 연결되지 않은 상태일 때 버튼이 계속 비활성 되어 있음. 사용자 측면에서 볼 때 동의 다 하고 나서 통신이 되지 않는게 낫지 않나 싶음
+        //  하여 해당 부분은 논의 후 수정
         edittextName.setOnFocusChangeListener { _, hasFocus ->
-            validNickname = false
             textviewNicknameErrorMessage.visibility = View.INVISIBLE
 
             if (hasFocus) {
-                edittextName.setBackgroundResource(R.drawable.textbox_state_focused)
-                edittextName.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_black))
-                textviewNicknameErrorMessage.visibility = View.INVISIBLE
+                edittextName.apply {
+                    setBackgroundResource(R.drawable.textbox_state_focused)
+                    setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_black))
+                }
 
             } else {
                 val nickname = edittextName.text.toString()
 
                 if (nickname.isEmpty()) {
                     edittextName.setBackgroundResource(R.drawable.textbox_state_normal)
+                    validNickname = false
 
                 } else if (RegexUtil.isValidNicknameFormat(nickname)) {
                     lifecycleScope.launch(Dispatchers.IO) {
@@ -174,18 +177,20 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                                 if (response.isSuccess && response.data!!.isAvailable) { // 사용 가능한 닉네임인 경우
                                     validNickname = true
                                     edittextName.setBackgroundResource(R.drawable.textbox_state_normal)
-                                    textviewNicknameErrorMessage.visibility = View.INVISIBLE
 
                                 } else { // 사용 가능하지 않은 닉네임인 경우
                                     validNickname = false
                                     edittextName.setBackgroundResource(R.drawable.textbox_state_error)
-                                    textviewNicknameErrorMessage.visibility = View.VISIBLE
-                                    textviewNicknameErrorMessage.text = getString(R.string.overlap_nickname)
+                                    textviewNicknameErrorMessage.apply {
+                                        visibility = View.VISIBLE
+                                        text = getString(R.string.overlap_nickname)
+                                    }
                                 }
                             }
 
                         } catch (e: Exception) {
-                            withContext(Dispatchers.Main) {
+                            runOnUiThread {
+                                validNickname = false
                                 Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
                                 showToast("닉네임 사용 가능 요청 실패")
                             }
@@ -193,9 +198,12 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                     }
 
                 } else {
+                    validNickname = false
                     edittextName.setBackgroundResource(R.drawable.textbox_state_error)
-                    textviewNicknameErrorMessage.visibility = View.VISIBLE
-                    textviewNicknameErrorMessage.text = getString(R.string.invalid_nickname)
+                    textviewNicknameErrorMessage.apply {
+                        visibility = View.VISIBLE
+                        text = getString(R.string.invalid_nickname)
+                    }
                 }
 
                 updateJoinButton()
@@ -203,35 +211,40 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         }
 
         edittextPassword.setOnFocusChangeListener { _, hasFocus ->
-            validPasswordFormat = false
-
             if (hasFocus) {
                 edittextPassword.setBackgroundResource(R.drawable.textbox_state_focused)
-                textviewPasswordMessage.text = getString(R.string.password_rule)
-                textviewPasswordMessage.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_black))
-                textviewPasswordMessage.gravity = Gravity.CENTER
+                textviewPasswordMessage.apply {
+                    text = getString(R.string.password_rule)
+                    setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_black))
+                    gravity = Gravity.CENTER
+                }
 
             } else {
                 val password = edittextPassword.text.toString()
 
                 if (password.isEmpty()) { // 비어있는 경우
                     edittextPassword.setBackgroundResource(R.drawable.textbox_state_normal)
-                    textviewPasswordMessage.text = getString(R.string.password_rule)
-                    textviewPasswordMessage.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_black))
-                    textviewPasswordMessage.gravity = Gravity.CENTER
+                    textviewPasswordMessage.apply {
+                        text = getString(R.string.password_rule)
+                        setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_black))
+                        gravity = Gravity.CENTER
+                    }
 
                 } else if (RegexUtil.isValidPwFormat(password)) { // 비밀번호 형식에 맞는 경우
-                    validPasswordFormat = true
                     edittextPassword.setBackgroundResource(R.drawable.textbox_state_normal)
-                    textviewPasswordMessage.text = getString(R.string.password_usable)
-                    textviewPasswordMessage.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.main_theme_subcyan))
-                    textviewPasswordMessage.gravity = Gravity.END
+                    textviewPasswordMessage.apply {
+                        text = getString(R.string.password_usable)
+                        setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.main_theme_subcyan))
+                        gravity = Gravity.END
+                    }
 
                 } else { // 비밀번호 형식에 맞지 않는 경우
                     edittextPassword.setBackgroundResource(R.drawable.textbox_state_error)
-                    textviewPasswordMessage.text = getString(R.string.invalid_pw_format)
-                    textviewPasswordMessage.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
-                    textviewPasswordMessage.gravity = Gravity.END
+                    textviewPasswordMessage.apply {
+                        text = getString(R.string.invalid_pw_format)
+                        setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
+                        gravity = Gravity.END
+                    }
                 }
 
                 updateJoinButton()
@@ -239,7 +252,6 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
         }
 
         edittextPasswordCheck.setOnFocusChangeListener { _, hasFocus ->
-            samePassword = false
             textviewCheckPasswordMessage.visibility = View.INVISIBLE
 
             if (hasFocus) {
@@ -249,11 +261,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                 val pw = edittextPassword.text.toString()
                 val pwCheck = edittextPasswordCheck.text.toString()
 
-                if (pwCheck.isEmpty()) { // 비어있는 경우
-                    edittextPasswordCheck.setBackgroundResource(R.drawable.textbox_state_normal)
-
-                } else if (pw == pwCheck) { // 입력한 pw와 동일한 경우
-                    samePassword = true
+                if (pwCheck.isEmpty() || pw == pwCheck) { // 비어있는 경우, 입력한 pw와 동일한 경우
                     edittextPasswordCheck.setBackgroundResource(R.drawable.textbox_state_normal)
 
                 } else { // 입력한 pw와 동일하지 않는 경우
@@ -267,7 +275,10 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     }
 
     private fun updateJoinButton() = with(binding) {
-        buttonJoin.isEnabled = (validNickname && validPasswordFormat && samePassword)
+        val password = edittextPassword.text.toString()
+        val passwordCheck = edittextPasswordCheck.text.toString()
+
+        buttonJoin.isEnabled = (validNickname && RegexUtil.isValidPwFormat(password) && (password == passwordCheck))
     }
 
     private fun setCheckedChangeListener() = with(binding.layoutAlert) {

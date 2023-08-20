@@ -159,6 +159,7 @@
         android:layout_width="318dp"
         android:layout_height="wrap_content"
         android:text="@string/join"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/edittext_password_check"
         app:layout_constraintStart_toStartOf="@id/edittext_password_check"

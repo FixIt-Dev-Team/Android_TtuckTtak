@@ -109,7 +109,7 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
     }
 
     private fun updateFocusState() = with(binding) {
-        edittextEmail.run {
+        edittextEmail.apply {
             setBackgroundResource(R.drawable.textbox_state_focused)
             setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_black))
         }
@@ -119,7 +119,7 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
 
     // 정상 상태 UI 갱신
     private fun updateNormalState() = with(binding) {
-        edittextEmail.run {
+        edittextEmail.apply {
             setBackgroundResource(R.drawable.textbox_state_normal)
             setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_black))
         }
@@ -128,11 +128,11 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
 
     // 에러 상태 UI 갱신
     private fun updateErrorState(errorMessage: String) = with(binding) {
-        edittextEmail.run {
+        edittextEmail.apply {
             setBackgroundResource(R.drawable.textbox_state_error)
             setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_red))
         }
-        textviewErrorMessage.run {
+        textviewErrorMessage.apply {
             text = errorMessage
             visibility = View.VISIBLE
         }
