@@ -28,59 +28,50 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
     override fun initAfterBinding() = with(binding) {
-        // 인가코드 설정
         authCode = intent.getStringExtra("code")!!
 
-        // 이메일 설정
-        textviewEmail.text = email // textviewEmail 값을 위의 email 값으로 변경하기
-        layoutAlert.textviewReconfirmEmail.text = email
-
-        // 기능 설정
-        startTimer() // timer 시작
+        setUpEmailText()
+        startTimer()
         setClickListener()
         setTouchListener()
         setTextChangeListener()
         setFocusChangeListener()
     }
 
-    private fun setClickListener() = with(binding) {
-        // 뒤로가기 버튼을 눌렀을 경우
-        buttonBack.setOnClickListener {
-            finish()
-        }
-
-        // 인증코드에 문제가 있나요? 텍스트를 눌렀을 경우
-        textviewCertificationCodeProblem.setOnClickListener {
-            showLayout()
-        }
-
-        // 인증번호 재전송 버튼을 눌렀을 경우
-        layoutAlert.buttonResend.setOnClickListener {
-            resendAuthCode()
-            resetTimer()
-
-            // 인증코드 입력화면 초기화
-            edittextCertificationCode.text = null // 입력한 인증코드 지우기
-            edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_normal)
-            textviewErrorMessage.visibility = View.INVISIBLE
-
-            closeLayout()
-        }
-
-        // 인증하기 버튼을 클릭한 경우
-        buttonCertification.setOnClickListener {
-            handleAuthCodeVerification()
-        }
+    // 이메일 텍스트 설정
+    private fun setUpEmailText() = with(binding) {
+        textviewEmail.text = email
+        layoutAlert.textviewReconfirmEmail.text = email
     }
+
+    private fun setClickListener() = with(binding) {
+        buttonBack.setOnClickListener { finish() }
+        textviewCertificationCodeProblem.setOnClickListener { showLayout() }
+        layoutAlert.buttonResend.setOnClickListener { handleResendButtonClick() }
+        buttonCertification.setOnClickListener { handleAuthCodeVerification() }
+    }
+
+    // 인증 코드 재전송 버튼 처리
+    private fun handleResendButtonClick() = with(binding) {
+        resendAuthCode()
+        resetTimer()
+
+        // 인증코드 입력화면 초기화
+        edittextCertificationCode.run {
+            text = null
+            setBackgroundResource(R.drawable.textbox_state_normal)
+        }
+        textviewErrorMessage.visibility = View.INVISIBLE
+
+        closeLayout()
+    }
+
 
     private fun resendAuthCode() = lifecycleScope.launch(Dispatchers.IO) {
         try {
-            // 서버에 이메일 인증코드 전송 요청
             val response = TtukttakServer.emailConfirm(email)
-
-            // null이 아닌 인증 코드를 새로 발급 받았을 때 update
-            response.data?.code?.let { authCode = it }
-            Log.i("code", authCode)
+            response.data?.code?.let { authCode = it } // null이 아닌 인증 코드를 새로 발급 받았을 때 update
+            Log.i("response", response.toString())
 
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
@@ -91,17 +82,17 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     }
 
     private fun handleAuthCodeVerification() = with(binding) {
-        if (edittextCertificationCode.text.toString() == authCode) { // 올바른 인증코드인 경우
-            val intent = Intent(this@JoinPart2Activity, JoinPart3Activity::class.java).apply {
+        if (edittextCertificationCode.text.toString() == authCode) { // 올바른 인증코드인 경우 email과 함께 다음 화면 실행
+            Intent(this@JoinPart2Activity, JoinPart3Activity::class.java).apply {
                 putExtra("email", email)
-            }
-
-            startActivity(intent)
+            }.also { startActivity(it) }
 
         } else { // 올바르지 않은 인증코드인 경우
             edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
-            textviewErrorMessage.visibility = View.VISIBLE
-            textviewErrorMessage.text = getString(R.string.error_code)
+            textviewErrorMessage.run {
+                visibility = View.VISIBLE
+                textviewErrorMessage.text = getString(R.string.error_code)
+            }
         }
     }
 
@@ -121,9 +112,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     }
 
     private fun updateTimerText() {
-        runOnUiThread {
-            binding.textviewTimer.text = "${time / 60} : ${time % 60}"
-        }
+        runOnUiThread { binding.textviewTimer.text = "${time / 60} : ${time % 60}" }
     }
 
     private fun handleTimerExpiration() = with(binding) {
@@ -132,25 +121,31 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
             runOnUiThread {
                 edittextCertificationCode.setBackgroundResource(R.drawable.textbox_state_error)
-                textviewErrorMessage.visibility = View.VISIBLE
-                textviewErrorMessage.text = getString(R.string.run_out_code)
+                textviewErrorMessage.run {
+                    visibility = View.VISIBLE
+                    text = getString(R.string.run_out_code)
+                }
             }
+
             timerTask.cancel()
         }
     }
 
     private fun setTouchListener() = with(binding) {
-        // layout alert 화면 외를 클릭 했을 때 layout alert 화면 내리기
-        layoutRoot.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                closeLayout()
-                return@setOnTouchListener true
-            }
-            false
-        }
+        // layout 밖을 클릭 했을 때 layout 내리기
+        layoutRoot.setOnTouchListener { _, event -> closeLayoutOnTouchOutside(event) }
 
-        // layout alert 화면은 클릭 되어도 그대로
+        // layout 내부를 클릭 했을 땐 그대로
         layoutAlert.root.setOnTouchListener { _, _ -> true }
+    }
+
+    // 레이아웃 밖을 터치했을 때 레이아웃 닫기
+    private fun closeLayoutOnTouchOutside(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            closeLayout()
+            return true
+        }
+        return false
     }
 
     // layout alert 화면 보여줄 때
@@ -177,9 +172,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
     private fun setTextChangeListener() = with(binding) {
         edittextCertificationCode.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
             override fun afterTextChanged(p0: Editable?) {
                 buttonCertification.isEnabled = (p0.toString().length == 8)
             }

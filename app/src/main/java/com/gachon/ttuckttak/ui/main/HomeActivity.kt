@@ -1,6 +1,5 @@
 package com.gachon.ttuckttak.ui.main
 
-import android.content.Intent
 import android.util.Log
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.database.AppDatabase
@@ -14,17 +13,9 @@ import kotlinx.coroutines.launch
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate) {
     private val database by lazy { AppDatabase.getInstance(this@HomeActivity)!! }
 
-    override fun initAfterBinding() = with(binding) {
+    override fun initAfterBinding() {
         setUi()
-
-        imagebuttonStart.setOnClickListener {
-            val intent = Intent(this@HomeActivity, ProblemCategoryActivity::class.java)
-            startActivity(intent)
-        }
-
-        buttonSetting.setOnClickListener {
-            startNextActivity(SettingsActivity::class.java)
-        }
+        setClickListener()
     }
 
     private fun setUi() = with(binding) {
@@ -44,6 +35,16 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                     textviewLatestResultTime.text = diagnosis.date
                 }
             }
+        }
+    }
+
+    private fun setClickListener() = with(binding) {
+        imagebuttonStart.setOnClickListener {
+            startNextActivity(ProblemCategoryActivity::class.java)
+        }
+
+        buttonSetting.setOnClickListener {
+            startNextActivity(SettingsActivity::class.java)
         }
     }
 }

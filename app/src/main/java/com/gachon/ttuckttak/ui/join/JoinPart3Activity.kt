@@ -8,9 +8,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
+import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
 import com.gachon.ttuckttak.ui.login.LandingActivity
@@ -22,8 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class JoinPart3Activity :
-    BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
+class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
 
     private var validNickname = false
     private var validPasswordFormat = false
@@ -41,69 +42,69 @@ class JoinPart3Activity :
     }
 
     private fun setClickListener() = with(binding) {
-        // 뒤로가기 버튼을 눌렀을 경우
-        imagebuttonBack.setOnClickListener {
-            finish()
-        }
-
-        // 가입하기 버튼을 클릭한 경우
-        buttonJoin.setOnClickListener {
-            showLayout()
-        }
+        imagebuttonBack.setOnClickListener { finish() }
+        buttonJoin.setOnClickListener { showLayout() }
 
         // 시작하기 버튼을 클릭한 경우
-        layoutAlert.buttonStart.setOnClickListener {
-            val nickname = edittextName.text.toString()
-            val password = edittextPassword.text.toString()
-            val adProvision = layoutAlert.checkboxPromoteTerms.isChecked
+        layoutAlert.buttonStart.setOnClickListener { handleStartButtonClick() }
+        layoutAlert.textviewUseTerms.setOnClickListener { startNextActivity(TermsUseActivity::class.java) }
+        layoutAlert.textviewPromoteTerms.setOnClickListener { startNextActivity(TermsPromoteActivity::class.java) }
+    }
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                try {
-                    // 서버에 회원가입 요청
-                    val response = TtukttakServer.signUp(SignUpReq(email, password, nickname, adProvision))
-                    Log.i("response", response.toString())
+    private fun handleStartButtonClick() = with(binding) {
+        val nickname = edittextName.text.toString()
+        val password = edittextPassword.text.toString()
+        val adProvision = layoutAlert.checkboxPromoteTerms.isChecked
 
-                    with(response) {
-                        if (isSuccess) { // 정상적으로 회원가입된 경우
-                            userManager.saveUserIdx(response.data!!.userIdx)
-                            tokenManager.saveToken(response.data.tokenInfo)
+        performSignUp(nickname, password, adProvision)
+    }
 
-                            startNextActivity(StartActivity::class.java)
+    private fun performSignUp(nickname: String, password: String, adProvision: Boolean) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = TtukttakServer.signUp(SignUpReq(email, password, nickname, adProvision))
+                Log.i("response", response.toString())
 
-                        } else { // 회원가입되지 않은 경우
-                            lifecycleScope.launch(Dispatchers.Main) {
-                                closeLayout()
-                                when (code) {
-                                    409 -> { // 이미 닉네임이 존재하는 경우
-                                        edittextName.setBackgroundResource(R.drawable.textbox_state_error)
-                                        edittextName.setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
-                                        textviewNicknameErrorMessage.visibility = View.VISIBLE
-                                        textviewNicknameErrorMessage.text = getString(R.string.overlap_nickname)
-                                    }
+                handleSignUpResponse(response)
 
-                                    500 -> showToast(getString(R.string.unexpected_error_occurred)) // 예상치 못한 에러
-                                }
-                            }
-                        }
-                    }
-
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
-                        showToast("회원가입 요청 실패")
-                    }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                    showToast("회원가입 요청 실패")
                 }
             }
         }
+    }
 
-        // 서비스 이용 약관를 클릭한 경우
-        layoutAlert.textviewUseTerms.setOnClickListener {
-            startNextActivity(TermsUseActivity::class.java)
+    private suspend fun handleSignUpResponse(response: BaseResponse<LoginRes>) {
+        with(response) {
+            if (isSuccess) {
+                userManager.saveUserIdx(response.data!!.userIdx)
+                tokenManager.saveToken(response.data.tokenInfo)
+                startNextActivity(StartActivity::class.java)
+
+            } else {
+                showErrorMessage(code)
+            }
         }
+    }
 
-
-        layoutAlert.textviewPromoteTerms.setOnClickListener {
-            startNextActivity(TermsPromoteActivity::class.java)
+    private suspend fun showErrorMessage(code: Int) = with(binding) {
+        withContext(Dispatchers.Main) {
+            closeLayout()
+            when (code) {
+                409 -> {
+                    edittextName.run {
+                        setBackgroundResource(R.drawable.textbox_state_error)
+                        setTextColor(ContextCompat.getColor(this@JoinPart3Activity, R.color.general_theme_red))
+                    }
+                    textviewNicknameErrorMessage.run {
+                        visibility = View.VISIBLE
+                        text = getString(R.string.overlap_nickname)
+                    }
+                }
+                500 -> showToast(getString(R.string.unexpected_error_occurred))
+            }
         }
     }
 
@@ -129,20 +130,24 @@ class JoinPart3Activity :
     }
 
     private fun setTouchListener() = with(binding) {
-        // layout alert 화면 외를 클릭 했을 때 layout alert 화면 내리기
-        layoutRoot.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                closeLayout()
-                return@setOnTouchListener true
-            }
-            false
-        }
+        // layout 밖을 클릭 했을 때 layout 내리기
+        layoutRoot.setOnTouchListener { _, event -> closeLayoutOnTouchOutside(event) }
 
-        // layout alert 화면은 클릭 되어도 그대로
+        // layout 내부를 클릭 했을 땐 그대로
         layoutAlert.root.setOnTouchListener { _, _ -> true }
     }
 
+    // 레이아웃 밖을 터치했을 때 레이아웃 닫기
+    private fun closeLayoutOnTouchOutside(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            closeLayout()
+            return true
+        }
+        return false
+    }
+
     // Todo: 로직 검증 필요
+    //  해당 부분은 로직 변경 시 수정될 수 있어 리팩토링 진행 X
     private fun setFocusChangeListener() = with(binding) {
         edittextName.setOnFocusChangeListener { _, hasFocus ->
             validNickname = false
@@ -266,29 +271,33 @@ class JoinPart3Activity :
     }
 
     private fun setCheckedChangeListener() = with(binding.layoutAlert) {
+        setUpAgreeTermsCheckedChangeListener()
+        setUpUseTermsCheckedChangeListener()
+        setUpPromoteTermsCheckedChangeListener()
+    }
+
+    private fun setUpAgreeTermsCheckedChangeListener() = with(binding.layoutAlert) {
         checkboxAgreeTerms.setOnCheckedChangeListener { _, isChecked ->
             checkboxUseTerms.isChecked = isChecked
             checkboxPromoteTerms.isChecked = isChecked
         }
+    }
 
+    private fun setUpUseTermsCheckedChangeListener() = with(binding.layoutAlert) {
         checkboxUseTerms.setOnCheckedChangeListener { _, isChecked ->
             buttonStart.isEnabled = isChecked
             updateAllCheckStatus()
         }
+    }
 
-        checkboxPromoteTerms.setOnCheckedChangeListener { _, _ ->
-            updateAllCheckStatus()
-        }
-
+    private fun setUpPromoteTermsCheckedChangeListener() = with(binding.layoutAlert) {
+        checkboxPromoteTerms.setOnCheckedChangeListener { _, _ -> updateAllCheckStatus() }
     }
 
     private fun updateAllCheckStatus() = with(binding.layoutAlert) {
         checkboxAgreeTerms.setOnCheckedChangeListener(null)
         checkboxAgreeTerms.isChecked = checkboxUseTerms.isChecked && checkboxPromoteTerms.isChecked
 
-        checkboxAgreeTerms.setOnCheckedChangeListener { _, isChecked ->
-            checkboxUseTerms.isChecked = isChecked
-            checkboxPromoteTerms.isChecked = isChecked
-        }
+        setUpAgreeTermsCheckedChangeListener()
     }
 }
