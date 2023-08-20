@@ -1,6 +1,8 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -19,6 +21,7 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
     override fun initAfterBinding() {
         setClickListener()
         setFocusChangeListener()
+        setTextChangeListener()
     }
 
     private fun setClickListener() = with(binding) {
@@ -78,19 +81,29 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
     }
 
     private fun setFocusChangeListener() = with(binding) {
-        // 포커스가 변경될 때마다 이메일 유효성 검사 및 UI 업데이트 수행
-        // Todo: text가 변경될 때마다 이메일 유효성 검사 및 UI 업데이트 수행되도록 변경
+        // 포커스가 변경될 때마다 UI 업데이트 수행
         edittextEmail.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) updateFocusState()
             else validateEmailAndSetUi(email = edittextEmail.text.toString())
         }
     }
 
+    private fun setTextChangeListener() = with(binding) {
+        edittextEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                val email = edittextEmail.text.toString()
+                buttonSend.isEnabled = email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+            }
+        })
+    }
+
     // 이메일 상태를 검증하고 UI 상태를 설정하는 함수
     private fun validateEmailAndSetUi(email: String) {
         when {
-            email.isEmpty() -> updateNormalState(false) // 비어있는 경우
-            email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches() -> updateNormalState(true) // 비어있지 않고 이메일 형식이 맞는 경우
+            email.isEmpty() -> updateNormalState() // 비어있는 경우
+            email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches() -> updateNormalState() // 비어있지 않고 이메일 형식이 맞는 경우
             else -> updateErrorState(getString(R.string.invalid_email_format))
         }
     }
@@ -105,13 +118,12 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
     }
 
     // 정상 상태 UI 갱신
-    private fun updateNormalState(enable: Boolean) = with(binding) {
+    private fun updateNormalState() = with(binding) {
         edittextEmail.run {
             setBackgroundResource(R.drawable.textbox_state_normal)
             setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_black))
         }
         textviewErrorMessage.visibility = View.INVISIBLE
-        buttonSend.isEnabled = enable
     }
 
     // 에러 상태 UI 갱신
