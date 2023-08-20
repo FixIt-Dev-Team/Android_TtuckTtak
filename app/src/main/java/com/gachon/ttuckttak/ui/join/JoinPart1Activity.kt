@@ -31,16 +31,25 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
         buttonSend.setOnClickListener { sendEmailConfirmationRequest() }
     }
 
-    // 이메일 인증 코드 전송 요청
+    // 이메일 인증 코드 전송 요청. 해당 API에서만 indeterminate progressbar를 사용한 이유는 외부 API 사용으로 시간이 오래걸리기 때문
     private fun sendEmailConfirmationRequest() {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val email = binding.edittextEmail.text.toString()
-                val response = TtukttakServer.emailConfirm(email) // 서버에 이메일 인증코드 전송 요청
+                runOnUiThread {
+                    binding.progressbar.visibility = View.VISIBLE // 서버에 이메일 인증코드 전송 요청하는 동안 progress bar 보이게
+                    binding.buttonSend.isClickable = false // 요청하는 동안 재요청 하지 못하게 클릭 막기
+                }
+
+                val response = TtukttakServer.emailConfirm(email = binding.edittextEmail.text.toString()) // 서버에 이메일 인증코드 전송 요청
                 Log.i("response", response.toString())
 
+                runOnUiThread {
+                    binding.progressbar.visibility = View.INVISIBLE // 인증코드가 온 경우 progress bar 가리게
+                    binding.buttonSend.isClickable = true
+                }
+
                 with(response) {
-                    if (isSuccess) moveToJoinPart2Activity(email, data?.code)
+                    if (isSuccess) moveToJoinPart2Activity(data?.code)
                     else handleErrorResponse(code, message)
                 }
 
@@ -61,9 +70,9 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
     }
 
     // 이메일과 인증 코드를 가지고 JoinPart2Activity로 이동
-    private fun moveToJoinPart2Activity(email: String, code: String?) {
+    private fun moveToJoinPart2Activity(code: String?) {
         Intent(this, JoinPart2Activity::class.java).apply {
-            putExtra("email", email)
+            putExtra("email", binding.edittextEmail.text.toString())
             code?.let { putExtra("code", it) } // 인증코드 값이 있는 경우 같이 전달 (null이 아닌 경우 전달)
         }.also { startActivity(it) }
     }
