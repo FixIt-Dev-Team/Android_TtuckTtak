@@ -7,6 +7,12 @@
     <string name="not_account">계정이 존재하지 않습니다!</string>
     <string name="certification_code">인증코드 보내기</string>
 
+    <!-- join-1 화면 -->
+    <string name="join_membership">회원가입</string>
+    <string name="join_email">사용하실 이메일을 정해주세요</string>
+    <string name="overlap_email">이미 사용중인 계정입니다.</string>
+    <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다.</string>
+
     <!-- 랜딩 페이지 화면    -->
     <string name="text_welcome1"><font color='#1DB9DB'>뚝딱</font>하실\n준비되셨나요?</string>
     <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
@@ -28,15 +34,8 @@
     <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
     <string name="email">이메일 주소</string>
     <string name="pw">비밀번호</string>
-    <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
 
-    <!-- join-1 화면 -->
-    <string name="join_membership">회원가입</string>
-    <string name="join_email">사용하실 이메일을 정해주세요</string>
-    <string name="overlap_email">이미 사용중인 계정입니다.</string>
-    <!--    <string name="bcak_content_description">뒤로 가기</string>-->
-    <!--    <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>-->
 
     <!-- join-2 화면 -->
     <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
@@ -70,8 +69,6 @@
 
 
     <string name="user_name">김뚝딱이</string>
-
-
 
 
     <string name="alert_setting">알림 설정</string>
