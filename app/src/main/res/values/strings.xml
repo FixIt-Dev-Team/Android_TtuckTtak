@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Android_TtuckTtak</string>
 
+    <!-- 계정 및 비밀번호 찾기 화면-->
+    <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
+    <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
+    <string name="not_account">계정이 존재하지 않습니다!</string>
+    <string name="certification_code">인증코드 보내기</string>
+
     <!-- 랜딩 페이지 화면    -->
     <string name="text_welcome1"><font color='#1DB9DB'>뚝딱</font>하실\n준비되셨나요?</string>
     <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
@@ -10,8 +16,6 @@
 
     <string name="sign_up">가입하기</string>
     <string name="text_welcome3"><u>이미 계정이 있으신가요?</u></string>
-    <string name="text_start">탭해서 진단을 시작해보세요!</string>
-
     <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
 
     <!--  로그인 화면  -->
@@ -31,7 +35,6 @@
     <string name="join_membership">회원가입</string>
     <string name="join_email">사용하실 이메일을 정해주세요</string>
     <string name="overlap_email">이미 사용중인 계정입니다.</string>
-    <string name="certification_code">인증코드 보내기</string>
     <!--    <string name="bcak_content_description">뒤로 가기</string>-->
     <!--    <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>-->
 
@@ -57,13 +60,19 @@
     <!--    <string name="join_membership">회원가입</string>-->
     <!--    <string name="bcak_content_description">뒤로 가기</string> -->
 
-
+    <!-- Home 화면 -->
+    <string name="text_start">탭해서 진단을 시작해보세요!</string>
+    <string name="home_content_description">홈 화면 버튼</string>
     <string name="latest_result">최근 진단내역</string>
+    <string name="latest_content_description">최근 진단 내역 이동 버튼</string>
+    <string name="setting_content_description">세팅 화면  이동 버튼</string>
+    <string name="up_content_description">위로 올리기 버튼</string>
+
 
     <string name="user_name">김뚝딱이</string>
 
 
-    <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
+
 
     <string name="alert_setting">알림 설정</string>
     <string name="consumer_center">고객 센터</string>
@@ -80,9 +89,7 @@
     <string name="night_time_alert">야간시간(20:00-24:00) Push 알림</string>
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
 
-    <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
     <string name="login_incorrect">이메일 혹은 비밀번호가 틀렸습니다!</string>
-    <string name="not_account">계정이 존재하지 않습니다!</string>
     <string name="btn_login">로그인 하기</string>
     <string name="find_pw">계정 찾기</string>
     <string name="logout"><u>로그아웃</u></string>

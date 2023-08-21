@@ -9,12 +9,12 @@
     <!-- 뷰 프로그래스 바 레이아웃 -->
     <View
         android:layout_width="0dp"
-        android:layout_height="5dp"
+        android:layout_height="0dp"
         android:background="@color/main_theme_blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.33"
-        app:layout_constraintHeight_percent="0.066"/>
+        app:layout_constraintHeight_percent="0.0066"/>
 
     <!-- 회원가입 텍스트 레이아웃 -->
     <TextView

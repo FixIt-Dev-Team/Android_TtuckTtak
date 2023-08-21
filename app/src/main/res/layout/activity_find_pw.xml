@@ -6,26 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.FindPwActivity">
 
+    <!-- 뷰 프로그래스 바 -->
     <View
         android:layout_width="0dp"
-        android:layout_height="5dp"
+        android:layout_height="0dp"
         android:background="@color/main_theme_blue"
+        app:layout_constraintHeight_percent="0.0066"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintWidth_percent="0.33" />
 
+    <!-- 뒤로 가기 버튼 -->
+    <!-- TODO: 이 방식이 같은 선상에 있을 때는 더 깔끔하고 좋은 듯 / 기존 것 변경 할 필요가 있음-->
     <ImageButton
         android:id="@+id/imagebutton_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
+        android:contentDescription="@string/bcak_content_description"
         android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@id/textview_find_id_or_pw"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintHorizontal_bias="0.0444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textview_find_id_or_pw" />
 
+    <!-- 계정 및 비밀번호 찾기 제목 텍스트 -->
     <TextView
         android:id="@+id/textview_find_id_or_pw"
         android:layout_width="wrap_content"
@@ -39,8 +45,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        app:layout_constraintVertical_bias="0.0318" />
 
+    <!-- 이메일 입력 안내 텍스트 -->
     <TextView
         android:id="@+id/textview_insert_email"
         android:layout_width="wrap_content"
@@ -52,52 +59,61 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintHorizontal_bias="0.0972"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintTop_toBottomOf="@id/textview_find_id_or_pw"
+        app:layout_constraintVertical_bias="0.2782" />
 
+    <!-- 이메일 입력 에딧 텍스트 -->
     <EditText
         android:id="@+id/edittext_email"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autofillHints="@string/email_autofill"
         android:background="@drawable/selector_default_textbox"
         android:hint="@string/email_reconfirm2"
         android:inputType="textEmailAddress"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
+        android:paddingHorizontal="19dp"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_insert_email"
-        app:layout_constraintWidth_percent="0.91" />
+        app:layout_constraintVertical_bias="0.0163"
+        app:layout_constraintWidth_percent="0.9111" />
 
+    <!-- 에러 메세지 텍스트 -->
+    <!-- TODO: 에러 메세지는 에딧 텍스트 박스 제일 끝쪽에 맞추두는 게 어떨지 -->
     <TextView
         android:id="@+id/textview_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
         android:text="@string/not_account"
         android:textColor="@color/general_theme_red"
         android:textSize="11sp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/edittext_email"
-        app:layout_constraintTop_toBottomOf="@id/edittext_email" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_email"
+        app:layout_constraintVertical_bias="0.0069" />
 
+    <!-- 계정 찾기 버튼 -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_send"
         style="@style/DefaultButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="180sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:enabled="false"
         android:text="@string/certification_code"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edittext_email" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_email"
+        app:layout_constraintVertical_bias="0.5379"
+        app:layout_constraintWidth_percent="0.8833" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
