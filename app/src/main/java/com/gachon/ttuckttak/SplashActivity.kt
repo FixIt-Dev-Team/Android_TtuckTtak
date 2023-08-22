@@ -14,16 +14,18 @@ import com.gachon.ttuckttak.data.remote.dto.auth.RefreshReq
 
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     val SPLASH_VIEW_TIME: Long = 1000
-    private val userManager: UserManager by lazy { UserManager(this@SplashActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SplashActivity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

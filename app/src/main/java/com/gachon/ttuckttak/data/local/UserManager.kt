@@ -3,10 +3,10 @@ package com.gachon.ttuckttak.data.local
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import okhttp3.HttpUrl.Companion.toHttpUrl
-import retrofit2.http.Url
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class UserManager(context: Context) {
+class UserManager @Inject constructor(@ApplicationContext context: Context) {
     private val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
     private val masterKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
     private val sharedPreferences = EncryptedSharedPreferences.create(
