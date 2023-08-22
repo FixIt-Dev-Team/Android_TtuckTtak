@@ -35,6 +35,7 @@
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="30dp"
         android:fontFamily="@font/noto_sans_kr_medium"
         android:includeFontPadding="false"
         android:textAlignment="center"
@@ -54,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagebutton_back"
         app:layout_constraintVertical_bias="0.6">
 
         <!-- YES 버튼 -->
@@ -75,7 +76,7 @@
                 app:layout_constraintBottom_toTopOf="@id/true_divider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4">
+                app:layout_constraintVertical_bias="0.55">
 
                 <ImageView
                     android:id="@+id/img_yes"
@@ -126,7 +127,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.6" />
+                app:layout_constraintVertical_bias="0.55" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -198,7 +199,7 @@
                 app:layout_constraintBottom_toTopOf="@id/false_divider"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.4">
+                app:layout_constraintVertical_bias="0.55">
 
                 <ImageView
                     android:id="@+id/img_no"
@@ -232,13 +233,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:includeFontPadding="false"
-                android:textColor="@color/main_theme_blue"
+                android:textColor="@color/general_theme_red"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@id/false_divider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/frame_no"
-                tools:text="AB_true_subtitle" />
+                tools:text="AB_false_subtitle" />
 
             <View
                 android:id="@+id/false_divider"
@@ -249,7 +250,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.6" />
+                app:layout_constraintVertical_bias="0.55" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

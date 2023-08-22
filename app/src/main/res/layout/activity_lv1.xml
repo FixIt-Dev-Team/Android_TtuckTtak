@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="680dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/bg_slider"
     android:backgroundTint="@color/system_theme_lightgray">
 
@@ -25,23 +25,24 @@
         android:layout_marginTop="27dp"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
-        android:text="level_A_1_title"
+        tools:text="level_A_1_title"
         android:textColor="@color/general_theme_black"
-        android:textSize="14dp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageview_bar" />
 
-    <ImageView
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/ic_exclamation"
+        android:layout_marginEnd="15dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_exclamation"
         app:layout_constraintBottom_toBottomOf="@id/textview_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/textview_title" />
 
-    <View
-        android:id="@+id/view"
+    <ImageView
+        android:id="@+id/image_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="30dp"
@@ -52,42 +53,31 @@
         app:layout_constraintTop_toBottomOf="@id/textview_title" />
 
     <TextView
-        android:id="@+id/textview_level_a1_title"
+        android:id="@+id/textview_level_a_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
-        android:text="level_A_1_title"
+        tools:text="level_A_1_title"
         android:textColor="@color/general_theme_black"
-        android:textSize="14dp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view" />
+        app:layout_constraintTop_toBottomOf="@id/image_content" />
 
-    <TextView
-        android:id="@+id/textview_level_a1_text1"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/noto_sans_kr_regular"
-        android:textColor="@color/system_theme_gray"
-        android:textSize="12dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_level_a1_title"
-        tools:text="level_A_1_text(1)" />
-
-    <TextView
-        android:id="@+id/textview_level_a1_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_regular"
-        android:textColor="@color/system_theme_gray"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="@id/textview_level_a1_text1"
-        app:layout_constraintTop_toBottomOf="@id/textview_level_a1_text1"
-        tools:text="level_A_1_text(2)" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_level_a_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
