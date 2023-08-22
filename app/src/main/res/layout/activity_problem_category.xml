@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/main_theme_blue">
 
+    <!-- FIXME : 기본적으로 잡혀있는 방식이 복잡하여 이야기하면서 변경할 필요가 있음-->
     <ImageButton
         android:id="@+id/imagebutton_back"
         android:layout_width="42dp"
