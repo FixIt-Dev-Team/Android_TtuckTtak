@@ -5,11 +5,16 @@ import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
+import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
+import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
+import okhttp3.MultipartBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Query
 
 interface MemberService {
@@ -34,4 +39,12 @@ interface MemberService {
     suspend fun checkNickname(
         @Query("nickname") nickname: String,
     ): BaseResponse<NicknameRes>
+
+    @Multipart
+    @PATCH("members/updateprofile")
+    suspend fun updateUserInfo(
+        @Header("Authorization") authCode: String,
+        @Part("ReqDto") reqDto: ProfileDto,
+        @Part file: MultipartBody.Part?
+    ): BaseResponse<UserInfoUpdateRes>
 }

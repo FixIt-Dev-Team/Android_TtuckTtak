@@ -8,7 +8,7 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/general_theme_black</item>
+        <item name="colorOnSecondary">@color/general_theme_white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!-- Customize your theme here. -->
@@ -24,13 +24,27 @@
         <item name="android:windowBackground">@color/main_theme_blue</item>
     </style>
 
+    <!-- Setting theme. -->
+    <style name="Theme.Android_TtuckTtak.Setting" parent="Theme.Android_TtuckTtak">
+        <item name="android:statusBarColor">@color/general_theme_white</item>
+        <item name="android:windowBackground">@color/general_theme_white</item>
+    </style>
+
     <!-- Splash theme. -->
-    <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar"> <!-- Customize your theme here. -->
+    <style name="Theme.Android_TtuckTtak.Splash" parent="Theme.AppCompat.Light.DarkActionBar"> <!-- Customize your theme here. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">@color/general_theme_white</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- background -->
         <item name="android:windowBackground">@drawable/img_background_splash</item>
+    </style>
+
+    <!-- Landing theme. -->
+    <style name="Theme.Android_TtuckTtak.Landing">
+        <item name="android:statusBarColor">@color/general_theme_black</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

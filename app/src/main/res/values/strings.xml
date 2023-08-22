@@ -73,9 +73,21 @@
 
     <string name="power">전원</string>
     <string name="power_prob_1">본체에 전원이 들어오나요? (팬 작동, led 켜짐 등)</string>
+    <string name="power_prob_2">윈도우 등의 OS가 나오나요?</string>
+    <string name="power_prob_3">평소와 다르게 글시가 지나치게 크거나 아이콘 등이 이상한가요?</string>
     <string name="display">화면</string>
     <string name="usage">사용</string>
+    <string name="usage_prob_1">본체에서 이상한 소리가 나나요?</string>
+    <string name="usage_prob_2">컴퓨터가 중간에 꺼지나요?</string>
+    <string name="usage_prob_3">컴퓨터가 중간에 느려지나요?</string>
+    <string name="usage_prob_4">팬이 시끄럽게 돌아가나요?</string>
+    <string name="usage_prob_5">CPU의 팬이 시끄럽나요?</string>
+    <string name="usage_prob_6">시스템 시간이 맞지 않거나 아이콘, 글씨 등이 평소와 다른가요?</string>
+    <string name="usage_prob_7">파일을 불러오는데 느리거나 실패하나요?</string>
     <string name="acc">주변기기</string>
+    <string name="acc_prob_1">키보드, 마우스, 마이크, 스피커에 문제가 있나요?</string>
+    <string name="acc_prob_2">CD, DVD와 같은 리더기에 문제가 있나요?</string>
+    <string name="acc_prob_3">인터넷, USB 등의 속도가 느린가요?</string>
     <string name="title">%1$s에 문제가 있어요</string>
 
     <!-- 간단 솔루션 -->
