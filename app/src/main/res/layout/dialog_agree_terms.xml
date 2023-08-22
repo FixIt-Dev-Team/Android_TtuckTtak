@@ -1,106 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="283dp"
     android:background="@drawable/box_alert">
 
+    <!-- 약관 동의 제목 텍스트-->
+    <!-- TODO: 가로비율 문제가 너무 많아요~ -->
     <TextView
         android:id="@+id/textview_agree_terms"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33.5dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="34dp"
         android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="@string/agree_terms"
         android:textColor="@color/general_theme_black"
         android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2944"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- 약관 전체 동의 체크 버튼-->
+    <!-- TODO: 최소 크기가 48dp가 되어야 하는데 selecter가 전체 크기를 먹는 것 때문에 위화감이 생겨남 -->
     <CheckBox
         android:id="@+id/checkbox_agree_terms"
         style="@style/DefaultCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         app:layout_constraintBottom_toBottomOf="@id/textview_agree_terms"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_agree_terms" />
+        app:layout_constraintHorizontal_bias="0.8972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textview_agree_terms"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
+    <!-- 약관 내용 박스 -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_service_terms"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/bg_rectangle_round"
         android:backgroundTint="@color/system_theme_subwhite"
-        app:layout_constraintEnd_toEndOf="@id/checkbox_agree_terms"
-        app:layout_constraintStart_toStartOf="@id/textview_agree_terms"
-        app:layout_constraintTop_toBottomOf="@id/textview_agree_terms">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_agree_terms"
+        app:layout_constraintWidth_percent="0.8833">
 
+        <!-- 필수 약관 텍스트 -->
         <TextView
             android:id="@+id/textview_use_terms"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
             android:fontFamily="@font/noto_sans_kr_bold"
-            android:paddingVertical="12.5dp"
-            android:paddingStart="18.5dp"
-            android:paddingEnd="0dp"
+            android:includeFontPadding="false"
             android:text="@string/service_use_terms"
             android:textColor="@color/general_theme_black"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/checkbox_use_terms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1564"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- 필수 약관 동의 체크 버튼 -->
         <CheckBox
             android:id="@+id/checkbox_use_terms"
             style="@style/DefaultCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="9dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             app:layout_constraintBottom_toBottomOf="@id/textview_use_terms"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8972"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textview_use_terms" />
 
+        <!-- 선택 약관 텍스트 -->
         <TextView
             android:id="@+id/textview_promote_terms"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
             android:fontFamily="@font/noto_sans_kr_bold"
-            android:paddingVertical="12.5dp"
-            android:paddingStart="18.5dp"
-            android:paddingEnd="0dp"
+            android:includeFontPadding="false"
             android:text="@string/service_promote_terms"
             android:textColor="@color/general_theme_black"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@id/checkbox_promote_terms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1564"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_use_terms" />
 
+        <!-- 선택 약관 동의 체크 버튼 -->
         <CheckBox
             android:id="@+id/checkbox_promote_terms"
             style="@style/DefaultCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="84dp"
-            android:layout_marginEnd="9dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             app:layout_constraintBottom_toBottomOf="@id/textview_promote_terms"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.8972"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/textview_promote_terms" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- 시작하기 버튼 -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_start"
         style="@style/DefaultButton"
-        android:layout_width="318dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="@string/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_service_terms" />
+        app:layout_constraintTop_toBottomOf="@id/layout_service_terms"
+        app:layout_constraintWidth_percent="0.8833" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

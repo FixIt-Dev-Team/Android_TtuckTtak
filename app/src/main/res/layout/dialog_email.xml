@@ -5,25 +5,25 @@
     android:layout_height="260dp"
     android:background="@drawable/box_alert">
 
-    <!-- 확인 메세지 텍스트  레이아웃 -->
+    <!-- TODO: 팝업 창은 크기 변화를 줄지 안 줄지 몰라서 디폴트 값 적용-->
+    <!-- 확인 메세지 텍스트 -->
     <TextView
         android:id="@+id/textview_reconfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
+        android:paddingTop="47dp"
         android:text="@string/certification_code_resend"
         android:textAlignment="center"
         android:textColor="@color/general_theme_black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.1808"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- 이메일  텍스트  레이아웃 -->
+    <!-- 이메일 텍스트 -->
     <TextView
         android:id="@+id/textview_reconfirm_email"
         android:layout_width="wrap_content"
@@ -31,28 +31,29 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="@string/email_reconfirm"
         android:textColor="@color/general_theme_black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_reconfirm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.1156"/>
+        app:layout_constraintTop_toBottomOf="@id/textview_reconfirm" />
 
-    <!-- 인증 코드 재전송 버튼 레이아웃 -->
+    <!-- 인증 코드 재전송 버튼 -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_resend"
         style="@style/DefaultButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.8833"
-        app:layout_constraintHeight_percent="0.2154"
+        android:layout_marginTop="38dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="@string/certification_resend"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_reconfirm_email"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.2923"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2154"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textview_reconfirm_email"
+        app:layout_constraintWidth_percent="0.8833" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

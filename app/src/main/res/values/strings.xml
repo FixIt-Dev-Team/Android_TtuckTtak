@@ -13,6 +13,37 @@
     <string name="overlap_email">이미 사용중인 계정입니다.</string>
     <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다.</string>
 
+    <!-- join-2 화면 -->
+    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
+    <string name="input_certification_code">예) 12345678</string>
+    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
+    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
+    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+    <string name="user_email">ttukttak@ttukttak.com</string>
+    <string name="code_autofill">인증코드</string>
+    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
+    <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
+    <string name="certification_resend">인증코드 재전송</string>
+
+    <!-- join-3 화면 -->
+    <string name="user_nickname">예) 뚝딱이</string>
+    <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
+    <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
+    <string name="name_autofill">이메일</string>
+    <string name="password_rule">대문자 혹은 특수문자가 포함되게 작성해주세요</string>
+    <string name="invalid_nickname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
+    <string name="join_user_password">사용하실 비밀번호를 정해주세요</string>
+    <string name="password_autofill">비밀번호</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
+    <string name="join">가입하기</string>
+    <string name="agree_terms">서비스 이용 및 홍보 약관에 동의해요</string>
+    <string name="service_use_terms">[필수] <u>서비스 이용 약관</u>에 동의해요</string>
+    <string name="service_promote_terms">[선택] <u>서비스 홍보 약관</u>에 동의해요</string>
+    <string name="password_usable">사용가능한 비밀번호 입니다!</string>
+    <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
+    <string name="start">시작하기</string>
+
     <!-- 랜딩 페이지 화면    -->
     <string name="text_welcome1"><font color='#1DB9DB'>뚝딱</font>하실\n준비되셨나요?</string>
     <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
@@ -30,34 +61,11 @@
     <string name="bcak_content_description">뒤로 가기</string>
     <string name="logo_content_description">로고</string>
     <string name="email_autofill">이메일</string>
-    <string name="password_autofill">비밀번호</string>
     <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
     <string name="email">이메일 주소</string>
     <string name="pw">비밀번호</string>
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
 
-
-    <!-- join-2 화면 -->
-    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
-    <string name="input_certification_code">예) 12345678</string>
-    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
-    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
-    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
-    <string name="user_email">ttukttak@ttukttak.com</string>
-    <string name="code_autofill">인증코드</string>
-    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
-    <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
-    <!--    <string name="join_membership">회원가입</string>-->
-    <!--    <string name="bcak_content_description">뒤로 가기</string> -->
-
-    <!-- join-3 화면 -->
-    <string name="user_nickname">예) 뚝딱이</string>
-    <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
-    <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
-    <string name="name_autofill">이메일</string>
-    <string name="password_rule">대문자 혹은 특수문자가 포함되게 작성해주세요</string>
-    <!--    <string name="join_membership">회원가입</string>-->
-    <!--    <string name="bcak_content_description">뒤로 가기</string> -->
 
     <!-- Home 화면 -->
     <string name="text_start">탭해서 진단을 시작해보세요!</string>
@@ -133,14 +141,8 @@
 
     <!-- -->
 
-
-    <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
     <string name="timer">00:00</string>
     <string name="certification">인증하기</string>
-    <string name="certification_resend">인증코드 재전송</string>
-    <string name="agree_terms">서비스 이용 및 홍보 약관에 동의해요</string>
-    <string name="service_use_terms">[필수] <u>서비스 이용 약관</u>에 동의해요</string>
-    <string name="service_promote_terms">[선택] <u>서비스 홍보 약관</u>에 동의해요</string>
     <string name="use_terms"><b>서비스 이용 약관</b></string>
     <string name="promote_terms"><b>서비스 홍보 약관</b></string>
     <string name="promote_terms_detail"><p>서비스 홍보 약관
@@ -310,14 +312,10 @@
 ① 서비스가 회원에 대하여 통지를 하는 경우 서비스가 회사에 등록한 전자우편 주소로 할 수 있습니다.
 ② 서비스는 불특정다수 회원에게 통지를 해야 할 경우 공지 게시판을 통해 7일 이상 게시함으로써 개별 통지에 갈음할 수 있습니다.</p></string>
 
-    <string name="join_user_password">사용하실 비밀번호를 정해주세요</string>
-    <string name="invalid_nickname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
 
-    <string name="password_usable">사용가능한 비밀번호 입니다!</string>
-    <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
-    <string name="password_check">비밀번호 확인</string>
-    <string name="join">가입하기</string>
-    <string name="start">시작하기</string>
+
+
+
 
 
     <!-- TODO: Remove or change this placeholder text -->
