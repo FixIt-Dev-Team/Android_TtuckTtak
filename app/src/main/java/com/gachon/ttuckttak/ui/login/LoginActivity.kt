@@ -8,9 +8,9 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
+import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityLoginBinding
 import com.gachon.ttuckttak.ui.main.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     @Inject lateinit var userManager: UserManager
     @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var authService: AuthService
 
     override fun initAfterBinding() {
         setClickListener()
@@ -42,7 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // 서버에 이메일 인증코드 전송 요청
-                val response = TtukttakServer.login(LoginReq(email, pw))
+                val response = authService.login(LoginReq(email, pw))
                 Log.i("response", response.toString())
 
                 if (response.isSuccess) {

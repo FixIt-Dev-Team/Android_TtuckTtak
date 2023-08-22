@@ -5,8 +5,8 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
+import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivitySettingsAlertBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +20,7 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
 
     @Inject lateinit var userManager: UserManager
     @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var memberService: MemberService
 
     override fun initAfterBinding() {
         setUi()
@@ -52,7 +53,7 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // 서버에 push 요청
-                val response = TtukttakServer.push(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
+                val response = memberService.eventAlert(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
                 Log.i("response", response.toString())
 
             } catch (e: Exception) {
@@ -68,7 +69,7 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // 서버에 push 요청
-                val response = TtukttakServer.pushNight(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
+                val response = memberService.nightAlert(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
                 Log.i("response", response.toString())
 
             } catch (e: Exception) {

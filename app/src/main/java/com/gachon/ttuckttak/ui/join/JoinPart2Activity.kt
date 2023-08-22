@@ -9,21 +9,26 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart2Binding
 import com.gachon.ttuckttak.ui.login.LandingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.*
+import javax.inject.Inject
 import kotlin.concurrent.timer
 
+@AndroidEntryPoint
 class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate, TransitionMode.HORIZONTAL) {
     private var time = 300 // 5분
     private lateinit var timerTask: Timer
 
     private val email: String by lazy { intent.getStringExtra("email")!! }
     private lateinit var authCode: String
+
+    @Inject lateinit var authService: AuthService
 
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
@@ -69,7 +74,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
     private fun resendAuthCode() = lifecycleScope.launch(Dispatchers.IO) {
         try {
-            val response = TtukttakServer.emailConfirm(email)
+            val response = authService.emailConfirm(email)
             response.data?.code?.let { authCode = it } // null이 아닌 인증 코드를 새로 발급 받았을 때 update
             Log.i("response", response.toString())
 

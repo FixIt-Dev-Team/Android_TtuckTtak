@@ -10,8 +10,8 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
+import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityLandingBinding
 import com.gachon.ttuckttak.ui.join.JoinPart1Activity
 import com.gachon.ttuckttak.ui.main.StartActivity
@@ -30,6 +30,8 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
 
     @Inject lateinit var userManager: UserManager
     @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var authService: AuthService
+
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,8 +101,8 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val result: BaseResponse<LoginRes> = when (method) {
-                    LoginMethod.KAKAO -> TtukttakServer.loginWithKakao(authCode = param)
-                    LoginMethod.GOOGLE -> TtukttakServer.loginWithGoogle(idToken = param)
+                    LoginMethod.KAKAO -> authService.loginWithKakao(authCode = param)
+                    LoginMethod.GOOGLE -> authService.loginWithGoogle(idToken = param)
                 }
 
                 withContext(Dispatchers.Main) {

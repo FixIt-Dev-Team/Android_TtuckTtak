@@ -8,13 +8,18 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityFindPwBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding::inflate, TransitionMode.HORIZONTAL) {
+
+    @Inject lateinit var memberService: MemberService
 
     override fun initAfterBinding() {
         setClickListener()
@@ -37,7 +42,7 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // 서버에 비밀번호 변경 전송 요청
-                val response = TtukttakServer.changePw(email)
+                val response = memberService.changePw(email)
                 Log.i("response", response.toString())
 
                 if (response.isSuccess) {

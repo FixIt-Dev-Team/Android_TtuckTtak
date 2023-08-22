@@ -9,9 +9,10 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
+import com.gachon.ttuckttak.data.remote.service.AuthService
+import com.gachon.ttuckttak.data.remote.service.ViewService
 import com.gachon.ttuckttak.databinding.ActivitySettingsBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +27,8 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
 
     @Inject lateinit var userManager: UserManager
     @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var authService: AuthService
+    @Inject lateinit var viewService: ViewService
 
     private var pushStatus = false
     private var nightPushStatus = false
@@ -98,7 +101,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
                     // 서버에 로그아웃 인증코드 전송 요청
-                    val response = TtukttakServer.logout(LogoutReq(userManager.getUserIdx()!!))
+                    val response = authService.logout(LogoutReq(userManager.getUserIdx()!!))
                     Log.i("response", response.toString())
 
                     if (response.isSuccess) {
@@ -132,7 +135,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsB
     private fun getProfile(userId: String, token: String) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = TtukttakServer.getUserInfo(userId, token)
+                val response = viewService.getUserInfo(userId, token)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

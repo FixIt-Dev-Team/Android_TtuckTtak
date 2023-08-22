@@ -10,13 +10,18 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate, TransitionMode.HORIZONTAL) {
+
+    @Inject lateinit var authService: AuthService
 
     override fun initAfterBinding() {
         setClickListener()
@@ -43,7 +48,7 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
                     binding.buttonSend.isClickable = false // 요청하는 동안 재요청 하지 못하게 클릭 막기
                 }
 
-                val response = TtukttakServer.emailConfirm(email = binding.edittextEmail.text.toString()) // 서버에 이메일 인증코드 전송 요청
+                val response = authService.emailConfirm(email = binding.edittextEmail.text.toString()) // 서버에 이메일 인증코드 전송 요청
                 Log.i("response", response.toString())
 
                 runOnUiThread {

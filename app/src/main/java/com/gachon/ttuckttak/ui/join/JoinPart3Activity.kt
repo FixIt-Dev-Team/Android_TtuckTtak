@@ -11,9 +11,10 @@ import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
+import com.gachon.ttuckttak.data.remote.service.AuthService
+import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
@@ -33,6 +34,9 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private val email: String by lazy { intent.getStringExtra("email")!! }
     @Inject lateinit var userManager: UserManager
     @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var authService: AuthService
+    @Inject lateinit var memberService: MemberService
+
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
     override fun initAfterBinding() = with(binding) {
@@ -63,7 +67,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private fun performSignUp(nickname: String, password: String, adProvision: Boolean) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = TtukttakServer.signUp(SignUpReq(email, password, nickname, adProvision))
+                val response = authService.signUp(SignUpReq(email, password, nickname, adProvision))
                 Log.i("response", response.toString())
 
                 handleSignUpResponse(response)
@@ -174,7 +178,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                     lifecycleScope.launch(Dispatchers.IO) {
                         try { // 서버에 닉네임 사용 가능 여부 확인
                             lifecycleScope.launch(Dispatchers.Main) {
-                                val response = TtukttakServer.checkNickname(nickname)
+                                val response = memberService.checkNickname(nickname)
                                 Log.i("response", response.toString())
 
                                 if (response.isSuccess && response.data!!.isAvailable) { // 사용 가능한 닉네임인 경우
