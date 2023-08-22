@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginActivity">
 
-    <!--  FixMe: 디자인 수정 필요  -->
-
-    <!--  뒤로 가기 레이아웃  -->
+    <!--  뒤로 가기 버튼  -->
+    <!-- TODO: 이것만 왜 버튼 아이디가 달라요?-->
     <ImageButton
         android:id="@+id/button_back"
         android:layout_width="48dp"
@@ -18,12 +17,13 @@
         android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0444"
+        app:layout_constraintHorizontal_bias="0.0361"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0199" />
+        app:layout_constraintVertical_bias="0.0159" />
 
-    <!--  뚝딱 로고 레이아웃  -->
+
+    <!--  뚝딱 로고 이미지  -->
     <!-- TODO: 배경과 글자색 텍스트 대비비율로 인한 경고 표시 발생   -->
     <ImageView
         android:id="@+id/imageview_logo"
@@ -39,43 +39,47 @@
         app:layout_constraintVertical_bias="0.1828" />
 
     <!-- TODO: EditText 문제점 퍼센트로 가로 넓이를 지정하면 기본적으로 크기로 인한 오류 문제로 논의 필요   -->
-    <!--  이메일 입력 레이아웃  -->
+    <!-- 이메일 입력 에딧 텍스트  -->
     <EditText
         android:id="@+id/edittext_email"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.9111"
-        app:layout_constraintHeight_percent="0.0636"
         android:autofillHints="@string/email_autofill"
         android:background="@drawable/selector_default_textbox"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:hint="@string/email"
+        android:includeFontPadding="false"
         android:inputType="textEmailAddress"
         android:paddingHorizontal="19dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageview_logo"
-        app:layout_constraintVertical_bias="0.1138" />
+        app:layout_constraintVertical_bias="0.1138"
+        app:layout_constraintWidth_percent="0.9111" />
 
-    <!--  비밀번호 입력 레이아웃  -->
+    <!--  비밀번호 입력 에딧 텍스트  -->
     <EditText
         android:id="@+id/editText_password"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.9111"
-        app:layout_constraintHeight_percent="0.0636"
         android:autofillHints="@string/email_autofill"
         android:background="@drawable/selector_default_textbox"
+        android:fontFamily="@font/noto_sans_kr_bold"
         android:hint="@string/pw"
+        android:includeFontPadding="false"
         android:inputType="textPassword"
         android:paddingHorizontal="19dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edittext_email"
-        app:layout_constraintVertical_bias="0.0184" />
+        app:layout_constraintVertical_bias="0.0184"
+        app:layout_constraintWidth_percent="0.9111" />
 
     <!--  오류 메세지 입력 레이아웃  -->
     <!-- TODO: 오류 메세지 위치를 기존 피그마를 이용해 값을 입력하면 피그마와 위치 차이가 생김  -->
@@ -83,36 +87,40 @@
         android:id="@+id/textview_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:textColor="@color/general_theme_red"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/editText_password"
         app:layout_constraintTop_toBottomOf="@id/editText_password"
-        app:layout_constraintHorizontal_bias="0.0972"
         app:layout_constraintVertical_bias="0.0237"
         tools:text="@string/wrong_email_or_password" />
 
-    <!--  로그인 버튼 레이아웃  -->
+    <!--  로그인 버튼 -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_login"
         style="@style/DefaultButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.8833"
-        app:layout_constraintHeight_percent="0.0742"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_error_message"
-        app:layout_constraintVertical_bias="0.0593" />
+        app:layout_constraintVertical_bias="0.0593"
+        app:layout_constraintWidth_percent="0.8833" />
 
     <!--  계정 찾기 텍스트 레이아웃  -->
     <TextView
         android:id="@+id/text_find_id_or_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="@string/find_id_or_pw1"
         android:textColor="@color/general_theme_black"
         app:layout_constraintBottom_toBottomOf="parent"

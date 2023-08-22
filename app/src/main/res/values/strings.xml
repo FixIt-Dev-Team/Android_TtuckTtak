@@ -44,6 +44,18 @@
     <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
     <string name="start">시작하기</string>
 
+    <!--  로그인 화면  -->
+    <string name="wrong_email_or_password">이메일 혹은 비밀번호가 틀렸습니다.</string>
+    <string name="login">로그인하기</string>
+    <string name="bcak_content_description">뒤로 가기</string>
+    <string name="logo_content_description">로고</string>
+    <string name="email_autofill">이메일</string>
+    <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
+    <string name="email">이메일 주소</string>
+    <string name="pw">비밀번호</string>
+    <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
+
+
     <!-- 랜딩 페이지 화면    -->
     <string name="text_welcome1"><font color='#1DB9DB'>뚝딱</font>하실\n준비되셨나요?</string>
     <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
@@ -55,16 +67,7 @@
     <string name="text_welcome3"><u>이미 계정이 있으신가요?</u></string>
     <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
 
-    <!--  로그인 화면  -->
-    <string name="wrong_email_or_password">이메일 혹은 비밀번호가 틀렸습니다.</string>
-    <string name="login">로그인하기</string>
-    <string name="bcak_content_description">뒤로 가기</string>
-    <string name="logo_content_description">로고</string>
-    <string name="email_autofill">이메일</string>
-    <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
-    <string name="email">이메일 주소</string>
-    <string name="pw">비밀번호</string>
-    <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
+
 
 
     <!-- Home 화면 -->
