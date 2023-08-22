@@ -39,7 +39,7 @@
         <item name="android:statusBarColor">@color/general_theme_white</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- background -->
-        <item name="android:windowBackground">@drawable/ic_background_splash</item>
+        <item name="android:windowBackground">@drawable/img_background_splash</item>
     </style>
 
     <!-- Landing theme. -->
