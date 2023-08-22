@@ -9,14 +9,17 @@ import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
 import com.gachon.ttuckttak.databinding.ActivitySettingsAlertBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(ActivitySettingsAlertBinding::inflate) {
+@AndroidEntryPoint
+class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(ActivitySettingsAlertBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    private val userManager: UserManager by lazy { UserManager(this@SettingsAlertActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsAlertActivity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
 
     override fun initAfterBinding() {
         setUi()

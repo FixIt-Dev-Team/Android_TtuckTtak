@@ -5,7 +5,7 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityProblemYnBinding
 
-class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblemYnBinding::inflate) {
+class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblemYnBinding::inflate, TransitionMode.HORIZONTAL) {
 
     override fun initAfterBinding() = with(binding){
         // back button

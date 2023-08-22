@@ -20,16 +20,19 @@ import com.gachon.ttuckttak.ui.main.StartActivity
 import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
 import com.gachon.ttuckttak.ui.terms.TermsUseActivity
 import com.gachon.ttuckttak.utils.RegexUtil
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate) {
+@AndroidEntryPoint
+class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPart3Binding::inflate, TransitionMode.HORIZONTAL) {
 
     private var validNickname = false
     private val email: String by lazy { intent.getStringExtra("email")!! }
-    private val userManager: UserManager by lazy { UserManager(this@JoinPart3Activity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@JoinPart3Activity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
     override fun initAfterBinding() = with(binding) {

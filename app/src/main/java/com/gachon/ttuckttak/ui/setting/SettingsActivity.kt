@@ -14,16 +14,18 @@ import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 import com.gachon.ttuckttak.databinding.ActivitySettingsBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsBinding::inflate, TransitionMode.HORIZONTAL) {
 
-class SettingsActivity : BaseActivity<ActivitySettingsBinding>(ActivitySettingsBinding::inflate) {
-
-    private val userManager: UserManager by lazy { UserManager(this@SettingsActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsActivity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
 
     private var pushStatus = false
     private var nightPushStatus = false

@@ -16,7 +16,7 @@ import com.gachon.ttuckttak.databinding.WebviewBinding
 // FixMe: 현재 웹 뷰에 카카오 로그인 화면 띄우는데, 카카오 연동해서 할 수 있으면 해볼 것
 //  근데 카카오 연동하면 access token 받을 것 같은데 이 부분 고민해볼 것
 
-class KakaoLoginWebViewActivity : BaseActivity<WebviewBinding>(WebviewBinding::inflate) {
+class KakaoLoginWebViewActivity : BaseActivity<WebviewBinding>(WebviewBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val restApiKey = BuildConfig.KAKAO_REST_API_KEY
     private val redirectUri = BuildConfig.KAKAO_REDIRECT_URI

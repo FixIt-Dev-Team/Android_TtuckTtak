@@ -24,16 +24,19 @@ import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
 import com.gachon.ttuckttak.utils.RegexUtil
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.lang.Exception
+import javax.inject.Inject
 
-class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(ActivitySettingsProfileBinding::inflate) {
+@AndroidEntryPoint
+class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(ActivitySettingsProfileBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    private val userManager: UserManager by lazy { UserManager(this@SettingsProfileActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsProfileActivity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
 
     private val permission = Manifest.permission.READ_MEDIA_IMAGES
 

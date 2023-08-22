@@ -19,14 +19,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.kakao.sdk.common.KakaoSdk
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBinding::inflate) {
+@AndroidEntryPoint
+class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    private val userManager: UserManager by lazy { UserManager(this@LandingActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(applicationContext) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,13 +13,16 @@ import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.databinding.ActivityLoginBinding
 import com.gachon.ttuckttak.ui.main.StartActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate, TransitionMode.VERTICAL) {
 
-    private val userManager: UserManager by lazy { UserManager(this@LoginActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@LoginActivity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
 
     override fun initAfterBinding() {
         setClickListener()

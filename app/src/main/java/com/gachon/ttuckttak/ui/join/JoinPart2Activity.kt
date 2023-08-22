@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.concurrent.timer
 
-class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate) {
+class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPart2Binding::inflate, TransitionMode.HORIZONTAL) {
     private var time = 300 // 5분
     private lateinit var timerTask: Timer
 

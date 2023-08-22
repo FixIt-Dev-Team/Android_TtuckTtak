@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate) {
+class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate, TransitionMode.HORIZONTAL) {
     private val database by lazy { AppDatabase.getInstance(this@HomeActivity)!! }
 
     override fun initAfterBinding() {
