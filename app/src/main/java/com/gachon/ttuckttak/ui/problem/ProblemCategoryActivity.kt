@@ -36,7 +36,6 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
 
             intent.putExtra("surveyIdx", SolutionManager.DISPLAY)
             intent.putExtra("pattern", "1")
-            intent.putExtra("level", 1)
 
             startActivity(intent)
         }
@@ -47,8 +46,6 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
             intent.putExtra("surveyIdx", SolutionManager.USAGE)
             intent.putExtra("subtitle", R.string.usage_prob_1)
             intent.putExtra("pattern", "")
-            // TODO()
-            // intent.putExtra("level", level)
 
             startActivity(intent)
         }
@@ -59,14 +56,12 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
             intent.putExtra("surveyIdx", SolutionManager.ACC)
             intent.putExtra("subtitle", R.string.acc_prob_1)
             intent.putExtra("pattern", "")
-            // TODO()
-            // intent.putExtra("level", level)
 
             startActivity(intent)
         }
 
         buttonAsk.setOnClickListener {
-            TODO()
+            TODO("문의 페이지로 연결")
         }
     }
 }

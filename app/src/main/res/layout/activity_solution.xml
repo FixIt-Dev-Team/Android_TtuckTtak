@@ -11,8 +11,8 @@
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
-        android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/ic_arrow_left"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,6 +38,7 @@
         android:includeFontPadding="false"
         android:textColor="@color/general_theme_white"
         android:textSize="12sp"
+        android:text="@string/solution"
         app:layout_constraintBottom_toBottomOf="@id/button_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +61,6 @@
         android:id="@+id/field_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="21dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,10 +69,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="21dp">
 
             <TextView
-                android:id="@+id/text_question"
+                android:id="@+id/text_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -85,33 +86,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Todo: RecyclerView로 변환 -->
-
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/button_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_question">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="4dp"
-                    android:background="@drawable/bg_rectangle_round"
-                    android:drawableEnd="@drawable/ic_question"
-                    android:fontFamily="@font/noto_sans_kr_regular"
-                    android:includeFontPadding="false"
-                    android:padding="15dp"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/general_theme_black"
-                    android:textSize="14sp"
-                    app:backgroundTint="@color/system_theme_subwhite"
-                    tools:text="점검 사항 (1)\nsersfsdfasdfjlksjdlkfjsdssdkf" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@id/text_count" />
 
             <TextView
                 android:id="@+id/text_fixed_availprobs"
@@ -140,14 +121,14 @@
                 android:textAlignment="center"
                 android:textColor="@color/general_theme_white"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toTopOf="@id/button_find_solution"
+                app:layout_constraintBottom_toTopOf="@id/button_cs"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_fixed_availprobs"
                 app:layout_constraintVertical_bias="0.8"
                 tools:text="선택지가 필요하지 않은 고장여부 디스플레이 (1)\n선택지가 필요하지 않은 고장여부 디스플레이 (2)\n선택지가 필요하지 않은 고장여부 디스플레이 (3)" />
 
             <Button
-                android:id="@+id/button_find_solution"
+                android:id="@+id/button_cs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="22dp"
@@ -165,6 +146,7 @@
                 android:id="@+id/button_complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="68dp"
                 android:background="@drawable/bg_rectangle_round_line"
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"

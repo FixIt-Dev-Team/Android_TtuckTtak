@@ -71,34 +71,164 @@
     <string name="yes">네</string>
     <string name="no">아니오</string>
 
+    <!-- 전원 문제 -->
     <string name="power">전원</string>
-    <string name="power_prob_1">본체에 전원이 들어오나요? (팬 작동, led 켜짐 등)</string>
+
+    <string name="power_prob_1">본체에 전원이 들어오나요?</string>
+    <string name="power_1_y">전원이 잘 들어와요</string>
+    <string name="power_1_y_content1">쿨링 팬 작동</string>
+    <string name="power_1_y_content2">조명 켜짐</string>
+    <string name="power_1_y_content3" />
+    <string name="power_1_n">전원이 들어오지 않아요</string>
+    <string name="power_1_n_content1">반응 없음</string>
+    <string name="power_1_n_content2">쿨링 팬 작동 안함</string>
+    <string name="power_1_n_content3">조명 꺼짐</string>
+
     <string name="power_prob_2">윈도우 등의 OS가 나오나요?</string>
-    <string name="power_prob_3">평소와 다르게 글시가 지나치게 크거나 아이콘 등이 이상한가요?</string>
+    <string name="power_2_y">보여요</string>
+    <string name="power_2_y_content1">바이오스 로고 노출</string>
+    <string name="power_2_y_content2">윈도우, 맥 로고 노출</string>
+    <string name="power_2_y_content3">화면에 뭔가 나옴</string>
+    <string name="power_2_n">안 보여요</string>
+    <string name="power_2_n_content1">바이오스 로고 안보임</string>
+    <string name="power_2_n_content2">윈도우, 맥 로고 안보임</string>
+    <string name="power_2_n_content3">화면에 반응이 없음</string>
+
+    <string name="power_prob_3">평소와 다르게 글씨가 크거나 아이콘이 이상한가요?</string>
+    <string name="power_3_y">이상해요</string>
+    <string name="power_3_y_content1">글씨 크기 커짐</string>
+    <string name="power_3_y_content2">아이콘 모양 변함</string>
+    <string name="power_3_y_content3">화면 깨짐</string>
+    <string name="power_3_n">멀쩡해요</string>
+    <string name="power_3_n_content1">글씨 크기 그대로</string>
+    <string name="power_3_n_content2">아이콘 그대로</string>
+    <string name="power_3_n_content3">화면 멀쩡함</string>
+
+    <!-- 화면 문제 -->
     <string name="display">화면</string>
-    <string name="usage">사용</string>
-    <string name="usage_prob_1">본체에서 이상한 소리가 나나요?</string>
-    <string name="usage_prob_2">컴퓨터가 중간에 꺼지나요?</string>
-    <string name="usage_prob_3">컴퓨터가 중간에 느려지나요?</string>
-    <string name="usage_prob_4">팬이 시끄럽게 돌아가나요?</string>
-    <string name="usage_prob_5">CPU의 팬이 시끄럽나요?</string>
-    <string name="usage_prob_6">시스템 시간이 맞지 않거나 아이콘, 글씨 등이 평소와 다른가요?</string>
-    <string name="usage_prob_7">파일을 불러오는데 느리거나 실패하나요?</string>
+
+    <!-- 주변기기 문제 -->
     <string name="acc">주변기기</string>
-    <string name="acc_prob_1">키보드, 마우스, 마이크, 스피커에 문제가 있나요?</string>
+
+    <string name="acc_prob_1">키보드, 마우스, 스피커, 프린터 등에 문제가 있나요?</string>
+    <string name="acc_1_y">문제가 있어요</string>
+    <string name="acc_1_y_content1">입력에 반응하지 않음</string>
+    <string name="acc_1_y_content2">조명 들어오지 않음</string>
+    <string name="acc_1_y_content3">출력이 안나옴</string>
+    <string name="acc_1_n">문제가 없어요</string>
+    <string name="acc_1_n_content1">입력에 반응함</string>
+    <string name="acc_1_n_content2">조명이 들어옴</string>
+    <string name="acc_1_n_content3">출력이 나옴</string>
+
     <string name="acc_prob_2">CD, DVD와 같은 리더기에 문제가 있나요?</string>
+    <string name="acc_2_y">문제가 있어요</string>
+    <string name="acc_2_y_content1">작동하지 않음</string>
+    <string name="acc_2_y_content2">디스크 인식 안됨</string>
+    <string name="acc_2_y_content3">이상 소음이 남</string>
+    <string name="acc_2_n">문제가 없어요</string>
+    <string name="acc_2_n_content1">부드럽게 작동함</string>
+    <string name="acc_2_n_content2">디스크 인식 잘됨</string>
+    <string name="acc_2_n_content3" />
+
     <string name="acc_prob_3">인터넷, USB 등의 속도가 느린가요?</string>
+    <string name="acc_3_y">느리거나 멈춰요</string>
+    <string name="acc_3_y_content1">인식 안됨</string>
+    <string name="acc_3_y_content2">속도 느림</string>
+    <string name="acc_3_y_content3">연결 안됨</string>
+    <string name="acc_3_n">이상 없어요</string>
+    <string name="acc_3_n_content1">인식 잘됨</string>
+    <string name="acc_3_n_content2">속도 정상</string>
+    <string name="acc_3_n_content3">연결 정상</string>
+
+    <!-- 사용 문제 -->
+    <string name="usage">사용</string>
+
+    <string name="usage_prob_1">본체에서 이상한 소리가 나나요?</string>
+    <string name="usage_1_y">이상한 소리가 나요</string>
+    <string name="usage_1_y_content1">드르륵</string>
+    <string name="usage_1_y_content2">덜컥</string>
+    <string name="usage_1_y_content3">평소에 나지 않던 소리</string>
+    <string name="usage_1_n">평소와 같아요</string>
+    <string name="usage_1_n_content1">부드럽게 작동해요</string>
+    <string name="usage_1_n_content2">팬이 잘 돌아가요</string>
+    <string name="usage_1_n_content3">바람소리</string>
+
+    <string name="usage_prob_2">컴퓨터가 중간에 꺼지나요?</string>
+    <string name="usage_2_y">자꾸 꺼져요</string>
+    <string name="usage_2_y_content1">랜덤한 강제종료</string>
+    <string name="usage_2_y_content2">특정 상황에서 종료</string>
+    <string name="usage_2_y_content3">멈춰서 재부팅 해야함</string>
+    <string name="usage_2_n">잘 작동해요</string>
+    <string name="usage_2_n_content1">강제종료 없음</string>
+    <string name="usage_2_n_content2">블루 스크린 없음</string>
+    <string name="usage_2_n_content3">멈추지 않음</string>
+
+    <string name="usage_prob_3">컴퓨터가 중간에 느려지나요?</string>
+    <string name="usage_3_y">자꾸 느려져요</string>
+    <string name="usage_3_y_content1">랜덤한 느려짐</string>
+    <string name="usage_3_y_content2">특정 상황에서 느려짐</string>
+    <string name="usage_3_y_content3">버벅임</string>
+    <string name="usage_3_n">느려지지 않아요</string>
+    <string name="usage_3_n_content1">부드러운 작동</string>
+    <string name="usage_3_n_content2">평소와 같음</string>
+    <string name="usage_3_n_content3">끊기지 않음</string>
+
+    <string name="usage_prob_4">팬이 시끄럽게 돌아가나요?</string>
+    <string name="usage_4_y">시끄러워요</string>
+    <string name="usage_4_y_content1">랜덤한 시끄러움</string>
+    <string name="usage_4_y_content2">특정 상황에서 시끄러움</string>
+    <string name="usage_4_y_content3">이상 소음이 발생함</string>
+    <string name="usage_4_n">평소와 같아요</string>
+    <string name="usage_4_n_content1">조용함</string>
+    <string name="usage_4_n_content2">평소와 같음</string>
+    <string name="usage_4_n_content3">바람소리만 남</string>
+
+    <string name="usage_prob_5">CPU의 팬이 시끄럽나요?</string>
+    <string name="usage_5_y">시끄러워요</string>
+    <string name="usage_5_y_content1">랜덤한 시끄러움</string>
+    <string name="usage_5_y_content2">특정 상황에서 시끄러움</string>
+    <string name="usage_5_y_content3">이상 소음이 발생함</string>
+    <string name="usage_5_n">다른 부분에서 시끄러워요</string>
+    <string name="usage_5_n_content1">GPU에서 시끄러움</string>
+    <string name="usage_5_n_content2">케이스 쿨러가 시끄러움</string>
+    <string name="usage_5_n_content3" />
+
+    <string name="usage_prob_6">시스템 시간이 맞지 않거나 아이콘, 글씨 등이 평소와 다른가요?</string>
+    <string name="usage_6_y">이상해요</string>
+    <string name="usage_6_y_content1">시스템 시간 불일치</string>
+    <string name="usage_6_y_content2">글씨가 너무 큼</string>
+    <string name="usage_6_y_content3">아이콘이 이상함</string>
+    <string name="usage_6_n">정상적이에요</string>
+    <string name="usage_6_n_content1">시스템 시간 일치함</string>
+    <string name="usage_6_n_content2">화면이 깨지지 않음</string>
+    <string name="usage_6_n_content3">부드러운 작동</string>
+
+    <string name="usage_prob_7">파일을 불러오는데 느리거나 중간에 멈추나요?</string>
+    <string name="usage_7_y">이상해요</string>
+    <string name="usage_7_y_content1">시간이 너무 오래걸림</string>
+    <string name="usage_7_y_content2">중간에 실패함</string>
+    <string name="usage_7_y_content3">파일이 깨짐</string>
+    <string name="usage_7_n">멀쩡해요</string>
+    <string name="usage_7_n_content1">금방 이동함</string>
+    <string name="usage_7_n_content2">실패 없음</string>
+    <string name="usage_7_n_content3">파일이 멀쩡함</string>
+
     <string name="title">%1$s에 문제가 있어요</string>
 
     <!-- 간단 솔루션 -->
+    <string name="basic_check">기본 상태 확인</string>
     <string name="simple_diagnose">빠른 해결을 위해 간단 점검 해볼게요!</string>
     <string name="avail_problems">현재 단계에서 발생 가능한 문제에요.</string>
     <string name="find_solution">해결법 찾기</string>
     <string name="complete">수리 완료</string>
 
     <!-- 솔루션 화면 -->
+    <string name="solution">문제 해결법</string>
     <string name="solutions">문제에 대한 %1$d가지 해결법이에요!</string>
     <string name="go_next">다음으로 넘어가기</string>
+
+    <!-- 솔루션 디테일 -->
+    <string name="solution_detail">해결안 템플릿</string>
 
     <!-- -->
     <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>

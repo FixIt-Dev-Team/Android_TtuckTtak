@@ -16,7 +16,6 @@ class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblem
         val surveyIdx = intent.getIntExtra("surveyIdx", 0)
         val subtitleId = intent.getIntExtra("subtitle", -1)
         val resPattern = intent.getStringExtra("pattern")
-        // val level = intent.getIntExtra("level", 0)
 
         // Title
         title.text = getString(R.string.title, getString(solutionManager.getCategory(surveyIdx)))
@@ -24,12 +23,22 @@ class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblem
         // Subtitle
         subtitle.text = getString(subtitleId)
 
-        // TODO("true/false 타이틀 등 정해지지 않음")
+        // content
+        val contentTexts = solutionManager.getContent(subtitleId)!!
+        trueSubtitle.text = getString(contentTexts[0])
+        trueContent1.text = getString(contentTexts[1])
+        trueContent2.text = getString(contentTexts[2])
+        trueContent3.text = getString(contentTexts[3])
+        falseSubtitle.text = getString(contentTexts[4])
+        falseContent1.text = getString(contentTexts[5])
+        falseContent2.text = getString(contentTexts[6])
+        falseContent3.text = getString(contentTexts[7])
 
         // 뒤로가기
         imagebuttonBack.setOnClickListener {
             finish()
         }
+
 
         // 예
         buttonY.setOnClickListener {
@@ -40,10 +49,10 @@ class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblem
 
                 intent.putExtra("surveyIdx", surveyIdx)
                 intent.putExtra("pattern", solutionManager.convertPattern(surveyIdx, pattern))
-                // TODO("level 어떻게 계산하는지 백엔드에 질문")
-                // intent.putExtra("level", level + 1)
+                intent.putExtra("level", 1)
 
                 startActivity(intent)
+                finish()
 
             } else if (solutionManager.isQuestion(surveyIdx, pattern)) {
                 val intent = Intent(this@ProblemYNActivity, ProblemYNActivity::class.java)
@@ -51,10 +60,9 @@ class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblem
                 intent.putExtra("surveyIdx", surveyIdx)
                 intent.putExtra("subtitle", solutionManager.getSubtitle(surveyIdx, pattern))
                 intent.putExtra("pattern", pattern)
-                // TODO("level 어떻게 계산하는지 백엔드에 질문")
-                // intent.putExtra("level", level + 1)
 
                 startActivity(intent)
+                finish()
 
             } else {
                 TODO("Jump to CS")
@@ -70,10 +78,10 @@ class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblem
 
                 intent.putExtra("surveyIdx", surveyIdx)
                 intent.putExtra("pattern", solutionManager.convertPattern(surveyIdx, pattern))
-                // TODO("level 어떻게 계산하는지 백엔드에 질문")
-                // intent.putExtra("level", level + 1)
+                intent.putExtra("level", 1)
 
                 startActivity(intent)
+                finish()
 
             } else if (solutionManager.isQuestion(surveyIdx, pattern)) {
                 val intent = Intent(this@ProblemYNActivity, ProblemYNActivity::class.java)
@@ -81,10 +89,8 @@ class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblem
                 intent.putExtra("surveyIdx", surveyIdx)
                 intent.putExtra("subtitle", solutionManager.getSubtitle(surveyIdx, pattern))
                 intent.putExtra("pattern", pattern)
-                // TODO("level 어떻게 계산하는지 백엔드에 질문")
-                // intent.putExtra("level", level + 1)
-
                 startActivity(intent)
+                finish()
 
             } else {
                 TODO("Jump to CS")
