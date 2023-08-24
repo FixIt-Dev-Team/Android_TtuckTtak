@@ -9,21 +9,24 @@ import com.gachon.ttuckttak.data.local.UserManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.auth.RefreshReq
+import com.gachon.ttuckttak.data.remote.service.AuthService
 
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
 
     val SPLASH_VIEW_TIME: Long = 1000
-    private val userManager: UserManager by lazy { UserManager(this@SplashActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SplashActivity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +38,7 @@ class SplashActivity : AppCompatActivity() {
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {
                         // 서버에 AccessToken 갱신 요청
-                        val response = TtukttakServer.refreshAccessToken(RefreshReq(tokenManager.getRefreshToken()!!, userManager.getUserIdx()!!))
+                        val response = authService.refreshAccessToken(RefreshReq(tokenManager.getRefreshToken()!!, userManager.getUserIdx()!!))
                         Log.i("response", response.toString())
 
                         // 토큰을 갱신하는 데 성공한 경우, 토큰 update 및 startActivity로 이동

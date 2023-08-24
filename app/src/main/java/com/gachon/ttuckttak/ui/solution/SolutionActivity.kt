@@ -8,24 +8,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
+import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionBinding
 import com.gachon.ttuckttak.utils.SolutionAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionBinding::inflate) {
+@AndroidEntryPoint
+class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionActivity) }
 
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
     private var solutionBs: MutableList<SolutionBypassDto>? = null
+
+    @Inject lateinit var solutionService: SolutionService
 
     override fun initAfterBinding() {
         val surveyIdx = intent.getIntExtra("surveyIdx", 0)
@@ -78,7 +83,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
-                val response = TtukttakServer.getSolEntries(tokenManager.getAccessToken()!!, request)
+                val response = solutionService.getSolEntries(tokenManager.getAccessToken()!!, request)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

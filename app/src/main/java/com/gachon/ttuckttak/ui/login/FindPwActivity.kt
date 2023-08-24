@@ -8,13 +8,18 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityFindPwBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding::inflate) {
+@AndroidEntryPoint
+class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding::inflate, TransitionMode.HORIZONTAL) {
+
+    @Inject lateinit var memberService: MemberService
 
     override fun initAfterBinding() {
         setClickListener()
@@ -23,46 +28,59 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
 
     private fun setClickListener() = with(binding) {
         buttonSend.setOnClickListener {
-            val email = edittextEmail.text.toString()
-
-            lifecycleScope.launch(Dispatchers.IO) {
-                try {
-                    // 서버에 비밀번호 변경 전송 요청
-                    val response = TtukttakServer.changePw(email)
-                    Log.i("response", response.toString())
-
-                    if (response.isSuccess) {
-                        // ResetPwActivity로 이동
-                        val intent = Intent(this@FindPwActivity, ResetPwActivity::class.java).apply {
-                            putExtra("email", email) // 입력한 email 값 전달하기
-                        }
-
-                        startActivity(intent)
-
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            when (response.code) {
-                                400 -> {
-                                    // 계정이 존재하지 않는 경우
-                                    textviewErrorMessage.visibility = View.VISIBLE
-                                    edittextEmail.setBackgroundResource(R.drawable.textbox_state_error)
-                                    edittextEmail.setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_red))
-                                }
-                            }
-                        }
-                    }
-
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
-                        showToast("이메일 인증 요청 실패")
-                    }
-                }
-            }
+            requestChangePw()
         }
 
         imagebuttonBack.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun requestChangePw() = with(binding) {
+        val email = edittextEmail.text.toString()
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                // 서버에 비밀번호 변경 전송 요청
+                val response = memberService.changePw(email)
+                Log.i("response", response.toString())
+
+                if (response.isSuccess) {
+                    moveToResetPwActivity(email)
+
+                } else {
+                    showError(code = response.code)
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("FindPwActivity", "서버 통신 오류: ${e.message}")
+                    showToast("이메일 인증 요청 실패")
+                }
+            }
+        }
+    }
+
+    private fun moveToResetPwActivity(email: String) {
+        val intent = Intent(this@FindPwActivity, ResetPwActivity::class.java).apply {
+            putExtra("email", email)
+        }
+        startActivity(intent)
+    }
+
+    private suspend fun showError(code: Int) = withContext(Dispatchers.Main) {
+        when (code) {
+            400 -> showNonExistingAccountError()
+        }
+    }
+
+    private fun showNonExistingAccountError() {
+        with(binding) {
+            textviewErrorMessage.visibility = View.VISIBLE
+            edittextEmail.apply {
+                setBackgroundResource(R.drawable.textbox_state_error)
+                setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_red))
+            }
         }
     }
 
@@ -72,8 +90,10 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
 
             if (hasFocus) {
                 textviewErrorMessage.visibility = View.INVISIBLE
-                edittextEmail.setBackgroundResource(R.drawable.textbox_state_focused)
-                edittextEmail.setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_black))
+                edittextEmail.apply {
+                    setBackgroundResource(R.drawable.textbox_state_focused)
+                    setTextColor(ContextCompat.getColor(this@FindPwActivity, R.color.general_theme_black))
+                }
 
             } else {
                 edittextEmail.setBackgroundResource(R.drawable.textbox_state_normal)

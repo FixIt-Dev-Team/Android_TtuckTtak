@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/ic_back"
+        android:src="@drawable/ic_arrow_left"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

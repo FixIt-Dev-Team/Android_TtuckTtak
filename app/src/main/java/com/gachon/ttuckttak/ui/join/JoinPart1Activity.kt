@@ -1,6 +1,8 @@
 package com.gachon.ttuckttak.ui.join
 
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import android.view.View
@@ -8,18 +10,23 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
-import com.gachon.ttuckttak.ui.login.LandingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate) {
+@AndroidEntryPoint
+class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate, TransitionMode.HORIZONTAL) {
+
+    @Inject lateinit var authService: AuthService
 
     override fun initAfterBinding() {
         setClickListener()
         setFocusChangeListener()
+        setTextChangeListener()
     }
 
     private fun setClickListener() = with(binding) {
@@ -29,86 +36,111 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
         }
 
         // 인증코드 보내기 버튼을 눌렀을 경우
-        buttonSend.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                try {
-                    val email = edittextEmail.text.toString()
+        buttonSend.setOnClickListener { sendEmailConfirmationRequest() }
+    }
 
-                    // 서버에 이메일 인증코드 전송 요청
-                    val response = TtukttakServer.emailConfirm(email)
-                    Log.i("response", response.toString())
+    // 이메일 인증 코드 전송 요청. 해당 API에서만 indeterminate progressbar를 사용한 이유는 외부 API 사용으로 시간이 오래걸리기 때문
+    private fun sendEmailConfirmationRequest() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                runOnUiThread {
+                    binding.progressbar.visibility = View.VISIBLE // 서버에 이메일 인증코드 전송 요청하는 동안 progress bar 보이게
+                    binding.buttonSend.isClickable = false // 요청하는 동안 재요청 하지 못하게 클릭 막기
+                }
 
-                    with(response) {
-                        if (isSuccess) { // 서버에서 이메일에 성공적으로 인증코드를 보낸 경우
-                            moveToJoinPart2Activity(email, response.data?.code)
-                        }
+                val response = authService.emailConfirm(email = binding.edittextEmail.text.toString()) // 서버에 이메일 인증코드 전송 요청
+                Log.i("response", response.toString())
 
-                        else { // 서버에서 해당 이메일에 인증코드를 보내지 않은 경우
-                            when (code) {
-                                400, 409 -> updateErrorState(message) // 이메일 형식에 맞지 않은 경우, 이미 사용중인 이메일인 경우
-                                500 -> showToast(getString(R.string.unexpected_error_occurred)) // 예상치 못한 에러
-                            }
-                        }
-                    }
+                runOnUiThread {
+                    binding.progressbar.visibility = View.INVISIBLE // 인증코드가 온 경우 progress bar 가리게
+                    binding.buttonSend.isClickable = true
+                }
 
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
-                        showToast("이메일 인증 요청 실패")
-                    }
+                with(response) {
+                    if (isSuccess) moveToJoinPart2Activity(data?.code)
+                    else handleErrorResponse(code, message)
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    showToast("이메일 인증 요청 실패")
                 }
             }
         }
     }
 
-    // email과 인증코드를 넣어 JoinPart2Activity 화면 실행하는 method
-    private fun moveToJoinPart2Activity(email: String, code: String?) {
-        val intent = Intent(this, JoinPart2Activity::class.java).apply {
-            putExtra("email", email)
-            code?.let { putExtra("code", it) } // 인증코드 값이 있는 경우 같이 전달 (null이 아닌 경우 전달)
+    // 서버의 오류 응답 처리
+    private fun handleErrorResponse(code: Int, message: String) {
+        when (code) {
+            400, 409 -> updateErrorState(message)
+            500 -> showToast(getString(R.string.unexpected_error_occurred))
         }
+    }
 
-        startActivity(intent)
+    // 이메일과 인증 코드를 가지고 JoinPart2Activity로 이동
+    private fun moveToJoinPart2Activity(code: String?) {
+        Intent(this, JoinPart2Activity::class.java).apply {
+            putExtra("email", binding.edittextEmail.text.toString())
+            code?.let { putExtra("code", it) } // 인증코드 값이 있는 경우 같이 전달 (null이 아닌 경우 전달)
+        }.also { startActivity(it) }
     }
 
     private fun setFocusChangeListener() = with(binding) {
+        // 포커스가 변경될 때마다 UI 업데이트 수행
         edittextEmail.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                updateNormalState(false)
-
-            } else {
-                validateEmailAndSetUi(email = edittextEmail.text.toString())
-            }
+            if (hasFocus) updateFocusState()
+            else validateEmailAndSetUi(email = edittextEmail.text.toString())
         }
+    }
+
+    private fun setTextChangeListener() = with(binding) {
+        edittextEmail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {
+                val email = edittextEmail.text.toString()
+                buttonSend.isEnabled = email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+            }
+        })
     }
 
     // 이메일 상태를 검증하고 UI 상태를 설정하는 함수
     private fun validateEmailAndSetUi(email: String) {
-        if (email.isEmpty()) { // 비어있는 경우
-            updateNormalState(false)
-
-        } else if (email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()) { // 이메일이 비어있지 않고 이메일 형식이 맞는 경우
-            updateNormalState(true)
-
-        } else {
-            updateErrorState(getString(R.string.invalid_email_format))
+        when {
+            email.isEmpty() -> updateNormalState() // 비어있는 경우
+            email.isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches() -> updateNormalState() // 비어있지 않고 이메일 형식이 맞는 경우
+            else -> updateErrorState(getString(R.string.invalid_email_format))
         }
     }
 
-    // EditText, 오류 메시지, 인증번호 전송 버튼을 업데이트하는 함수
-    private fun updateNormalState(enable: Boolean) = with(binding) {
-        edittextEmail.setBackgroundResource(R.drawable.textbox_state_normal) // EditText의 배경 리소스 설정
-        edittextEmail.setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_black))
+    private fun updateFocusState() = with(binding) {
+        edittextEmail.apply {
+            setBackgroundResource(R.drawable.textbox_state_focused)
+            setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_black))
+        }
         textviewErrorMessage.visibility = View.INVISIBLE
-        buttonSend.isEnabled = enable
+        buttonSend.isEnabled = false
     }
 
-    // EditText, 오류 메시지, 인증번호 전송 버튼을 업데이트하는 함수
+    // 정상 상태 UI 갱신
+    private fun updateNormalState() = with(binding) {
+        edittextEmail.apply {
+            setBackgroundResource(R.drawable.textbox_state_normal)
+            setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_black))
+        }
+        textviewErrorMessage.visibility = View.INVISIBLE
+    }
+
+    // 에러 상태 UI 갱신
     private fun updateErrorState(errorMessage: String) = with(binding) {
-        edittextEmail.setBackgroundResource(R.drawable.textbox_state_error) // EditText의 배경 리소스 설정
-        edittextEmail.setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_red))
-        textviewErrorMessage.text = errorMessage
-        textviewErrorMessage.visibility = View.VISIBLE
+        edittextEmail.apply {
+            setBackgroundResource(R.drawable.textbox_state_error)
+            setTextColor(ContextCompat.getColor(this@JoinPart1Activity, R.color.general_theme_red))
+        }
+        textviewErrorMessage.apply {
+            text = errorMessage
+            visibility = View.VISIBLE
+        }
         buttonSend.isEnabled = false
     }
 }

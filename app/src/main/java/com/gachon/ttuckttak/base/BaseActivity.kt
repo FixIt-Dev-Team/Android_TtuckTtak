@@ -17,7 +17,7 @@ import com.gachon.ttuckttak.R
 // 자동적으로 뷰 바인딩을 해주기 때문에 BaseActivity를 상속받아 필요한 것들만 넘겨주면 자동적으로 onCreate() 수행되면서 뷰 바인딩이 된다.
 abstract class BaseActivity<T : ViewBinding>(
     private val inflate: (LayoutInflater) -> T,
-    private val transitionMode: TransitionMode = TransitionMode.HORIZONTAL
+    private val transitionMode: TransitionMode
 ) : AppCompatActivity() {
 
     protected lateinit var binding: T

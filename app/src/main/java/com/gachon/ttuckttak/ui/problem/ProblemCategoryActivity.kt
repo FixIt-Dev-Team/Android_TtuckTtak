@@ -7,9 +7,9 @@ import com.gachon.ttuckttak.data.local.SolutionManager
 import com.gachon.ttuckttak.databinding.ActivityProblemCategoryBinding
 import com.gachon.ttuckttak.ui.solution.SolutionBeforeActivity
 
-class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(ActivityProblemCategoryBinding::inflate) {
+class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(ActivityProblemCategoryBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    override fun initAfterBinding() = with(binding) {
+    override fun initAfterBinding() {
         setClickListener()
     }
 

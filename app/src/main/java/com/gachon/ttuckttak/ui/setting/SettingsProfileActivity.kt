@@ -11,7 +11,6 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
@@ -21,20 +20,26 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.gachon.ttuckttak.R
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
+import com.gachon.ttuckttak.data.remote.service.MemberService
+import com.gachon.ttuckttak.data.remote.service.ViewService
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
 import com.gachon.ttuckttak.utils.RegexUtil
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.lang.Exception
+import javax.inject.Inject
 
-class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(ActivitySettingsProfileBinding::inflate) {
+@AndroidEntryPoint
+class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(ActivitySettingsProfileBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    private val userManager: UserManager by lazy { UserManager(this@SettingsProfileActivity) }
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SettingsProfileActivity) }
+    @Inject lateinit var userManager: UserManager
+    @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var memberService: MemberService
+    @Inject lateinit var viewService: ViewService
 
     private val permission = Manifest.permission.READ_MEDIA_IMAGES
 
@@ -109,7 +114,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
         buttonPasswordReset.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
                 try {
-                    val response = TtukttakServer.changePw(userManager.getUserMail()!!)
+                    val response = memberService.changePw(userManager.getUserMail()!!)
 
                     withContext(Dispatchers.Main) {
                         // 전송 성공
@@ -157,7 +162,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
                 } else if (nickname != userManager.getUserName()) {
                     lifecycleScope.launch(Dispatchers.IO) {
                         try {
-                            val response = TtukttakServer.checkNickname(nickname)
+                            val response = memberService.checkNickname(nickname)
                             Log.i("response", response.toString())
 
                             runOnUiThread {
@@ -227,7 +232,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
     private fun updateNickname(token: String) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = TtukttakServer.updateUserInfo(
+                val response = memberService.updateUserInfo(
                         authCode = token,
                         reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!),
                         file = null
@@ -259,7 +264,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
             try {
                 val file = File(userManager.getUserImagePath()!!)
                 val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                val response = TtukttakServer.updateUserInfo(
+                val response = memberService.updateUserInfo(
                     authCode = token,
                     reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!),
                     file = MultipartBody.Part.create(requestFile)

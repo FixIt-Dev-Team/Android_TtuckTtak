@@ -14,12 +14,12 @@ import retrofit2.http.*
 interface AuthService {
 
     @GET("auths/oauth2/kakao")
-    suspend fun kakaoLogin(
+    suspend fun loginWithKakao(
         @Query("code") authCode: String,
     ): BaseResponse<LoginRes>
 
     @POST("auths/oauth2/google")
-    suspend fun googleLogin(
+    suspend fun loginWithGoogle(
         @Header("Google-id-token") idToken: String,
     ): BaseResponse<LoginRes>
 

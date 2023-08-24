@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.gachon.ttuckttak.data.remote.dto.auth.TokensDto
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class TokenManager(context: Context) {
+class TokenManager @Inject constructor(@ApplicationContext context: Context) {
     private val keyGenParameterSpec = MasterKeys.AES256_GCM_SPEC
     private val masterKeyAlias = MasterKeys.getOrCreate(keyGenParameterSpec)
     private val sharedPreferences = EncryptedSharedPreferences.create(

@@ -3,7 +3,7 @@ package com.gachon.ttuckttak.ui.login
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityResetPwBinding
 
-class ResetPwActivity : BaseActivity<ActivityResetPwBinding>(ActivityResetPwBinding::inflate) {
+class ResetPwActivity : BaseActivity<ActivityResetPwBinding>(ActivityResetPwBinding::inflate, TransitionMode.HORIZONTAL) {
     // 입력한 email 받기
     private val email: String by lazy { intent.getStringExtra("email")!! }
     override fun initAfterBinding() = with(binding) {

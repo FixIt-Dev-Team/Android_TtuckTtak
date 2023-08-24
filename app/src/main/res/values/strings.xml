@@ -417,7 +417,7 @@
     <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
     <string name="join_user_password">사용하실 비밀번호를 정해주세요</string>
     <string name="invalid_nickname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
-    <string name="password_rule">대문자 혹은 특수문자가 포함되게 작성해주세요</string>
+    <string name="password_rule">9글자 이상으로, 대소문자, 숫자와 특수문자가 포함되게 작성해주세요</string>
     <string name="password_usable">사용가능한 비밀번호 입니다!</string>
     <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
     <string name="password_check">비밀번호 확인</string>

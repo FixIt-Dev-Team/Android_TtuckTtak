@@ -1,29 +1,27 @@
 package com.gachon.ttuckttak.ui.solution
 
 import android.content.Intent
-import android.media.session.MediaSession.Token
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
+import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionDescBinding
-import com.gachon.ttuckttak.ui.main.HomeActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivitySolutionDescBinding::inflate) {
+@AndroidEntryPoint
+class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivitySolutionDescBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val tokenManager : TokenManager by lazy { TokenManager(this@SolutionDescActivity) }
     private var done = false
+
+    @Inject lateinit var solutionService: SolutionService
 
     override fun initAfterBinding() = with(binding) {
         val title = intent.getStringExtra("solTitle")
@@ -69,7 +67,7 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
     private fun getSolDetail(solIdx: String, progress: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = TtukttakServer.getSolDetail(solIdx, tokenManager.getAccessToken()!!)
+                val response = solutionService.getSolDetail(solIdx, tokenManager.getAccessToken()!!)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

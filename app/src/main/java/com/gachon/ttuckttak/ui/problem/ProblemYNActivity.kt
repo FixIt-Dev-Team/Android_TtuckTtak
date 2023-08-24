@@ -1,14 +1,13 @@
 package com.gachon.ttuckttak.ui.problem
 
 import android.content.Intent
-import android.util.Log
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.SolutionManager
 import com.gachon.ttuckttak.databinding.ActivityProblemYnBinding
 import com.gachon.ttuckttak.ui.solution.SolutionBeforeActivity
 
-class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblemYnBinding::inflate) {
+class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblemYnBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val solutionManager: SolutionManager by lazy { SolutionManager(this@ProblemYNActivity) }
 

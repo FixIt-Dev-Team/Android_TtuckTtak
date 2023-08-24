@@ -10,19 +10,22 @@ import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.SolutionManager
 import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.remote.TtukttakServer
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
+import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionBeforeBinding
 import com.gachon.ttuckttak.utils.DetailAdapter
 import com.gachon.ttuckttak.utils.SolutionBeforeAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
-class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(ActivitySolutionBeforeBinding::inflate) {
+@AndroidEntryPoint
+class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(ActivitySolutionBeforeBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionBeforeActivity) }
     private val solutionManager: SolutionManager by lazy { SolutionManager(this@SolutionBeforeActivity) }
@@ -32,6 +35,8 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
     private var solutionBs: MutableList<SolutionBypassDto>? = null
 
     private var isLayoutVisible = false
+
+    @Inject lateinit var solutionService: SolutionService
 
     override fun initAfterBinding() = with(binding) {
         val surveyIdx = intent.getIntExtra("surveyIdx", 0)
@@ -87,7 +92,7 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
     private fun showDetail(solutionIdx: String, title: String) = with(binding.layoutDetail) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = TtukttakServer.getSolDetail(solutionIdx, tokenManager.getAccessToken()!!)
+                val response = solutionService.getSolDetail(solutionIdx, tokenManager.getAccessToken()!!)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
@@ -145,7 +150,7 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
-                val response = TtukttakServer.getSolEntries(tokenManager.getAccessToken()!!, request)
+                val response = solutionService.getSolEntries(tokenManager.getAccessToken()!!, request)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
