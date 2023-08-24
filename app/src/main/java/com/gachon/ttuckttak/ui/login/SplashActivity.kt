@@ -1,4 +1,4 @@
-package com.gachon.ttuckttak
+package com.gachon.ttuckttak.ui.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.remote.dto.auth.RefreshReq
 import com.gachon.ttuckttak.data.remote.service.AuthService
 
-import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers

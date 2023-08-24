@@ -15,8 +15,6 @@ import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionBeforeBinding
-import com.gachon.ttuckttak.utils.DetailAdapter
-import com.gachon.ttuckttak.utils.SolutionBeforeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

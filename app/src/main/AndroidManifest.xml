@@ -21,7 +21,7 @@
         tools:targetApi="tiramisu" >
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".ui.login.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Android_TtuckTtak.Splash">
             <intent-filter>

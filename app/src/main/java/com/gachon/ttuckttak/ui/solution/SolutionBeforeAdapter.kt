@@ -1,11 +1,11 @@
-package com.gachon.ttuckttak.utils
+package com.gachon.ttuckttak.ui.solution
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
-import com.gachon.ttuckttak.databinding.ItemSolutionBeforeBinding
+import com.gachon.ttuckttak.databinding.ViewItemSolutionBeforeBinding
 
 class SolutionBeforeAdapter(val solutionList: List<SolutionDto>) : RecyclerView.Adapter<SolutionBeforeAdapter.Holder>() {
     interface ItemClick {
@@ -14,12 +14,12 @@ class SolutionBeforeAdapter(val solutionList: List<SolutionDto>) : RecyclerView.
 
     var itemClick: ItemClick? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SolutionBeforeAdapter.Holder {
-        val binding = ItemSolutionBeforeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        val binding = ViewItemSolutionBeforeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
 
-    override fun onBindViewHolder(holder: SolutionBeforeAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.itemView.setOnClickListener {
             itemClick?.onClick(it, position)
         }
@@ -30,7 +30,7 @@ class SolutionBeforeAdapter(val solutionList: List<SolutionDto>) : RecyclerView.
         return solutionList.size
     }
 
-    inner class Holder(val binding: ItemSolutionBeforeBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(val binding: ViewItemSolutionBeforeBinding) : RecyclerView.ViewHolder(binding.root) {
         val title = binding.title
     }
 }
