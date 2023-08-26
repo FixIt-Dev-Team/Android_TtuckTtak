@@ -62,7 +62,7 @@ class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPar
                 showToast(message)
             }
         }
-     }
+    }
 
     private fun showLoadingState(isLoading: Boolean) {
         binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
