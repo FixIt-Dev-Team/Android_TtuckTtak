@@ -10,7 +10,7 @@ class StartActivity : BaseActivity<ActivityStartBinding>(ActivityStartBinding::i
 
     private val viewModel: StartViewmodel by viewModels()
 
-    override fun initAfterBinding() = with(binding) {
+    override fun initAfterBinding() {
         binding.viewmodel = viewModel
         setObservers()
     }
