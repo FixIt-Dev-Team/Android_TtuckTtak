@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.base
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,7 @@ open class BaseViewModel : ViewModel() {
         get() = _viewEvent
 
     fun viewEvent(content: Any) {
-        _viewEvent.value = Event(content)
+        Log.d("BaseViewModel", "ViewEvent called with content: $content")
+        _viewEvent.postValue(Event(content))
     }
 }

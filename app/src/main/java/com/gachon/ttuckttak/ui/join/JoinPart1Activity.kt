@@ -3,86 +3,87 @@ package com.gachon.ttuckttak.ui.join
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.Patterns
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.remote.service.AuthService
+import com.gachon.ttuckttak.base.BaseResponse
+import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
 import com.gachon.ttuckttak.databinding.ActivityJoinPart1Binding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
+
+import com.gachon.ttuckttak.ui.join.JoinPart1Viewmodel.State.*
+import com.gachon.ttuckttak.ui.join.JoinPart1Viewmodel.NavigateTo.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class JoinPart1Activity : BaseActivity<ActivityJoinPart1Binding>(ActivityJoinPart1Binding::inflate, TransitionMode.HORIZONTAL) {
 
-    @Inject lateinit var authService: AuthService
+    private val viewModel: JoinPart1Viewmodel by viewModels()
 
     override fun initAfterBinding() {
-        setClickListener()
+        binding.viewmodel = viewModel
         setFocusChangeListener()
         setTextChangeListener()
+        setObservers()
     }
 
-    private fun setClickListener() = with(binding) {
-        // 뒤로가기 버튼을 눌렀을 경우
-        imagebuttonBack.setOnClickListener {
-            finish()
+    private fun setObservers() {
+        viewModel.state.observe(this@JoinPart1Activity) { state ->
+            when (state) {
+                Loading -> showLoadingState(true)
+                Success -> showSuccessState()
+                Error -> showErrorState()
+            }
         }
 
-        // 인증코드 보내기 버튼을 눌렀을 경우
-        buttonSend.setOnClickListener { sendEmailConfirmationRequest() }
-    }
+        viewModel.viewEvent.observe(this@JoinPart1Activity) { event ->
+            event.getContentIfNotHandled()?.let { navigateTo ->
+                when (navigateTo) {
+                    is Before -> finish()
+                    is JoinPart2 -> {
+                        val intent = Intent(this, JoinPart2Activity::class.java).apply {
+                            putExtra("email", binding.edittextEmail.text.toString())
+                            putExtra("code", viewModel.response.value!!.data!!.code)
+                        }
 
-    // 이메일 인증 코드 전송 요청. 해당 API에서만 indeterminate progressbar를 사용한 이유는 외부 API 사용으로 시간이 오래걸리기 때문
-    private fun sendEmailConfirmationRequest() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                runOnUiThread {
-                    binding.progressbar.visibility = View.VISIBLE // 서버에 이메일 인증코드 전송 요청하는 동안 progress bar 보이게
-                    binding.buttonSend.isClickable = false // 요청하는 동안 재요청 하지 못하게 클릭 막기
-                }
-
-                val response = authService.emailConfirm(email = binding.edittextEmail.text.toString()) // 서버에 이메일 인증코드 전송 요청
-                Log.i("response", response.toString())
-
-                runOnUiThread {
-                    binding.progressbar.visibility = View.INVISIBLE // 인증코드가 온 경우 progress bar 가리게
-                    binding.buttonSend.isClickable = true
-                }
-
-                with(response) {
-                    if (isSuccess) moveToJoinPart2Activity(data?.code)
-                    else handleErrorResponse(code, message)
-                }
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    showToast("이메일 인증 요청 실패")
+                        startActivity(intent)
+                    }
                 }
             }
         }
+
+        // 일회성 show toast
+        lifecycleScope.launch {
+            viewModel.showToastEvent.collect { message ->
+                showToast(message)
+            }
+        }
+     }
+
+    private fun showLoadingState(isLoading: Boolean) {
+        binding.progressbar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+        binding.buttonSend.isClickable = !isLoading
+    }
+
+    private fun showSuccessState() {
+        showLoadingState(false)
+        updateNormalState()
+    }
+
+    private fun showErrorState() {
+        showLoadingState(false)
+        handleErrorResponse(viewModel.response.value!!)
     }
 
     // 서버의 오류 응답 처리
-    private fun handleErrorResponse(code: Int, message: String) {
+    private fun handleErrorResponse(response: BaseResponse<EmailConfirmRes>) = with(response) {
         when (code) {
             400, 409 -> updateErrorState(message)
-            500 -> showToast(getString(R.string.unexpected_error_occurred))
         }
-    }
-
-    // 이메일과 인증 코드를 가지고 JoinPart2Activity로 이동
-    private fun moveToJoinPart2Activity(code: String?) {
-        Intent(this, JoinPart2Activity::class.java).apply {
-            putExtra("email", binding.edittextEmail.text.toString())
-            code?.let { putExtra("code", it) } // 인증코드 값이 있는 경우 같이 전달 (null이 아닌 경우 전달)
-        }.also { startActivity(it) }
     }
 
     private fun setFocusChangeListener() = with(binding) {
