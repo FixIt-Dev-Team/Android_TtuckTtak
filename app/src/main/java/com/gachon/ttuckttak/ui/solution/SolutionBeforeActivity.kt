@@ -2,19 +2,18 @@ package com.gachon.ttuckttak.ui.solution
 
 import android.content.Intent
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.local.SolutionManager
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionBeforeBinding
+import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,13 +25,12 @@ import javax.inject.Inject
 class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(ActivitySolutionBeforeBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionBeforeActivity) }
-    private val solutionManager: SolutionManager by lazy { SolutionManager(this@SolutionBeforeActivity) }
 
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
     private var solutionBs: MutableList<SolutionBypassDto>? = null
 
-    private var isLayoutVisible = false
+    private var detailVisible = false
 
     @Inject lateinit var solutionService: SolutionService
 
@@ -47,10 +45,11 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
 
         getSolution(surveyIdx, resPattern, level)
         setClickListener(surveyIdx, resPattern, level)
-        setTouchListener()
+        mainFrame.addPanelSlideListener(PanelEventListener())
     }
 
     private fun setClickListener(surveyIdx: Int, pattern: Int, level: Int) = with(binding) {
+
         fieldButtonBack.setOnClickListener {
             finish()
         }
@@ -82,12 +81,14 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
         adapter.itemClick = object : SolutionBeforeAdapter.ItemClick {
             // 솔루션 버튼 클릭 시 디테일 레이아웃 표시
             override fun onClick(view: View, position: Int) {
-                showDetail(solutions!![position].solIdx, solutions!![position].descHeader)
+                if (!detailVisible){
+                    showDetail(solutions!![position].solIdx)
+                }
             }
         }
     }
 
-    private fun showDetail(solutionIdx: String, title: String) = with(binding.layoutDetail) {
+    private fun showDetail(solutionIdx: String) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = solutionService.getSolDetail(solutionIdx, tokenManager.getAccessToken()!!)
@@ -103,11 +104,11 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
                         Log.i(TAG, "subContent: ${data.subContent}")
 
                         // Detail Title
-                        textviewTitle.text = title
+                        textviewTitle.text = data.content
                         // Detail Content Title
                         textviewLevelATitle.text = data.detailHeader
                         // Detail Content Text
-                        val contentList: List<String> = data.content.split("\\n")
+                        val contentList: List<String> = data.subContent.split("\\n ")
                         val adapter = DetailAdapter(contentList)
                         recyclerviewContent.adapter = adapter
                         recyclerviewContent.layoutManager = LinearLayoutManager(this@SolutionBeforeActivity, LinearLayoutManager.VERTICAL, false)
@@ -120,12 +121,10 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
                                 .into(imageContent)
                         }
 
-                        if (!isLayoutVisible) {
-                            root.visibility = View.VISIBLE
-                            root.translationY = root.height.toFloat()
-                            root.translationZ = Float.MAX_VALUE // 가장 위로 나오게
-                            root.animate().translationY(0f).setDuration(300).start()
-                            isLayoutVisible = true
+                        val state = mainFrame.panelState
+                        // 닫힌 상태일 경우 열기
+                        if (state == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                            mainFrame.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
                         }
 
                     } else {
@@ -177,7 +176,7 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
                         // 발생 가능한 문제 설정
                         textAvailProblems.text = solutionPs?.joinToString("\n")
 
-                        // TODO("solutions에 따라 동적 버튼 생성")
+                        // solutions에 따라 동적 버튼 생성
                         solutionBtn()
 
                     } else {
@@ -196,35 +195,21 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
         }
     }
 
-    private fun setTouchListener() = with(binding) {
-        layoutRoot.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                closeLayout()
-                return@setOnTouchListener true
-            }
-            false
+    inner class PanelEventListener : SlidingUpPanelLayout.PanelSlideListener {
+        // 패널이 슬라이드 중일 때
+        override fun onPanelSlide(panel: View?, slideOffset: Float) {
+            detailVisible = true
         }
 
-        fieldScroll.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                closeLayout()
-                return@setOnTouchListener true
+        // 패널의 상태가 변했을 때
+        override fun onPanelStateChanged(panel: View?, previousState: SlidingUpPanelLayout.PanelState?, newState: SlidingUpPanelLayout.PanelState?) {
+            if (newState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+                detailVisible = false
+            } else if (newState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+                detailVisible = true
             }
-            false
-        }
-
-        layoutDetail.root.setOnTouchListener { _, _ -> true }
-    }
-    // detail layout 비표시
-    private fun closeLayout() = with(binding.layoutDetail) {
-        if (isLayoutVisible) {
-            root.animate().translationY(root.height.toFloat()).setDuration(300).withEndAction {
-                root.visibility = View.GONE
-            }.start()
-            isLayoutVisible = false
         }
     }
-
 
     companion object {
         const val TAG = "Before Solution"

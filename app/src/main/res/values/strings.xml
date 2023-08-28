@@ -221,7 +221,7 @@
     <string name="simple_diagnose">빠른 해결을 위해 간단 점검 해볼게요!</string>
     <string name="avail_problems">현재 단계에서 발생 가능한 문제에요.</string>
     <string name="find_solution">해결법 찾기</string>
-    <string name="complete">수리 완료</string>
+    <string name="complete">완료</string>
 
     <!-- 솔루션 화면 -->
     <string name="solution">문제 해결법</string>

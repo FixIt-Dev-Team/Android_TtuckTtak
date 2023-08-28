@@ -8,22 +8,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.dao.DiagnosisDao
+import com.gachon.ttuckttak.data.local.entity.Diagnosis
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Date
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionActivity) }
+    @Inject lateinit var diagnosisDao: DiagnosisDao
 
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
@@ -69,10 +75,15 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
         adapter.setItemClickListener(object: SolutionAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
+                val solution = solutionList[position]
+
+                CoroutineScope(Dispatchers.Default).launch {
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
+                    diagnosisDao.insertDiagnosis(Diagnosis(tokenManager.getAccessToken()!! ,solution.descHeader, dateFormat.format(Date(System.currentTimeMillis()))))
+                }
                 val intent = Intent(this@SolutionActivity, SolutionDescActivity::class.java)
-                intent.putExtra("solIdx", solutionList[position].solIdx)
+                intent.putExtra("solIdx", solution.solIdx)
                 intent.putExtra("progress", 0)
-                intent.putExtra("solTitle", solutionList[position].descHeader)
                 startActivity(intent)
             }
         })

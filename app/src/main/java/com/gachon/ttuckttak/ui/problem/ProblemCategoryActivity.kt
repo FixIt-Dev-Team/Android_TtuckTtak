@@ -29,6 +29,7 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
             intent.putExtra("pattern", "")
 
             startActivity(intent)
+            finish()
         }
 
         buttonDisplayProb.setOnClickListener {
@@ -38,6 +39,7 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
             intent.putExtra("pattern", "1")
 
             startActivity(intent)
+            finish()
         }
 
         buttonUseProb.setOnClickListener {
@@ -48,6 +50,7 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
             intent.putExtra("pattern", "")
 
             startActivity(intent)
+            finish()
         }
 
         buttonAccProb.setOnClickListener {
@@ -58,6 +61,7 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
             intent.putExtra("pattern", "")
 
             startActivity(intent)
+            finish()
         }
 
         buttonAsk.setOnClickListener {

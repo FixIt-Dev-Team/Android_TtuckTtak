@@ -2,12 +2,18 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e6bd9c7413bedd38effff54a4dac0f5a",
+    "identityHash": "a57ab30be485aa8444e966247cea3c86",
     "entities": [
       {
         "tableName": "Diagnosis",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`context` TEXT NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY(`context`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userIdx` TEXT NOT NULL, `context` TEXT NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY(`userIdx`))",
         "fields": [
+          {
+            "fieldPath": "userIdx",
+            "columnName": "userIdx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
           {
             "fieldPath": "context",
             "columnName": "context",
@@ -24,7 +30,7 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "context"
+            "userIdx"
           ]
         },
         "indices": [],
@@ -34,7 +40,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e6bd9c7413bedd38effff54a4dac0f5a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a57ab30be485aa8444e966247cea3c86')"
     ]
   }
 }
