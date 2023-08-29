@@ -24,4 +24,7 @@ object DatabaseModule {
     @Provides
     fun provideDiagnosisDao(database: AppDatabase) = database.diagnosisDao()
 
+    @Provides
+    fun provideUserDao(database: AppDatabase) = database.userDao()
+
 }

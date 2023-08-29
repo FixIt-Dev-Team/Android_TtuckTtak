@@ -35,6 +35,62 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userIdx` TEXT NOT NULL, `userName` TEXT NOT NULL, `email` TEXT NOT NULL, `profileImgUrl` TEXT NOT NULL, `accountType` TEXT NOT NULL, `pushStatus` INTEGER NOT NULL, `nightPushStatus` INTEGER NOT NULL, PRIMARY KEY(`userIdx`))",
+        "fields": [
+          {
+            "fieldPath": "userIdx",
+            "columnName": "userIdx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profileImgUrl",
+            "columnName": "profileImgUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accountType",
+            "columnName": "accountType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pushStatus",
+            "columnName": "pushStatus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nightPushStatus",
+            "columnName": "nightPushStatus",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "userIdx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
