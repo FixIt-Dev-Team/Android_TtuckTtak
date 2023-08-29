@@ -67,6 +67,9 @@
     <string name="windows">현재 버전의 뚝딱은 Window 기반의 데스크탑 위주로\n진단 및 문제 해결을 도와드리고 있어요.</string>
     <string name="contact_ttukttak">도움 받으실 수 없을 경우, 뚝딱 센터에 연락주세요!</string>
     <string name="ask">문의하기</string>
+    <string name="ask_desc">아래 이메일로 문의를 넣어주세요!\n아래 확인을 클릭하면\n주소가 자동으로 복사돼요.</string>
+    <string name="confirm">확인</string>
+    <string name="copied">클립보드에 복사되었습니다.</string>
 
     <!-- Problem Y/N 화면 -->
     <string name="yes">네</string>

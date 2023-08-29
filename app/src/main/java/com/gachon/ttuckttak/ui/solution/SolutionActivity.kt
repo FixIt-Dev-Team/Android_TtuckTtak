@@ -1,7 +1,10 @@
 package com.gachon.ttuckttak.ui.solution
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +37,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
     private var solutionBs: MutableList<SolutionBypassDto>? = null
+    private var isLayoutVisible = false
 
     @Inject lateinit var solutionService: SolutionService
 
@@ -48,6 +52,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
         getSolution(surveyIdx, pattern, level)
         setClickListener()
+        setTouchListner()
     }
 
     private fun setClickListener() = with(binding) {
@@ -60,7 +65,11 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         }
 
         buttonCs.setOnClickListener {
-            TODO("고객센터 연결")
+            showLayout()
+        }
+
+        layoutCs.buttonConfirm.setOnClickListener {
+            closeLayout()
         }
 
         buttonComplete.setOnClickListener {
@@ -139,6 +148,46 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                     showToast("솔루션 검색 실패")
                 }
             }
+        }
+    }
+
+    private fun setTouchListner() = with(binding) {
+        layoutRoot.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                closeLayout()
+                return@setOnTouchListener true
+            }
+            false
+        }
+
+        layoutCs.root.setOnTouchListener { _, _ -> true }
+
+        layoutCs.textviewEmail.setOnTouchListener { _, event ->
+            val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
+            clipboard.setPrimaryClip(clipData)
+            return@setOnTouchListener true
+        }
+    }
+
+    // CS 화면 표시
+    private fun showLayout() = with(binding.layoutCs) {
+        if (!isLayoutVisible) {
+            root.visibility = View.VISIBLE
+            root.translationY = root.height.toFloat()
+            root.translationZ = Float.MAX_VALUE // 가장 큰 값을 줌으로써 인증하기 버튼 위로 나오게
+            root.animate().translationY(0f).setDuration(300).start()
+            isLayoutVisible = true
+        }
+    }
+
+    // CS 화면 닫기
+    private fun closeLayout() = with(binding.layoutCs) {
+        if (isLayoutVisible) {
+            root.animate().translationY(root.height.toFloat()).setDuration(300).withEndAction {
+                root.visibility = View.GONE
+            }.start()
+            isLayoutVisible = false
         }
     }
 
