@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e6bd9c7413bedd38effff54a4dac0f5a",
+    "identityHash": "be91c38af2a8289d47deddc078d21bb6",
     "entities": [
       {
         "tableName": "Diagnosis",
@@ -29,12 +29,68 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userIdx` TEXT NOT NULL, `userName` TEXT NOT NULL, `email` TEXT NOT NULL, `profileImgUrl` TEXT NOT NULL, `accountType` TEXT NOT NULL, `pushStatus` INTEGER NOT NULL, `nightPushStatus` INTEGER NOT NULL, PRIMARY KEY(`userIdx`))",
+        "fields": [
+          {
+            "fieldPath": "userIdx",
+            "columnName": "userIdx",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profileImgUrl",
+            "columnName": "profileImgUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accountType",
+            "columnName": "accountType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pushStatus",
+            "columnName": "pushStatus",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nightPushStatus",
+            "columnName": "nightPushStatus",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "userIdx"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e6bd9c7413bedd38effff54a4dac0f5a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'be91c38af2a8289d47deddc078d21bb6')"
     ]
   }
 }
