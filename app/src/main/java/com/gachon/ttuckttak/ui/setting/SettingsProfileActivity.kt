@@ -23,6 +23,7 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.data.remote.service.ViewService
+import com.gachon.ttuckttak.repository.UserRepository
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
 import com.gachon.ttuckttak.utils.RegexUtil
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +41,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
     @Inject lateinit var tokenManager: TokenManager
     @Inject lateinit var memberService: MemberService
     @Inject lateinit var viewService: ViewService
+    @Inject lateinit var userRepository: UserRepository
 
     private val permission = Manifest.permission.READ_MEDIA_IMAGES
 
@@ -55,17 +57,26 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
         setTouchListener()
     }
 
-    private fun setUi() = with(binding) {
-        edittextNickname.setText(userManager.getUserName())
-        textviewUserEmail.text = userManager.getUserMail()
+    private fun setUi() = lifecycleScope.launch(Dispatchers.Default) {
+        val info = userRepository.getUserProfile()!!
 
-        if (userManager.getUserImageUrl().isNullOrEmpty()) {
-            imageProfile.setImageDrawable(AppCompatResources.getDrawable(this@SettingsProfileActivity, R.drawable.img_profile))
+        runOnUiThread {
+            binding.edittextNickname.setText(info.userName)
+            binding.textviewUserEmail.text = info.email
 
-        } else {
-            Glide.with(this@SettingsProfileActivity)
-                .load(userManager.getUserImageUrl())
-                .into(imageProfile)
+            if (info.profileImgUrl.isNullOrEmpty()) {
+                binding.imageProfile.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        this@SettingsProfileActivity,
+                        R.drawable.img_profile
+                    )
+                )
+
+            } else {
+                Glide.with(this@SettingsProfileActivity)
+                    .load(info.profileImgUrl)
+                    .into(binding.imageProfile)
+            }
         }
     }
 
