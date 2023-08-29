@@ -1,33 +1,43 @@
 package com.gachon.ttuckttak.ui.solution
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.dao.DiagnosisDao
+import com.gachon.ttuckttak.data.local.entity.Diagnosis
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.Date
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionActivity) }
+    @Inject lateinit var diagnosisDao: DiagnosisDao
 
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
     private var solutionBs: MutableList<SolutionBypassDto>? = null
+    private var isLayoutVisible = false
 
     @Inject lateinit var solutionService: SolutionService
 
@@ -42,6 +52,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
         getSolution(surveyIdx, pattern, level)
         setClickListener()
+        setTouchListner()
     }
 
     private fun setClickListener() = with(binding) {
@@ -54,7 +65,11 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         }
 
         buttonCs.setOnClickListener {
-            TODO("고객센터 연결")
+            showLayout()
+        }
+
+        layoutCs.buttonConfirm.setOnClickListener {
+            closeLayout()
         }
 
         buttonComplete.setOnClickListener {
@@ -69,10 +84,15 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
         adapter.setItemClickListener(object: SolutionAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
+                val solution = solutionList[position]
+
+                CoroutineScope(Dispatchers.Default).launch {
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
+                    diagnosisDao.insertDiagnosis(Diagnosis(tokenManager.getAccessToken()!! ,solution.descHeader, dateFormat.format(Date(System.currentTimeMillis()))))
+                }
                 val intent = Intent(this@SolutionActivity, SolutionDescActivity::class.java)
-                intent.putExtra("solIdx", solutionList[position].solIdx)
+                intent.putExtra("solIdx", solution.solIdx)
                 intent.putExtra("progress", 0)
-                intent.putExtra("solTitle", solutionList[position].descHeader)
                 startActivity(intent)
             }
         })
@@ -128,6 +148,46 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                     showToast("솔루션 검색 실패")
                 }
             }
+        }
+    }
+
+    private fun setTouchListner() = with(binding) {
+        layoutRoot.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                closeLayout()
+                return@setOnTouchListener true
+            }
+            false
+        }
+
+        layoutCs.root.setOnTouchListener { _, _ -> true }
+
+        layoutCs.textviewEmail.setOnTouchListener { _, event ->
+            val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
+            clipboard.setPrimaryClip(clipData)
+            return@setOnTouchListener true
+        }
+    }
+
+    // CS 화면 표시
+    private fun showLayout() = with(binding.layoutCs) {
+        if (!isLayoutVisible) {
+            root.visibility = View.VISIBLE
+            root.translationY = root.height.toFloat()
+            root.translationZ = Float.MAX_VALUE // 가장 큰 값을 줌으로써 인증하기 버튼 위로 나오게
+            root.animate().translationY(0f).setDuration(300).start()
+            isLayoutVisible = true
+        }
+    }
+
+    // CS 화면 닫기
+    private fun closeLayout() = with(binding.layoutCs) {
+        if (isLayoutVisible) {
+            root.animate().translationY(root.height.toFloat()).setDuration(300).withEndAction {
+                root.visibility = View.GONE
+            }.start()
+            isLayoutVisible = false
         }
     }
 

@@ -51,8 +51,69 @@
         android:layout_width="match_parent"
         android:layout_height="16dp"
         android:layout_marginTop="14dp"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginHorizontal="13dp"
         app:layout_constraintTop_toBottomOf="@id/textview_subtitle">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_2_first"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:tint="@color/system_theme_gray"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_2_second"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:tint="@color/system_theme_gray"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_3_first"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:tint="@color/system_theme_gray"
+            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_3_second"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:tint="@color/system_theme_gray"
+            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_3_third"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:tint="@color/system_theme_gray"
+            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

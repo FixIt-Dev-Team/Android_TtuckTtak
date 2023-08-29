@@ -2,6 +2,8 @@ package com.gachon.ttuckttak.ui.solution
 
 import android.content.Intent
 import android.util.Log
+import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.R
@@ -24,26 +26,47 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
     @Inject lateinit var solutionService: SolutionService
 
     override fun initAfterBinding() = with(binding) {
-        val title = intent.getStringExtra("solTitle")
         val solIdx = intent.getStringExtra("solIdx")
         val progress = intent.getIntExtra("progress", 0)
 
-        textviewTitle.text = title
-
         getSolDetail(solIdx!!, progress)
-        setClickListener(title!!, solIdx, progress)
+        setClickListener(solIdx, progress)
     }
 
     private fun setProgress(maxN: Int, nowN: Int) = with(binding) {
         Log.i(TAG, "progress: ${nowN + 1} of $maxN")
+        val progress2 = arrayListOf(progress2First, progress2Second)
+        val progress3 = arrayListOf(progress3First, progress3Second, progress3Third)
+
+        // 완료 여부 확인
         if (maxN == nowN + 1) {
             done = true
+            buttonComplete.background = AppCompatResources.getDrawable(this@SolutionDescActivity, R.drawable.bg_rectangle_round)
             buttonComplete.text = getString(R.string.complete)
+            buttonComplete.setTextColor(getColor(R.color.general_theme_white))
         }
+
         // TODO("Progress Bar")
+        if (maxN == 2) {
+            for (bar in progress2) {
+                bar.visibility = View.VISIBLE
+            }
+            for (i in 0..nowN) {
+                progress2[i].setColorFilter(getColor(R.color.main_theme_blue))
+            }
+        } else if (maxN == 3) {
+            for (bar in progress3) {
+                bar.visibility = View.VISIBLE
+            }
+            for (i in 0..nowN) {
+                progress3[i].setColorFilter(getColor(R.color.main_theme_blue))
+            }
+        } else {
+            Log.e(TAG, "Progress number doesn't match")
+        }
     }
 
-    private fun setClickListener(title: String, solIdx: String ,progress: Int) = with(binding) {
+    private fun setClickListener(solIdx: String ,progress: Int) = with(binding) {
         buttonBack.setOnClickListener {
             finish()
         }
@@ -51,11 +74,8 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
         buttonComplete.setOnClickListener {
             if (done) {
                 finish()
-
-                // TODO("완료 시 어떻게 동작할지?")
             } else {
                 val intent = Intent(this@SolutionDescActivity, SolutionDescActivity::class.java)
-                intent.putExtra("solTitle", title)
                 intent.putExtra("solIdx", solIdx)
                 intent.putExtra("progress", progress + 1)
                 startActivity(intent)
@@ -80,23 +100,20 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
                         Log.i(TAG, "subContent: ${data.subContent}")
 
                         // 타이틀 설정
-                        textContent.text = data.detailHeader
+                        textviewTitle.text = data.content
 
                         // 콘텐트 설정
-                        val contents: List<String> = data.content.split("\\n")
-                        textDescription.text = contents[progress]
+                        val subcontents: List<String> = data.subContent.split("\\n ")
+                        textContent.text = data.detailHeader
+                        textDescription.text = subcontents[progress]
 
                         // 프로그레스 바 설정
-                        setProgress(contents.size, progress)
+                        setProgress(subcontents.size, progress)
 
                         // 이미지 설정
-                        if (data.imageUrls.isEmpty()){
-                            Log.i(SolutionBeforeActivity.TAG, "이미지 로딩 실패")
-                        } else {
-                            Glide.with(this@SolutionDescActivity)
-                                .load(data.imageUrls[0])
-                                .into(image)
-                        }
+                        Glide.with(this@SolutionDescActivity)
+                            .load(data.imageUrls[progress])
+                            .into(image)
                     }
                 }
 

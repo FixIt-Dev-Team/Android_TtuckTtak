@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Diagnosis(
-    @PrimaryKey
+    @PrimaryKey val userIdx: String,
     val context: String,
     val date: String
 )
