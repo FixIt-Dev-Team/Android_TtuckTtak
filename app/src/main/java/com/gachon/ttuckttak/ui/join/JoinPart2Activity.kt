@@ -115,8 +115,15 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         startTimer()
     }
 
-    private fun updateTimerText() {
-        runOnUiThread { binding.textviewTimer.text = "${time / 60} : ${time % 60}" }
+    private fun updateTimerText() = with(binding){
+        runOnUiThread {
+            val min = time / 60
+            val sec = time % 60
+            if(sec < 10) {
+                textviewTimer.text = "${min} :" + "0" + "${sec}"
+            } else { textviewTimer.text = "${min} : ${sec}" }
+            //textviewTimer.text = "${time / 60} : ${time % 60}"
+        }
     }
 
     private fun handleTimerExpiration() = with(binding) {
