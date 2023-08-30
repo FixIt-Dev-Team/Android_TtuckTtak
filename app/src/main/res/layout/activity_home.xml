@@ -9,176 +9,129 @@
             type="com.gachon.ttuckttak.ui.main.HomeViewModel" />
     </data>
 
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        app:umanoDragView="@id/dragView"
-        app:umanoOverlay="true"
-        app:umanoPanelHeight="82dp"
-        app:umanoShadowHeight="19dp"
-        tools:context=".ui.main.HomeActivity">
-        <!-- gravity 를 bottom으로 하면 아래에서 위로 드래그, top으로 하면 위에서 아래로 드래그 할 수 있다.
-             umanoDragView 드래그 해서 보여줄 view를 선택
-             umanoScrollableView  슬라이딩 패널에 내용물이 패널에 표시되는것보다 많을 때 스크롤 해서 보여줄 view 부분
-             umanoParallaxOffset 에 값을 주면 해당 높이만큼 뒤에 화면을 올려준다.
-             umanoShadowHeight 는 슬라이딩 패널 윗부분에 그림자 효과
-             umanoOverlay 를 false로 해주면 슬라이딩 패널이 위로 보이고 뒷 부분은 반투명하게 보인다. -->
+        android:background="@color/main_theme_blue">
+
+        <ImageButton
+            android:id="@+id/imagebutton_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_setting"
+            android:contentDescription="settingButton"
+            android:onClick="@{() -> viewmodel.startSettingsActivity()}"
+            app:layout_constraintBottom_toTopOf="@id/textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="@string/text_start"
+            android:textColor="@color/general_theme_white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/imagebutton_start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.75" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/home_animation" />
+
+        <ImageButton
+            android:id="@+id/imagebutton_start"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/circle"
+            android:src="@drawable/img_logo"
+            android:onClick="@{() -> viewmodel.startProblemCategoryActivity()}"
+            android:contentDescription="ttukttakButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_latest"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/main_theme_blue">
+            android:layout_height="123dp"
+            android:layout_marginHorizontal="13dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/system_theme_subwhite"
+            android:paddingHorizontal="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagebutton_start"
+            app:layout_constraintVertical_bias="0.146">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:fontFamily="@font/noto_sans_kr_bold"
-                android:text="@string/text_start"
-                android:textColor="@color/general_theme_white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/imagebutton_start"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:includeFontPadding="false"
+                android:text="@string/latest_result"
+                android:textColor="@color/system_theme_gray"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.75" />
+                app:layout_constraintVertical_bias="0.25" />
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/lottieView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/home_animation" />
-
-            <ImageButton
-                android:id="@+id/imagebutton_start"
-                android:layout_width="230dp"
-                android:layout_height="230dp"
-                android:background="@drawable/circle"
-                android:src="@drawable/img_logo"
-                android:onClick="@{() -> viewmodel.startProblemCategoryActivity()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- Todo: 디자인 수정 -->
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_latest"
-                android:layout_width="match_parent"
-                android:layout_height="123dp"
-                android:layout_marginHorizontal="13dp"
-                android:background="@drawable/bg_rectangle_round"
-                android:backgroundTint="@color/system_theme_subwhite"
-                android:paddingHorizontal="30dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imagebutton_start"
-                app:layout_constraintVertical_bias="0.146">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_kr_bold"
-                    android:includeFontPadding="false"
-                    android:text="@string/latest_result"
-                    android:textColor="@color/system_theme_gray"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.25" />
-
-                <TextView
-                    android:id="@+id/textview_latest_result_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_kr_bold"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/general_theme_black"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="부팅디스크(SSD) 접촉불량" />
-
-                <TextView
-                    android:id="@+id/textview_latest_result_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_kr_bold"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/system_theme_gray"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.75"
-                    tools:text="2023.04.16 00:00" />
-
-                <ImageView
-                    android:layout_width="7.5dp"
-                    android:layout_height="13dp"
-                    android:src="@drawable/ic_arrow_right"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/system_theme_gray" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <!-- 올라오는 화면을 꽉 채우고 싶다면 match_parent, 내용물 만큼만 보이고 뒷 배경이 반투명처리로 보이고 싶다면 wrap_content-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/dragView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_slider"
-            android:clickable="true"
-            android:focusable="false">
-
-            <ImageView
-                android:id="@+id/slide_arrow"
+            <TextView
+                android:id="@+id/textview_latest_result_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_arrow_up"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:textColor="@color/general_theme_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="부팅디스크(SSD) 접촉불량" />
+
+            <TextView
+                android:id="@+id/textview_latest_result_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:textColor="@color/system_theme_gray"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.75"
+                tools:text="2023.04.16 00:00" />
+
+            <ImageView
+                android:layout_width="7.5dp"
+                android:layout_height="13dp"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:layout_marginTop="82dp"
-                android:background="@drawable/bg_slider"
-                android:paddingHorizontal="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/button_setting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_setting"
-                    android:onClick="@{() -> viewmodel.startSettingsActivity()}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/system_theme_gray" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
