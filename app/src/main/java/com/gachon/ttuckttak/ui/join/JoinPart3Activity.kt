@@ -16,7 +16,6 @@ import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
-import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
 import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
 import com.gachon.ttuckttak.ui.terms.TermsUseActivity
@@ -74,7 +73,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                    Log.e("JoinPart3Activity", "서버 통신 오류: ${e.message}")
                     showToast("회원가입 요청 실패")
                 }
             }
@@ -198,7 +197,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                         } catch (e: Exception) {
                             runOnUiThread {
                                 validNickname = false
-                                Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                                Log.e("JoinPart3Activity", "서버 통신 오류: ${e.message}")
                                 showToast("닉네임 사용 가능 요청 실패")
                             }
                         }

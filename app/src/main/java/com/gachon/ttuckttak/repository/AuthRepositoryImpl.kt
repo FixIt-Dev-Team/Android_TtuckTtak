@@ -25,6 +25,14 @@ class AuthRepositoryImpl @Inject constructor(
         return authService.login(LoginReq(userId = email, userPw = pw))
     }
 
+    override suspend fun loginWithKakaoAccount(authCode: String): BaseResponse<LoginRes> {
+        return authService.loginWithKakao(authCode)
+    }
+
+    override suspend fun loginWithGoogleAccount(idToken: String): BaseResponse<LoginRes> {
+        return authService.loginWithGoogle(idToken)
+    }
+
     override suspend fun logout(): BaseResponse<LogoutRes> {
         return authService.logout(LogoutReq(userManager.getUserIdx()!!))
     }

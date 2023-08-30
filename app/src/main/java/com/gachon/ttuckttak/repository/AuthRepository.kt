@@ -10,6 +10,10 @@ interface AuthRepository {
 
     suspend fun login(email: String, pw: String): BaseResponse<LoginRes>
 
+    suspend fun loginWithKakaoAccount(authCode: String): BaseResponse<LoginRes>
+
+    suspend fun loginWithGoogleAccount(idToken: String): BaseResponse<LoginRes>
+
     suspend fun logout(): BaseResponse<LogoutRes>
 
     suspend fun saveUserInfo(data: LoginRes)

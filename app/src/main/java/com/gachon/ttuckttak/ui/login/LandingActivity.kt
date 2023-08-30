@@ -4,39 +4,33 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.BuildConfig
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
-import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityLandingBinding
 import com.gachon.ttuckttak.ui.join.JoinPart1Activity
 import com.gachon.ttuckttak.ui.main.StartActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.kakao.sdk.common.KakaoSdk
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
+
+import com.gachon.ttuckttak.ui.login.LandingViewmodel.NavigateTo.*
 
 @AndroidEntryPoint
-class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBinding::inflate, TransitionMode.HORIZONTAL) {
+class LandingActivity : BaseActivity<ActivityLandingBinding>(
+    ActivityLandingBinding::inflate,
+    TransitionMode.HORIZONTAL
+) {
 
-    @Inject lateinit var userManager: UserManager
-    @Inject lateinit var tokenManager: TokenManager
-    @Inject lateinit var authService: AuthService
+    private val viewModel: LandingViewmodel by viewModels()
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        KakaoSdk.init(this, BuildConfig.KAKAO_NATIVE_APP_KEY)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
@@ -46,11 +40,32 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
         googleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
-    override fun initAfterBinding() = with(binding) {
-        buttonRegular.setOnClickListener {
-            startNextActivity(JoinPart1Activity::class.java)
+    override fun initAfterBinding() {
+        binding.viewmodel = viewModel
+        setObservers()
+        setClickListener()
+    }
+
+    private fun setObservers() {
+        viewModel.viewEvent.observe(this@LandingActivity) { event ->
+            event.getContentIfNotHandled()?.let { navigateTo ->
+                when (navigateTo) {
+                    is Start -> startNextActivity(StartActivity::class.java)
+                    is Login -> startNextActivity(LoginActivity::class.java)
+                    is JoinPart1 -> startNextActivity(JoinPart1Activity::class.java)
+                }
+            }
         }
 
+        // 일회성 show toast
+        lifecycleScope.launch {
+            viewModel.showToastEvent.collect { message ->
+                showToast(message)
+            }
+        }
+    }
+
+    private fun setClickListener() = with(binding) {
         imagebuttonKakao.setOnClickListener {
             val intent = Intent(this@LandingActivity, KakaoLoginWebViewActivity::class.java)
             kakaoLoginLauncher.launch(intent)
@@ -60,10 +75,6 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
             val intent = googleSignInClient.signInIntent
             googleLoginLauncher.launch(intent)
         }
-
-        textviewSignIn.setOnClickListener {
-            startNextActivity(LoginActivity::class.java)
-        }
     }
 
     private val kakaoLoginLauncher = registerForActivityResult(
@@ -71,11 +82,12 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             result.data?.getStringExtra("authCode")?.let { authCode ->
-                Log.i(TAG, "카카오 auth code: $authCode")
-                loginWithOauth(param = authCode, method = LoginMethod.KAKAO)
+                Log.i("LOGIN", "카카오 auth code: $authCode")
+                viewModel.loginWithKakaoAccount(authCode)
             }
+
         } else {
-            Log.e(TAG, "카카오 auth code 발급 실패")
+            Log.e("LOGIN", "카카오 auth code 발급 실패")
             showToast("로그인 실패")
         }
     }
@@ -87,65 +99,14 @@ class LandingActivity : BaseActivity<ActivityLandingBinding>(ActivityLandingBind
             if (task.isSuccessful) {
                 val idToken = task.result?.idToken
                 if (idToken != null) {
-                    Log.i(TAG, "구글 id token: $idToken")
-                    loginWithOauth(param = idToken, method = LoginMethod.GOOGLE)
+                    Log.i("LOGIN", "구글 id token: $idToken")
+                    viewModel.loginWithGoogleAccount(idToken)
+
                 } else {
-                    Log.e(TAG, "구글 id token 발급 실패")
+                    Log.e("LOGIN", "구글 id token 발급 실패")
                     showToast("로그인 실패")
                 }
             }
         }
-    }
-
-    private fun loginWithOauth(param: String, method: LoginMethod) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val result: BaseResponse<LoginRes> = when (method) {
-                    LoginMethod.KAKAO -> authService.loginWithKakao(authCode = param)
-                    LoginMethod.GOOGLE -> authService.loginWithGoogle(idToken = param)
-                }
-
-                withContext(Dispatchers.Main) {
-                    if (result.isSuccess) {
-                        val data = result.data!!
-                        Log.i(TAG, "userIdx: ${data.userIdx}")
-                        Log.i(TAG, "accessToken: ${data.tokenInfo.accessToken}")
-                        Log.i(TAG, "refreshToken: ${data.tokenInfo.refreshToken}")
-                        saveInfo(data)
-
-                        startNextActivity(StartActivity::class.java)
-
-                    } else {
-                        Log.e(TAG, "로그인 실패!")
-                        Log.e(TAG, "${result.code} ${result.message}")
-                        showToast("로그인 실패")
-                    }
-                }
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(TAG, "서버 통신 오류: ${e.message}")
-                    showToast("로그인 실패")
-                }
-            }
-        }
-    }
-
-    /**
-     * 뚝딱 서비스의 사용자 식별자와 토큰 정보를 앱 내에 저장
-     *
-     * data: 사용자 정보 - 식별자, access token, refresh token
-     */
-    private fun saveInfo(data: LoginRes) {
-        userManager.saveUserIdx(data.userIdx)
-        tokenManager.saveToken(data.tokenInfo)
-    }
-
-    companion object {
-        const val TAG = "LOGIN"
-    }
-
-    enum class LoginMethod {
-        KAKAO, GOOGLE
     }
 }

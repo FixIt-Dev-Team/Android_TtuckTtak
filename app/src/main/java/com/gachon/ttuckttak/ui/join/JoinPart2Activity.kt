@@ -11,7 +11,6 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart2Binding
-import com.gachon.ttuckttak.ui.login.LandingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -80,7 +79,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                Log.e("JoinPart2Activity", "서버 통신 오류: ${e.message}")
                 showToast("이메일 인증 요청 실패")
             }
         }
