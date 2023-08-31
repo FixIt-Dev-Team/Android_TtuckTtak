@@ -8,11 +8,14 @@ import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutRes
+import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
 import com.gachon.ttuckttak.data.remote.service.AuthService
+import com.gachon.ttuckttak.data.remote.service.MemberService
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val authService: AuthService,
+    private val memberService: MemberService,
     private val tokenManager: TokenManager,
     private val userManager: UserManager
 ) : AuthRepository {
@@ -31,6 +34,10 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun loginWithGoogleAccount(idToken: String): BaseResponse<LoginRes> {
         return authService.loginWithGoogle(idToken)
+    }
+
+    override suspend fun findAccount(email: String): BaseResponse<PutPwEmailRes> {
+        return memberService.changePw(email)
     }
 
     override suspend fun logout(): BaseResponse<LogoutRes> {

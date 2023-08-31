@@ -43,12 +43,14 @@ class UserManager @Inject constructor(@ApplicationContext context: Context) {
         return sharedPreferences.getString("userName", null)
     }
 
+    // 해당 method는 로그인 하기 전에만 사용. (e.g., 계정 찾기, 계정 비밀번호 초기화)
     fun saveUserMail(data: String) {
         val editor = sharedPreferences.edit()
         editor.putString("userMail", data)
         editor.apply()
     }
 
+    // 해당 method는 로그인 하기 전에만 사용. (e.g., 계정 찾기, 계정 비밀번호 초기화)
     fun getUserMail(): String? {
         return sharedPreferences.getString("userMail", null)
     }

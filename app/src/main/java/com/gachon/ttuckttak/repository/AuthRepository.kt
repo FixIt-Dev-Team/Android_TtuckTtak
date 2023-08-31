@@ -4,6 +4,7 @@ import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutRes
+import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
 
 interface AuthRepository {
     suspend fun emailConfirm(email: String): BaseResponse<EmailConfirmRes>
@@ -13,6 +14,8 @@ interface AuthRepository {
     suspend fun loginWithKakaoAccount(authCode: String): BaseResponse<LoginRes>
 
     suspend fun loginWithGoogleAccount(idToken: String): BaseResponse<LoginRes>
+
+    suspend fun findAccount(email: String): BaseResponse<PutPwEmailRes>
 
     suspend fun logout(): BaseResponse<LogoutRes>
 

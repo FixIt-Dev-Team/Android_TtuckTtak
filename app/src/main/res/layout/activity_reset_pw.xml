@@ -1,83 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/main_theme_subcyan"
-    tools:context=".ui.login.ResetPwActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textview_pw_reset_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/pw_reset_link"
-        android:textColor="@color/general_theme_white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.gachon.ttuckttak.ui.login.ResetPwViewmodel" />
+    </data>
 
-    <TextView
-        android:id="@+id/textview_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/user_email"
-        android:textColor="@color/general_theme_black"
-        android:textFontWeight="900"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/textview_pw_reset_link"
-        app:layout_constraintStart_toStartOf="@id/textview_pw_reset_link"
-        app:layout_constraintTop_toBottomOf="@id/textview_pw_reset_link" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_theme_subcyan"
+        tools:context=".ui.login.ResetPwActivity">
 
-    <TextView
-        android:id="@+id/textview_attachLink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/noto_sans_kr_regular"
-        android:gravity="center"
-        android:text="@string/attach_link"
-        android:textColor="@color/general_theme_white"
-        android:textFontWeight="400"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/textview_email"
-        app:layout_constraintStart_toStartOf="@id/textview_email"
-        app:layout_constraintTop_toBottomOf="@id/textview_email" />
+        <TextView
+            android:id="@+id/textview_pw_reset_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="@string/pw_reset_link"
+            android:textColor="@color/general_theme_white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2" />
 
-    <TextView
-        android:id="@+id/textview_additional"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/noto_sans_kr_regular"
-        android:gravity="center"
-        android:text="@string/additional_message"
-        android:textColor="@color/general_theme_white"
-        android:textFontWeight="400"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@id/textview_attachLink"
-        app:layout_constraintStart_toStartOf="@id/textview_attachLink"
-        app:layout_constraintTop_toBottomOf="@id/textview_attachLink" />
+        <TextView
+            android:id="@+id/textview_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="@{viewmodel.email}"
+            android:textColor="@color/general_theme_black"
+            android:textFontWeight="900"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@id/textview_pw_reset_link"
+            app:layout_constraintStart_toStartOf="@id/textview_pw_reset_link"
+            app:layout_constraintTop_toBottomOf="@id/textview_pw_reset_link"
+            tools:text="@string/user_email" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_close"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_rectangle_round"
-        android:backgroundTint="@color/general_theme_white"
-        android:text="@string/btn_close"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/textview_additional"
-        app:layout_constraintStart_toStartOf="@id/textview_additional"
-        app:layout_constraintTop_toBottomOf="@id/textview_additional" />
+        <TextView
+            android:id="@+id/textview_attachLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:gravity="center"
+            android:text="@string/attach_link"
+            android:textColor="@color/general_theme_white"
+            android:textFontWeight="400"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/textview_email"
+            app:layout_constraintStart_toStartOf="@id/textview_email"
+            app:layout_constraintTop_toBottomOf="@id/textview_email" />
 
+        <TextView
+            android:id="@+id/textview_additional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:gravity="center"
+            android:text="@string/additional_message"
+            android:textColor="@color/general_theme_white"
+            android:textFontWeight="400"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/textview_attachLink"
+            app:layout_constraintStart_toStartOf="@id/textview_attachLink"
+            app:layout_constraintTop_toBottomOf="@id/textview_attachLink" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_close"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/general_theme_white"
+            android:onClick="@{() -> viewmodel.goLandingActivity()}"
+            android:text="@string/btn_close"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/textview_additional"
+            app:layout_constraintStart_toStartOf="@id/textview_additional"
+            app:layout_constraintTop_toBottomOf="@id/textview_additional" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

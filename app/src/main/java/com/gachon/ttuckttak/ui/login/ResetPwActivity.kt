@@ -1,26 +1,32 @@
 package com.gachon.ttuckttak.ui.login
 
+import androidx.activity.viewModels
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityResetPwBinding
 
-class ResetPwActivity : BaseActivity<ActivityResetPwBinding>(ActivityResetPwBinding::inflate, TransitionMode.HORIZONTAL) {
-    // 입력한 email 받기
-    private val email: String by lazy { intent.getStringExtra("email")!! }
-    override fun initAfterBinding() = with(binding) {
-        setUi()
-        setClickListener()
+import com.gachon.ttuckttak.ui.login.ResetPwViewmodel.NavigateTo.*
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class ResetPwActivity : BaseActivity<ActivityResetPwBinding>(
+    ActivityResetPwBinding::inflate,
+    TransitionMode.HORIZONTAL
+) {
+
+    private val viewModel: ResetPwViewmodel by viewModels()
+
+    override fun initAfterBinding() {
+        binding.viewmodel = viewModel
+        setObservers()
     }
 
-    private fun setUi() = with(binding) {
-        textviewEmail.setText(email) // email text 변경
-    }
-
-    private fun setClickListener() = with(binding) {
-        // Todo: 고객센터를 클릭했을 때
-
-        // 닫기 버튼을 눌렀을 경우
-        buttonClose.setOnClickListener {
-            startActivityWithClear(LandingActivity::class.java)
+    private fun setObservers() {
+        viewModel.viewEvent.observe(this@ResetPwActivity) { event ->
+            event.getContentIfNotHandled()?.let { navigateTo ->
+                when (navigateTo) {
+                    is Landing -> startActivityWithClear(LandingActivity::class.java)
+                }
+            }
         }
     }
 }
