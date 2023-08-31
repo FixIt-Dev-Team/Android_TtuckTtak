@@ -8,6 +8,8 @@ import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutRes
+import com.gachon.ttuckttak.data.remote.dto.auth.RefreshReq
+import com.gachon.ttuckttak.data.remote.dto.auth.RefreshRes
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
@@ -34,6 +36,24 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun loginWithGoogleAccount(idToken: String): BaseResponse<LoginRes> {
         return authService.loginWithGoogle(idToken)
+    }
+
+    override suspend fun checkAccessTokenExist(): Boolean {
+        return tokenManager.getAccessToken() != null
+    }
+
+    override suspend fun updateAccessToken(): BaseResponse<RefreshRes> {
+        return authService.refreshAccessToken(
+            RefreshReq(
+                refreshToken = tokenManager.getRefreshToken()!!,
+                userIdx = userManager.getUserIdx()!!
+            )
+        )
+    }
+
+    override suspend fun updateTokenInfo(token: RefreshRes) {
+        tokenManager.resetAccessToken(token.accessToken)
+        tokenManager.resetRefreshToken(token.refreshToken)
     }
 
     override suspend fun findAccount(email: String): BaseResponse<PutPwEmailRes> {
