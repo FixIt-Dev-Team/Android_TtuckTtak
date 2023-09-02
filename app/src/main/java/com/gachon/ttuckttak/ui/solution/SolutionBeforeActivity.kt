@@ -54,10 +54,6 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
             finish()
         }
 
-        fieldButtonMenu.setOnClickListener {
-            TODO()
-        }
-
         buttonFindSolution.setOnClickListener {
             val intent = Intent(this@SolutionBeforeActivity, SolutionActivity::class.java)
 
