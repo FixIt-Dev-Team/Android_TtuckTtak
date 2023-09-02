@@ -11,6 +11,13 @@ class SolutionManager(context: Context) {
         listOf("1", "01", "00111", "00110", "0001", "00001")
     )
 
+    private val cs: List<List<String>> = listOf(listOf(),
+        listOf("110"),
+        listOf(),
+        listOf("000"),
+        listOf("00000")
+    )
+
     private val questions: List<Map<String, Int>> = listOf(mapOf(),
         mapOf("1" to R.string.power_prob_2, "11" to R.string.power_prob_3),
         mapOf(),
@@ -51,6 +58,13 @@ class SolutionManager(context: Context) {
 
     fun isQuestion(surveyIdx: Int, pattern: String): Boolean {
         if (pattern in questions[surveyIdx]) {
+            return true
+        }
+        return false
+    }
+
+    fun isCS(surveyIdx: Int, pattern: String): Boolean {
+        if (pattern in cs[surveyIdx]){
             return true
         }
         return false

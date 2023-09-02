@@ -37,9 +37,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
+        android:text="@string/solution_detail"
         android:textColor="@color/main_theme_subcyan"
         android:textSize="12sp"
-        android:text="@string/solution_detail"
         app:layout_constraintBottom_toBottomOf="@id/button_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,8 +50,8 @@
         android:id="@+id/field_progressbar"
         android:layout_width="match_parent"
         android:layout_height="16dp"
-        android:layout_marginTop="14dp"
         android:layout_marginHorizontal="13dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@id/textview_subtitle">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -61,10 +61,10 @@
             android:paddingHorizontal="3dp"
             android:src="@drawable/bg_rectangle_round"
             android:visibility="invisible"
-            app:tint="@color/system_theme_gray"
-            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintWidth_percent="0.5"
+            app:tint="@color/system_theme_gray" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progress_2_second"
@@ -73,10 +73,10 @@
             android:paddingHorizontal="3dp"
             android:src="@drawable/bg_rectangle_round"
             android:visibility="invisible"
-            app:tint="@color/system_theme_gray"
-            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintWidth_percent="0.5"
+            app:tint="@color/system_theme_gray" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progress_3_first"
@@ -85,10 +85,10 @@
             android:paddingHorizontal="3dp"
             android:src="@drawable/bg_rectangle_round"
             android:visibility="invisible"
-            app:tint="@color/system_theme_gray"
-            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintWidth_percent="0.33"
+            app:tint="@color/system_theme_gray" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progress_3_second"
@@ -97,11 +97,11 @@
             android:paddingHorizontal="3dp"
             android:src="@drawable/bg_rectangle_round"
             android:visibility="invisible"
-            app:tint="@color/system_theme_gray"
-            app:layout_constraintWidth_percent="0.33"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.33"
+            app:tint="@color/system_theme_gray" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/progress_3_third"
@@ -110,10 +110,10 @@
             android:paddingHorizontal="3dp"
             android:src="@drawable/bg_rectangle_round"
             android:visibility="invisible"
-            app:tint="@color/system_theme_gray"
-            app:layout_constraintWidth_percent="0.33"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintWidth_percent="0.33"
+            app:tint="@color/system_theme_gray" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -129,9 +129,11 @@
         android:id="@+id/text_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
+        android:textAlignment="center"
         android:textColor="@color/general_theme_black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"

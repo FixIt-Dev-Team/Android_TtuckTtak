@@ -58,15 +58,17 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
             finish()
         }
 
-        fieldButtonMenu.setOnClickListener {
-            finish()
-        }
-
         buttonCs.setOnClickListener {
+            shadow.visibility = View.VISIBLE
             showLayout()
         }
 
         layoutCs.buttonConfirm.setOnClickListener {
+            val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
+            clipboard.setPrimaryClip(clipData)
+
+            shadow.visibility = View.INVISIBLE
             closeLayout()
         }
 
@@ -82,6 +84,10 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
         adapter.setItemClickListener(object: SolutionAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
+                if (isLayoutVisible) {
+                    return
+                }
+
                 val solution = solutionList[position]
 
                 CoroutineScope(Dispatchers.IO).launch {
@@ -157,6 +163,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
     private fun setTouchListner() = with(binding) {
         layoutRoot.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
+                shadow.visibility = View.INVISIBLE
                 closeLayout()
                 return@setOnTouchListener true
             }
@@ -164,13 +171,6 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         }
 
         layoutCs.root.setOnTouchListener { _, _ -> true }
-
-        layoutCs.textviewEmail.setOnTouchListener { _, event ->
-            val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
-            clipboard.setPrimaryClip(clipData)
-            return@setOnTouchListener true
-        }
     }
 
     // CS 화면 표시
