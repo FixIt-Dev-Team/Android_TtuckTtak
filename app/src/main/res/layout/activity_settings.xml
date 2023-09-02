@@ -252,6 +252,16 @@
             app:layout_constraintStart_toStartOf="@id/textview_ttuckttakVersion"
             app:layout_constraintTop_toBottomOf="@id/textview_ttuckttakVersion" />
 
+        <include
+            android:id="@+id/layout_cs"
+            layout="@layout/dialog_cs"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
