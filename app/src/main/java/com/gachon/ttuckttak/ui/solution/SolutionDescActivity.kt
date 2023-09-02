@@ -87,7 +87,7 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
     private fun getSolDetail(solIdx: String, progress: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = solutionService.getSolDetail(solIdx, authManager.getAccessToken()!!)
+                val response = solutionService.getSolDetail(solIdx)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

@@ -102,7 +102,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
-                val response = solutionService.getSolEntries(authManager.getAccessToken()!!, request)
+                val response = solutionService.getSolEntries(request)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

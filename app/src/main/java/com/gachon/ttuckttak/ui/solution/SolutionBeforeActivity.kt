@@ -91,7 +91,7 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
     private fun showDetail(solutionIdx: String) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = solutionService.getSolDetail(solutionIdx, authManager.getAccessToken()!!)
+                val response = solutionService.getSolDetail(solutionIdx)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
@@ -147,7 +147,7 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
-                val response = solutionService.getSolEntries(authManager.getAccessToken()!!, request)
+                val response = solutionService.getSolEntries(request)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

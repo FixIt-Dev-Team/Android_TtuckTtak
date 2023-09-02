@@ -44,7 +44,6 @@ class UserRepositoryImpl @Inject constructor(
             profile = try {
                 val res = viewService.getUserInfo(
                     userID = authManager.getUserIdx()!!,
-                    authCode = authManager.getAccessToken()!!
                 ) // 서버에 요청한다.
 
                 if (res.isSuccess) { // 성공적으로 사용자의 프로필을 가져온 경우
@@ -96,7 +95,6 @@ class UserRepositoryImpl @Inject constructor(
             .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
         return memberService.updateUserInfo(
-            token = authManager.getAccessToken()!!,
             reqDto = jsonBody,
             file = newProfileImg
         )
@@ -112,7 +110,6 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun updateRemotePushStatus(targetValue: Boolean): BaseResponse<NoticeRes> {
         return memberService.eventAlert(
-            token = authManager.getAccessToken()!!,
             noticeReq = NoticeReq(memberIdx = authManager.getUserIdx()!!, targetValue)
         )
     }
@@ -123,7 +120,6 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun updateRemoteNightPushStatus(targetValue: Boolean): BaseResponse<NoticeRes> {
         return memberService.nightAlert(
-            token = authManager.getAccessToken()!!,
             noticeReq = NoticeReq(memberIdx = authManager.getUserIdx()!!, targetValue)
         )
     }
