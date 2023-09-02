@@ -235,6 +235,7 @@
     <string name="solution_detail">해결안 템플릿</string>
 
     <!-- -->
+    <string name="available_nickname">사용 가능한 닉네임입니다.</string>
     <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
     <string name="overlap_email">이미 사용중인 계정입니다.</string>
     <string name="certification_code">인증코드 보내기</string>

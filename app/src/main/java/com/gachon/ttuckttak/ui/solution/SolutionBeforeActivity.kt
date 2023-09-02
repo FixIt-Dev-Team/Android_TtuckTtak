@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionDto
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionEntryReq
@@ -24,7 +24,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(ActivitySolutionBeforeBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionBeforeActivity) }
+    @Inject lateinit var authManager: AuthManager
 
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
@@ -91,7 +91,7 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
     private fun showDetail(solutionIdx: String) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = solutionService.getSolDetail(solutionIdx, tokenManager.getAccessToken()!!)
+                val response = solutionService.getSolDetail(solutionIdx, authManager.getAccessToken()!!)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
@@ -147,7 +147,7 @@ class SolutionBeforeActivity : BaseActivity<ActivitySolutionBeforeBinding>(Activ
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
-                val response = solutionService.getSolEntries(tokenManager.getAccessToken()!!, request)
+                val response = solutionService.getSolEntries(authManager.getAccessToken()!!, request)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

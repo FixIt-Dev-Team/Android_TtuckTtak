@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
@@ -32,7 +32,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private var validNickname = false
     private val email: String by lazy { intent.getStringExtra("email")!! }
     @Inject lateinit var userManager: UserManager
-    @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var authManager: AuthManager
     @Inject lateinit var authService: AuthService
     @Inject lateinit var memberService: MemberService
 
@@ -83,8 +83,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private suspend fun handleSignUpResponse(response: BaseResponse<LoginRes>) {
         with(response) {
             if (isSuccess) {
-                userManager.saveUserIdx(response.data!!.userIdx)
-                tokenManager.saveToken(response.data.tokenInfo)
+                authManager.saveUserInfo(response.data!!)
                 startNextActivity(StartActivity::class.java)
 
             } else {

@@ -35,7 +35,7 @@ class FindPwViewmodel @Inject constructor(
             val res = authRepository.findAccount(email) // 서버에 계정 찾기 요청
 
             if (res.isSuccess) { // 계정 찾기에 성공한 경우
-                userManager.saveUserMail(email) // sharedPreference에 사용자의 이메일 저장
+                userManager.savePasswordResetEmail(email) // sharedPreference에 사용자의 이메일 저장 (Todo: Repository에서 관리하도록 수정)
                 viewEvent(NavigateTo.ResetPw) // 다음 activity로 전환 되도록 event를 준다
 
             } else { // 계정 찾기에 실패한 경우

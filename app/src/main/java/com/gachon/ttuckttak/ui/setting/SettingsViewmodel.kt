@@ -38,6 +38,8 @@ class SettingsViewmodel @Inject constructor(
                 _profile.postValue(profile!!) // 사용자의 프로필로 수정한다
             }
 
+            // Todo: 첫 로그인 + 네트워크 문제로 사용자의 프로필을 불러올 수 없을 때 어떻게 화면에 보여줄지 기획에 물어볼 것
+
         } catch (e: Exception) {
             _showToastEvent.emit("요청에 실패하였습니다.") // 요청 실패했다고 메시지 수정
         }

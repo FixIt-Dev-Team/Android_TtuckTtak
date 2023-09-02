@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionDescBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivitySolutionDescBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    private val tokenManager : TokenManager by lazy { TokenManager(this@SolutionDescActivity) }
+    @Inject lateinit var authManager: AuthManager
     private var done = false
 
     @Inject lateinit var solutionService: SolutionService
@@ -87,7 +87,7 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
     private fun getSolDetail(solIdx: String, progress: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = solutionService.getSolDetail(solIdx, tokenManager.getAccessToken()!!)
+                val response = solutionService.getSolDetail(solIdx, authManager.getAccessToken()!!)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

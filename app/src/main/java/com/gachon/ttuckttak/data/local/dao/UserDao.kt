@@ -15,6 +15,9 @@ interface UserDao {
     @Query("SELECT userName, email, profileImgUrl FROM User")
     fun getUserProfile(): UserProfile?
 
+    @Query("Select email from User")
+    fun getUserEmail(): String
+
     @Query("SELECT pushStatus FROM User")
     fun getEventOrFunctionUpdateNotification(): Boolean
 
@@ -26,4 +29,7 @@ interface UserDao {
 
     @Query("Update User set nightPushStatus=:targetValue")
     fun updateNightPushNotification(targetValue: Boolean)
+
+    @Query("Delete from User")
+    fun deleteUser()
 }

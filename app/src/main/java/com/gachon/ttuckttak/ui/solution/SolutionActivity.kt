@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.local.dao.DiagnosisDao
 import com.gachon.ttuckttak.data.local.entity.Diagnosis
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
@@ -31,7 +31,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    private val tokenManager: TokenManager by lazy { TokenManager(this@SolutionActivity) }
+    @Inject lateinit var authManager: AuthManager
     @Inject lateinit var diagnosisDao: DiagnosisDao
 
     private var solutions: List<SolutionDto>? = null
@@ -88,7 +88,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
                 CoroutineScope(Dispatchers.Default).launch {
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
-                    diagnosisDao.insertDiagnosis(Diagnosis(tokenManager.getAccessToken()!! ,solution.descHeader, dateFormat.format(Date(System.currentTimeMillis()))))
+                    diagnosisDao.insertDiagnosis(Diagnosis(authManager.getAccessToken()!! ,solution.descHeader, dateFormat.format(Date(System.currentTimeMillis()))))
                 }
                 val intent = Intent(this@SolutionActivity, SolutionDescActivity::class.java)
                 intent.putExtra("solIdx", solution.solIdx)
@@ -102,7 +102,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
-                val response = solutionService.getSolEntries(tokenManager.getAccessToken()!!, request)
+                val response = solutionService.getSolEntries(authManager.getAccessToken()!!, request)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

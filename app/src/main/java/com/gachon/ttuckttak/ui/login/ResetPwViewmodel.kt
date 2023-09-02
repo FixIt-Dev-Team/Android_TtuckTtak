@@ -10,7 +10,7 @@ class ResetPwViewmodel @Inject constructor(
     private val userManager: UserManager,
 ) : BaseViewModel() {
 
-    val email: String = userManager.getUserMail()!!
+    val email: String = userManager.getPasswordResetEmail()!!
 
     fun goLandingActivity() = viewEvent(NavigateTo.Landing)
 

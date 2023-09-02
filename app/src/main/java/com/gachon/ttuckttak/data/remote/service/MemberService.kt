@@ -5,9 +5,9 @@ import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
-import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -43,8 +43,8 @@ interface MemberService {
     @Multipart
     @PATCH("members/updateprofile")
     suspend fun updateUserInfo(
-        @Header("Authorization") authCode: String,
-        @Part("ReqDto") reqDto: ProfileDto,
+        @Header("Authorization") token: String,
+        @Part("ReqDto") reqDto : RequestBody,
         @Part file: MultipartBody.Part?
     ): BaseResponse<UserInfoUpdateRes>
 }

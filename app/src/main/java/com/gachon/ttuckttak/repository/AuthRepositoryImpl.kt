@@ -1,8 +1,8 @@
 package com.gachon.ttuckttak.repository
 
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.local.UserManager
+import com.gachon.ttuckttak.data.local.AuthManager
+import com.gachon.ttuckttak.data.local.dao.UserDao
 import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
@@ -18,8 +18,8 @@ import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor(
     private val authService: AuthService,
     private val memberService: MemberService,
-    private val tokenManager: TokenManager,
-    private val userManager: UserManager
+    private val authManager: AuthManager,
+    private val userDao: UserDao
 ) : AuthRepository {
 
     override suspend fun emailConfirm(email: String): BaseResponse<EmailConfirmRes> {
@@ -39,21 +39,20 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun checkAccessTokenExist(): Boolean {
-        return tokenManager.getAccessToken() != null
+        return authManager.getAccessToken() != null
     }
 
     override suspend fun updateAccessToken(): BaseResponse<RefreshRes> {
         return authService.refreshAccessToken(
             RefreshReq(
-                refreshToken = tokenManager.getRefreshToken()!!,
-                userIdx = userManager.getUserIdx()!!
+                refreshToken = authManager.getRefreshToken()!!,
+                userIdx = authManager.getUserIdx()!!
             )
         )
     }
 
     override suspend fun updateTokenInfo(token: RefreshRes) {
-        tokenManager.resetAccessToken(token.accessToken)
-        tokenManager.resetRefreshToken(token.refreshToken)
+        authManager.updateTokenInfo(token)
     }
 
     override suspend fun findAccount(email: String): BaseResponse<PutPwEmailRes> {
@@ -61,16 +60,19 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun logout(): BaseResponse<LogoutRes> {
-        return authService.logout(LogoutReq(userManager.getUserIdx()!!))
+        return authService.logout(
+            LogoutReq(
+                userIdx = authManager.getUserIdx()!!
+            )
+        )
     }
 
     override suspend fun saveUserInfo(data: LoginRes) {
-        userManager.saveUserIdx(data.userIdx)
-        tokenManager.saveToken(data.tokenInfo)
+        authManager.saveUserInfo(data)
     }
 
     override suspend fun clearUserInfo() {
-        userManager.clearUserIdx()
-        tokenManager.clearToken()
+        authManager.clearUserInfo()
+        userDao.deleteUser()
     }
 }
