@@ -34,7 +34,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
-    private var solutionBs: MutableList<SolutionBypassDto>? = null
+    private var solutionBs: List<SolutionBypassDto>? = null
     private var isLayoutVisible = false
 
     @Inject lateinit var solutionService: SolutionService
@@ -129,7 +129,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                             solutionPs?.add(data.solPList[i].possibleName)
                         }
                         if (data.solBList != null) {
-                            solutionBs = data.solBList.toMutableList()
+                            solutionBs = data.solBList
                         }
 
                         // 타이틀 설정
