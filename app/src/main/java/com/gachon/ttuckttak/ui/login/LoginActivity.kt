@@ -5,15 +5,11 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.databinding.ActivityLoginBinding
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-
-import com.gachon.ttuckttak.ui.login.LoginViewmodel.State.*
 import com.gachon.ttuckttak.ui.login.LoginViewmodel.NavigateTo.*
 import com.gachon.ttuckttak.ui.main.StartActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate, TransitionMode.VERTICAL) {
@@ -27,11 +23,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     private fun setObservers() {
-        viewModel.state.observe(this@LoginActivity) { state ->
-            when (state) {
-                Error -> onFailureLogin(viewModel.response.value!!)
-                else -> null
-            }
+        viewModel.loginFail.observe(this@LoginActivity) {
+            updateLoginFailUi()
         }
 
         viewModel.viewEvent.observe(this@LoginActivity) { event ->
@@ -52,18 +45,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         }
     }
 
-    private fun onFailureLogin(response: BaseResponse<LoginRes>) = with(binding) {
-        when (response.code) {
-            400 -> {
-                arrayOf(edittextEmail, editTextPassword).forEach { it.setBackgroundResource(R.drawable.textbox_state_error) }
-
-                textviewErrorMessage.apply {
-                    visibility = View.VISIBLE
-                    text = getString(R.string.login_incorrect)
-                }
-            }
-            else -> null
+    private fun updateLoginFailUi() = with(binding) {
+        arrayOf(edittextEmail, editTextPassword).forEach { edittext ->
+            edittext.setBackgroundResource(R.drawable.textbox_state_error)
         }
+
+        textviewErrorMessage.visibility = View.VISIBLE
     }
 
     private fun setFocusChangeListener() = with(binding) {

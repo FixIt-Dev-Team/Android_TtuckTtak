@@ -81,11 +81,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
+            android:text="@string/wrong_email_or_password"
             android:textColor="@color/general_theme_red"
             android:textSize="11sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="@id/editText_password"
-            app:layout_constraintTop_toBottomOf="@id/editText_password"
-            tools:text="@string/wrong_email_or_password" />
+            app:layout_constraintTop_toBottomOf="@id/editText_password" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_login"
