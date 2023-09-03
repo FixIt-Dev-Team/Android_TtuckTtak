@@ -1,16 +1,25 @@
 package com.gachon.ttuckttak.ui.login
 
+import androidx.lifecycle.viewModelScope
 import com.gachon.ttuckttak.base.BaseViewModel
-import com.gachon.ttuckttak.data.local.UserManager
+import com.gachon.ttuckttak.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ResetPwViewmodel @Inject constructor(
-    private val userManager: UserManager,
+    private val userRepository: UserRepository,
 ) : BaseViewModel() {
 
-    val email: String = userManager.getPasswordResetEmail()!!
+    lateinit var email: String
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            email = userRepository.getPasswordResetEmail()!!
+        }
+    }
 
     fun goLandingActivity() = viewEvent(NavigateTo.Landing)
 
