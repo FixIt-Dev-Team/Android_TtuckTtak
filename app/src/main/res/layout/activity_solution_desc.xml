@@ -115,6 +115,114 @@
             app:layout_constraintWidth_percent="0.33"
             app:tint="@color/system_theme_gray" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_4_first"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_4_second"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/progress_4_first"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_4_third"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/progress_4_second"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_4_fourth"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_5_first"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.20"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_5_second"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/progress_5_first"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.20"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_5_third"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/progress_5_second"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.20"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_5_fourth"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/progress_5_third"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.20"
+            app:tint="@color/system_theme_gray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/progress_5_fifth"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:paddingHorizontal="3dp"
+            android:src="@drawable/bg_rectangle_round"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.20"
+            app:tint="@color/system_theme_gray" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
@@ -156,21 +264,15 @@
         app:layout_constraintTop_toBottomOf="@id/text_content"
         tools:text="세부내용이 입력됩니다.세부내용이 입력됩니다.세부내용이 입력됩니다.세부내용이 입력됩니다.세부내용이 입력됩니다.세부내용이 입력됩니다." />
 
-    <TextView
-        android:id="@+id/text_another_prob"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bypass_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="16dp"
-        android:fontFamily="@font/noto_sans_kr_regular"
-        android:includeFontPadding="false"
-        android:textAlignment="textStart"
-        android:textColor="@color/general_theme_red"
-        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_description"
-        tools:text="문제해결 - 해당되는 포트가 본체에 없는 경우" />
+        app:layout_constraintTop_toBottomOf="@id/text_description" />
 
     <Button
         android:id="@+id/button_complete"
@@ -185,8 +287,10 @@
         android:textColor="@color/main_theme_blue"
         android:textSize="16sp"
         app:backgroundTint="@color/main_theme_blue"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_another_prob" />
+        app:layout_constraintTop_toBottomOf="@id/bypass_list"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

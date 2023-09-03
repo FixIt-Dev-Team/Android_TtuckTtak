@@ -4,7 +4,9 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
@@ -16,27 +18,39 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.math.max
 
 @AndroidEntryPoint
 class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivitySolutionDescBinding::inflate, TransitionMode.HORIZONTAL) {
 
     private val tokenManager : TokenManager by lazy { TokenManager(this@SolutionDescActivity) }
     private var done = false
+    private var bypassNames : Array<String>? = arrayOf()
+    private var bypassIdxes : Array<String>? = arrayOf()
 
     @Inject lateinit var solutionService: SolutionService
 
     override fun initAfterBinding() = with(binding) {
         val solIdx = intent.getStringExtra("solIdx")
         val progress = intent.getIntExtra("progress", 0)
+        bypassNames = intent.getStringArrayExtra("bypassNames")
+        bypassIdxes = intent.getStringArrayExtra("bypassIdxes")
 
         getSolDetail(solIdx!!, progress)
         setClickListener(solIdx, progress)
     }
 
+    // Progress bar 표시
     private fun setProgress(maxN: Int, nowN: Int) = with(binding) {
         Log.i(TAG, "progress: ${nowN + 1} of $maxN")
-        val progress2 = arrayListOf(progress2First, progress2Second)
-        val progress3 = arrayListOf(progress3First, progress3Second, progress3Third)
+        val progressBar = arrayListOf<ArrayList<AppCompatImageView>>(
+            arrayListOf(), // 0
+            arrayListOf(), // 1
+            arrayListOf(progress2First, progress2Second),
+            arrayListOf(progress3First, progress3Second, progress3Third),
+            arrayListOf(progress4First, progress4Second, progress4Third, progress4Fourth),
+            arrayListOf(progress5First, progress5Second, progress5Third, progress5Fourth, progress5Fifth)
+        )
 
         // 완료 여부 확인
         if (maxN == nowN + 1) {
@@ -46,24 +60,32 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
             buttonComplete.setTextColor(getColor(R.color.general_theme_white))
         }
 
-        // TODO("Progress Bar")
-        if (maxN == 2) {
-            for (bar in progress2) {
+        // Progress Bar
+        if (maxN in 2..5) {
+            for (bar in progressBar[maxN]) {
                 bar.visibility = View.VISIBLE
             }
             for (i in 0..nowN) {
-                progress2[i].setColorFilter(getColor(R.color.main_theme_blue))
-            }
-        } else if (maxN == 3) {
-            for (bar in progress3) {
-                bar.visibility = View.VISIBLE
-            }
-            for (i in 0..nowN) {
-                progress3[i].setColorFilter(getColor(R.color.main_theme_blue))
+                progressBar[maxN][i].setColorFilter(getColor(R.color.main_theme_blue))
             }
         } else {
-            Log.e(TAG, "Progress number doesn't match")
+            Log.e(TAG, "progress step not in range (2,5)")
         }
+
+    }
+
+    // Bypass 리스트 (RecyclerView) 표시
+    private fun setBypass() = with(binding) {
+//        val adapter = bypassNames?.let { BypassAdapter(it, bypassIdxes!!) }
+//
+//        bypassList.adapter = adapter
+//        bypassList.layoutManager = LinearLayoutManager(this@SolutionDescActivity, LinearLayoutManager.VERTICAL, false)
+//
+//        adapter.setItemClickListener(object: BypassAdapter.OnItemClickListener{
+//            override fun onClick(v: View, position: Int) {
+//                TODO("Not yet implemented")
+//            }
+//        })
     }
 
     private fun setClickListener(solIdx: String ,progress: Int) = with(binding) {
@@ -84,6 +106,7 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
         }
     }
 
+    // 서버로부터 Solution Detail API 수신, setProgress() 호출
     private fun getSolDetail(solIdx: String, progress: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
