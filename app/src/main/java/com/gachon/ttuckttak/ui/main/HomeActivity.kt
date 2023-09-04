@@ -1,6 +1,5 @@
 package com.gachon.ttuckttak.ui.main
 
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -29,6 +28,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             if (System.currentTimeMillis() > backPressedTime + 2000) {
                 backPressedTime = System.currentTimeMillis()
                 showToast("한 번 더 누르면 종료합니다.")
+
             } else if (System.currentTimeMillis() <= backPressedTime + 2000) {
                 ActivityCompat.finishAffinity(this@HomeActivity)
                 System.exit(0)
@@ -37,22 +37,18 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     }
 
     private fun setObservers() = with(binding) {
-        viewModel.diagnosis.observe(this@HomeActivity) {
-            if (it != null) {
-                textviewLatestResultText.text = it.context
-                textviewLatestResultTime.text = it.date
+        viewModel.diagnosis.observe(this@HomeActivity) { diagnosis ->
+            if (diagnosis != null) {
+                textviewLatestResultText.text = diagnosis.context
+                textviewLatestResultTime.text = diagnosis.date
             }
         }
 
         viewModel.viewEvent.observe(this@HomeActivity) { event ->
             event.getContentIfNotHandled()?.let { navigateTo ->
                 when (navigateTo) {
-                    is ProblemCategory -> {
-                        startNextActivity(ProblemCategoryActivity::class.java)
-                    }
-                    is Settings -> {
-                        startNextActivity(SettingsActivity::class.java)
-                    }
+                    is ProblemCategory -> startNextActivity(ProblemCategoryActivity::class.java)
+                    is Settings -> startNextActivity(SettingsActivity::class.java)
                 }
             }
         }
