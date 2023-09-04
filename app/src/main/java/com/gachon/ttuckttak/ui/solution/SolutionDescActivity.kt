@@ -1,8 +1,10 @@
 package com.gachon.ttuckttak.ui.solution
 
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
+import com.gachon.ttuckttak.data.local.TokenManager
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionDescBinding
@@ -18,29 +22,33 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.math.max
 
 @AndroidEntryPoint
 class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivitySolutionDescBinding::inflate, TransitionMode.HORIZONTAL) {
 
     @Inject lateinit var authManager: AuthManager
     private var done = false
-    private var bypassNames : Array<String>? = arrayOf()
-    private var bypassIdxes : Array<String>? = arrayOf()
+    private var bypassListI : Array<SolutionBypassDto>? = null
 
     @Inject lateinit var solutionService: SolutionService
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun initAfterBinding() = with(binding) {
         val solIdx = intent.getStringExtra("solIdx")
         val progress = intent.getIntExtra("progress", 0)
-        bypassNames = intent.getStringArrayExtra("bypassNames")
-        bypassIdxes = intent.getStringArrayExtra("bypassIdxes")
+        if (intent.hasExtra("solutionBs")) {
+            bypassListI = intent.getParcelableArrayExtra("solutionBs", SolutionBypassDto::class.java)
+            Log.i(TAG, "bypass: ${bypassListI?.get(0)}")
+            Log.i(TAG, "bypass name: ${bypassListI?.get(0)?.targetEntryName}")
+            Log.i(TAG, "bypass start Idx: ${bypassListI?.get(0)?.startEntryIdx}")
+            Log.i(TAG, "bypass target Idx: ${bypassListI?.get(0)?.targetEntryIdx}")
+        }
 
         getSolDetail(solIdx!!, progress)
         setClickListener(solIdx, progress)
     }
 
-    // Progress bar 표시
+    // Progress bar 표시 및 단계에 따라 완료 버튼 표시
     private fun setProgress(maxN: Int, nowN: Int) = with(binding) {
         Log.i(TAG, "progress: ${nowN + 1} of $maxN")
         val progressBar = arrayListOf<ArrayList<AppCompatImageView>>(
@@ -75,17 +83,23 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
     }
 
     // Bypass 리스트 (RecyclerView) 표시
-    private fun setBypass() = with(binding) {
-//        val adapter = bypassNames?.let { BypassAdapter(it, bypassIdxes!!) }
-//
-//        bypassList.adapter = adapter
-//        bypassList.layoutManager = LinearLayoutManager(this@SolutionDescActivity, LinearLayoutManager.VERTICAL, false)
-//
-//        adapter.setItemClickListener(object: BypassAdapter.OnItemClickListener{
-//            override fun onClick(v: View, position: Int) {
-//                TODO("Not yet implemented")
-//            }
-//        })
+    private fun setBypass(solutionBs : List<SolutionBypassDto>) = with(binding) {
+        val adapter = BypassAdapter(solutionBs)
+
+        bypassList.adapter = adapter
+        bypassList.layoutManager = LinearLayoutManager(this@SolutionDescActivity, LinearLayoutManager.VERTICAL, false)
+
+        adapter.setItemClickListener(object: BypassAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                // TODO("Not yet implemented")
+                val intent = Intent(this@SolutionDescActivity, SolutionDescActivity::class.java)
+                intent.putExtra("solIdx", solutionBs[position].targetEntryIdx)
+                intent.putExtra("progress", 0)
+
+                startActivity(intent)
+                showToast("Workiiiiiiiiiiin?")
+            }
+        })
     }
 
     private fun setClickListener(solIdx: String ,progress: Int) = with(binding) {
@@ -100,13 +114,17 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
                 val intent = Intent(this@SolutionDescActivity, SolutionDescActivity::class.java)
                 intent.putExtra("solIdx", solIdx)
                 intent.putExtra("progress", progress + 1)
+                if (bypassListI != null) {
+                    intent.putExtra("solutionBs", bypassListI)
+                }
                 startActivity(intent)
                 finish()
             }
         }
     }
 
-    // 서버로부터 Solution Detail API 수신, setProgress() 호출
+    // 서버로부터 Solution Detail API 수신
+    // setProgress() 및 setBypass() 호출 => 스파게티 코드가 되지만 현재 API상 이렇게 구현하는 게 한계임
     private fun getSolDetail(solIdx: String, progress: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
@@ -132,6 +150,11 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
 
                         // 프로그레스 바 설정
                         setProgress(subcontents.size, progress)
+
+                        // 바이패스 설정
+                        if (subcontents.size == progress + 1 && bypassListI != null) {
+                            setBypass(bypassListI!!.toList())
+                        }
 
                         // 이미지 설정
                         Glide.with(this@SolutionDescActivity)

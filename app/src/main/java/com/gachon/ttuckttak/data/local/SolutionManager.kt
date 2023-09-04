@@ -12,7 +12,7 @@ class SolutionManager(context: Context) {
     )
 
     private val cs: List<List<String>> = listOf(listOf(),
-        listOf("110"),
+        listOf("110", "111"),
         listOf(),
         listOf("000"),
         listOf("00000")

@@ -3,6 +3,7 @@ package com.gachon.ttuckttak.ui.solution
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.os.Parcelable
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -24,6 +25,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import java.text.DateFormat.getDateTimeInstance
+import java.text.SimpleDateFormat
+import java.util.ArrayList
+import java.util.Date
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -102,6 +107,8 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                 val intent = Intent(this@SolutionActivity, SolutionDescActivity::class.java)
                 intent.putExtra("solIdx", solution.solIdx)
                 intent.putExtra("progress", 0)
+                intent.putExtra("solutionBs", solutionBs?.toTypedArray())
+
                 startActivity(intent)
             }
         })
