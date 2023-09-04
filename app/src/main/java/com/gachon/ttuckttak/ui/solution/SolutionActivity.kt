@@ -3,6 +3,7 @@ package com.gachon.ttuckttak.ui.solution
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
+import android.os.Parcelable
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -24,7 +25,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import java.text.DateFormat.getDateTimeInstance
 import java.text.SimpleDateFormat
+import java.util.ArrayList
 import java.util.Date
 import javax.inject.Inject
 
@@ -93,12 +96,14 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                 val solution = solutionList[position]
 
                 CoroutineScope(Dispatchers.Default).launch {
-                    val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm", java.util.Locale.getDefault())
                     diagnosisDao.insertDiagnosis(Diagnosis(tokenManager.getAccessToken()!! ,solution.descHeader, dateFormat.format(Date(System.currentTimeMillis()))))
                 }
                 val intent = Intent(this@SolutionActivity, SolutionDescActivity::class.java)
                 intent.putExtra("solIdx", solution.solIdx)
                 intent.putExtra("progress", 0)
+                intent.putExtra("solutionBs", solutionBs?.toTypedArray())
+
                 startActivity(intent)
             }
         })

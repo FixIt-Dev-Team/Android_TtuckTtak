@@ -235,19 +235,18 @@
 
     <TextView
         android:id="@+id/text_content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="22dp"
         android:fontFamily="@font/noto_sans_kr_regular"
         android:includeFontPadding="false"
-        android:textAlignment="center"
         android:textColor="@color/general_theme_black"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image"
-        tools:text="내용이 입력됩니다.내용이 입력됩니다." />
+        tools:text="내용이 입력됩니다. 내용이 입력됩니다. 내용이 입력됩니다. 내용이 입력됩니다." />
 
     <TextView
         android:id="@+id/text_description"
