@@ -8,10 +8,9 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivityFindPwBinding
+import com.gachon.ttuckttak.ui.login.FindPwViewmodel.NavigateTo.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
-import com.gachon.ttuckttak.ui.login.FindPwViewmodel.NavigateTo.*
 
 @AndroidEntryPoint
 class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding::inflate, TransitionMode.HORIZONTAL) {
@@ -34,17 +33,21 @@ class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding
             }
         }
 
-        viewModel.showErrorMessage.observe(this@FindPwActivity) { showErrorMessage ->
-            when (showErrorMessage) {
-                true -> showNonExistingAccountError()
-                false -> null
+        lifecycleScope.launch {
+            // 서버 응답 코드를 구독하여 UI 업데이트 로직을 결정
+            viewModel.response.collect { response ->
+                if (response?.code == 400) { // 에러코드가 400인 경우, 에러 메시지 표시 함수 호출
+                    showNonExistingAccountError()
+                }
             }
         }
 
-        // 일회성 show toast
         lifecycleScope.launch {
+            // 토스트 메시지 내용을 구독하여 메시지를 보여준다
             viewModel.showToastEvent.collect { message ->
-                showToast(message)
+                if (message != null) {
+                    showToast(message)
+                }
             }
         }
     }
