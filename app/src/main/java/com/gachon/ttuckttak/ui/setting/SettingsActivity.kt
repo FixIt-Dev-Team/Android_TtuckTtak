@@ -5,17 +5,14 @@ import android.content.ClipboardManager
 import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivitySettingsBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.setting.SettingsViewmodel.NavigateTo.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>(
@@ -29,25 +26,25 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(
     override fun initAfterBinding() {
         binding.viewmodel = viewModel
         setObservers()
-        binding.buttonConsumerCenter.setOnClickListener { showLayout() }
+        setClickListener()
         setTouchListener()
     }
 
-    private fun setOnClickListener() = with(binding) {
+    private fun setClickListener() = with(binding) {
         buttonConsumerCenter.setOnClickListener {
             showLayout()
         }
-
     }
 
     private fun showLayout() = with(binding.layoutCs) {
         if (!isLayoutVisible) {
-            root.visibility = android.view.View.VISIBLE
+            root.visibility = View.VISIBLE
             root.translationY = root.height.toFloat()
-            root.translationZ = kotlin.Float.MAX_VALUE // 가장 큰 값을 줌으로써 인증하기 버튼 위로 나오게
+            root.translationZ = Float.MAX_VALUE // 가장 큰 값을 줌으로써 인증하기 버튼 위로 나오게
             root.animate().translationY(0f).setDuration(300).start()
             isLayoutVisible = true
         }
+
         buttonConfirm.setOnClickListener {
             emailCopy()
             closeLayout()
@@ -110,20 +107,15 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(
                 binding.textviewUserName.text = profile.userName
                 binding.textviewUserEmail.text = profile.email
 
-                if (profile.profileImgUrl.isEmpty()) { // 사용자의 프로필 이미지가 없는 경우 기본 이미지를 사용하고
-                    binding.imageviewProfile.setImageDrawable(
-                        AppCompatResources.getDrawable(
-                            this@SettingsActivity,
-                            R.drawable.img_profile
-                        )
-                    )
-
-                } else { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
+                if (profile.profileImgUrl != null) { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
                     Glide.with(this@SettingsActivity)
                         .load(viewModel.profile.value!!.profileImgUrl)
                         .into(binding.imageviewProfile)
                 }
             }
+
+            // Todo: 첫 로그인 + 네트워크 문제로 사용자의 프로필을 불러올 수 없을 때 어떻게 화면에 보여줄지 기획에 물어볼 것
+            //  즉 profile == null일 때 어떻게 처리할 것인지
         }
 
         // 일회성 show toast

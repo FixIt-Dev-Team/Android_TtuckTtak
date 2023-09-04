@@ -25,8 +25,8 @@ class SettingsProfileViewmodel @Inject constructor(
 ) : BaseViewModel() {
 
     // 사용자의 프로필
-    private val _profile = MutableLiveData<UserProfile>()
-    val profile: LiveData<UserProfile>
+    private val _profile = MutableLiveData<UserProfile?>()
+    val profile: LiveData<UserProfile?>
         get() = _profile
 
     // 닉네임 에러 메시지. 닉네임이 어떤 이유로 사용할 수 없는지 사용자에게 알려주는 역할을 한다.
@@ -59,15 +59,13 @@ class SettingsProfileViewmodel @Inject constructor(
     private fun getUserProfile() = viewModelScope.launch(Dispatchers.IO) {
         try {
             val profile = userRepository.getUserProfile() // 사용자 프로필을 가져온다
-            Log.i("SettingsProfileViewmodel", profile.toString())
+            Log.d("SettingsProfileViewmodel", profile.toString()) // 사용자 프로필 정보 로깅
 
-            if (profile != null) { // 사용자의 프로필이 존재한다면
-                _profile.postValue(profile!!) // 사용자의 프로필로 수정한다
-            }
-
-            // Todo: 첫 로그인 + 네트워크 문제로 사용자의 프로필을 불러올 수 없을 때 어떻게 화면에 보여줄지 기획에 물어볼 것
+            _profile.postValue(profile!!) // 사용자의 프로필로 수정한다
 
         } catch (e: Exception) {
+            Log.e("SettingsProfileViewmodel", e.message.toString()) // 에러 로깅
+            e.printStackTrace() // 에러 로깅
             _showToastEvent.emit("요청에 실패하였습니다.") // 요청 실패했다고 메시지 수정
         }
     }
@@ -102,8 +100,8 @@ class SettingsProfileViewmodel @Inject constructor(
             }
 
         } catch (e: Exception) { // 요청에 실패한 경우
-            Log.e("SettingsProfileViewmodel", e.toString())
-            Log.e("SettingsProfileViewmodel", e.message.toString())
+            Log.e("SettingsProfileViewmodel", e.message.toString()) // 에러 로깅
+            e.printStackTrace() // 에러 로깅
             _showToastEvent.emit("요청에 실패하였습니다.") // 요청 실패했다고 메시지 수정
         }
     }
@@ -139,8 +137,8 @@ class SettingsProfileViewmodel @Inject constructor(
                 }
 
         } catch (e: Exception) {
-            Log.e("SettingsProfileViewmodel", e.toString())
-            Log.e("SettingsProfileViewmodel", e.message.toString())
+            Log.e("SettingsProfileViewmodel", e.message.toString()) // 에러 로깅
+            e.printStackTrace() // 에러 로깅
             _showToastEvent.emit("요청에 실패하였습니다.") // 요청 실패했다고 메시지 수정
         }
     }
@@ -161,8 +159,8 @@ class SettingsProfileViewmodel @Inject constructor(
             }
 
         } catch (e: Exception) { // 요청에 실패한 경우
-            Log.e("SettingsProfileViewmodel", e.toString())
-            Log.e("SettingsProfileViewmodel", e.message.toString())
+            Log.e("SettingsProfileViewmodel", e.message.toString()) // 에러 로깅
+            e.printStackTrace() // 에러 로깅
             _showToastEvent.emit("요청에 실패하였습니다.") // 요청 실패했다고 메시지 수정
         }
     }

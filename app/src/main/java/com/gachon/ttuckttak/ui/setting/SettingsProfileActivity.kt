@@ -10,7 +10,6 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.content.res.AppCompatResources
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivitySettingsProfileBinding
@@ -61,20 +60,15 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
                 binding.edittextNickname.setText(profile.userName)
                 binding.textviewUserEmail.text = profile.email
 
-                if (profile.profileImgUrl.isEmpty()) { // 사용자의 프로필 이미지가 없는 경우 기본 이미지를 사용하고
-                    binding.imageviewProfile.setImageDrawable(
-                        AppCompatResources.getDrawable(
-                            this@SettingsProfileActivity,
-                            R.drawable.img_profile
-                        )
-                    )
-
-                } else { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
+                if (profile.profileImgUrl != null) { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
                     Glide.with(this@SettingsProfileActivity)
                         .load(viewModel.profile.value!!.profileImgUrl)
                         .into(binding.imageviewProfile)
                 }
             }
+
+            // Todo: 첫 로그인 + 네트워크 문제로 사용자의 프로필을 불러올 수 없을 때 어떻게 화면에 보여줄지 기획에 물어볼 것
+            //  즉 profile == null일 때 어떻게 처리할 것인지
         }
 
         viewModel.nicknameErrorMessage.observe(this@SettingsProfileActivity) { message ->
