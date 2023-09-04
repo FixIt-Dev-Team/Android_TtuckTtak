@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.repository
 
+import android.util.Log
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.local.UserManager
@@ -16,9 +17,14 @@ import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.data.remote.service.ViewService
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
@@ -37,29 +43,47 @@ class UserRepositoryImpl @Inject constructor(
         return userManager.getPasswordResetEmail()
     }
 
+    /**
+     * 사용자 프로필을 가져오는 method
+     * 로컬 DB에서 먼저 사용자 정보를 가져온 후, 비동기적으로 서버에서 최신 데이터를 요청한다.
+     *
+     * @return UserProfile? - 사용자 프로필. 만약 로컬 DB 접근이나 다른 예외로 인해 사용자 정보를 가져오지 못하면 null을 반환한다.
+     */
     override suspend fun getUserProfile(): UserProfile? {
-        var profile = userDao.getUserProfile() // Local 저장소에 사용자의 프로필이 있는지 조회한다.
+        var userProfile: UserProfile? = null
 
-        if (profile == null) { // 만약 사용자의 프로필이 존재하지 않는 경우
-            profile = try {
-                val res = viewService.getUserInfo(
-                    userID = authManager.getUserIdx()!!,
-                ) // 서버에 요청한다.
+        try {
+            userProfile = userDao.getUserProfile() // Local 저장소에서 사용자 정보를 가져온다.
+            Log.d("localUserProfile", userProfile.toString())
 
-                if (res.isSuccess) { // 성공적으로 사용자의 프로필을 가져온 경우
-                    saveUserInfo(res.data!!) // Local 저장소에 사용자의 정보를 저장하고
-                    res.data.getProfile() // 사용자의 프로필을 설정한다
+            // 네트워크 작업을 비동기로 실행
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    viewService.getUserInfo(authManager.getUserIdx()!!)
+                        .also { response -> // 서버에 사용자의 프로필 정보를 요청한다.
+                            if (response.isSuccess && response.data != null) { // 성공적으로 사용자의 프로필을 가져온 경우
+                                saveUserInfo(response.data) // Local 저장소에 사용자의 정보를 저장하고
+                                userProfile = response.data.getProfile() // 사용자 프로필을 갱신한다.
+                                Log.d("remoteUserProfile", userProfile.toString())
+                            }
+                        }
 
-                } else { // 사용자의 프로필을 가져오는데 실패한 경우 null값으로 설정한다
-                    null
+                } catch (e: SocketTimeoutException) { // 시간 초과 처리
+                    // 시간 초과 했을 경우에는 이미 Local에서 가져온 데이터가 있으므로 별도의 처리 없이 무시
+                } catch (e: ConnectException) { // 연결 실패 처리
+                    // 네트워크 연결 실패 시에는 이미 Local에서 가져온 데이터가 있으므로 별도의 처리 없이 무시
+                } catch (e: Exception) {
+                    Log.e("UserRepositoryImpl", e.message.toString()) // 에러 로깅
+                    e.printStackTrace() // 에러 로깅
                 }
-
-            } catch (e: Exception) { // 사용자의 프로필을 설정하는 모든 과정에서 예외가 터지면 null로 설정한다
-                null
             }
+
+        } catch (e: Exception) {
+            Log.e("UserRepositoryImpl", e.message.toString()) // 에러 로깅
+            e.printStackTrace() // 에러 로깅
         }
 
-        return profile // 사용자의 프로필을 반환한다
+        return userProfile  // 바로 로컬 데이터 반환
     }
 
     override suspend fun saveUserInfo(data: UserInfoRes) {
