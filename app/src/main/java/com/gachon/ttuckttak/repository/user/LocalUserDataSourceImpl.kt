@@ -2,7 +2,9 @@ package com.gachon.ttuckttak.repository.user
 
 import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.local.UserManager
+import com.gachon.ttuckttak.data.local.dao.DiagnosisDao
 import com.gachon.ttuckttak.data.local.dao.UserDao
+import com.gachon.ttuckttak.data.local.entity.Diagnosis
 import com.gachon.ttuckttak.data.local.entity.User
 import com.gachon.ttuckttak.data.local.entity.UserProfile
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
@@ -10,6 +12,7 @@ import javax.inject.Inject
 
 class LocalUserDataSourceImpl @Inject constructor(
     private val userDao: UserDao,
+    private val diagnosisDao: DiagnosisDao,
     private val authManager: AuthManager,
     private val userManager: UserManager
 ) : LocalUserDataSource {
@@ -38,6 +41,10 @@ class LocalUserDataSourceImpl @Inject constructor(
                 nightPushStatus = data.nightPushStatus
             )
         )
+    }
+
+    override suspend fun getRecentDiagnosis(): Diagnosis? {
+        return diagnosisDao.getDiagnosis()
     }
 
     override suspend fun getPushStatus(): Boolean {

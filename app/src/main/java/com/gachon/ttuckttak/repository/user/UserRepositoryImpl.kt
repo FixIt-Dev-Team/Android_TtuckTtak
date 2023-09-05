@@ -1,6 +1,7 @@
 package com.gachon.ttuckttak.repository.user
 
 import com.gachon.ttuckttak.base.BaseResponse
+import com.gachon.ttuckttak.data.local.entity.Diagnosis
 import com.gachon.ttuckttak.data.local.entity.UserProfile
 import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
@@ -27,6 +28,8 @@ class UserRepositoryImpl @Inject constructor(
         localUserDataSource.getUserProfile()
 
     override suspend fun saveUserInfo(data: UserInfoRes) = localUserDataSource.saveUserInfo(data)
+
+    override suspend fun getRecentDiagnosis(): Diagnosis? = localUserDataSource.getRecentDiagnosis()
 
     override suspend fun getPushStatus(): Boolean = localUserDataSource.getPushStatus()
 

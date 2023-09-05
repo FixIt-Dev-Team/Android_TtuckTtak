@@ -1,6 +1,7 @@
 package com.gachon.ttuckttak.repository.user
 
 import com.gachon.ttuckttak.base.BaseResponse
+import com.gachon.ttuckttak.data.local.entity.Diagnosis
 import com.gachon.ttuckttak.data.local.entity.UserProfile
 import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
@@ -20,6 +21,8 @@ interface UserRepository {
     suspend fun getLocalUserProfile(): UserProfile?
 
     suspend fun saveUserInfo(data: UserInfoRes)
+
+    suspend fun getRecentDiagnosis(): Diagnosis?
 
     suspend fun getPushStatus(): Boolean
 

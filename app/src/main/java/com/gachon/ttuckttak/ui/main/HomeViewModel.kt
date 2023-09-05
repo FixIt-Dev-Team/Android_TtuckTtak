@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gachon.ttuckttak.base.BaseViewModel
 import com.gachon.ttuckttak.data.local.entity.Diagnosis
-import com.gachon.ttuckttak.repository.DiagnosisRepository
+import com.gachon.ttuckttak.repository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val diagnosisRepository: DiagnosisRepository) : BaseViewModel() {
+class HomeViewModel @Inject constructor(private val userRepository: UserRepository) : BaseViewModel() {
 
     private val _diagnosis = MutableLiveData<Diagnosis?>()
     val diagnosis: LiveData<Diagnosis?>
@@ -26,7 +26,7 @@ class HomeViewModel @Inject constructor(private val diagnosisRepository: Diagnos
 
     private fun getDiagnosis() = viewModelScope.launch {
         withContext(Dispatchers.Default) {
-            _diagnosis.postValue(diagnosisRepository.getDiagnosis())
+            _diagnosis.postValue(userRepository.getRecentDiagnosis())
             Log.i("Diagnosis", diagnosis.value.toString())
         }
     }

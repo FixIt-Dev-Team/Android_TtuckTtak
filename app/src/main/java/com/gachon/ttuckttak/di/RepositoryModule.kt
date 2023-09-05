@@ -2,8 +2,6 @@ package com.gachon.ttuckttak.di
 
 import com.gachon.ttuckttak.repository.auth.AuthRepository
 import com.gachon.ttuckttak.repository.auth.AuthRepositoryImpl
-import com.gachon.ttuckttak.repository.DiagnosisRepository
-import com.gachon.ttuckttak.repository.DiagnosisRepositoryImpl
 import com.gachon.ttuckttak.repository.auth.LocalAuthDataSource
 import com.gachon.ttuckttak.repository.auth.LocalAuthDataSourceImpl
 import com.gachon.ttuckttak.repository.auth.RemoteAuthDataSource
@@ -31,9 +29,6 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindRemoteAuthDataSource(repository: RemoteAuthDataSourceImpl): RemoteAuthDataSource
-
-    @Binds
-    abstract fun bindDiagnosisRepository(repository: DiagnosisRepositoryImpl): DiagnosisRepository
 
     @Binds
     abstract fun bindUserRepository(repository: UserRepositoryImpl): UserRepository
