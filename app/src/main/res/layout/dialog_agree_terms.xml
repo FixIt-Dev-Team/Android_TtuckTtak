@@ -20,8 +20,7 @@
 
     <CheckBox
         android:id="@+id/checkbox_agree_terms"
-        android:background="@drawable/ic_confirm"
-        android:button="@null"
+        android:button="@drawable/ic_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -57,8 +56,7 @@
 
         <CheckBox
             android:id="@+id/checkbox_use_terms"
-            android:background="@drawable/ic_confirm"
-            android:button="@null"
+            android:button="@drawable/ic_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="9dp"
@@ -83,8 +81,7 @@
 
         <CheckBox
             android:id="@+id/checkbox_promote_terms"
-            android:background="@drawable/ic_confirm"
-            android:button="@null"
+            android:button="@drawable/ic_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="84dp"
