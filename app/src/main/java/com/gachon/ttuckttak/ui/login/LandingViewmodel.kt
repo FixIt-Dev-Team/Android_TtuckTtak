@@ -2,7 +2,7 @@ package com.gachon.ttuckttak.ui.login
 
 import androidx.lifecycle.viewModelScope
 import com.gachon.ttuckttak.base.BaseViewModel
-import com.gachon.ttuckttak.repository.AuthRepository
+import com.gachon.ttuckttak.repository.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow

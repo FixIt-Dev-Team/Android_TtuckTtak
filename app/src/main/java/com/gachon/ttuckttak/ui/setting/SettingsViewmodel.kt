@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gachon.ttuckttak.base.BaseViewModel
 import com.gachon.ttuckttak.data.local.entity.UserProfile
-import com.gachon.ttuckttak.repository.AuthRepository
+import com.gachon.ttuckttak.repository.auth.AuthRepository
 import com.gachon.ttuckttak.repository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

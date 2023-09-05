@@ -1,8 +1,7 @@
-package com.gachon.ttuckttak.repository
+package com.gachon.ttuckttak.repository.auth
 
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.AuthManager
-import com.gachon.ttuckttak.data.local.dao.UserDao
 import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
@@ -15,12 +14,11 @@ import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import javax.inject.Inject
 
-class AuthRepositoryImpl @Inject constructor(
+class RemoteAuthDataSourceImpl @Inject constructor(
     private val authService: AuthService,
     private val memberService: MemberService,
     private val authManager: AuthManager,
-    private val userDao: UserDao
-) : AuthRepository {
+) : RemoteAuthDataSource {
 
     override suspend fun emailConfirm(email: String): BaseResponse<EmailConfirmRes> {
         return authService.emailConfirm(email)
@@ -38,10 +36,6 @@ class AuthRepositoryImpl @Inject constructor(
         return authService.loginWithGoogle(idToken)
     }
 
-    override suspend fun checkAccessTokenExist(): Boolean {
-        return authManager.getAccessToken() != null
-    }
-
     override suspend fun updateAccessToken(): BaseResponse<RefreshRes> {
         return authService.refreshAccessToken(
             RefreshReq(
@@ -49,10 +43,6 @@ class AuthRepositoryImpl @Inject constructor(
                 userIdx = authManager.getUserIdx()!!
             )
         )
-    }
-
-    override suspend fun updateTokenInfo(token: RefreshRes) {
-        authManager.updateTokenInfo(token)
     }
 
     override suspend fun findAccount(email: String): BaseResponse<PutPwEmailRes> {
@@ -65,14 +55,5 @@ class AuthRepositoryImpl @Inject constructor(
                 userIdx = authManager.getUserIdx()!!
             )
         )
-    }
-
-    override suspend fun saveUserInfo(data: LoginRes) {
-        authManager.saveUserInfo(data)
-    }
-
-    override suspend fun clearUserInfo() {
-        authManager.clearUserInfo()
-        userDao.deleteUser()
     }
 }
