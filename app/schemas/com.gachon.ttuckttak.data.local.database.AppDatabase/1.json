@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "a57ab30be485aa8444e966247cea3c86",
+    "identityHash": "fa53abd610d756bd17e21fc6a93ed1e1",
     "entities": [
       {
         "tableName": "Diagnosis",
@@ -38,7 +38,7 @@
       },
       {
         "tableName": "User",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userIdx` TEXT NOT NULL, `userName` TEXT NOT NULL, `email` TEXT NOT NULL, `profileImgUrl` TEXT NOT NULL, `accountType` TEXT NOT NULL, `pushStatus` INTEGER NOT NULL, `nightPushStatus` INTEGER NOT NULL, PRIMARY KEY(`userIdx`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userIdx` TEXT NOT NULL, `userName` TEXT NOT NULL, `email` TEXT NOT NULL, `profileImgUrl` TEXT, `accountType` TEXT NOT NULL, `pushStatus` INTEGER NOT NULL, `nightPushStatus` INTEGER NOT NULL, PRIMARY KEY(`userIdx`))",
         "fields": [
           {
             "fieldPath": "userIdx",
@@ -62,7 +62,7 @@
             "fieldPath": "profileImgUrl",
             "columnName": "profileImgUrl",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "accountType",
@@ -96,7 +96,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a57ab30be485aa8444e966247cea3c86')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fa53abd610d756bd17e21fc6a93ed1e1')"
     ]
   }
 }
