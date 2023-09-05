@@ -16,6 +16,7 @@ import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
+import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
 import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
 import com.gachon.ttuckttak.ui.terms.TermsUseActivity
@@ -46,7 +47,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     }
 
     private fun setClickListener() = with(binding) {
-        imagebuttonBack.setOnClickListener { finish() }
+        imagebuttonBack.setOnClickListener { startActivityWithClear(LandingActivity::class.java) }
         buttonJoin.setOnClickListener { showLayout() }
 
         // 시작하기 버튼을 클릭한 경우

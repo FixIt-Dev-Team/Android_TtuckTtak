@@ -85,12 +85,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_subTitle" />
 
-            <View
-                android:id="@+id/view_blank"
-                android:layout_width="match_parent"
-                android:layout_height="229dp"
-                app:layout_constraintTop_toBottomOf="@id/textview_context" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
