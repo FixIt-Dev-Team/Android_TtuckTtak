@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -14,7 +15,7 @@ interface DiagnosisDao {
     fun insertDiagnosis(diagnosis: Diagnosis)
 
     @Query("SELECT * FROM Diagnosis")
-    fun getDiagnosis(): Diagnosis?
+    fun getDiagnosis(): LiveData<Diagnosis?>
 
     @Update
     fun updateDiagnosis(diagnosis: Diagnosis)

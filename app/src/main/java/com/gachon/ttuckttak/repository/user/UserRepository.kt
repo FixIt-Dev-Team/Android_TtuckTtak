@@ -23,7 +23,7 @@ interface UserRepository {
 
     suspend fun saveUserInfo(data: UserInfoRes)
 
-    suspend fun getRecentDiagnosis(): Diagnosis?
+    fun getRecentDiagnosis(): LiveData<Diagnosis?>
 
     suspend fun getPushStatus(): Boolean
 

@@ -44,7 +44,7 @@ class LocalUserDataSourceImpl @Inject constructor(
         )
     }
 
-    override suspend fun getRecentDiagnosis(): Diagnosis? {
+    override fun getRecentDiagnosis(): LiveData<Diagnosis?> {
         return diagnosisDao.getDiagnosis()
     }
 

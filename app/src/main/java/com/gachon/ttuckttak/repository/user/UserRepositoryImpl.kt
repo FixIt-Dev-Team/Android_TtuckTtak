@@ -30,7 +30,8 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun saveUserInfo(data: UserInfoRes) = localUserDataSource.saveUserInfo(data)
 
-    override suspend fun getRecentDiagnosis(): Diagnosis? = localUserDataSource.getRecentDiagnosis()
+    override fun getRecentDiagnosis(): LiveData<Diagnosis?> =
+        localUserDataSource.getRecentDiagnosis()
 
     override suspend fun getPushStatus(): Boolean = localUserDataSource.getPushStatus()
 
