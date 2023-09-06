@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.repository.user
 
+import androidx.lifecycle.LiveData
 import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.local.dao.DiagnosisDao
@@ -25,7 +26,7 @@ class LocalUserDataSourceImpl @Inject constructor(
         return userManager.getPasswordResetEmail()
     }
 
-    override suspend fun getUserProfile(): UserProfile? {
+    override fun getUserProfile(): LiveData<UserProfile?> {
         return userDao.getUserProfile()
     }
 

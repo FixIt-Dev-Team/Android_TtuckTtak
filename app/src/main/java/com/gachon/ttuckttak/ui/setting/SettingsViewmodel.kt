@@ -2,14 +2,12 @@ package com.gachon.ttuckttak.ui.setting
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.gachon.ttuckttak.base.BaseViewModel
 import com.gachon.ttuckttak.data.local.entity.UserProfile
 import com.gachon.ttuckttak.repository.auth.AuthRepository
 import com.gachon.ttuckttak.repository.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -24,9 +22,7 @@ class SettingsViewmodel @Inject constructor(
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
-    private val _profile = MutableLiveData<UserProfile?>()
-    val profile: LiveData<UserProfile?>
-        get() = _profile
+    val profile: LiveData<UserProfile?> = userRepository.getLocalUserProfile()
 
     private val _showToastEvent = MutableSharedFlow<String>()
     val showToastEvent = _showToastEvent.asSharedFlow()
@@ -37,41 +33,22 @@ class SettingsViewmodel @Inject constructor(
 
     /**
      * 사용자 프로필을 가져오는 method
-     * 로컬 DB에서 먼저 사용자 정보를 가져온 후, 비동기적으로 서버에서 최신 데이터를 요청한다.
      */
     private fun getUserProfile() = viewModelScope.launch(Dispatchers.IO) {
         try {
-            val localUserProfile = userRepository.getLocalUserProfile() // Local 저장소에서 사용자 정보를 가져온다.
-            Log.d("localUserProfile", localUserProfile.toString()) // 로깅
-
-            _profile.postValue(localUserProfile) // 사용자의 프로필을 업데이트 한다.
-
-            // 네트워크 작업을 비동기로 실행
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    userRepository.getRemoteUserProfile()
-                        .also { response -> // 서버에 사용자의 프로필 정보를 요청한다.
-                            if (response.isSuccess) { // 성공적으로 사용자의 프로필을 가져온 경우
-                                response.data?.let { userInfo ->
-                                    userRepository.saveUserInfo(userInfo) // Local 저장소에 사용자의 정보를 저장하고
-
-                                    val remoteUserProfile = userInfo.getProfile()
-                                    Log.d("remoteUserProfile", remoteUserProfile.toString()) // 로깅
-                                    _profile.postValue(remoteUserProfile) // 사용자의 프로필을 업데이트 한다.
-                                }
-                            }
+            userRepository.getRemoteUserProfile()
+                .also { response -> // 서버에 사용자의 프로필 정보를 요청한다.
+                    if (response.isSuccess) { // 성공적으로 사용자의 프로필을 가져온 경우
+                        response.data?.let { userInfo ->
+                            userRepository.saveUserInfo(userInfo) // Local 저장소에 사용자의 정보를 저장하고
                         }
-
-                } catch (e: SocketTimeoutException) {
-                    // 시간 초과 했을 경우에는 이미 Local에서 가져온 데이터가 있으므로 별도의 처리 없이 무시
-                } catch (e: ConnectException) {
-                    // 네트워크 연결 실패 시에는 이미 Local에서 가져온 데이터가 있으므로 별도의 처리 없이 무시
-                } catch (e: Exception) {
-                    Log.e("SettingsViewmodel", e.message.toString()) // 에러 로깅
-                    e.printStackTrace() // 에러 로깅
+                    }
                 }
-            }
 
+        } catch (e: SocketTimeoutException) {
+            // 시간 초과 했을 경우에는 이미 Local에서 가져온 데이터가 있으므로 별도의 처리 없이 무시
+        } catch (e: ConnectException) {
+            // 네트워크 연결 실패 시에는 이미 Local에서 가져온 데이터가 있으므로 별도의 처리 없이 무시
         } catch (e: Exception) {
             Log.e("SettingsViewmodel", e.message.toString()) // 에러 로깅
             e.printStackTrace() // 에러 로깅

@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.repository.user
 
+import androidx.lifecycle.LiveData
 import com.gachon.ttuckttak.base.BaseResponse
 import com.gachon.ttuckttak.data.local.entity.Diagnosis
 import com.gachon.ttuckttak.data.local.entity.UserProfile
@@ -18,7 +19,7 @@ interface UserRepository {
 
     suspend fun getPasswordResetEmail(): String?
 
-    suspend fun getLocalUserProfile(): UserProfile?
+    fun getLocalUserProfile(): LiveData<UserProfile?>
 
     suspend fun saveUserInfo(data: UserInfoRes)
 

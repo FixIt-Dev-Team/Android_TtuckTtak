@@ -1,5 +1,6 @@
 package com.gachon.ttuckttak.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,7 +14,7 @@ interface UserDao {
     fun insertUser(user: User)
 
     @Query("SELECT userName, email, profileImgUrl FROM User")
-    fun getUserProfile(): UserProfile?
+    fun getUserProfile(): LiveData<UserProfile?>
 
     @Query("Select email from User")
     fun getUserEmail(): String
