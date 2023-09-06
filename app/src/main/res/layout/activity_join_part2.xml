@@ -141,7 +141,7 @@
         android:id="@+id/layout_alert"
         layout="@layout/dialog_email"
         android:layout_width="0dp"
-        android:layout_height="260dp"
+        android:layout_height="wrap_content"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
