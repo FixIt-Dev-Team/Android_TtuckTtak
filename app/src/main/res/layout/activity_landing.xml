@@ -64,6 +64,7 @@
             android:text="@string/sign_up"
             android:textColor="@color/main_theme_blue"
             android:textSize="18sp"
+            android:textFontWeight="700"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.07"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +78,8 @@
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/btn_google"
+            android:scaleType="fitXY"
+            android:contentDescription="login_google"
             app:layout_constraintEnd_toEndOf="@id/button_regular"
             app:layout_constraintStart_toStartOf="@id/button_regular"
             app:layout_constraintTop_toBottomOf="@id/button_regular" />
@@ -88,6 +91,8 @@
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/btn_kakao"
+            android:scaleType="fitXY"
+            android:contentDescription="login_kakao"
             app:layout_constraintEnd_toEndOf="@id/imagebutton_google"
             app:layout_constraintStart_toStartOf="@id/imagebutton_google"
             app:layout_constraintTop_toBottomOf="@id/imagebutton_google" />
