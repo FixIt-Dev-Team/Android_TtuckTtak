@@ -39,9 +39,11 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_arrow_left"
             app:layout_constraintBottom_toBottomOf="@id/textview_profileSetting"
-            app:layout_constraintEnd_toStartOf="@id/textview_profileSetting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.07"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_profileSetting" />
+            app:layout_constraintTop_toTopOf="@id/textview_profileSetting"
+            app:layout_constraintVertical_bias="0.05" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/imagebutton_save"
@@ -116,12 +118,13 @@
             <View
                 android:id="@+id/view_blueBar1"
                 android:layout_width="1dp"
-                android:layout_height="18dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="11dp"
                 android:background="@color/main_theme_blue"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/edittext_nickname"
+                app:layout_constraintEnd_toStartOf="@id/edittext_nickname"
                 app:layout_constraintStart_toEndOf="@id/textview_nickname"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/edittext_nickname" />
 
             <EditText
                 android:id="@+id/edittext_nickname"
@@ -165,6 +168,7 @@
             android:textColor="@color/general_theme_red"
             android:textSize="10sp"
             android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/layout_email"
             app:layout_constraintEnd_toEndOf="@id/layout_nickname"
             app:layout_constraintTop_toBottomOf="@id/layout_nickname"
             tools:ignore="SmallSp" />
@@ -194,7 +198,7 @@
             <View
                 android:id="@+id/view_blueBar2"
                 android:layout_width="1dp"
-                android:layout_height="18dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="11dp"
                 android:background="@color/main_theme_blue" />
 

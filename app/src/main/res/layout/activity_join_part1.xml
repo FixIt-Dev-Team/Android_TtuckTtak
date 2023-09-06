@@ -42,13 +42,15 @@
             android:layout_height="48dp"
             android:backgroundTint="@android:color/transparent"
             android:contentDescription="@string/blank_text"
+            android:onClick="@{() -> viewmodel.goBack()}"
             android:scaleType="centerInside"
             android:src="@drawable/ic_arrow_left"
-            android:onClick="@{() -> viewmodel.goBack()}"
             app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
-            app:layout_constraintEnd_toStartOf="@id/textview_join_membership"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.07"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
+            app:layout_constraintTop_toTopOf="@id/textview_join_membership"
+            app:layout_constraintVertical_bias="0.05" />
 
         <TextView
             android:id="@+id/textview_join_email"
