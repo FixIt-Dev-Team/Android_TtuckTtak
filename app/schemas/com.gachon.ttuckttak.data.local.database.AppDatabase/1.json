@@ -2,35 +2,41 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "fa53abd610d756bd17e21fc6a93ed1e1",
+    "identityHash": "5637d1cfef105fada5b9a192b11add99",
     "entities": [
       {
-        "tableName": "Diagnosis",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userIdx` TEXT NOT NULL, `context` TEXT NOT NULL, `date` TEXT NOT NULL, PRIMARY KEY(`userIdx`))",
+        "tableName": "user_diagnosis",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`item` TEXT NOT NULL, `time` INTEGER NOT NULL, `bypassIdx` TEXT NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)",
         "fields": [
           {
-            "fieldPath": "userIdx",
-            "columnName": "userIdx",
+            "fieldPath": "item",
+            "columnName": "item",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "context",
-            "columnName": "context",
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "bypassIdx",
+            "columnName": "bypassIdx",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "date",
-            "columnName": "date",
-            "affinity": "TEXT",
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
         "primaryKey": {
-          "autoGenerate": false,
+          "autoGenerate": true,
           "columnNames": [
-            "userIdx"
+            "id"
           ]
         },
         "indices": [],
@@ -96,7 +102,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fa53abd610d756bd17e21fc6a93ed1e1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5637d1cfef105fada5b9a192b11add99')"
     ]
   }
 }

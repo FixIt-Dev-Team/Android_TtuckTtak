@@ -10,6 +10,9 @@ import com.gachon.ttuckttak.ui.setting.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 import com.gachon.ttuckttak.ui.main.HomeViewModel.NavigateTo.*
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate, TransitionMode.HORIZONTAL) {
@@ -39,8 +42,8 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     private fun setObservers() = with(binding) {
         viewModel.diagnosis.observe(this@HomeActivity) { diagnosis ->
             if (diagnosis != null) {
-                textviewLatestResultText.text = diagnosis.context
-                textviewLatestResultTime.text = diagnosis.date
+                textviewLatestResultText.text = diagnosis.item
+                textviewLatestResultTime.text = formatDate(diagnosis.time)
             }
         }
 
@@ -52,5 +55,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 }
             }
         }
+    }
+
+    private fun formatDate(date: Date): String {
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+        return format.format(date)
     }
 }

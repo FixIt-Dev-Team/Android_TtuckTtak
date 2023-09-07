@@ -24,8 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.Date
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -86,9 +84,13 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
             override fun onClick(v: View, position: Int) {
                 val solution = solutionList[position]
 
-                CoroutineScope(Dispatchers.Default).launch {
-                    val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm")
-                    diagnosisDao.insertDiagnosis(Diagnosis(authManager.getAccessToken()!! ,solution.descHeader, dateFormat.format(Date(System.currentTimeMillis()))))
+                CoroutineScope(Dispatchers.IO).launch {
+                    diagnosisDao.insertDiagnosis(
+                        Diagnosis(
+                            item = solution.descHeader,
+                            bypassIdx = solutionBs?.get(0)?.bypassIdx ?: "" // FixMe: 임시로 넣어놨어요, bypassIdx값 올바르게 수정해주세요
+                        )
+                    )
                 }
                 val intent = Intent(this@SolutionActivity, SolutionDescActivity::class.java)
                 intent.putExtra("solIdx", solution.solIdx)
