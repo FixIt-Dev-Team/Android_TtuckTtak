@@ -91,13 +91,12 @@ class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivityS
 
         adapter.setItemClickListener(object: BypassAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
-                // TODO("Not yet implemented")
-                val intent = Intent(this@SolutionDescActivity, SolutionDescActivity::class.java)
-                intent.putExtra("solIdx", solutionBs[position].targetEntryIdx)
+                // TODO("Case that returns to survey - not considered")
+                val intent = Intent(this@SolutionDescActivity, SolutionActivity::class.java)
+                intent.putExtra("entryID", solutionBs[position].targetEntryIdx)
                 intent.putExtra("progress", 0)
 
                 startActivity(intent)
-                showToast("Workiiiiiiiiiiin?")
             }
         })
     }

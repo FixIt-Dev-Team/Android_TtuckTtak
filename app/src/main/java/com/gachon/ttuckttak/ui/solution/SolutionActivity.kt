@@ -3,7 +3,6 @@ package com.gachon.ttuckttak.ui.solution
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import android.os.Parcelable
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -25,9 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
-import java.text.DateFormat.getDateTimeInstance
 import java.text.SimpleDateFormat
-import java.util.ArrayList
 import java.util.Date
 import javax.inject.Inject
 
@@ -45,15 +42,24 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
     @Inject lateinit var solutionService: SolutionService
 
     override fun initAfterBinding() {
-        val surveyIdx = intent.getIntExtra("surveyIdx", 0)
-        val pattern = intent.getIntExtra("pattern", -1)
-        val level = intent.getIntExtra("level", 0)
+        if (intent.hasExtra("surveyIdx")){
+            val surveyIdx = intent.getIntExtra("surveyIdx", 0)
+            val pattern = intent.getIntExtra("pattern", -1)
+            val level = intent.getIntExtra("level", 0)
 
-        Log.i(TAG, "surveyIdx: $surveyIdx")
-        Log.i(TAG, "resPattern: $pattern")
-        Log.i(TAG, "level: $level")
+            Log.i(TAG, "surveyIdx: $surveyIdx")
+            Log.i(TAG, "resPattern: $pattern")
+            Log.i(TAG, "level: $level")
 
-        getSolution(surveyIdx, pattern, level)
+            getSolutionSurvey(surveyIdx, pattern, level)
+        } else if (intent.hasExtra("entryID")){
+            val entryID = intent.getIntExtra("entryID", 0)
+
+            Log.i(TAG, "Bypass entryID: $entryID")
+
+            getSolutionEntry(entryID)
+        }
+
         setClickListener()
         setTouchListner()
     }
@@ -114,11 +120,63 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         })
     }
 
-    private fun getSolution(surveyIdx: Int, pattern: Int, level: Int) = with(binding) {
+    private fun getSolutionSurvey(surveyIdx: Int, pattern: Int, level: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
                 val response = solutionService.getSolEntries(request)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccess) {
+                        val data = response.data!!
+
+                        Log.i(TAG, "entryIdx: ${data.entryIdx}")
+                        Log.i(TAG, "level: ${data.level}")
+                        Log.i(TAG, "problem name: ${data.problemName}")
+                        Log.i(TAG, "solution list: ${data.solList}")
+                        Log.i(TAG, "possible solution list: ${data.solPList}")
+                        Log.i(TAG, "solution bypass list: ${data.solBList}")
+
+                        solutions = data.solList
+                        for (i in data.solPList.indices) {
+                            solutionPs?.add(data.solPList[i].possibleName)
+                        }
+                        if (data.solBList != null) {
+                            solutionBs = data.solBList
+                        }
+
+                        // 타이틀 설정
+                        title.text = data.problemName
+
+                        // 카운터 설정
+                        textCount.text = getString(R.string.solutions, solutions!!.size)
+
+                        // 발생 가능한 문제 설정
+                        textAvailProblems.text = solutionPs?.joinToString("\n")
+
+                        // RecyclerView 설정
+                        solutionBtn(solutions!!)
+
+                    } else {
+                        Log.e(TAG, "솔루션 검색 실패")
+                        Log.e(TAG, "${response.code} ${response.message}")
+                        showToast("솔루션 검색 실패")
+                    }
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(TAG, "서버 통신 오류: ${e.message}")
+                    showToast("솔루션 검색 실패")
+                }
+            }
+        }
+    }
+
+    private fun getSolutionEntry(entryID: Int) = with(binding) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = solutionService.getSolbyEntry(entryID, tokenManager.getAccessToken()!!)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {
