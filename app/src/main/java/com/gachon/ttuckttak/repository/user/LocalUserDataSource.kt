@@ -13,7 +13,7 @@ interface LocalUserDataSource {
 
     fun getUserProfile(): LiveData<UserProfile?>
 
-    suspend fun saveUserInfo(data: UserInfoRes)
+    suspend fun updateUserInfo(data: UserInfoRes)
 
     fun getRecentDiagnosis(): LiveData<Diagnosis?>
 

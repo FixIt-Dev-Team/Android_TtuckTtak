@@ -28,7 +28,7 @@ class UserRepositoryImpl @Inject constructor(
     override fun getLocalUserProfile(): LiveData<UserProfile?> =
         localUserDataSource.getUserProfile()
 
-    override suspend fun saveUserInfo(data: UserInfoRes) = localUserDataSource.saveUserInfo(data)
+    override suspend fun updateUserInfo(data: UserInfoRes) = localUserDataSource.updateUserInfo(data)
 
     override fun getRecentDiagnosis(): LiveData<Diagnosis?> =
         localUserDataSource.getRecentDiagnosis()

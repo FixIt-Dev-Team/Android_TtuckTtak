@@ -5,32 +5,36 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.gachon.ttuckttak.data.local.entity.User
 import com.gachon.ttuckttak.data.local.entity.UserProfile
 
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUser(user: User)
+    suspend fun insertUser(user: User)
 
-    @Query("SELECT userName, email, profileImgUrl FROM User")
-    fun getUserProfile(): LiveData<UserProfile?>
+    @Query("SELECT user_name, email, profile_img_url FROM User Where uid = :userIdx")
+    fun getUserProfile(userIdx: String): LiveData<UserProfile?>
 
-    @Query("Select email from User")
-    fun getUserEmail(): String
+    @Update
+    fun updateUserProfile(user: User)
 
-    @Query("SELECT pushStatus FROM User")
-    fun getEventOrFunctionUpdateNotification(): Boolean
+    @Query("Select email from User Where uid = :userIdx")
+    suspend fun getUserEmail(userIdx: String): String
 
-    @Query("SELECT nightPushStatus FROM User")
-    fun getNightPushNotification(): Boolean
+    @Query("SELECT push_status FROM User Where uid = :userIdx")
+    suspend fun getEventOrFunctionUpdateNotification(userIdx: String): Boolean
 
-    @Query("Update User set pushStatus=:targetValue")
-    fun updateEventOrFunctionUpdateNotification(targetValue: Boolean)
+    @Query("SELECT night_push_status FROM User Where uid = :userIdx")
+    suspend fun getNightPushNotification(userIdx: String): Boolean
 
-    @Query("Update User set nightPushStatus=:targetValue")
-    fun updateNightPushNotification(targetValue: Boolean)
+    @Query("Update User set push_status = :targetValue Where uid = :userIdx")
+    suspend fun updateEventOrFunctionUpdateNotification(userIdx: String, targetValue: Boolean)
 
-    @Query("Delete from User")
-    fun deleteUser()
+    @Query("Update User set night_push_status = :targetValue Where uid = :userIdx")
+    suspend fun updateNightPushNotification(userIdx: String, targetValue: Boolean)
+
+    @Query("Delete from User Where uid = :userIdx")
+    suspend fun deleteUser(userIdx: String)
 }

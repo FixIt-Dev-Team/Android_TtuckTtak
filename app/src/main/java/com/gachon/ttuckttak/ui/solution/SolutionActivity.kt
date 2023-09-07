@@ -87,6 +87,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                 CoroutineScope(Dispatchers.IO).launch {
                     diagnosisDao.insertDiagnosis(
                         Diagnosis(
+                            uid = authManager.getUserIdx()!!,
                             item = solution.descHeader,
                             bypassIdx = solutionBs?.get(0)?.bypassIdx ?: "" // FixMe: 임시로 넣어놨어요, bypassIdx값 올바르게 수정해주세요
                         )

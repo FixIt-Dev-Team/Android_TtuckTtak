@@ -40,7 +40,7 @@ class SettingsViewmodel @Inject constructor(
                 .also { response -> // 서버에 사용자의 프로필 정보를 요청한다.
                     if (response.isSuccess) { // 성공적으로 사용자의 프로필을 가져온 경우
                         response.data?.let { userInfo ->
-                            userRepository.saveUserInfo(userInfo) // Local 저장소에 사용자의 정보를 저장하고
+                            userRepository.updateUserInfo(userInfo) // Local 저장소에 사용자의 정보를 갱신한다
                         }
                     }
                 }

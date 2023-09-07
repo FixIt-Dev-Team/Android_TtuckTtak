@@ -62,7 +62,7 @@ class SettingsProfileViewmodel @Inject constructor(
                 .also { response -> // 서버에 사용자의 프로필 정보를 요청한다.
                     if (response.isSuccess) { // 성공적으로 사용자의 프로필을 가져온 경우
                         response.data?.let { userInfo ->
-                            userRepository.saveUserInfo(userInfo) // Local 저장소에 사용자의 정보를 저장하고
+                            userRepository.updateUserInfo(userInfo) // Local 저장소에 사용자의 정보를 갱신한다
                         }
                     }
                 }
@@ -94,12 +94,12 @@ class SettingsProfileViewmodel @Inject constructor(
     fun updateUserProfile() = viewModelScope.launch(Dispatchers.IO) {
         try {
             userRepository.updateRemoteUserProfile(
-                newNickname = newNickname ?: profile.value!!.userName, // 변경할 닉네임이 없다면 기존 닉네임으로 프로필 변경 요청
+                newNickname = newNickname ?: profile.value!!.userName!!, // 변경할 닉네임이 없다면 기존 닉네임으로 프로필 변경 요청
                 newProfileImg = newProfileImg // 변경할 프로필 이미지. 없을 수 있음
             ).also { response -> // 서버에 프로필 변경 요청
 
                 if (response.isSuccess && response.data != null) { // 성공적으로 프로필이 변경되었다면
-                    userRepository.saveUserInfo(response.data.userData) // 최신화된 사용자 정보를 저장하고 (RoomDB)
+                    userRepository.updateUserInfo(response.data.userData) // Local 저장소에 사용자의 정보를 갱신하고
                     viewEvent(NavigateTo.Before) // 이전 화면으로 전환 되도록 event를 준다
 
                 } else { // 사용자의 프로필이 성공적으로 업데이트되지 못 한 경우
@@ -158,7 +158,7 @@ class SettingsProfileViewmodel @Inject constructor(
         try {
             userRepository.changePassword().also { response -> // 서버에 비밀번호 변경 찾기 요청
                 if (response.isSuccess && response.data!!.sendSuccess) { // 사용자의 이메일에 성공적으로 보내진 경우
-                    userRepository.savePasswordResetEmail(profile.value!!.email) // ResetPwActivity에서 보여질 사용자의 이메일을 저장해주고
+                    userRepository.savePasswordResetEmail(profile.value!!.email!!) // ResetPwActivity에서 보여질 사용자의 이메일을 저장해주고
                     viewEvent(NavigateTo.ResetPw) // ResetPwActivity로 전환 되도록 event를 준다
 
                 } else { // 사용자의 이메일에 성공적으로 보내지 못 한 경우

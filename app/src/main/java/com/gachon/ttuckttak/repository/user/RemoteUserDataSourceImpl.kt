@@ -66,7 +66,7 @@ class RemoteUserDataSourceImpl @Inject constructor(
     }
 
     override suspend fun changePassword(): BaseResponse<PutPwEmailRes> {
-        return memberService.changePw(userDao.getUserEmail())
+        return memberService.changePw(userDao.getUserEmail(authManager.getUserIdx()!!))
     }
 
 }

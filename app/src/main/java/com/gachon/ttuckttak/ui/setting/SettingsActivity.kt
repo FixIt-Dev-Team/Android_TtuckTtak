@@ -104,8 +104,13 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(
 
         viewModel.profile.observe(this@SettingsActivity) { profile ->
             if (profile != null) {
-                binding.textviewUserName.text = profile.userName
-                binding.textviewUserEmail.text = profile.email
+                if (profile.userName != null) {
+                    binding.textviewUserName.text = profile.userName
+                }
+
+                if (profile.email != null) {
+                    binding.textviewUserEmail.text = profile.email
+                }
 
                 if (profile.profileImgUrl != null) { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
                     Glide.with(this@SettingsActivity)

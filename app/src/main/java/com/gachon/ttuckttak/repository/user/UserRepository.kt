@@ -21,7 +21,7 @@ interface UserRepository {
 
     fun getLocalUserProfile(): LiveData<UserProfile?>
 
-    suspend fun saveUserInfo(data: UserInfoRes)
+    suspend fun updateUserInfo(data: UserInfoRes)
 
     fun getRecentDiagnosis(): LiveData<Diagnosis?>
 

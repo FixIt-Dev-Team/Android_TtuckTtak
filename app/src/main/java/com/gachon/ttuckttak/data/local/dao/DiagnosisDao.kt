@@ -12,13 +12,13 @@ interface DiagnosisDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDiagnosis(diagnosis: Diagnosis)
 
-    @Query("SELECT * FROM user_diagnosis ORDER BY time DESC LIMIT 1")
-    fun getLatestDiagnosis(): LiveData<Diagnosis?>
+    @Query("SELECT * FROM user_diagnosis Where uid = :userIdx ORDER BY time DESC LIMIT 1")
+    fun getLatestDiagnosis(userIdx: String): LiveData<Diagnosis?>
 
-    @Query("SELECT * FROM user_diagnosis ORDER BY time DESC")
-    fun getAllDiagnoses(): LiveData<List<Diagnosis>>
+    @Query("SELECT * FROM user_diagnosis Where uid = :userIdx ORDER BY time DESC")
+    fun getAllDiagnoses(userIdx: String): LiveData<List<Diagnosis>>
 
-    @Query("DELETE FROM user_diagnosis")
-    suspend fun deleteAllDiagnoses()
+    @Query("DELETE FROM user_diagnosis Where uid = :userIdx")
+    suspend fun deleteAllDiagnoses(userIdx: String)
 
 }

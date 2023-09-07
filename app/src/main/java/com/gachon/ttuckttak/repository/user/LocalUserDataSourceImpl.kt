@@ -27,11 +27,11 @@ class LocalUserDataSourceImpl @Inject constructor(
     }
 
     override fun getUserProfile(): LiveData<UserProfile?> {
-        return userDao.getUserProfile()
+        return userDao.getUserProfile(authManager.getUserIdx()!!)
     }
 
-    override suspend fun saveUserInfo(data: UserInfoRes) {
-        userDao.insertUser(
+    override suspend fun updateUserInfo(data: UserInfoRes) {
+        userDao.updateUserProfile(
             User(
                 userIdx = authManager.getUserIdx()!!,
                 userName = data.userName,
@@ -45,22 +45,22 @@ class LocalUserDataSourceImpl @Inject constructor(
     }
 
     override fun getRecentDiagnosis(): LiveData<Diagnosis?> {
-        return diagnosisDao.getLatestDiagnosis()
+        return diagnosisDao.getLatestDiagnosis(authManager.getUserIdx()!!)
     }
 
     override suspend fun getPushStatus(): Boolean {
-        return userDao.getEventOrFunctionUpdateNotification()
+        return userDao.getEventOrFunctionUpdateNotification(authManager.getUserIdx()!!)
     }
 
     override suspend fun getNightPushStatus(): Boolean {
-        return userDao.getNightPushNotification()
+        return userDao.getNightPushNotification(authManager.getUserIdx()!!)
     }
 
     override suspend fun updateLocalPushStatus(targetValue: Boolean) {
-        userDao.updateEventOrFunctionUpdateNotification(targetValue)
+        userDao.updateEventOrFunctionUpdateNotification(authManager.getUserIdx()!!, targetValue)
     }
 
     override suspend fun updateLocalNightPushStatus(targetValue: Boolean) {
-        userDao.updateNightPushNotification(targetValue)
+        userDao.updateNightPushNotification(authManager.getUserIdx()!!, targetValue)
     }
 }
