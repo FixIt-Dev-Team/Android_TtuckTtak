@@ -41,7 +41,7 @@
     <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
     <string name="password_check">비밀번호 확인</string>
     <string name="join">가입하기</string>
-    <string name="start">시작하기</string>
+
     <string name="available_nickname">사용 가능한 닉네임입니다.</string>
     <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
@@ -55,6 +55,9 @@
     <string name="service_promote_terms">[선택] <u>서비스 홍보 약관</u>에 동의해요</string>
     <string name="use_terms"><b>서비스 이용 약관</b></string>
     <string name="promote_terms"><b>서비스 홍보 약관</b></string>
+
+    <!-- 시작 화면  -->
+    <string name="start">시작하기</string>
 
     <!-- contentDescription -->
     <string name="back_content_description">뒤로가기</string>

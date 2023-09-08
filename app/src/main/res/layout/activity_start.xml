@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.gachon.ttuckttak.ui.main.StartViewmodel" />
@@ -17,21 +18,25 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_start"
-            android:layout_width="318dp"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@drawable/bg_rectangle_round"
             android:backgroundTint="@color/general_theme_white"
-            android:fontFamily="@font/noto_sans_kr_regular"
-            android:textFontWeight="700"
+            android:fontFamily="@font/noto_sans_kr_bold"
             android:gravity="center"
-            android:text="@string/start"
+            android:includeFontPadding="false"
+            android:lineHeight="26sp"
             android:onClick="@{() ->viewmodel.goNext()}"
+            android:text="@string/start"
             android:textColor="@color/main_theme_blue"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.07"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7338"
+            app:layout_constraintWidth_percent="0.8833" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
