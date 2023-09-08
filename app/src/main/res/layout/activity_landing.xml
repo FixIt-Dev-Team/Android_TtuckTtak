@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.gachon.ttuckttak.ui.login.LandingViewmodel" />
@@ -15,6 +16,7 @@
         android:background="@color/general_theme_black"
         tools:context=".ui.login.LandingActivity">
 
+        <!-- 텍스트 레이아웃  -->
         <LinearLayout
             android:id="@+id/layout_welcome"
             android:layout_width="wrap_content"
@@ -22,21 +24,20 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.2389"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25">
+            app:layout_constraintVertical_bias="0.22">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
+                android:lineHeight="55sp"
                 android:text="@string/text_welcome1"
                 android:textColor="@color/general_theme_white"
-                android:textFontWeight="700"
-                android:textSize="38sp"
-                tools:ignore="HardcodedText" />
+                android:textSize="38sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -44,74 +45,103 @@
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
+                android:lineHeight="20sp"
                 android:text="@string/text_welcome2"
-                android:textColor="@color/general_theme_white"
-                android:textFontWeight="700"
+                android:textColor="@color/system_theme_gray"
                 android:textSize="14sp" />
-
         </LinearLayout>
 
-        <!-- Todo: 피그마 비율대로 했는데 조금 다름. 수정 필요   -->
+        <!-- 가입하기 버튼  -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_regular"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="110dp"
             android:background="@drawable/bg_rectangle_round"
             android:backgroundTint="@color/general_theme_white"
             android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
+            android:lineHeight="26sp"
             android:onClick="@{() -> viewmodel.goJoinPart1Activity()}"
             android:text="@string/sign_up"
             android:textColor="@color/main_theme_blue"
             android:textSize="18sp"
-            android:textFontWeight="700"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.07"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layout_welcome"
-            app:layout_constraintWidth_percent="0.88" />
+            app:layout_constraintVertical_bias="0.2808"
+            app:layout_constraintWidth_percent="0.8833" />
 
-        <ImageButton
+        <!-- 구글 계정 로그인 버튼  -->
+        <!-- FIXME: 구글 이미지 버튼을 어떻게 할지 논의 필요-->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/imagebutton_google"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/btn_google"
-            android:scaleType="fitXY"
-            android:contentDescription="login_google"
-            app:layout_constraintEnd_toEndOf="@id/button_regular"
-            app:layout_constraintStart_toStartOf="@id/button_regular"
-            app:layout_constraintTop_toBottomOf="@id/button_regular" />
+            android:layout_height="0dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/general_theme_white"
+            android:drawableStart="@drawable/img_logo_google"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineHeight="21sp"
+            android:onClick="@{() -> viewmodel.goJoinPart1Activity()}"
+            android:text="@string/google_sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/system_theme_gray"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_regular"
+            app:layout_constraintVertical_bias="0.0361"
+            app:layout_constraintWidth_percent="0.8833" />
 
-        <ImageButton
+        <!-- 카카오 계정 로그인 버튼  -->
+        <!-- FIXME: 카카오 이미지 버튼을 어떻게 할지 논의 필요-->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/imagebutton_kakao"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/btn_kakao"
-            android:scaleType="fitXY"
-            android:contentDescription="login_kakao"
-            app:layout_constraintEnd_toEndOf="@id/imagebutton_google"
-            app:layout_constraintStart_toStartOf="@id/imagebutton_google"
-            app:layout_constraintTop_toBottomOf="@id/imagebutton_google" />
+            android:layout_height="0dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="#FEE500"
+            android:drawableStart="@drawable/img_logo_kakao"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:lineHeight="21sp"
+            android:onClick="@{() -> viewmodel.goJoinPart1Activity()}"
+            android:text="@string/kakao_sign_up"
+            android:textAllCaps="false"
+            android:textColor="@color/general_theme_black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagebutton_google"
+            app:layout_constraintVertical_bias="0.0474"
+            app:layout_constraintWidth_percent="0.8833" />
 
+        <!-- 로그인 화면 이동 텍스트 -->
         <TextView
             android:id="@+id/textview_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:includeFontPadding="false"
+            android:lineHeight="20sp"
             android:onClick="@{() -> viewmodel.goLoginActivity()}"
             android:text="@string/text_welcome3"
             android:textColor="@color/general_theme_white"
-            android:textFontWeight="700"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagebutton_kakao" />
+            app:layout_constraintTop_toBottomOf="@id/imagebutton_kakao"
+            app:layout_constraintVertical_bias="0.1241" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
