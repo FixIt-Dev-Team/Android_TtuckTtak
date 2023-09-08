@@ -57,12 +57,20 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
 
         viewModel.profile.observe(this@SettingsProfileActivity) { profile ->
             if (profile != null) {
-                binding.edittextNickname.setText(profile.userName)
-                binding.textviewUserEmail.text = profile.email
+                if (profile.userName != null) {
+                    binding.edittextNickname.setText(profile.userName)
+                }
+
+                if (profile.email != null) {
+                    binding.textviewUserEmail.text = profile.email
+                }
 
                 if (profile.profileImgUrl != null) { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
                     Glide.with(this@SettingsProfileActivity)
-                        .load(viewModel.profile.value!!.profileImgUrl)
+                        .load(profile.profileImgUrl) // 사용자의 프로필 이미지를 Load
+                        .placeholder(R.drawable.img_profile) // 사용자의 프로필 로딩을 시작하기 전에 보여줄 이미지 설정
+                        .error(R.drawable.img_profile) // 리소스를 불러오다가 에러가 발생했을 때 보여줄 이미지를 설정
+                        .fallback(R.drawable.img_profile) // Load할 url이 null인 경우 등 비어있을 때 보여줄 이미지를 설정
                         .into(binding.imageviewProfile)
                 }
             }
