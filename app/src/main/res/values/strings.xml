@@ -16,8 +16,14 @@
     <string name="pw">비밀번호</string>
     <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
 
-
+    <!-- 조인 화면  -->
+    <string name="join_membership">회원가입</string>
+    <string name="join_email">사용하실 이메일을 정해주세요</string>
+    <string name="user_email">예) ttukttak@ttukttak.com</string>
+    <string name="overlap_email">이미 사용중인 계정입니다.</string>
     <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>
+    <string name="certification_code">인증코드 보내기</string>
+
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
 
     <!-- contentDescription -->
@@ -28,6 +34,7 @@
     <string name="email_autofill">이메일 에딧 텍스트</string>
     <string name="password_autofill">비밀번호 에딧 텍스트</string>
 
+
     <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
     <string name="request_failed">요청에 실패하였습니다.</string>
 
@@ -36,7 +43,6 @@
     <string name="latest_result">최근 진단내역</string>
 
     <string name="user_name">김뚝딱이</string>
-    <string name="user_email">ttukttak@ttukttak.com</string>
 
     <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
     <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
@@ -251,8 +257,6 @@
     <!-- -->
     <string name="available_nickname">사용 가능한 닉네임입니다.</string>
     <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
-    <string name="overlap_email">이미 사용중인 계정입니다.</string>
-    <string name="certification_code">인증코드 보내기</string>
     <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
     <string name="input_certification_code">예) 1234</string>
     <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
@@ -444,11 +448,10 @@
     <string name="start">시작하기</string>
     <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
 
-    <string name="join_membership">회원가입</string>
-    <string name="join_email">사용하실 이메일을 정해주세요</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="blank_text">blank_text</string>
+    <string name="blank_text">blank</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="insert_email">찾으실 이메일을 입력해주세요</string>
