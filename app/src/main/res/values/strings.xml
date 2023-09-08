@@ -23,6 +23,18 @@
     <string name="overlap_email">이미 사용중인 계정입니다.</string>
     <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>
     <string name="certification_code">인증코드 보내기</string>
+    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
+    <string name="user_email2">ttukttak@ttukttak.com</string>
+    <string name="input_certification_code">예) 12345678</string>
+    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
+    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
+    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+    <string name="timer">00:00</string>
+    <string name="certification">인증하기</string>
+
+    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
+    <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
+    <string name="certification_resend">인증코드 재전송</string>
 
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
 
@@ -33,6 +45,7 @@
     <!-- Autofill -->
     <string name="email_autofill">이메일 에딧 텍스트</string>
     <string name="password_autofill">비밀번호 에딧 텍스트</string>
+    <string name="code_autofill">인증코드</string>
 
 
     <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
@@ -44,7 +57,7 @@
 
     <string name="user_name">김뚝딱이</string>
 
-    <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
+
     <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
 
     <string name="alert_setting">알림 설정</string>
@@ -257,15 +270,11 @@
     <!-- -->
     <string name="available_nickname">사용 가능한 닉네임입니다.</string>
     <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
-    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
-    <string name="input_certification_code">예) 1234</string>
-    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
-    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
-    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+
+
     <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
-    <string name="timer">00:00</string>
-    <string name="certification">인증하기</string>
-    <string name="certification_resend">인증코드 재전송</string>
+
+
     <string name="agree_terms">서비스 이용 및 홍보 약관에 동의해요</string>
     <string name="service_use_terms">[필수] <u>서비스 이용 약관</u>에 동의해요</string>
     <string name="service_promote_terms">[선택] <u>서비스 홍보 약관</u>에 동의해요</string>
@@ -446,7 +455,7 @@
     <string name="password_check">비밀번호 확인</string>
     <string name="join">가입하기</string>
     <string name="start">시작하기</string>
-    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
+
 
 
 
