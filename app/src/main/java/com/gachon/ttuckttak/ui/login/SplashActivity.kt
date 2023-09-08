@@ -22,8 +22,17 @@ class SplashActivity : AppCompatActivity() {
         viewModel.viewEvent.observe(this) { event ->
             event.getContentIfNotHandled()?.let { navigateTo ->
                 when (navigateTo) {
-                    is Landing -> startActivity(Intent(this, LandingActivity::class.java))
-                    is Start -> startActivity(Intent(this, StartActivity::class.java))
+                    is Landing -> {
+                        val intent = Intent(this, LandingActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+
+                    is Start -> {
+                        val intent = Intent(this, StartActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
                 }
             }
         }
