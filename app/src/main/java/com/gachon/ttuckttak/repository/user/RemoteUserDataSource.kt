@@ -10,7 +10,7 @@ import okhttp3.MultipartBody
 
 interface RemoteUserDataSource {
 
-    suspend fun getUserProfile(): BaseResponse<UserInfoRes>
+    suspend fun getUserInfo(): BaseResponse<UserInfoRes>
 
     suspend fun checkNicknameAvailable(nickname: String): BaseResponse<NicknameRes>
     suspend fun updateRemoteUserProfile(

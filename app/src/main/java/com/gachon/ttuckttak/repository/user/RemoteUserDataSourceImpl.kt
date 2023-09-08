@@ -25,7 +25,7 @@ class RemoteUserDataSourceImpl @Inject constructor(
     private val viewService: ViewService,
 ) : RemoteUserDataSource {
 
-    override suspend fun getUserProfile(): BaseResponse<UserInfoRes> {
+    override suspend fun getUserInfo(): BaseResponse<UserInfoRes> {
         return viewService.getUserInfo(authManager.getUserIdx()!!)
     }
 
