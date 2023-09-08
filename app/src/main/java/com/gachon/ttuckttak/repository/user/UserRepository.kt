@@ -35,7 +35,7 @@ interface UserRepository {
 
     // ---------- Remote ----------
 
-    suspend fun getRemoteUserProfile(): BaseResponse<UserInfoRes>
+    suspend fun getUserInfo(): BaseResponse<UserInfoRes>
 
     suspend fun checkNicknameAvailable(nickname: String): BaseResponse<NicknameRes>
 

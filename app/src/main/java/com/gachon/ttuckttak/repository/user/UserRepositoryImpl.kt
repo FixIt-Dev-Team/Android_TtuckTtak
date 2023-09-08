@@ -45,8 +45,8 @@ class UserRepositoryImpl @Inject constructor(
 
     // ---------- Remote ----------
 
-    override suspend fun getRemoteUserProfile(): BaseResponse<UserInfoRes> =
-        remoteUserDataSource.getUserProfile()
+    override suspend fun getUserInfo(): BaseResponse<UserInfoRes> =
+        remoteUserDataSource.getUserInfo()
 
     override suspend fun checkNicknameAvailable(nickname: String): BaseResponse<NicknameRes> =
         remoteUserDataSource.checkNicknameAvailable(nickname)

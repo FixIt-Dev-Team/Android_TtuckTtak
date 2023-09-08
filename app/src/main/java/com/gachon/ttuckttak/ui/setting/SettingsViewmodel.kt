@@ -28,17 +28,17 @@ class SettingsViewmodel @Inject constructor(
     val showToastEvent = _showToastEvent.asSharedFlow()
 
     init {
-        getUserProfile() // 초기화시 사용자의 프로필을 요청한다
+        updateUserInfo() // 초기화시 사용자의 정보를 갱신한다.
     }
 
     /**
-     * 사용자 프로필을 가져오는 method
+     * 사용자 정보를 갱신하는 method
      */
-    private fun getUserProfile() = viewModelScope.launch(Dispatchers.IO) {
+    private fun updateUserInfo() = viewModelScope.launch(Dispatchers.IO) {
         try {
-            userRepository.getRemoteUserProfile()
+            userRepository.getUserInfo()
                 .also { response -> // 서버에 사용자의 프로필 정보를 요청한다.
-                    if (response.isSuccess) { // 성공적으로 사용자의 프로필을 가져온 경우
+                    if (response.isSuccess) { // 성공적으로 사용자의 정보를 가져온 경우
                         response.data?.let { userInfo ->
                             userRepository.updateUserInfo(userInfo) // Local 저장소에 사용자의 정보를 갱신한다
                         }
