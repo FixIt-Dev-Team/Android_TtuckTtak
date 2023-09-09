@@ -41,7 +41,7 @@ class SettingsProfileViewmodel @Inject constructor(
     private var newProfileImg: MultipartBody.Part? = null
 
     // 사용자가 바꾼 값이 있는지. 이 값으로 저장 버튼을 활성화 시킨다.
-    private val _changeDetected = MutableLiveData<Boolean>()
+    private val _changeDetected = MutableLiveData(false)
     val changeDetected: LiveData<Boolean>
         get() = _changeDetected
 

@@ -62,10 +62,6 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
             binding.textviewNicknameErrorMessage.text = message
         }
 
-        viewModel.changeDetected.observe(this@SettingsProfileActivity) { value ->
-            binding.imagebuttonSave.isEnabled = value
-        }
-
         // 일회성 show toast
         lifecycleScope.launch {
             viewModel.showToastEvent.collect { message ->

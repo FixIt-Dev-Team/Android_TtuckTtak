@@ -51,7 +51,7 @@
             android:layout_height="48dp"
             android:background="@drawable/ic_check"
             android:contentDescription="@string/blank_text"
-            android:enabled="false"
+            android:enabled="@{viewmodel.changeDetected}"
             android:onClick="@{() -> viewmodel.updateUserProfile()}"
             app:layout_constraintBottom_toBottomOf="@id/textview_profileSetting"
             app:layout_constraintEnd_toEndOf="parent"
