@@ -27,7 +27,7 @@ class SettingsProfileViewmodel @Inject constructor(
 ) : BaseViewModel() {
 
     // 사용자의 프로필
-    val profile: LiveData<UserProfile?> = userRepository.getLocalUserProfile()
+    val profile: LiveData<UserProfile> = userRepository.getLocalUserProfile()
 
     // 닉네임 에러 메시지. 닉네임이 어떤 이유로 사용할 수 없는지 사용자에게 알려주는 역할을 한다.
     private val _nicknameErrorMessage = MutableLiveData<String?>()

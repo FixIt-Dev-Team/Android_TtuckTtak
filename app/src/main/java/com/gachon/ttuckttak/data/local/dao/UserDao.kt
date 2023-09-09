@@ -15,7 +15,7 @@ interface UserDao {
     suspend fun insertUser(user: User)
 
     @Query("SELECT user_name, email, profile_img_url FROM User Where uid = :userIdx")
-    fun getUserProfile(userIdx: String): LiveData<UserProfile?>
+    fun getUserProfile(userIdx: String): LiveData<UserProfile>
 
     @Update
     fun updateUserProfile(user: User)

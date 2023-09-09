@@ -25,12 +25,12 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun getPasswordResetEmail(): String? =
         localUserDataSource.getPasswordResetEmail()
 
-    override fun getLocalUserProfile(): LiveData<UserProfile?> =
+    override fun getLocalUserProfile(): LiveData<UserProfile> =
         localUserDataSource.getUserProfile()
 
     override suspend fun updateUserInfo(data: UserInfoRes) = localUserDataSource.updateUserInfo(data)
 
-    override fun getRecentDiagnosis(): LiveData<Diagnosis?> =
+    override fun getRecentDiagnosis(): LiveData<Diagnosis> =
         localUserDataSource.getRecentDiagnosis()
 
     override suspend fun getPushStatus(): Boolean = localUserDataSource.getPushStatus()

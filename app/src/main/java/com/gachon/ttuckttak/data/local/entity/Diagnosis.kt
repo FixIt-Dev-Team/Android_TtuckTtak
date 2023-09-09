@@ -1,10 +1,14 @@
 package com.gachon.ttuckttak.data.local.entity
 
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 @Entity(
     tableName = "user_diagnosis",
@@ -25,4 +29,21 @@ data class Diagnosis(
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L
+
+    object MyBind {
+
+        @JvmStatic
+        @BindingAdapter("formattedDate")
+        fun setFormattedDate(view: TextView, date: Date?) {
+            view.text = formatDate(date)
+        }
+
+        private fun formatDate(date: Date?): String {
+            return if (date != null) {
+                SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.getDefault()).format(date)
+            } else {
+                ""
+            }
+        }
+    }
 }

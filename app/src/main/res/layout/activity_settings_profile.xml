@@ -72,11 +72,12 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:padding="6dp"
-                android:src="@drawable/img_profile"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{viewmodel.profile.profileImgUrl}"
+                tools:src="@drawable/img_profile" />
 
             <ImageButton
                 android:layout_width="48dp"
@@ -135,6 +136,7 @@
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:inputType="textPersonName"
                 android:maxLength="12"
+                android:text="@{viewmodel.profile.userName}"
                 android:textColor="@color/general_theme_black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -208,6 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
                 android:fontFamily="@font/noto_sans_kr_bold"
+                android:text="@{viewmodel.profile.email}"
                 android:textColor="@color/general_theme_black"
                 android:textSize="14sp"
                 tools:text="@string/user_email" />

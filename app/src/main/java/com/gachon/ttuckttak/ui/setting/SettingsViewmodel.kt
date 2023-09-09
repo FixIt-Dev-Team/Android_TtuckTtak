@@ -22,7 +22,7 @@ class SettingsViewmodel @Inject constructor(
     private val userRepository: UserRepository
 ) : BaseViewModel() {
 
-    val profile: LiveData<UserProfile?> = userRepository.getLocalUserProfile()
+    val profile: LiveData<UserProfile> = userRepository.getLocalUserProfile()
 
     private val _showToastEvent = MutableSharedFlow<String>()
     val showToastEvent = _showToastEvent.asSharedFlow()

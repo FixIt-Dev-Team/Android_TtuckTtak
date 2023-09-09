@@ -13,7 +13,7 @@ interface DiagnosisDao {
     suspend fun insertDiagnosis(diagnosis: Diagnosis)
 
     @Query("SELECT * FROM user_diagnosis Where uid = :userIdx ORDER BY time DESC LIMIT 1")
-    fun getLatestDiagnosis(userIdx: String): LiveData<Diagnosis?>
+    fun getLatestDiagnosis(userIdx: String): LiveData<Diagnosis>
 
     @Query("SELECT * FROM user_diagnosis Where uid = :userIdx ORDER BY time DESC")
     fun getAllDiagnoses(userIdx: String): LiveData<List<Diagnosis>>

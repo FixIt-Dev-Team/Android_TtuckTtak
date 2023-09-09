@@ -10,7 +10,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val userRepository: UserRepository) : BaseViewModel() {
 
-    val diagnosis: LiveData<Diagnosis?> = userRepository.getRecentDiagnosis()
+    val diagnosis: LiveData<Diagnosis> = userRepository.getRecentDiagnosis()
 
     fun startProblemCategoryActivity() = viewEvent(NavigateTo.ProblemCategory)
 

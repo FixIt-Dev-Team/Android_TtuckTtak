@@ -10,7 +10,6 @@ import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivitySettingsProfileBinding
 import kotlinx.coroutines.launch
@@ -36,9 +35,11 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
 
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
-    override fun initAfterBinding() = with(binding) {
+    override fun initAfterBinding() {
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this // LiveData 관찰을 위한 lifecycleOwner 설정
         binding.layoutAlert.viewmodel = viewModel
+        binding.layoutAlert.lifecycleOwner = this // LiveData 관찰을 위한 lifecycleOwner 설정
         setObservers()
         setClickListener()
         setFocusListener()
@@ -53,30 +54,6 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
                     is ResetPw -> startNextActivity(ResetPwActivity::class.java)
                 }
             }
-        }
-
-        viewModel.profile.observe(this@SettingsProfileActivity) { profile ->
-            if (profile != null) {
-                if (profile.userName != null) {
-                    binding.edittextNickname.setText(profile.userName)
-                }
-
-                if (profile.email != null) {
-                    binding.textviewUserEmail.text = profile.email
-                }
-
-                if (profile.profileImgUrl != null) { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
-                    Glide.with(this@SettingsProfileActivity)
-                        .load(profile.profileImgUrl) // 사용자의 프로필 이미지를 Load
-                        .placeholder(R.drawable.img_profile) // 사용자의 프로필 로딩을 시작하기 전에 보여줄 이미지 설정
-                        .error(R.drawable.img_profile) // 리소스를 불러오다가 에러가 발생했을 때 보여줄 이미지를 설정
-                        .fallback(R.drawable.img_profile) // Load할 url이 null인 경우 등 비어있을 때 보여줄 이미지를 설정
-                        .into(binding.imageviewProfile)
-                }
-            }
-
-            // Todo: 첫 로그인 + 네트워크 문제로 사용자의 프로필을 불러올 수 없을 때 어떻게 화면에 보여줄지 기획에 물어볼 것
-            //  즉 profile == null일 때 어떻게 처리할 것인지
         }
 
         viewModel.nicknameErrorMessage.observe(this@SettingsProfileActivity) { message ->
