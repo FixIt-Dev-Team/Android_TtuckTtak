@@ -36,12 +36,10 @@ class SettingsViewmodel @Inject constructor(
      */
     private fun updateUserInfo() = viewModelScope.launch(Dispatchers.IO) {
         try {
-            userRepository.getUserInfo()
-                .also { response -> // 서버에 사용자의 프로필 정보를 요청한다.
+            userRepository.getUserInfo() // 서버에 사용자의 프로필 정보를 요청한다.
+                .also { response ->
                     if (response.isSuccess) { // 성공적으로 사용자의 정보를 가져온 경우
-                        response.data?.let { userInfo ->
-                            userRepository.updateUserInfo(userInfo) // Local 저장소에 사용자의 정보를 갱신한다
-                        }
+                        userRepository.updateUserInfo(response.data!!) // Local 저장소에 사용자의 정보를 갱신한다
                     }
                 }
 
@@ -58,14 +56,16 @@ class SettingsViewmodel @Inject constructor(
 
     fun logout() = viewModelScope.launch(Dispatchers.IO) {
         try {
-            val res = authRepository.logout() // 서버에 사용자 프로필 요청한다
-            if (res.isSuccess) {
-                authRepository.clearUserInfo() // 사용자 폰에 저장되어 있는 사용자의 정보를 지우고
-                viewEvent(NavigateTo.Landing) // LandingActivity로 전환되라고 event를 준다
+            authRepository.logout() // 서버에 사용자 프로필 요청한다
+                .also { response ->
+                    if (response.isSuccess) {
+                        authRepository.clearUserInfo() // 사용자 폰에 저장되어 있는 사용자의 정보를 지우고
+                        viewEvent(NavigateTo.Landing) // LandingActivity로 전환되라고 event를 준다
 
-            } else {
-                _showToastEvent.emit(res.message) // 서버에서 보내 준 에러 메시지로 수정
-            }
+                    } else {
+                        _showToastEvent.emit(response.message) // 서버에서 보내 준 에러 메시지로 수정
+                    }
+                }
 
         } catch (e: Exception) {
             Log.e("SettingsViewmodel", e.message.toString()) // 에러 로깅

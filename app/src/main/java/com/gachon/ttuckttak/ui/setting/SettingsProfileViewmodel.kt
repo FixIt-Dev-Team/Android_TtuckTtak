@@ -98,8 +98,8 @@ class SettingsProfileViewmodel @Inject constructor(
                 newProfileImg = newProfileImg // 변경할 프로필 이미지. 없을 수 있음
             ).also { response -> // 서버에 프로필 변경 요청
 
-                if (response.isSuccess && response.data != null) { // 성공적으로 프로필이 변경되었다면
-                    userRepository.updateUserInfo(response.data.userData) // Local 저장소에 사용자의 정보를 갱신하고
+                if (response.isSuccess) { // 성공적으로 프로필이 변경되었다면
+                    userRepository.updateUserInfo(response.data!!.userData) // Local 저장소에 사용자의 정보를 갱신하고
                     viewEvent(NavigateTo.Before) // 이전 화면으로 전환 되도록 event를 준다
 
                 } else { // 사용자의 프로필이 성공적으로 업데이트되지 못 한 경우
