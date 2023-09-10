@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android_TtuckTtak</string>
+    <string name="app_name">뚝딱</string>
 
     <!-- 랜딩 페이지 -->
     <string name="text_welcome1"><font color='#1DB9DB'>뚝딱</font>하실\n준비되셨나요?</string>
@@ -62,6 +62,7 @@
     <!-- 홈 화면 -->
     <string name="text_start">탭해서 진단을 시작해보세요!</string>
     <string name="latest_result">최근 진단내역</string>
+    <string name="email_reconfirm2">“ttukttak@ttukttak.com”</string>
 
     <!-- 세팅 화면 -->
     <string name="alert_setting">알림 설정</string>
