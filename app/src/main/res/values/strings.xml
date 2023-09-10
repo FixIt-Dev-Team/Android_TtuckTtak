@@ -59,9 +59,16 @@
     <!-- 시작 화면  -->
     <string name="start">시작하기</string>
 
+    <!-- 홈 화면 -->
+    <string name="text_start">탭해서 진단을 시작해보세요!</string>
+    <string name="latest_result">최근 진단내역</string>
+
     <!-- contentDescription -->
     <string name="back_content_description">뒤로가기</string>
     <string name="logo_content_description">뚝딱로고</string>
+    <string name="setting_content_description">설정</string>
+    <string name="home_content_description">홈 버튼</string>
+    <string name="next_content_description">다음 버튼</string>
 
     <!-- Autofill -->
     <string name="email_autofill">이메일 에딧 텍스트</string>
@@ -75,7 +82,7 @@
 
 
 
-    <string name="latest_result">최근 진단내역</string>
+
 
 
 
