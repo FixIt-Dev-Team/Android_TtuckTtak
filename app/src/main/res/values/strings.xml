@@ -63,32 +63,7 @@
     <string name="text_start">탭해서 진단을 시작해보세요!</string>
     <string name="latest_result">최근 진단내역</string>
 
-    <!-- contentDescription -->
-    <string name="back_content_description">뒤로가기</string>
-    <string name="logo_content_description">뚝딱로고</string>
-    <string name="setting_content_description">설정</string>
-    <string name="home_content_description">홈 버튼</string>
-    <string name="next_content_description">다음 버튼</string>
-
-    <!-- Autofill -->
-    <string name="email_autofill">이메일 에딧 텍스트</string>
-    <string name="password_autofill">비밀번호 에딧 텍스트</string>
-    <string name="code_autofill">인증코드</string>
-    <string name="name_autofill">닉네임</string>
-
-
-    <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
-    <string name="request_failed">요청에 실패하였습니다.</string>
-
-
-
-
-
-
-
-
-    <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
-
+    <!-- 세팅 화면 -->
     <string name="alert_setting">알림 설정</string>
     <string name="consumer_center">고객 센터</string>
     <string name="review">리뷰 및 평가하기</string>
@@ -102,6 +77,27 @@
     <string name="password_reset">비밀번호 재설정하기</string>
     <string name="event_push_alert">이벤트 및 기능추가 push 알림</string>
     <string name="night_time_alert">야간시간(20:00-24:00) Push 알림</string>
+    <string name="user_nickname">김뚝딱이</string>
+
+    <!-- contentDescription -->
+    <string name="back_content_description">뒤로가기</string>
+    <string name="logo_content_description">뚝딱로고</string>
+    <string name="setting_content_description">설정</string>
+    <string name="home_content_description">홈 버튼</string>
+    <string name="next_content_description">다음 버튼</string>
+    <string name="profile_content_description">프로필 이미지</string>
+
+    <!-- Autofill -->
+    <string name="email_autofill">이메일 에딧 텍스트</string>
+    <string name="password_autofill">비밀번호 에딧 텍스트</string>
+    <string name="code_autofill">인증코드</string>
+    <string name="name_autofill">닉네임</string>
+
+
+    <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
+    <string name="request_failed">요청에 실패하였습니다.</string>
+
+
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
 
     <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
@@ -299,7 +295,6 @@
     <!-- -->
 
 
-
     <string name="promote_terms_detail"><p>서비스 홍보 약관
 상품소개 등을 위한 개인정보의 처리 동의(선택)
 ① 소비자권익보호에 관한 사항
@@ -466,10 +461,6 @@
 제 25 조 (통지)
 ① 서비스가 회원에 대하여 통지를 하는 경우 서비스가 회사에 등록한 전자우편 주소로 할 수 있습니다.
 ② 서비스는 불특정다수 회원에게 통지를 해야 할 경우 공지 게시판을 통해 7일 이상 게시함으로써 개별 통지에 갈음할 수 있습니다.</p></string>
-
-
-
-
 
 
     <!-- TODO: Remove or change this placeholder text -->
