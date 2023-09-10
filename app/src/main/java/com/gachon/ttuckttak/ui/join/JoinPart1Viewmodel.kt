@@ -33,16 +33,17 @@ class JoinPart1Viewmodel @Inject constructor(private val authRepository: AuthRep
             try {
                 _state.postValue(State.Loading) // 현재 상태를 요청 중으로 수정
 
-                val res = authRepository.emailConfirm(email) // 서버에 이메일 인증 요청
-                _response.postValue(res) // 요청 결과 저장
+                authRepository.emailConfirm(email).also { response -> // 서버에 이메일 인증 요청
+                    _response.postValue(response) // 요청 결과 저장
 
-                if (res.isSuccess) {
-                    _state.postValue(State.Success) // 현재 상태를 정상으로 수정
-                    viewEvent(NavigateTo.JoinPart2) // 다음 activity로 전환 되도록 event를 준다
+                    if (response.isSuccess) {
+                        _state.postValue(State.Success) // 현재 상태를 정상으로 수정
+                        viewEvent(NavigateTo.JoinPart2) // 다음 activity로 전환 되도록 event를 준다
 
-                } else {
-                    _state.postValue(State.Error) // 현재 상태를 error로 수정
-                    _showToastEvent.emit(res.message) // 서버에서 보내 준 에러 메시지로 수정
+                    } else {
+                        _state.postValue(State.Error) // 현재 상태를 error로 수정
+                        _showToastEvent.emit(response.message) // 서버에서 보내 준 에러 메시지로 수정
+                    }
                 }
 
             } catch (e: Exception) {

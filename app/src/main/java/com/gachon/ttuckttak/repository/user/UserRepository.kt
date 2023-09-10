@@ -19,11 +19,11 @@ interface UserRepository {
 
     suspend fun getPasswordResetEmail(): String?
 
-    fun getLocalUserProfile(): LiveData<UserProfile?>
+    fun getLocalUserProfile(): LiveData<UserProfile>
 
     suspend fun updateUserInfo(data: UserInfoRes)
 
-    fun getRecentDiagnosis(): LiveData<Diagnosis?>
+    fun getRecentDiagnosis(): LiveData<Diagnosis>
 
     suspend fun getPushStatus(): Boolean
 

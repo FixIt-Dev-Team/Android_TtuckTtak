@@ -6,8 +6,6 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivitySettingsBinding
 import com.gachon.ttuckttak.ui.login.LandingActivity
@@ -26,6 +24,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(
 
     override fun initAfterBinding() {
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this // LiveData 관찰을 위한 lifecycleOwner 설정
         setObservers()
         setClickListener()
         setTouchListener()
@@ -101,30 +100,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(
                     is Landing -> startActivityWithClear(LandingActivity::class.java)
                 }
             }
-        }
-
-        viewModel.profile.observe(this@SettingsActivity) { profile ->
-            if (profile != null) {
-                if (profile.userName != null) {
-                    binding.textviewUserName.text = profile.userName
-                }
-
-                if (profile.email != null) {
-                    binding.textviewUserEmail.text = profile.email
-                }
-
-                if (profile.profileImgUrl != null) { // 사용자의 프로필 이미지가 있는 경우 Glide를 이용해 프로필 이미지를 설정한다
-                    Glide.with(this@SettingsActivity)
-                        .load(profile.profileImgUrl) // 사용자의 프로필 이미지를 Load
-                        .placeholder(R.drawable.img_profile) // 사용자의 프로필 로딩을 시작하기 전에 보여줄 이미지 설정
-                        .error(R.drawable.img_profile) // 리소스를 불러오다가 에러가 발생했을 때 보여줄 이미지를 설정
-                        .fallback(R.drawable.img_profile) // Load할 url이 null인 경우 등 비어있을 때 보여줄 이미지를 설정
-                        .into(binding.imageviewProfile)
-                }
-            }
-
-            // Todo: 첫 로그인 + 네트워크 문제로 사용자의 프로필을 불러올 수 없을 때 어떻게 화면에 보여줄지 기획에 물어볼 것
-            //  즉 profile == null일 때 어떻게 처리할 것인지
         }
 
         // 일회성 show toast

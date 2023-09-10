@@ -131,6 +131,7 @@
                 android:lineHeight="17sp"
                 android:textColor="@color/system_theme_gray"
                 android:textSize="12sp"
+                app:formattedDate="@{viewmodel.diagnosis.time}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

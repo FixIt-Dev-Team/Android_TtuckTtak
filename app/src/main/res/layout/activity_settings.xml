@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.gachon.ttuckttak.ui.setting.SettingsViewmodel" />
@@ -70,10 +69,11 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="20dp"
                     android:contentDescription="@string/blank_text"
-                    android:src="@drawable/img_profile"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadImage="@{viewmodel.profile.profileImgUrl}"
+                    tools:src="@drawable/img_profile" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
@@ -89,11 +89,12 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/noto_sans_kr_bold"
                         android:includeFontPadding="false"
-                        android:text="@string/user_name"
+                        android:text="@{viewmodel.profile.userName}"
                         android:textColor="@color/general_theme_black"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/user_name" />
 
                     <TextView
                         android:id="@+id/textview_userEmail"
@@ -102,11 +103,12 @@
                         android:layout_marginTop="2dp"
                         android:fontFamily="@font/noto_sans_kr_bold"
                         android:includeFontPadding="false"
-                        android:text="@string/user_email"
+                        android:text="@{viewmodel.profile.email}"
                         android:textColor="@color/system_theme_darkgray"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/textview_userName" />
+                        app:layout_constraintTop_toBottomOf="@id/textview_userName"
+                        tools:text="@string/user_email" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

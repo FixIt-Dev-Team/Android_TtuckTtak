@@ -26,7 +26,7 @@ class LocalUserDataSourceImpl @Inject constructor(
         return userManager.getPasswordResetEmail()
     }
 
-    override fun getUserProfile(): LiveData<UserProfile?> {
+    override fun getUserProfile(): LiveData<UserProfile> {
         return userDao.getUserProfile(authManager.getUserIdx()!!)
     }
 
@@ -44,7 +44,7 @@ class LocalUserDataSourceImpl @Inject constructor(
         )
     }
 
-    override fun getRecentDiagnosis(): LiveData<Diagnosis?> {
+    override fun getRecentDiagnosis(): LiveData<Diagnosis> {
         return diagnosisDao.getLatestDiagnosis(authManager.getUserIdx()!!)
     }
 

@@ -10,9 +10,7 @@ import com.gachon.ttuckttak.ui.setting.SettingsActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 import com.gachon.ttuckttak.ui.main.HomeViewModel.NavigateTo.*
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate, TransitionMode.HORIZONTAL) {
@@ -22,6 +20,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
     override fun initAfterBinding() {
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this // LiveData 관찰을 위한 lifecycleOwner 설정
         setObservers()
         this@HomeActivity.onBackPressedDispatcher.addCallback(this@HomeActivity, onBackPressedCallback)
     }
@@ -34,19 +33,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
             } else if (System.currentTimeMillis() <= backPressedTime + 2000) {
                 ActivityCompat.finishAffinity(this@HomeActivity)
-                System.exit(0)
+                exitProcess(0)
             }
         }
     }
 
-    private fun setObservers() = with(binding) {
-        viewModel.diagnosis.observe(this@HomeActivity) { diagnosis ->
-            if (diagnosis != null) {
-                textviewLatestResultText.text = diagnosis.item
-                textviewLatestResultTime.text = formatDate(diagnosis.time)
-            }
-        }
-
+    private fun setObservers() {
         viewModel.viewEvent.observe(this@HomeActivity) { event ->
             event.getContentIfNotHandled()?.let { navigateTo ->
                 when (navigateTo) {
@@ -55,10 +47,5 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 }
             }
         }
-    }
-
-    private fun formatDate(date: Date): String {
-        val format = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
-        return format.format(date)
     }
 }

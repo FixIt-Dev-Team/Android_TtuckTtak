@@ -11,11 +11,11 @@ interface LocalUserDataSource {
 
     suspend fun getPasswordResetEmail(): String?
 
-    fun getUserProfile(): LiveData<UserProfile?>
+    fun getUserProfile(): LiveData<UserProfile>
 
     suspend fun updateUserInfo(data: UserInfoRes)
 
-    fun getRecentDiagnosis(): LiveData<Diagnosis?>
+    fun getRecentDiagnosis(): LiveData<Diagnosis>
 
     suspend fun getPushStatus(): Boolean
 

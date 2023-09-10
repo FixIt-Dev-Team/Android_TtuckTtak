@@ -16,6 +16,7 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
 
     override fun initAfterBinding() {
         binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
         setObservers()
     }
 
@@ -26,14 +27,6 @@ class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(Activit
                     is Before -> finish()
                 }
             }
-        }
-
-        viewModel.pushStatus.observe(this@SettingsAlertActivity) { value ->
-            binding.switchEventAndFunctionPush.isChecked = value
-        }
-
-        viewModel.nightPushStatus.observe(this@SettingsAlertActivity) { value ->
-            binding.switchNightTimePushAlert.isChecked = value
         }
 
         // 일회성 show toast
