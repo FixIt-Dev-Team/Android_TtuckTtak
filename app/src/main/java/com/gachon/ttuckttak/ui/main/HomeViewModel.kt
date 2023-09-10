@@ -14,10 +14,13 @@ class HomeViewModel @Inject constructor(private val userRepository: UserReposito
 
     fun startProblemCategoryActivity() = viewEvent(NavigateTo.ProblemCategory)
 
+    fun showDiagnosis() = viewEvent(NavigateTo.Diagnosis)
+
     fun startSettingsActivity() = viewEvent(NavigateTo.Settings)
 
     sealed class NavigateTo {
         object ProblemCategory : NavigateTo()
+        object Diagnosis : NavigateTo()
         object Settings : NavigateTo()
     }
 

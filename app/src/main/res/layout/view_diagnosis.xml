@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="diagnosis"
+            type="com.gachon.ttuckttak.data.local.entity.Diagnosis" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/bg_rectangle_round_line_slim"
+        android:backgroundTint="@color/system_theme_gray">
+
+        <!-- 최근 진단 내역 내용 텍스트 -->
+        <TextView
+            android:id="@+id/textview_latest_diagnosis_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="18dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:text="@{diagnosis.item}"
+            android:textColor="@color/general_theme_black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_latest_diagnosis_time"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="부팅디스크(SSD) 접촉불량" />
+
+        <!-- 최근 진단 내역 내용 날짜 텍스트 -->
+        <TextView
+            android:id="@+id/textview_latest_diagnosis_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="18dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:textColor="@color/system_theme_gray"
+            android:textSize="12sp"
+            app:formattedDate="@{diagnosis.time}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_latest_diagnosis_text"
+            app:layout_constraintTop_toBottomOf="@id/textview_latest_diagnosis_text"
+            tools:text="2023.04.16 00:00" />
+
+        <ImageButton
+            android:id="@+id/imagebutton_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

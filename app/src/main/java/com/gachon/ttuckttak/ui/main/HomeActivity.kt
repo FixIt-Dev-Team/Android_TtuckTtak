@@ -43,6 +43,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             event.getContentIfNotHandled()?.let { navigateTo ->
                 when (navigateTo) {
                     is ProblemCategory -> startNextActivity(ProblemCategoryActivity::class.java)
+                    is Diagnosis -> startNextActivity(DiagnosisActivity::class.java)
                     is Settings -> startNextActivity(SettingsActivity::class.java)
                 }
             }

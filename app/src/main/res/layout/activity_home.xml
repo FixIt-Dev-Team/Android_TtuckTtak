@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.gachon.ttuckttak.ui.main.HomeViewModel" />
@@ -82,6 +81,7 @@
             android:layout_height="0dp"
             android:background="@drawable/bg_rectangle_round"
             android:backgroundTint="@color/system_theme_subwhite"
+            android:onClick="@{() -> viewmodel.showDiagnosis()}"
             android:paddingLeft="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +114,7 @@
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
                 android:lineHeight="23sp"
+                android:text="@{viewmodel.diagnosis.item}"
                 android:textColor="@color/general_theme_black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -142,12 +143,12 @@
             <ImageView
                 android:layout_width="7.6dp"
                 android:layout_height="12.79dp"
+                android:contentDescription="@string/next_content_description"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/system_theme_gray"
-                android:contentDescription="@string/next_content_description"/>
+                app:tint="@color/system_theme_gray" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

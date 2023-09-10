@@ -44,10 +44,6 @@ class LocalUserDataSourceImpl @Inject constructor(
         )
     }
 
-    override fun getRecentDiagnosis(): LiveData<Diagnosis> {
-        return diagnosisDao.getLatestDiagnosis(authManager.getUserIdx()!!)
-    }
-
     override suspend fun getPushStatus(): Boolean {
         return userDao.getEventOrFunctionUpdateNotification(authManager.getUserIdx()!!)
     }
@@ -62,5 +58,14 @@ class LocalUserDataSourceImpl @Inject constructor(
 
     override suspend fun updateLocalNightPushStatus(targetValue: Boolean) {
         userDao.updateNightPushNotification(authManager.getUserIdx()!!, targetValue)
+    }
+
+    // Diagnosis
+    override fun getRecentDiagnosis(): LiveData<Diagnosis> {
+        return diagnosisDao.getLatestDiagnosis(authManager.getUserIdx()!!)
+    }
+
+    override fun getLatestDiagnosis(): LiveData<List<Diagnosis>> {
+        return diagnosisDao.getAllDiagnoses(authManager.getUserIdx()!!)
     }
 }

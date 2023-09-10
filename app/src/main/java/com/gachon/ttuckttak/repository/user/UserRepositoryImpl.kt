@@ -28,10 +28,8 @@ class UserRepositoryImpl @Inject constructor(
     override fun getLocalUserProfile(): LiveData<UserProfile> =
         localUserDataSource.getUserProfile()
 
-    override suspend fun updateUserInfo(data: UserInfoRes) = localUserDataSource.updateUserInfo(data)
-
-    override fun getRecentDiagnosis(): LiveData<Diagnosis> =
-        localUserDataSource.getRecentDiagnosis()
+    override suspend fun updateUserInfo(data: UserInfoRes) =
+        localUserDataSource.updateUserInfo(data)
 
     override suspend fun getPushStatus(): Boolean = localUserDataSource.getPushStatus()
 
@@ -42,6 +40,14 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun updateLocalNightPushStatus(targetValue: Boolean) =
         localUserDataSource.updateLocalNightPushStatus(targetValue)
+
+    // Diagnosis
+
+    override fun getRecentDiagnosis(): LiveData<Diagnosis> =
+        localUserDataSource.getRecentDiagnosis()
+
+    override fun getLatestDiagnosis(): LiveData<List<Diagnosis>> =
+        localUserDataSource.getLatestDiagnosis()
 
     // ---------- Remote ----------
 
