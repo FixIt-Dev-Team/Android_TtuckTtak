@@ -256,12 +256,12 @@
 
         </LinearLayout>
 
+        <!-- 뚝딱 버전 텍스트 -->
         <TextView
             android:id="@+id/textview_ttuckttakVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:fontFamily="@font/noto_sans_kr_bold"
+            android:fontFamily="@font/noto_sans_kr_medium"
             android:includeFontPadding="false"
             android:lineHeight="17sp"
             android:text="@string/ttuckttak_version"
@@ -279,14 +279,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/general_theme_white"
-            android:fontFamily="@font/noto_sans_kr_bold"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:lineHeight="20sp"
+            android:includeFontPadding="false"
             android:onClick="@{() -> viewmodel.logout()}"
             android:text="@string/logout"
             android:textColor="@color/general_theme_black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/textview_ttuckttakVersion"
             app:layout_constraintStart_toStartOf="@id/textview_ttuckttakVersion"
-            app:layout_constraintTop_toBottomOf="@id/textview_ttuckttakVersion" />
+            app:layout_constraintTop_toBottomOf="@id/textview_ttuckttakVersion"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.1279"/>
 
         <include
             android:id="@+id/layout_cs"
