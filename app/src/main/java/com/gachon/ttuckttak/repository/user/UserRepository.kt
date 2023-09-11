@@ -7,6 +7,7 @@ import com.gachon.ttuckttak.data.local.entity.UserProfile
 import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
+import com.gachon.ttuckttak.data.remote.dto.view.UserAlertStatusInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import okhttp3.MultipartBody
@@ -23,9 +24,9 @@ interface UserRepository {
 
     suspend fun updateUserInfo(data: UserInfoRes)
 
-    suspend fun getPushStatus(): Boolean
+    fun getPushStatus(): LiveData<Boolean>
 
-    suspend fun getNightPushStatus(): Boolean
+    fun getNightPushStatus(): LiveData<Boolean>
 
     suspend fun updateLocalPushStatus(targetValue: Boolean)
 
@@ -40,6 +41,8 @@ interface UserRepository {
     // ---------- Remote ----------
 
     suspend fun getUserInfo(): BaseResponse<UserInfoRes>
+
+    suspend fun getUserAlertStatusInfo(): BaseResponse<UserAlertStatusInfoRes>
 
     suspend fun checkNicknameAvailable(nickname: String): BaseResponse<NicknameRes>
 

@@ -9,13 +9,13 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
+import com.gachon.ttuckttak.repository.auth.AuthRepository
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
 import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
@@ -33,7 +33,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private var validNickname = false
     private val email: String by lazy { intent.getStringExtra("email")!! }
     @Inject lateinit var userManager: UserManager
-    @Inject lateinit var authManager: AuthManager
+    @Inject lateinit var authRepository: AuthRepository
     @Inject lateinit var authService: AuthService
     @Inject lateinit var memberService: MemberService
 
@@ -84,7 +84,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private suspend fun handleSignUpResponse(response: BaseResponse<LoginRes>) {
         with(response) {
             if (isSuccess) {
-                authManager.saveUserInfo(response.data!!)
+                authRepository.saveUserInfo(response.data!!)
                 startNextActivity(StartActivity::class.java)
 
             } else {

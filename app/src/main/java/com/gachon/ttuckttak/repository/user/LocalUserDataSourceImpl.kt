@@ -44,11 +44,11 @@ class LocalUserDataSourceImpl @Inject constructor(
         )
     }
 
-    override suspend fun getPushStatus(): Boolean {
+    override fun getPushStatus(): LiveData<Boolean> {
         return userDao.getEventOrFunctionUpdateNotification(authManager.getUserIdx()!!)
     }
 
-    override suspend fun getNightPushStatus(): Boolean {
+    override fun getNightPushStatus(): LiveData<Boolean> {
         return userDao.getNightPushNotification(authManager.getUserIdx()!!)
     }
 

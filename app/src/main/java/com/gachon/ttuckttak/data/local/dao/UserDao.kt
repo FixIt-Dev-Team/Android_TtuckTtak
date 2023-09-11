@@ -24,10 +24,10 @@ interface UserDao {
     suspend fun getUserEmail(userIdx: String): String
 
     @Query("SELECT push_status FROM User Where uid = :userIdx")
-    suspend fun getEventOrFunctionUpdateNotification(userIdx: String): Boolean
+    fun getEventOrFunctionUpdateNotification(userIdx: String): LiveData<Boolean>
 
     @Query("SELECT night_push_status FROM User Where uid = :userIdx")
-    suspend fun getNightPushNotification(userIdx: String): Boolean
+    fun getNightPushNotification(userIdx: String): LiveData<Boolean>
 
     @Query("Update User set push_status = :targetValue Where uid = :userIdx")
     suspend fun updateEventOrFunctionUpdateNotification(userIdx: String, targetValue: Boolean)

@@ -7,6 +7,7 @@ import com.gachon.ttuckttak.data.local.entity.UserProfile
 import com.gachon.ttuckttak.data.remote.dto.member.NicknameRes
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
+import com.gachon.ttuckttak.data.remote.dto.view.UserAlertStatusInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import okhttp3.MultipartBody
@@ -31,9 +32,9 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun updateUserInfo(data: UserInfoRes) =
         localUserDataSource.updateUserInfo(data)
 
-    override suspend fun getPushStatus(): Boolean = localUserDataSource.getPushStatus()
+    override fun getPushStatus(): LiveData<Boolean> = localUserDataSource.getPushStatus()
 
-    override suspend fun getNightPushStatus(): Boolean = localUserDataSource.getNightPushStatus()
+    override fun getNightPushStatus(): LiveData<Boolean> = localUserDataSource.getNightPushStatus()
 
     override suspend fun updateLocalPushStatus(targetValue: Boolean) =
         localUserDataSource.updateLocalPushStatus(targetValue)
@@ -53,6 +54,9 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun getUserInfo(): BaseResponse<UserInfoRes> =
         remoteUserDataSource.getUserInfo()
+
+    override suspend fun getUserAlertStatusInfo(): BaseResponse<UserAlertStatusInfoRes> =
+        remoteUserDataSource.getUserAlertStatusInfo()
 
     override suspend fun checkNicknameAvailable(nickname: String): BaseResponse<NicknameRes> =
         remoteUserDataSource.checkNicknameAvailable(nickname)
