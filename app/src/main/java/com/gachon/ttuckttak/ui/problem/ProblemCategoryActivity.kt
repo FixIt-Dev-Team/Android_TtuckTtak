@@ -96,11 +96,9 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
 
         layoutCs.root.setOnTouchListener { _, _ -> true }
 
-        layoutCs.textviewEmail.setOnTouchListener { _, event ->
-            val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
-            clipboard.setPrimaryClip(clipData)
-            return@setOnTouchListener true
+        layoutCs.buttonConfirm.setOnClickListener {
+            copyInquiryEmailToClipboard() // 클립보드에 문의 이메일 복사
+            closeLayout()
         }
     }
 
@@ -123,5 +121,14 @@ class ProblemCategoryActivity : BaseActivity<ActivityProblemCategoryBinding>(Act
             }.start()
             isLayoutVisible = false
         }
+    }
+
+    /**
+     * 문의 이메일을 클립보드에 복사하는 Method
+     */
+    private fun copyInquiryEmailToClipboard() {
+        val clipboardManager: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com") // 클립보드에 label이라는 이름표로 문의 이메일 저장
+        clipboardManager.setPrimaryClip(clipData)
     }
 }
