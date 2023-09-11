@@ -8,6 +8,7 @@ import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
 import com.gachon.ttuckttak.data.remote.dto.member.NoticeRes
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
 import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
+import com.gachon.ttuckttak.data.remote.dto.view.UserAlertStatusInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 import com.gachon.ttuckttak.data.remote.dto.view.UserInfoUpdateRes
 import com.gachon.ttuckttak.data.remote.service.MemberService
@@ -27,6 +28,10 @@ class RemoteUserDataSourceImpl @Inject constructor(
 
     override suspend fun getUserInfo(): BaseResponse<UserInfoRes> {
         return viewService.getUserInfo(authManager.getUserIdx()!!)
+    }
+
+    override suspend fun getUserAlertStatusInfo(): BaseResponse<UserAlertStatusInfoRes> {
+        return viewService.getUserAlertStatus(authManager.getUserIdx()!!)
     }
 
     override suspend fun checkNicknameAvailable(nickname: String): BaseResponse<NicknameRes> {

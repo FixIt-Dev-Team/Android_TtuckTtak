@@ -10,7 +10,10 @@ import kotlinx.coroutines.launch
 import com.gachon.ttuckttak.ui.setting.SettingsAlertViewmodel.NavigateTo.*
 
 @AndroidEntryPoint
-class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(ActivitySettingsAlertBinding::inflate, TransitionMode.HORIZONTAL) {
+class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(
+    ActivitySettingsAlertBinding::inflate,
+    TransitionMode.HORIZONTAL
+) {
 
     private val viewModel: SettingsAlertViewmodel by viewModels()
 

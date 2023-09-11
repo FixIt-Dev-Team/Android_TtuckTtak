@@ -15,9 +15,9 @@ interface LocalUserDataSource {
 
     suspend fun updateUserInfo(data: UserInfoRes)
 
-    suspend fun getPushStatus(): Boolean
+    fun getPushStatus(): LiveData<Boolean>
 
-    suspend fun getNightPushStatus(): Boolean
+    fun getNightPushStatus(): LiveData<Boolean>
 
     suspend fun updateLocalPushStatus(targetValue: Boolean)
 
