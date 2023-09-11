@@ -48,6 +48,7 @@
 
     <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
     <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
+    <string name="email_reconfirm2">“ttukttak@ttukttak.com”</string>
     <string name="certification_resend">인증코드 재전송</string>
 
     <string name="agree_terms">서비스 이용 및 홍보 약관에 동의해요</string>
