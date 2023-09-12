@@ -18,6 +18,14 @@ class LocalUserDataSourceImpl @Inject constructor(
     private val userManager: UserManager
 ) : LocalUserDataSource {
 
+    override suspend fun saveRegistrationEmail(email: String) {
+        userManager.saveRegistrationEmail(email)
+    }
+
+    override suspend fun getRegistrationEmail(): String? {
+        return userManager.getRegistrationEmail()
+    }
+
     override suspend fun savePasswordResetEmail(email: String) {
         userManager.savePasswordResetEmail(email)
     }

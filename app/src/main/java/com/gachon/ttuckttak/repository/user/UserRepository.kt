@@ -16,6 +16,10 @@ interface UserRepository {
 
     // ---------- Local ----------
 
+    suspend fun saveRegistrationEmail(email: String)
+
+    suspend fun getRegistrationEmail(): String?
+
     suspend fun savePasswordResetEmail(email: String)
 
     suspend fun getPasswordResetEmail(): String?

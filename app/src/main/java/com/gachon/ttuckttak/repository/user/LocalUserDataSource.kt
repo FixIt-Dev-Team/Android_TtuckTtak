@@ -7,6 +7,10 @@ import com.gachon.ttuckttak.data.remote.dto.view.UserInfoRes
 
 interface LocalUserDataSource {
 
+    suspend fun saveRegistrationEmail(email: String)
+
+    suspend fun getRegistrationEmail(): String?
+
     suspend fun savePasswordResetEmail(email: String)
 
     suspend fun getPasswordResetEmail(): String?
