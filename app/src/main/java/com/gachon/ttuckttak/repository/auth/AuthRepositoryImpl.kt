@@ -5,6 +5,7 @@ import com.gachon.ttuckttak.data.remote.dto.auth.EmailConfirmRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutRes
 import com.gachon.ttuckttak.data.remote.dto.auth.RefreshRes
+import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
 import javax.inject.Inject
 
@@ -29,6 +30,9 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun emailConfirm(email: String): BaseResponse<EmailConfirmRes> =
         remoteAuthDataSource.emailConfirm(email)
+
+    override suspend fun signUp(data: SignUpReq): BaseResponse<LoginRes> =
+        remoteAuthDataSource.signUp(data)
 
     override suspend fun login(email: String, pw: String): BaseResponse<LoginRes> =
         remoteAuthDataSource.login(email, pw)

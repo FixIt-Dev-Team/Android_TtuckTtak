@@ -20,6 +20,12 @@ class UserRepositoryImpl @Inject constructor(
 
     // ---------- Local ----------
 
+    override suspend fun saveRegistrationEmail(email: String) =
+        localUserDataSource.saveRegistrationEmail(email)
+
+    override suspend fun getRegistrationEmail(): String? =
+        localUserDataSource.getRegistrationEmail()
+
     override suspend fun savePasswordResetEmail(email: String) =
         localUserDataSource.savePasswordResetEmail(email)
 

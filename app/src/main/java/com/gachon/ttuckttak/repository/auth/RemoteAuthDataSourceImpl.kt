@@ -9,6 +9,7 @@ import com.gachon.ttuckttak.data.remote.dto.auth.LogoutReq
 import com.gachon.ttuckttak.data.remote.dto.auth.LogoutRes
 import com.gachon.ttuckttak.data.remote.dto.auth.RefreshReq
 import com.gachon.ttuckttak.data.remote.dto.auth.RefreshRes
+import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import com.gachon.ttuckttak.data.remote.dto.member.PutPwEmailRes
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
@@ -22,6 +23,10 @@ class RemoteAuthDataSourceImpl @Inject constructor(
 
     override suspend fun emailConfirm(email: String): BaseResponse<EmailConfirmRes> {
         return authService.emailConfirm(email)
+    }
+
+    override suspend fun signUp(data: SignUpReq): BaseResponse<LoginRes> {
+        return authService.signUp(data)
     }
 
     override suspend fun login(email: String, pw: String): BaseResponse<LoginRes> {
