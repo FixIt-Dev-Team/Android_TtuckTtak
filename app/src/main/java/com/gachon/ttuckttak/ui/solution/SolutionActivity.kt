@@ -24,8 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.Date
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -106,7 +104,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                         Diagnosis(
                             uid = authManager.getUserIdx()!!,
                             item = solution.descHeader,
-                            bypassIdx = solutionBs?.get(0)?.bypassIdx ?: "" // FixMe: 임시로 넣어놨어요, bypassIdx값 올바르게 수정해주세요
+                            bypassIdx = solution.solIdx
                         )
                     )
                 }
@@ -176,7 +174,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
     private fun getSolutionEntry(entryID: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val response = solutionService.getSolbyEntry(entryID, tokenManager.getAccessToken()!!)
+                val response = solutionService.getSolbyEntry(entryID)
 
                 withContext(Dispatchers.Main) {
                     if (response.isSuccess) {

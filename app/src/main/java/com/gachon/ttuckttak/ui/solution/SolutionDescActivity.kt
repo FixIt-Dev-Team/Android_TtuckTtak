@@ -12,10 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
-import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
-import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionDescBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +24,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SolutionDescActivity : BaseActivity<ActivitySolutionDescBinding>(ActivitySolutionDescBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    @Inject lateinit var authManager: AuthManager
     private var done = false
     private var bypassListI : Array<SolutionBypassDto>? = null
 
