@@ -34,21 +34,30 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
     private var solutions: List<SolutionDto>? = null
     private var solutionPs: MutableList<String>? = mutableListOf()
-    private var solutionBs: MutableList<SolutionBypassDto>? = null
+    private var solutionBs: List<SolutionBypassDto>? = null
     private var isLayoutVisible = false
 
     @Inject lateinit var solutionService: SolutionService
 
     override fun initAfterBinding() {
-        val surveyIdx = intent.getIntExtra("surveyIdx", 0)
-        val pattern = intent.getIntExtra("pattern", -1)
-        val level = intent.getIntExtra("level", 0)
+        if (intent.hasExtra("surveyIdx")){
+            val surveyIdx = intent.getIntExtra("surveyIdx", 0)
+            val pattern = intent.getIntExtra("pattern", -1)
+            val level = intent.getIntExtra("level", 0)
 
-        Log.i(TAG, "surveyIdx: $surveyIdx")
-        Log.i(TAG, "resPattern: $pattern")
-        Log.i(TAG, "level: $level")
+            Log.i(TAG, "surveyIdx: $surveyIdx")
+            Log.i(TAG, "resPattern: $pattern")
+            Log.i(TAG, "level: $level")
 
-        getSolution(surveyIdx, pattern, level)
+            getSolutionSurvey(surveyIdx, pattern, level)
+        } else if (intent.hasExtra("entryID")){
+            val entryID = intent.getIntExtra("entryID", 0)
+
+            Log.i(TAG, "Bypass entryID: $entryID")
+
+            getSolutionEntry(entryID)
+        }
+
         setClickListener()
         setTouchListner()
     }
@@ -58,15 +67,17 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
             finish()
         }
 
-        fieldButtonMenu.setOnClickListener {
-            finish()
-        }
-
         buttonCs.setOnClickListener {
+            shadow.visibility = View.VISIBLE
             showLayout()
         }
 
         layoutCs.buttonConfirm.setOnClickListener {
+            val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
+            clipboard.setPrimaryClip(clipData)
+
+            shadow.visibility = View.INVISIBLE
             closeLayout()
         }
 
@@ -82,6 +93,10 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
 
         adapter.setItemClickListener(object: SolutionAdapter.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
+                if (isLayoutVisible) {
+                    return
+                }
+
                 val solution = solutionList[position]
 
                 CoroutineScope(Dispatchers.IO).launch {
@@ -89,19 +104,21 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                         Diagnosis(
                             uid = authManager.getUserIdx()!!,
                             item = solution.descHeader,
-                            bypassIdx = solutionBs?.get(0)?.bypassIdx ?: "" // FixMe: 임시로 넣어놨어요, bypassIdx값 올바르게 수정해주세요
+                            bypassIdx = solution.solIdx
                         )
                     )
                 }
                 val intent = Intent(this@SolutionActivity, SolutionDescActivity::class.java)
                 intent.putExtra("solIdx", solution.solIdx)
                 intent.putExtra("progress", 0)
+                intent.putExtra("solutionBs", solutionBs?.toTypedArray())
+
                 startActivity(intent)
             }
         })
     }
 
-    private fun getSolution(surveyIdx: Int, pattern: Int, level: Int) = with(binding) {
+    private fun getSolutionSurvey(surveyIdx: Int, pattern: Int, level: Int) = with(binding) {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val request = SolutionEntryReq(surveyIdx, pattern, level)
@@ -123,7 +140,59 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
                             solutionPs?.add(data.solPList[i].possibleName)
                         }
                         if (data.solBList != null) {
-                            solutionBs = data.solBList.toMutableList()
+                            solutionBs = data.solBList
+                        }
+
+                        // 타이틀 설정
+                        title.text = data.problemName
+
+                        // 카운터 설정
+                        textCount.text = getString(R.string.solutions, solutions!!.size)
+
+                        // 발생 가능한 문제 설정
+                        textAvailProblems.text = solutionPs?.joinToString("\n")
+
+                        // RecyclerView 설정
+                        solutionBtn(solutions!!)
+
+                    } else {
+                        Log.e(TAG, "솔루션 검색 실패")
+                        Log.e(TAG, "${response.code} ${response.message}")
+                        showToast("솔루션 검색 실패")
+                    }
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e(TAG, "서버 통신 오류: ${e.message}")
+                    showToast("솔루션 검색 실패")
+                }
+            }
+        }
+    }
+
+    private fun getSolutionEntry(entryID: Int) = with(binding) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = solutionService.getSolbyEntry(entryID)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccess) {
+                        val data = response.data!!
+
+                        Log.i(TAG, "entryIdx: ${data.entryIdx}")
+                        Log.i(TAG, "level: ${data.level}")
+                        Log.i(TAG, "problem name: ${data.problemName}")
+                        Log.i(TAG, "solution list: ${data.solList}")
+                        Log.i(TAG, "possible solution list: ${data.solPList}")
+                        Log.i(TAG, "solution bypass list: ${data.solBList}")
+
+                        solutions = data.solList
+                        for (i in data.solPList.indices) {
+                            solutionPs?.add(data.solPList[i].possibleName)
+                        }
+                        if (data.solBList != null) {
+                            solutionBs = data.solBList
                         }
 
                         // 타이틀 설정
@@ -157,6 +226,7 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
     private fun setTouchListner() = with(binding) {
         layoutRoot.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
+                shadow.visibility = View.INVISIBLE
                 closeLayout()
                 return@setOnTouchListener true
             }
@@ -164,13 +234,6 @@ class SolutionActivity : BaseActivity<ActivitySolutionBinding>(ActivitySolutionB
         }
 
         layoutCs.root.setOnTouchListener { _, _ -> true }
-
-        layoutCs.textviewEmail.setOnTouchListener { _, event ->
-            val clipboard: ClipboardManager = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
-            clipboard.setPrimaryClip(clipData)
-            return@setOnTouchListener true
-        }
     }
 
     // CS 화면 표시
