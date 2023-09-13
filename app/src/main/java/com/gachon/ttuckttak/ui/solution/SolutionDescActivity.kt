@@ -14,6 +14,7 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
+import com.gachon.ttuckttak.data.remote.dto.solution.SolutionBypassDto
 import com.gachon.ttuckttak.data.local.AuthManager
 import com.gachon.ttuckttak.data.remote.service.SolutionService
 import com.gachon.ttuckttak.databinding.ActivitySolutionDescBinding
