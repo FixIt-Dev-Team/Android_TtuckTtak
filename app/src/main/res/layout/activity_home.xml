@@ -141,8 +141,9 @@
 
             <!-- FIXME: 오른쪽 화살표 재설정 필요 -->
             <ImageView
-                android:layout_width="7.6dp"
-                android:layout_height="12.79dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="15dp"
                 android:contentDescription="@string/next_content_description"
                 android:src="@drawable/ic_arrow_right"
                 app:layout_constraintBottom_toBottomOf="parent"
