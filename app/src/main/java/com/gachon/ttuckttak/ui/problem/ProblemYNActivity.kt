@@ -127,8 +127,8 @@ class ProblemYNActivity : BaseActivity<ActivityProblemYnBinding>(ActivityProblem
             val clipData = ClipData.newPlainText("label", "ttukttak@ttukttak.com")
             clipboard.setPrimaryClip(clipData)
 
-            shadow.visibility = View.INVISIBLE
-            closeLayout()
+            showToast("복사되었습니다.") // 복사가 되었다면 토스트메시지 노출
+            finish()
         }
     }
 
