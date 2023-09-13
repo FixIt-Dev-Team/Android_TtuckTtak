@@ -226,7 +226,7 @@
                 android:layout_marginStart="11dp"
                 android:background="@color/main_theme_blue"
                 app:layout_constraintBottom_toBottomOf="@id/textview_userEmail"
-                app:layout_constraintEnd_end="@id/textview_userEmail"
+                app:layout_constraintEnd_toEndOf="@id/textview_userEmail"
                 app:layout_constraintStart_toEndOf="@id/textview_email"
                 app:layout_constraintTop_toTopOf="@id/textview_userEmail" />
 

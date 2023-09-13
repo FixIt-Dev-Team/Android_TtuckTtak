@@ -3,25 +3,34 @@ package com.gachon.ttuckttak.ui.setting
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
+import android.text.TextUtils
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import androidx.lifecycle.lifecycleScope
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.databinding.ActivitySettingsProfileBinding
-import kotlinx.coroutines.launch
-import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
+import com.gachon.ttuckttak.ui.setting.SettingsProfileViewmodel.NavigateTo.Before
+import com.gachon.ttuckttak.ui.setting.SettingsProfileViewmodel.NavigateTo.ResetPw
 import dagger.hilt.android.AndroidEntryPoint
-
-import com.gachon.ttuckttak.ui.setting.SettingsProfileViewmodel.NavigateTo.*
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
+
 
 @AndroidEntryPoint
 class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
@@ -36,6 +45,7 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
     override fun initAfterBinding() {
+        //checkSelfPermission()
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this // LiveData 관찰을 위한 lifecycleOwner 설정
         binding.layoutAlert.viewmodel = viewModel
@@ -83,7 +93,11 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
 
         // 프로필 사진 변경을 클릭하는 경우
         layoutProfile.setOnClickListener {
-            changeImage.launch(permission)
+            if(Build.VERSION.SDK_INT >= 33) {
+                changeImage.launch(permission)
+            } else {
+                checkSelfPermission()
+            }
         }
     }
 
@@ -172,4 +186,25 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
         }
     }
 
+    private fun checkSelfPermission() {
+        var temp = ""
+
+        //파일 읽기 권한 확인
+        if (ContextCompat.checkSelfPermission(this@SettingsProfileActivity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            temp += Manifest.permission.READ_EXTERNAL_STORAGE + " "
+        }
+
+        //파일 쓰기 권한 확인
+        if (ContextCompat.checkSelfPermission(this@SettingsProfileActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " "
+        }
+
+        if (TextUtils.isEmpty(temp) == false) {
+            // 권한 요청
+            ActivityCompat.requestPermissions(this@SettingsProfileActivity, temp.trim { it <= ' ' }.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray(), 1)
+        } else {
+            // 모두 허용 상태
+            showToast("권한을 모두 허용")
+        }
+    }
 }
