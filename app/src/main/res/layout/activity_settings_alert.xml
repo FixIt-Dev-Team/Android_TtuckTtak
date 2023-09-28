@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.widget.Switch" />
+
+        <variable
+            name="viewmodel"
+            type="com.gachon.ttuckttak.ui.setting.SettingsAlertViewmodel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/onboarding_"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.setting.SettingsAlertActivity">
+
+        <!-- 알림 설정 제목 텍스트 -->
+        <TextView
+            android:id="@+id/textview_alertSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:gravity="top"
+            android:includeFontPadding="false"
+            android:lineHeight="23sp"
+            android:text="@string/alert_setting"
+            android:textColor="@color/general_theme_black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0298" />
+
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/back_content_description"
+            android:onClick="@{() -> viewmodel.goBack()}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@id/textview_alertSetting"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_alertSetting" />
+
+        <!-- 이벤트 푸쉬 알람 텍스트 -->
+        <TextView
+            android:id="@+id/textview_eventPushAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:lineHeight="20sp"
+            android:text="@string/event_push_alert"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1111"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_alertSetting"
+            app:layout_constraintVertical_bias="0.0698" />
+
+        <!-- 이벤트 푸쉬 알람 서브 텍스트 -->
+        <TextView
+            android:id="@+id/textview_eventPushAlertAdditional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:lineHeight="14sp"
+            android:text="@string/push_alert_add"
+            android:textColor="@color/teal_700"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/textview_eventPushAlert"
+            app:layout_constraintTop_toBottomOf="@id/textview_eventPushAlert" />
+        <!-- 이벤트 알람 스위치 -->
+        <Switch
+            android:id="@+id/switch_eventAndFunctionPush"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:checked="@{viewmodel.pushStatus}"
+            android:onClick="@{(view) -> viewmodel.updateEventOrFunctionUpdateNotification(((Switch)view).isChecked)}"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"
+            app:layout_constraintBottom_toBottomOf="@id/textview_eventPushAlertAdditional"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.7694"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_eventPushAlert" />
+
+        <!-- 야간시간 알림 제목 텍스트 -->
+        <TextView
+            android:id="@+id/textview_nightTimePushAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:lineHeight="20sp"
+            android:text="@string/night_time_alert"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.1111"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_eventPushAlertAdditional"
+            app:layout_constraintVertical_bias="0.0886" />
+
+        <!-- 야간시간 알림 서브 텍스트 -->
+        <TextView
+            android:id="@+id/textview_nightTimePushAlertAdditional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:lineHeight="14sp"
+            android:text="@string/push_alert_add"
+            android:textColor="@color/teal_700"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@id/textview_nightTimePushAlert"
+            app:layout_constraintTop_toBottomOf="@id/textview_nightTimePushAlert" />
+
+        <Switch
+            android:id="@+id/switch_nightTimePushAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:checked="@{viewmodel.nightPushStatus}"
+            android:onClick="@{(view) -> viewmodel.updateNightPushNotification(((Switch)view).isChecked)}"
+            android:thumb="@drawable/switch_thumb"
+            android:track="@drawable/switch_track"
+            app:layout_constraintBottom_toBottomOf="@id/textview_nightTimePushAlert"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.7694"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_nightTimePushAlertAdditional" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

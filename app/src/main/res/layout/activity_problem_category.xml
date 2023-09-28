@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_theme_blue">
+
+    <ImageButton
+        android:id="@+id/imagebutton_back"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@android:color/transparent"
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:includeFontPadding="false"
+        android:text="@string/whatis_problem"
+        android:textAlignment="center"
+        android:textColor="@color/general_theme_white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/group_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <!-- 버튼 그리드 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/group_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45">
+
+        <!-- 전원 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_power_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/general_theme_white"
+            app:layout_constraintBottom_toTopOf="@id/button_use_prob"
+            app:layout_constraintEnd_toStartOf="@id/button_display_prob"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_power"
+                app:layout_constraintBottom_toTopOf="@id/text_power"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.625" />
+
+            <TextView
+                android:id="@+id/text_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="@string/prob_power"
+                android:textColor="@color/general_theme_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 화면 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_display_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/general_theme_white"
+            app:layout_constraintBottom_toTopOf="@id/button_acc_prob"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_power_prob"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_display"
+                app:layout_constraintBottom_toTopOf="@id/text_display"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.625" />
+
+            <TextView
+                android:id="@+id/text_display"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="@string/prob_display"
+                android:textColor="@color/general_theme_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 사용 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_use_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/general_theme_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_acc_prob"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_power_prob">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_usage"
+                app:layout_constraintBottom_toTopOf="@id/text_use"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.625" />
+
+            <TextView
+                android:id="@+id/text_use"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="@string/prob_use"
+                android:textColor="@color/general_theme_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 주변기기 문제 버튼 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_acc_prob"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/general_theme_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_use_prob"
+            app:layout_constraintTop_toBottomOf="@id/button_display_prob">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_appliances"
+                app:layout_constraintBottom_toTopOf="@id/text_acc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.625" />
+
+            <TextView
+                android:id="@+id/text_acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="@string/prob_acc"
+                android:textColor="@color/general_theme_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.85" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
+        android:text="@string/windows"
+        android:textAlignment="center"
+        android:textColor="@color/system_theme_gray"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/button_ask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group_button"
+        app:layout_constraintVertical_bias="0.27" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
+        android:text="@string/contact_ttukttak"
+        android:textColor="@color/general_theme_white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/button_ask"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group_button"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_ask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/bg_rectangle_round_line"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
+        android:text="@string/ask"
+        android:textColor="@color/system_theme_subwhite"
+        android:textSize="18sp"
+        app:backgroundTint="@color/system_theme_subwhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/group_button"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <include
+        android:id="@+id/layout_cs"
+        layout="@layout/dialog_cs"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintDimensionRatio="1.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

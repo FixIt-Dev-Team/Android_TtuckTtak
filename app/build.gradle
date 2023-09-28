@@ -1,20 +1,40 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
     namespace 'com.gachon.ttuckttak'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.gachon.ttuckttak"
         minSdk 31
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
+        // Room DB Schema
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Local.properties에서 정보를 가져오기 위해
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+        defaultConfig {
+            buildConfigField "String", "KAKAO_NATIVE_APP_KEY", "\"${properties.getProperty("KAKAO_NATIVE_APP_KEY")}\""
+            buildConfigField "String", "KAKAO_REST_API_KEY", "\"${properties.getProperty("KAKAO_REST_API_KEY")}\""
+            buildConfigField "String", "KAKAO_REDIRECT_URI", "\"${properties.getProperty("KAKAO_REDIRECT_URI")}\""
+            buildConfigField "String", "GOOGLE_CLIENT_ID", "\"${properties.getProperty("GOOGLE_CLIENT_ID")}\""
+        }
     }
 
     buildTypes {
@@ -23,22 +43,69 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 
 dependencies {
-
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Room DB
+    implementation 'androidx.room:room-runtime:2.5.2'
+    kapt 'androidx.room:room-compiler:2.5.2'
+    implementation "androidx.room:room-ktx:2.5.2"
+
+    // LifeCycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+
+    // Login
+    implementation "com.kakao.sdk:v2-user:2.13.0" // 카카오 로그인
+    implementation 'com.google.android.gms:play-services-auth:20.6.0' // 구글 로그인
+
+    implementation "androidx.security:security-crypto:1.0.0" // Encrypted Shared Preference
+
+    // UI
+    implementation 'com.sothree.slidinguppanel:library:3.4.0' // Sliding pannel
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+
+    // Lottie
+    implementation 'com.airbnb.android:lottie:3.0.7'
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    // ViewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+}
+
+kapt {
+    correctErrorTypes true
 }

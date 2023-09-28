@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.gachon.ttuckttak.ui.login.FindPwViewmodel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.FindPwActivity">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:background="@color/main_theme_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <ImageButton
+            android:id="@+id/imagebutton_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@android:color/transparent"
+            android:onClick="@{() -> viewmodel.goBack()}"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@id/textview_find_id_or_pw"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_find_id_or_pw" />
+
+        <TextView
+            android:id="@+id/textview_find_id_or_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
+            android:text="@string/find_id_or_pw2"
+            android:textColor="@color/general_theme_black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05" />
+
+        <TextView
+            android:id="@+id/textview_insert_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:text="@string/insert_email"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.118"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <EditText
+            android:id="@+id/edittext_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/textbox"
+            android:hint="@string/email_reconfirm2"
+            android:inputType="textEmailAddress"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="10dp"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_insert_email"
+            app:layout_constraintWidth_percent="0.91" />
+
+        <TextView
+            android:id="@+id/textview_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:text="@string/not_account"
+            android:textColor="@color/general_theme_red"
+            android:textSize="11sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@id/edittext_email"
+            app:layout_constraintTop_toBottomOf="@id/edittext_email" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_send"
+            style="@style/DefaultButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="180sp"
+            android:enabled="false"
+            android:onClick="@{() -> viewmodel.findAccount(edittextEmail.getText().toString())}"
+            android:text="@string/certification_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edittext_email" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

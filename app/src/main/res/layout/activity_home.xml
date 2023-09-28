@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.gachon.ttuckttak.ui.main.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/main_theme_blue">
+
+        <!-- 세팅 버튼 -->
+        <ImageButton
+            android:id="@+id/imagebutton_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/setting_content_description"
+            android:onClick="@{() -> viewmodel.startSettingsActivity()}"
+            android:src="@drawable/ic_setting"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9556"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0331" />
+
+        <!-- 탭 진단 제목 텍스트 레이아웃  -->
+        <TextView
+            android:id="@+id/textview_tab_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
+            android:lineHeight="29sp"
+            android:text="@string/text_start"
+            android:textColor="@color/general_theme_white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.1510" />
+
+        <!-- 로티 애니메이셔 효과 버튼 -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/home_animation" />
+
+        <ImageButton
+            android:id="@+id/imagebutton_start"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/circle"
+            android:contentDescription="@string/home_content_description"
+            android:onClick="@{() -> viewmodel.startProblemCategoryActivity()}"
+            android:src="@drawable/img_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_tab_start"
+            app:layout_constraintVertical_bias="0.1078" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_latest"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/system_theme_subwhite"
+            android:onClick="@{() -> viewmodel.showDiagnosis()}"
+            android:paddingLeft="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.1875"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imagebutton_start"
+            app:layout_constraintVertical_bias="0.1551"
+            app:layout_constraintWidth_percent="0.925">
+
+            <!-- 최근 진단 내역 제목 텍스트 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:lineHeight="17sp"
+                android:text="@string/latest_result"
+                android:textColor="@color/system_theme_gray"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <!-- 최근 진단 내역 내용 텍스트 -->
+            <TextView
+                android:id="@+id/textview_latest_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:lineHeight="23sp"
+                android:text="@{viewmodel.diagnosis.item}"
+                android:textColor="@color/general_theme_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="부팅디스크(SSD) 접촉불량" />
+
+            <!-- 최근 진단 내역 내용 날짜 텍스트 -->
+            <TextView
+                android:id="@+id/textview_latest_result_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:lineHeight="17sp"
+                android:textColor="@color/system_theme_gray"
+                android:textSize="12sp"
+                app:formattedDate="@{viewmodel.diagnosis.time}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.75"
+                tools:text="2023.04.16 00:00" />
+
+            <!-- FIXME: 오른쪽 화살표 재설정 필요 -->
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="15dp"
+                android:contentDescription="@string/next_content_description"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/system_theme_gray" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
