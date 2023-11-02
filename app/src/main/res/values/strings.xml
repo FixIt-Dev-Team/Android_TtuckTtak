@@ -1,31 +1,70 @@
 <resources>
-    <string name="app_name">Android_TtuckTtak</string>
+    <string name="app_name">뚝딱</string>
+
+    <!-- 랜딩 페이지 -->
     <string name="text_welcome1"><font color='#1DB9DB'>뚝딱</font>하실\n준비되셨나요?</string>
     <string name="text_welcome2">알고리즘 기반의 똑똑한 뚝딱과 함께\n데스크탑의 자가수리에 성공하세요.</string>
     <string name="sign_up">가입하기</string>
+    <string name="google_sign_up">Google 계정으로 로그인</string>
+    <string name="kakao_sign_up">카카오 로그인</string>
     <string name="text_welcome3"><u>이미 계정이 있으신가요?</u></string>
-    <string name="text_start">탭해서 진단을 시작해보세요!</string>
-
-    <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
 
     <!--  로그인 화면  -->
+    <string name="email">이메일 주소</string>
     <string name="wrong_email_or_password">이메일 혹은 비밀번호가 틀렸습니다.</string>
     <string name="login">로그인하기</string>
-    <!--    -->
-
-
-    <string name="email">이메일 주소</string>
     <string name="pw">비밀번호</string>
+    <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
+
+    <!-- 조인 화면  -->
+    <string name="join_membership">회원가입</string>
+    <string name="join_email">사용하실 이메일을 정해주세요</string>
+    <string name="user_email">예) ttukttak@ttukttak.com</string>
+    <string name="overlap_email">이미 사용중인 계정입니다.</string>
     <string name="invalid_email_format">올바르지 않은 이메일 형식 입니다!</string>
+    <string name="certification_code">인증코드 보내기</string>
+    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
+    <string name="user_email2">ttukttak@ttukttak.com</string>
+    <string name="input_certification_code">예) 12345678</string>
+    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
+    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
+    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
+    <string name="timer">00:00</string>
+    <string name="certification">인증하기</string>
+    <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
+    <string name="user_name">예) 뚝딱이</string>
+    <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
+    <string name="join_user_password">사용하실 비밀번호를 정해주세요</string>
+    <string name="invalid_nickname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
+    <string name="password_rule">9글자 이상으로, 대소문자, 숫자와 특수문자가 포함되게 작성해주세요</string>
+    <string name="password_usable">사용가능한 비밀번호 입니다!</string>
+    <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="join">가입하기</string>
+
+    <string name="available_nickname">사용 가능한 닉네임입니다.</string>
+    <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
     <string name="invalid_pw_format">올바르지 않은 비밀번호 형식 입니다!</string>
-    <string name="latest_result">최근 진단내역</string>
 
-    <string name="user_name">김뚝딱이</string>
-    <string name="user_email">ttukttak@ttukttak.com</string>
-
+    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
     <string name="email_reconfirm">“ttukttak@ttukttak.com”</string>
-    <string name="email_reconfirm2">예) ttukttak@ttukttak.com</string>
+    <string name="certification_resend">인증코드 재전송</string>
 
+    <string name="agree_terms">서비스 이용 및 홍보 약관에 동의해요</string>
+    <string name="service_use_terms">[필수] <u>서비스 이용 약관</u>에 동의해요</string>
+    <string name="service_promote_terms">[선택] <u>서비스 홍보 약관</u>에 동의해요</string>
+    <string name="use_terms"><b>서비스 이용 약관</b></string>
+    <string name="promote_terms"><b>서비스 홍보 약관</b></string>
+
+    <!-- 시작 화면  -->
+    <string name="start">시작하기</string>
+
+    <!-- 홈 화면 -->
+    <string name="text_start">탭해서 진단을 시작해보세요!</string>
+    <string name="latest_result">최근 진단내역</string>
+    <string name="email_reconfirm2">“ttukttak@ttukttak.com”</string>
+
+    <!-- 세팅 화면 -->
     <string name="alert_setting">알림 설정</string>
     <string name="consumer_center">고객 센터</string>
     <string name="review">리뷰 및 평가하기</string>
@@ -39,16 +78,42 @@
     <string name="password_reset">비밀번호 재설정하기</string>
     <string name="event_push_alert">이벤트 및 기능추가 push 알림</string>
     <string name="night_time_alert">야간시간(20:00-24:00) Push 알림</string>
+    <string name="user_nickname">김뚝딱이</string>
+    <string name="logout"><u>로그아웃</u></string>
     <string name="push_alert_add">프로모션 및 새 업데이트에 대해 알려드려요</string>
-    <string name="find_id_or_pw1"><u>계정 및 비밀번호 찾기</u></string>
+    <string name="undo_change">프로필 설정 화면에서 나가시겠어요?\n변경된 사항은 저장되지 않아요!</string>
+    <string name="undo">뒤로가기</string>
+
+    <!-- contentDescription -->
+    <string name="back_content_description">뒤로가기</string>
+    <string name="logo_content_description">뚝딱로고</string>
+    <string name="setting_content_description">설정</string>
+    <string name="home_content_description">홈 버튼</string>
+    <string name="next_content_description">다음 버튼</string>
+    <string name="profile_content_description">프로필 이미지</string>
+    <string name="save_content_description">변경사항 확인</string>
+    <string name="image_content_description">이미지 변경</string>
+
+
+    <!-- Autofill -->
+    <string name="email_autofill">이메일 에딧 텍스트</string>
+    <string name="password_autofill">비밀번호 에딧 텍스트</string>
+    <string name="code_autofill">인증코드</string>
+    <string name="name_autofill">닉네임</string>
+
+
+    <string name="unexpected_error_occurred">예상치 못한 에러가 발생하였습니다.</string>
+    <string name="request_failed">요청에 실패하였습니다.</string>
+
+
+
+
     <string name="find_id_or_pw2">계정 및 비밀번호 찾기</string>
     <string name="login_incorrect">이메일 혹은 비밀번호가 틀렸습니다!</string>
     <string name="not_account">계정이 존재하지 않습니다!</string>
     <string name="btn_login">로그인 하기</string>
     <string name="find_pw">계정 찾기</string>
-    <string name="logout"><u>로그아웃</u></string>
-    <string name="undo_change">프로필 설정 화면에서 나가시겠어요?\n변경된 사항은 저장되지 않아요!</string>
-    <string name="undo">뒤로가기</string>
+
 
     <!-- Reset Pw 화면 -->
     <string name="pw_reset_link">비밀번호 재설정 링크를\n이메일로 보내드렸어요!</string>
@@ -66,46 +131,176 @@
     <string name="windows">현재 버전의 뚝딱은 Window 기반의 데스크탑 위주로\n진단 및 문제 해결을 도와드리고 있어요.</string>
     <string name="contact_ttukttak">도움 받으실 수 없을 경우, 뚝딱 센터에 연락주세요!</string>
     <string name="ask">문의하기</string>
+    <string name="ask_desc">아래 이메일로 문의를 넣어주세요!\n아래 확인을 클릭하면\n주소가 자동으로 복사돼요.</string>
+    <string name="confirm">확인</string>
+    <string name="copied">클립보드에 복사되었습니다.</string>
 
     <!-- Problem Y/N 화면 -->
     <string name="yes">네</string>
     <string name="no">아니오</string>
 
+    <!-- 전원 문제 -->
     <string name="power">전원</string>
-    <string name="power_prob_1">본체에 전원이 들어오나요? (팬 작동, led 켜짐 등)</string>
+
+    <string name="power_prob_1">본체에 전원이 들어오나요?</string>
+    <string name="power_1_y">전원이 잘 들어와요</string>
+    <string name="power_1_y_content1">쿨링 팬 작동</string>
+    <string name="power_1_y_content2">조명 켜짐</string>
+    <string name="power_1_y_content3" />
+    <string name="power_1_n">전원이 들어오지 않아요</string>
+    <string name="power_1_n_content1">반응 없음</string>
+    <string name="power_1_n_content2">쿨링 팬 작동 안함</string>
+    <string name="power_1_n_content3">조명 꺼짐</string>
+
+    <string name="power_prob_2">윈도우 등의 OS가 나오나요?</string>
+    <string name="power_2_y">보여요</string>
+    <string name="power_2_y_content1">바이오스 로고 노출</string>
+    <string name="power_2_y_content2">윈도우, 맥 로고 노출</string>
+    <string name="power_2_y_content3">화면에 뭔가 나옴</string>
+    <string name="power_2_n">안 보여요</string>
+    <string name="power_2_n_content1">바이오스 로고 안보임</string>
+    <string name="power_2_n_content2">윈도우, 맥 로고 안보임</string>
+    <string name="power_2_n_content3">화면에 반응이 없음</string>
+
+    <string name="power_prob_3">평소와 다르게 글씨가 크거나 아이콘이 이상한가요?</string>
+    <string name="power_3_y">이상해요</string>
+    <string name="power_3_y_content1">글씨 크기 커짐</string>
+    <string name="power_3_y_content2">아이콘 모양 변함</string>
+    <string name="power_3_y_content3">화면 깨짐</string>
+    <string name="power_3_n">멀쩡해요</string>
+    <string name="power_3_n_content1">글씨 크기 그대로</string>
+    <string name="power_3_n_content2">아이콘 그대로</string>
+    <string name="power_3_n_content3">화면 멀쩡함</string>
+
+    <!-- 화면 문제 -->
     <string name="display">화면</string>
-    <string name="usage">사용</string>
+
+    <!-- 주변기기 문제 -->
     <string name="acc">주변기기</string>
+
+    <string name="acc_prob_1">키보드, 마우스, 스피커, 프린터 등에 문제가 있나요?</string>
+    <string name="acc_1_y">문제가 있어요</string>
+    <string name="acc_1_y_content1">입력에 반응하지 않음</string>
+    <string name="acc_1_y_content2">조명 들어오지 않음</string>
+    <string name="acc_1_y_content3">출력이 안나옴</string>
+    <string name="acc_1_n">문제가 없어요</string>
+    <string name="acc_1_n_content1">입력에 반응함</string>
+    <string name="acc_1_n_content2">조명이 들어옴</string>
+    <string name="acc_1_n_content3">출력이 나옴</string>
+
+    <string name="acc_prob_2">CD, DVD와 같은 리더기에 문제가 있나요?</string>
+    <string name="acc_2_y">문제가 있어요</string>
+    <string name="acc_2_y_content1">작동하지 않음</string>
+    <string name="acc_2_y_content2">디스크 인식 안됨</string>
+    <string name="acc_2_y_content3">이상 소음이 남</string>
+    <string name="acc_2_n">문제가 없어요</string>
+    <string name="acc_2_n_content1">부드럽게 작동함</string>
+    <string name="acc_2_n_content2">디스크 인식 잘됨</string>
+    <string name="acc_2_n_content3" />
+
+    <string name="acc_prob_3">인터넷, USB 등의 속도가 느린가요?</string>
+    <string name="acc_3_y">느리거나 멈춰요</string>
+    <string name="acc_3_y_content1">인식 안됨</string>
+    <string name="acc_3_y_content2">속도 느림</string>
+    <string name="acc_3_y_content3">연결 안됨</string>
+    <string name="acc_3_n">이상 없어요</string>
+    <string name="acc_3_n_content1">인식 잘됨</string>
+    <string name="acc_3_n_content2">속도 정상</string>
+    <string name="acc_3_n_content3">연결 정상</string>
+
+    <!-- 사용 문제 -->
+    <string name="usage">사용</string>
+
+    <string name="usage_prob_1">본체에서 이상한 소리가 나나요?</string>
+    <string name="usage_1_y">이상한 소리가 나요</string>
+    <string name="usage_1_y_content1">드르륵</string>
+    <string name="usage_1_y_content2">덜컥</string>
+    <string name="usage_1_y_content3">평소에 나지 않던 소리</string>
+    <string name="usage_1_n">평소와 같아요</string>
+    <string name="usage_1_n_content1">부드럽게 작동해요</string>
+    <string name="usage_1_n_content2">팬이 잘 돌아가요</string>
+    <string name="usage_1_n_content3">바람소리</string>
+
+    <string name="usage_prob_2">컴퓨터가 중간에 꺼지나요?</string>
+    <string name="usage_2_y">자꾸 꺼져요</string>
+    <string name="usage_2_y_content1">랜덤한 강제종료</string>
+    <string name="usage_2_y_content2">특정 상황에서 종료</string>
+    <string name="usage_2_y_content3">멈춰서 재부팅 해야함</string>
+    <string name="usage_2_n">잘 작동해요</string>
+    <string name="usage_2_n_content1">강제종료 없음</string>
+    <string name="usage_2_n_content2">블루 스크린 없음</string>
+    <string name="usage_2_n_content3">멈추지 않음</string>
+
+    <string name="usage_prob_3">컴퓨터가 중간에 느려지나요?</string>
+    <string name="usage_3_y">자꾸 느려져요</string>
+    <string name="usage_3_y_content1">랜덤한 느려짐</string>
+    <string name="usage_3_y_content2">특정 상황에서 느려짐</string>
+    <string name="usage_3_y_content3">버벅임</string>
+    <string name="usage_3_n">느려지지 않아요</string>
+    <string name="usage_3_n_content1">부드러운 작동</string>
+    <string name="usage_3_n_content2">평소와 같음</string>
+    <string name="usage_3_n_content3">끊기지 않음</string>
+
+    <string name="usage_prob_4">팬이 시끄럽게 돌아가나요?</string>
+    <string name="usage_4_y">시끄러워요</string>
+    <string name="usage_4_y_content1">랜덤한 시끄러움</string>
+    <string name="usage_4_y_content2">특정 상황에서 시끄러움</string>
+    <string name="usage_4_y_content3">이상 소음이 발생함</string>
+    <string name="usage_4_n">평소와 같아요</string>
+    <string name="usage_4_n_content1">조용함</string>
+    <string name="usage_4_n_content2">평소와 같음</string>
+    <string name="usage_4_n_content3">바람소리만 남</string>
+
+    <string name="usage_prob_5">CPU의 팬이 시끄럽나요?</string>
+    <string name="usage_5_y">시끄러워요</string>
+    <string name="usage_5_y_content1">랜덤한 시끄러움</string>
+    <string name="usage_5_y_content2">특정 상황에서 시끄러움</string>
+    <string name="usage_5_y_content3">이상 소음이 발생함</string>
+    <string name="usage_5_n">다른 부분에서 시끄러워요</string>
+    <string name="usage_5_n_content1">GPU에서 시끄러움</string>
+    <string name="usage_5_n_content2">케이스 쿨러가 시끄러움</string>
+    <string name="usage_5_n_content3" />
+
+    <string name="usage_prob_6">시스템 시간이 맞지 않거나 아이콘, 글씨 등이 평소와 다른가요?</string>
+    <string name="usage_6_y">이상해요</string>
+    <string name="usage_6_y_content1">시스템 시간 불일치</string>
+    <string name="usage_6_y_content2">글씨가 너무 큼</string>
+    <string name="usage_6_y_content3">아이콘이 이상함</string>
+    <string name="usage_6_n">정상적이에요</string>
+    <string name="usage_6_n_content1">시스템 시간 일치함</string>
+    <string name="usage_6_n_content2">화면이 깨지지 않음</string>
+    <string name="usage_6_n_content3">부드러운 작동</string>
+
+    <string name="usage_prob_7">파일을 불러오는데 느리거나 중간에 멈추나요?</string>
+    <string name="usage_7_y">이상해요</string>
+    <string name="usage_7_y_content1">시간이 너무 오래걸림</string>
+    <string name="usage_7_y_content2">중간에 실패함</string>
+    <string name="usage_7_y_content3">파일이 깨짐</string>
+    <string name="usage_7_n">멀쩡해요</string>
+    <string name="usage_7_n_content1">금방 이동함</string>
+    <string name="usage_7_n_content2">실패 없음</string>
+    <string name="usage_7_n_content3">파일이 멀쩡함</string>
+
     <string name="title">%1$s에 문제가 있어요</string>
 
     <!-- 간단 솔루션 -->
+    <string name="basic_check">기본 상태 확인</string>
     <string name="simple_diagnose">빠른 해결을 위해 간단 점검 해볼게요!</string>
     <string name="avail_problems">현재 단계에서 발생 가능한 문제에요.</string>
     <string name="find_solution">해결법 찾기</string>
-    <string name="complete">수리 완료</string>
+    <string name="complete">완료</string>
 
     <!-- 솔루션 화면 -->
+    <string name="solution">문제 해결법</string>
     <string name="solutions">문제에 대한 %1$d가지 해결법이에요!</string>
     <string name="go_next">다음으로 넘어가기</string>
 
+    <!-- 솔루션 디테일 -->
+    <string name="solution_detail">해결안 템플릿</string>
+
     <!-- -->
-    <string name="overlap_nickname">이미 사용중인 닉네임입니다.</string>
-    <string name="overlap_email">이미 사용중인 계정입니다.</string>
-    <string name="certification_code">인증코드 보내기</string>
-    <string name="send_certification_code">전송된 인증코드를 입력해주세요</string>
-    <string name="input_certification_code">예) 1234</string>
-    <string name="error_code">잘못된 코드를 입력하셨습니다.</string>
-    <string name="run_out_code">인증 시간이 만료되었습니다.</string>
-    <string name="certification_code_problem"><u>인증코드에 문제가 있나요?</u></string>
-    <string name="discordance_pw">비밀번호가 일치하지 않아요.</string>
-    <string name="timer">00:00</string>
-    <string name="certification">인증하기</string>
-    <string name="certification_resend">인증코드 재전송</string>
-    <string name="agree_terms">서비스 이용 및 홍보 약관에 동의해요</string>
-    <string name="service_use_terms">[필수] <u>서비스 이용 약관</u>에 동의해요</string>
-    <string name="service_promote_terms">[선택] <u>서비스 홍보 약관</u>에 동의해요</string>
-    <string name="use_terms"><b>서비스 이용 약관</b></string>
-    <string name="promote_terms"><b>서비스 홍보 약관</b></string>
+
+
     <string name="promote_terms_detail"><p>서비스 홍보 약관
 상품소개 등을 위한 개인정보의 처리 동의(선택)
 ① 소비자권익보호에 관한 사항
@@ -272,22 +467,10 @@
 제 25 조 (통지)
 ① 서비스가 회원에 대하여 통지를 하는 경우 서비스가 회사에 등록한 전자우편 주소로 할 수 있습니다.
 ② 서비스는 불특정다수 회원에게 통지를 해야 할 경우 공지 게시판을 통해 7일 이상 게시함으로써 개별 통지에 갈음할 수 있습니다.</p></string>
-    <string name="join_user_name">사용하실 닉네임을 정해주세요</string>
-    <string name="join_user_password">사용하실 비밀번호를 정해주세요</string>
-    <string name="invalid_nickname">닉네임은 4글자 이상, 12글자 미만이어야 합니다.</string>
-    <string name="password_rule">9글자 이상으로, 대소문자, 숫자와 특수문자가 포함되게 작성해주세요</string>
-    <string name="password_usable">사용가능한 비밀번호 입니다!</string>
-    <string name="password_error">비밀번호는 9글자 이상이어야 합니다.</string>
-    <string name="password_check">비밀번호 확인</string>
-    <string name="join">가입하기</string>
-    <string name="start">시작하기</string>
-    <string name="certification_code_resend">기입해주신 이메일 주소와\n스팸메일함, 메일함 용량을 다시 한번 확인해주세요! </string>
 
-    <string name="join_membership">회원가입</string>
-    <string name="join_email">사용하실 이메일을 정해주세요</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="blank_text">blank_text</string>
+    <string name="blank_text">blank</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="insert_email">찾으실 이메일을 입력해주세요</string>

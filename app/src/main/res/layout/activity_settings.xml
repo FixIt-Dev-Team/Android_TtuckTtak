@@ -1,243 +1,306 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/onboarding_"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.setting.SettingsActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textview_ChangeSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/change_settings"
-        android:textColor="@color/general_theme_black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+    <data>
 
-    <ImageButton
-        android:id="@+id/button_back"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@android:color/transparent"
-        android:contentDescription="@string/blank_text"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_arrow_left"
-        app:layout_constraintBottom_toBottomOf="@+id/textview_ChangeSettings"
-        app:layout_constraintEnd_toStartOf="@+id/textview_ChangeSettings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textview_ChangeSettings" />
+        <variable
+            name="viewmodel"
+            type="com.gachon.ttuckttak.ui.setting.SettingsViewmodel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_profile"
+        android:id="@+id/onboarding_"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="30dp"
-        android:paddingVertical="18dp"
-        android:background="@drawable/textbox_state_normal"
-        android:columnCount="3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_ChangeSettings">
+        android:layout_height="match_parent"
+        tools:context=".ui.setting.SettingsActivity">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageview_Profile"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="20dp"
-            android:src="@drawable/img_profile"
-            android:contentDescription="@string/blank_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- 설정 변경 화면 제목 텍스트 -->
+        <TextView
+            android:id="@+id/textview_ChangeSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            app:layout_constraintStart_toEndOf="@id/imageview_Profile"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:includeFontPadding="false"
+            android:lineHeight="23sp"
+            android:text="@string/change_settings"
+            android:textColor="@color/general_theme_black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" >
+            app:layout_constraintVertical_bias="0.03" />
 
-            <TextView
-                android:id="@+id/textview_userName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_kr_bold"
-                android:includeFontPadding="false"
-                android:text="@string/user_name"
-                android:textColor="@color/general_theme_black"
-                android:textSize="14sp"
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/button_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/back_content_description"
+            android:onClick="@{() -> viewmodel.goBack()}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@id/textview_ChangeSettings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0444"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_ChangeSettings" />
+
+        <!-- 프로필 레이아웃 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="13.5dp"
+            android:background="@drawable/textbox_state_normal"
+            android:columnCount="3"
+            android:onClick="@{() -> viewmodel.goSettingsProfileActivity()}"
+            android:paddingVertical="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_ChangeSettings"
+            app:layout_constraintVertical_bias="0.0472">
+
+            <!-- 프로필 이미지 -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageview_Profile"
+                android:layout_width="59dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="20dp"
+                android:contentDescription="@string/profile_content_description"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{viewmodel.profile.profileImgUrl}"
+                tools:src="@drawable/img_profile" />
+
+            <!-- 프로필 정보 레이아웃 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageview_Profile"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textview_userName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:includeFontPadding="false"
+                    android:lineHeight="23sp"
+                    android:text="@{viewmodel.profile.userName}"
+                    android:textColor="@color/general_theme_black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/user_nickname" />
+
+                <TextView
+                    android:id="@+id/textview_userEmail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:includeFontPadding="false"
+                    android:lineHeight="20sp"
+                    android:text="@{viewmodel.profile.email}"
+                    android:textColor="@color/system_theme_darkgray"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textview_userName"
+                    tools:text="@string/user_email2" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 이동 버튼 이미지 -->
+            <ImageButton
+                android:id="@+id/button_settingProfile"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:adjustViewBounds="true"
+                android:backgroundTint="@android:color/transparent"
+                android:clickable="false"
+                android:contentDescription="@string/next_content_description"
+                android:src="@drawable/ic_arrow_right"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textview_userEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/noto_sans_kr_bold"
-                android:includeFontPadding="false"
-                android:text="@string/user_email"
-                android:textColor="@color/system_theme_darkgray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_userName" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageButton
-            android:id="@+id/button_settingProfile"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:adjustViewBounds="true"
-            android:backgroundTint="@android:color/transparent"
-            android:clickable="false"
-            android:contentDescription="@string/blank_text"
-            android:src="@drawable/ic_arrow_right"
+        <!-- 설정 레이아웃 1 -->
+        <LinearLayout
+            android:id="@+id/layout_alertAndConsumer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="13.5dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/main_theme_subblue"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/layout_profile"
+            app:layout_constraintStart_toStartOf="@id/layout_profile"
+            app:layout_constraintTop_toBottomOf="@id/layout_profile"
+            app:layout_constraintVertical_bias="0.105">
+
+            <Button
+                android:id="@+id/button_alertSetting"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/general_theme_white"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:lineHeight="23sp"
+                android:onClick="@{() -> viewmodel.goSettingsAlertActivity()}"
+                android:paddingVertical="14.5dp"
+                android:text="@string/alert_setting"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/general_theme_white" />
+
+            <Button
+                android:id="@+id/button_consumerCenter"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/general_theme_white"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:lineHeight="23sp"
+                android:paddingVertical="14.5dp"
+                android:text="@string/consumer_center"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!-- 설정 레이아웃 2 -->
+        <LinearLayout
+            android:id="@+id/layout_reviewHelpUse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="13.5dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/main_theme_subblue"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/layout_alertAndConsumer"
+            app:layout_constraintStart_toStartOf="@id/layout_alertAndConsumer"
+            app:layout_constraintTop_toBottomOf="@id/layout_alertAndConsumer"
+            app:layout_constraintVertical_bias="0.0385">
+
+            <Button
+                android:id="@+id/layout_review"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/general_theme_white"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:lineHeight="23sp"
+                android:paddingVertical="14.5dp"
+                android:text="@string/review"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/general_theme_white" />
+
+            <Button
+                android:id="@+id/button_help"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/general_theme_white"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:lineHeight="23sp"
+                android:paddingVertical="14.5dp"
+                android:text="@string/help"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/general_theme_white" />
+
+            <Button
+                android:id="@+id/button_use"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@color/general_theme_white"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:lineHeight="23sp"
+                android:paddingVertical="14.5dp"
+                android:text="@string/use"
+                android:textAlignment="viewStart"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <!-- 뚝딱 버전 텍스트 -->
+        <TextView
+            android:id="@+id/textview_ttuckttakVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:includeFontPadding="false"
+            android:lineHeight="17sp"
+            android:text="@string/ttuckttak_version"
+            android:textColor="@color/system_theme_gray"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/layout_reviewHelpUse"
+            app:layout_constraintStart_toStartOf="@id/layout_reviewHelpUse"
+            app:layout_constraintTop_toBottomOf="@id/layout_reviewHelpUse"
+            app:layout_constraintVertical_bias="0.2254" />
+
+        <Button
+            android:id="@+id/button_logout"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/general_theme_white"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:lineHeight="20sp"
+            android:includeFontPadding="false"
+            android:onClick="@{() -> viewmodel.logout()}"
+            android:text="@string/logout"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/textview_ttuckttakVersion"
+            app:layout_constraintStart_toStartOf="@id/textview_ttuckttakVersion"
+            app:layout_constraintTop_toBottomOf="@id/textview_ttuckttakVersion"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.1279"/>
+
+        <include
+            android:id="@+id/layout_cs"
+            layout="@layout/dialog_cs"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_alertAndConsumer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="61dp"
-        android:background="@drawable/bg_rectangle_round"
-        android:backgroundTint="@color/main_theme_subblue"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@id/layout_profile"
-        app:layout_constraintStart_toStartOf="@id/layout_profile"
-        app:layout_constraintTop_toBottomOf="@id/layout_profile">
-
-        <Button
-            android:id="@+id/button_alertSetting"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:drawableTint="@color/general_theme_white"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="@string/alert_setting"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/general_theme_white" />
-
-        <Button
-            android:id="@+id/button_consumerCenter"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:drawableTint="@color/general_theme_white"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="@string/consumer_center"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_reviewHelpUse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_rectangle_round"
-        android:backgroundTint="@color/main_theme_subblue"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="@id/layout_alertAndConsumer"
-        app:layout_constraintStart_toStartOf="@id/layout_alertAndConsumer"
-        app:layout_constraintTop_toBottomOf="@id/layout_alertAndConsumer">
-
-        <Button
-            android:id="@+id/layout_review"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:drawableTint="@color/general_theme_white"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="@string/review"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/general_theme_white" />
-
-        <Button
-            android:id="@+id/button_help"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:drawableTint="@color/general_theme_white"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="@string/help"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/general_theme_white" />
-
-        <Button
-            android:id="@+id/button_use"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/ic_arrow_right"
-            android:drawableTint="@color/general_theme_white"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:text="@string/use"
-            android:textAlignment="viewStart"
-            android:textSize="16sp" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textview_ttuckttakVersion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/ttuckttak_version"
-        android:textColor="@color/system_theme_gray"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@id/layout_reviewHelpUse"
-        app:layout_constraintStart_toStartOf="@id/layout_reviewHelpUse"
-        app:layout_constraintTop_toBottomOf="@id/layout_reviewHelpUse" />
-
-    <Button
-        android:id="@+id/button_logout"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/general_theme_white"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/logout"
-        android:textColor="@color/general_theme_black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/textview_ttuckttakVersion"
-        app:layout_constraintStart_toStartOf="@id/textview_ttuckttakVersion"
-        app:layout_constraintTop_toBottomOf="@id/textview_ttuckttakVersion" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

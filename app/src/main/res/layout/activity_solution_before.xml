@@ -2,22 +2,18 @@
 <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ui.solution.SolutionBeforeActivity"
     android:gravity="bottom"
-    app:umanoDragView="@id/dragView"
+    app:umanoDragView="@id/slide_layout"
     app:umanoOverlay="true"
-    app:umanoPanelHeight="82dp"
-    app:umanoShadowHeight="0dp"
-    tools:context=".MainActivity">
-    <!-- gravity 를 bottom으로 하면 아래에서 위로 드래그, top으로 하면 위에서 아래로 드래그 할 수 있다.
-         umanoDragView 드래그 해서 보여줄 view를 선택
-         umanoScrollableView  슬라이딩 패널에 내용물이 패널에 표시되는것보다 많을 때 스크롤 해서 보여줄 view 부분
-         umanoParallaxOffset 에 값을 주면 해당 높이만큼 뒤에 화면을 올려준다.
-         umanoShadowHeight 는 슬라이딩 패널 윗부분에 그림자 효과
-         umanoOverlay 를 false로 해주면 슬라이딩 패널이 위로 보이고 뒷 부분은 반투명하게 보인다. -->
+    app:umanoPanelHeight="0dp"
+    app:umanoShadowHeight="0dp" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_theme_blue">
@@ -55,29 +51,28 @@
             android:includeFontPadding="false"
             android:textColor="@color/general_theme_white"
             android:textSize="12sp"
+            android:text="@string/basic_check"
             app:layout_constraintBottom_toBottomOf="@id/field_button_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="기본 상태 확인" />
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
-        <ImageButton
-            android:id="@+id/field_button_menu"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <ImageButton-->
+<!--            android:id="@+id/field_button_menu"-->
+<!--            android:layout_width="48dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:src="@drawable/ic_menu"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <!-- 스크롤 -->
         <ScrollView
             android:id="@+id/field_scroll"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:paddingHorizontal="21dp"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,7 +81,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="21dp">
 
                 <TextView
                     android:id="@+id/text_question"
@@ -102,33 +98,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Todo: RecyclerView로 변경 -->
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/button_list_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_question">
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="4dp"
-                        android:background="@drawable/bg_rectangle_round"
-                        android:drawableEnd="@drawable/ic_question"
-                        android:fontFamily="@font/noto_sans_kr_regular"
-                        android:includeFontPadding="false"
-                        android:padding="15dp"
-                        android:textAlignment="textStart"
-                        android:textColor="@color/general_theme_black"
-                        android:textSize="14sp"
-                        app:backgroundTint="@color/system_theme_subwhite"
-                        tools:text="점검 사항 (1)\nsersfsdfasdfjlksjdlkfjsdssdkf" />
-
-                </LinearLayout>
+                    app:layout_constraintTop_toBottomOf="@id/text_question" />
 
                 <TextView
                     android:id="@+id/text_fixed_availprobs"
@@ -182,6 +159,7 @@
                     android:id="@+id/button_complete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="68dp"
                     android:background="@drawable/bg_rectangle_round_line"
                     android:fontFamily="@font/noto_sans_kr_bold"
                     android:includeFontPadding="false"
@@ -200,43 +178,84 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- 올라오는 화면을 꽉 채우고 싶다면 match_parent, 내용물 만큼만 보이고 뒷 배경이 반투명처리로 보이고 싶다면 wrap_content-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dragView"
+        android:id="@+id/slide_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="650dp"
         android:background="@drawable/bg_slider"
-        android:clickable="true"
-        android:focusable="false">
+        android:backgroundTint="@color/system_theme_lightgray">
 
         <ImageView
-            android:id="@+id/slide_arrow"
+            android:id="@+id/imageview_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/ic_arrow_up"
+            android:layout_marginTop="11dp"
+            android:background="@drawable/ic_bar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:layout_marginTop="82dp"
-            android:background="@drawable/bg_slider"
-            android:paddingHorizontal="20dp"
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="27dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            tools:text="level_A_1_title"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/imageview_bar" />
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_setting"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_exclamation"
+            app:layout_constraintBottom_toBottomOf="@id/textview_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_title" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/image_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_title" />
+
+        <TextView
+            android:id="@+id/textview_level_a_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            tools:text="level_A_1_title"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_level_a_title"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

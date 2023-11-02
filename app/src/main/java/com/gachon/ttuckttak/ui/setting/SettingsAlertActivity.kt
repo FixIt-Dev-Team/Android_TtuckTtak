@@ -1,82 +1,41 @@
 package com.gachon.ttuckttak.ui.setting
 
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.data.remote.dto.member.NoticeReq
-import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivitySettingsAlertBinding
-import com.gachon.ttuckttak.ui.login.LandingActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
+
+import com.gachon.ttuckttak.ui.setting.SettingsAlertViewmodel.NavigateTo.*
 
 @AndroidEntryPoint
-class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(ActivitySettingsAlertBinding::inflate, TransitionMode.HORIZONTAL) {
+class SettingsAlertActivity : BaseActivity<ActivitySettingsAlertBinding>(
+    ActivitySettingsAlertBinding::inflate,
+    TransitionMode.HORIZONTAL
+) {
 
-    @Inject lateinit var userManager: UserManager
-    @Inject lateinit var tokenManager: TokenManager
-    @Inject lateinit var memberService: MemberService
+    private val viewModel: SettingsAlertViewmodel by viewModels()
 
     override fun initAfterBinding() {
-        setUi()
-        setClickListener()
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = this
+        setObservers()
     }
 
-    private fun setUi() = with(binding) {
-        switchEventAndFunctionPush.isChecked = intent.getBooleanExtra("pushStatus", false)
-        switchNightTimePushAlert.isChecked = intent.getBooleanExtra("nightPushStatus", false)
-    }
-
-    private fun setClickListener() = with(binding) {
-        // 뒤로가기 버튼을 누르는 경우
-        buttonBack.setOnClickListener {
-            finish()
-        }
-
-        // event switch를 누르는 경우
-        switchEventAndFunctionPush.setOnCheckedChangeListener { CompoundButton, onSwitch ->
-            launcherEvent(onSwitch)
-        }
-
-        // night time switch를 누르는 경우
-        switchNightTimePushAlert.setOnCheckedChangeListener { CompoundButton, onSwitch ->
-            launcherNight(onSwitch)
-        }
-    }
-
-    private fun launcherEvent(value: Boolean) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                // 서버에 push 요청
-                val response = memberService.eventAlert(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
-                Log.i("response", response.toString())
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
-                    showToast("push 요청 실패")
+    private fun setObservers() {
+        viewModel.viewEvent.observe(this@SettingsAlertActivity) { event ->
+            event.getContentIfNotHandled()?.let { navigateTo ->
+                when (navigateTo) {
+                    is Before -> finish()
                 }
             }
         }
-    }
 
-    private fun launcherNight(value: Boolean) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                // 서버에 push 요청
-                val response = memberService.nightAlert(tokenManager.getAccessToken()!!, NoticeReq(userManager.getUserIdx()!!, value))
-                Log.i("response", response.toString())
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
-                    showToast("push 요청 실패")
-                }
+        // 일회성 show toast
+        lifecycleScope.launch {
+            viewModel.showToastEvent.collect { message ->
+                showToast(message)
             }
         }
     }

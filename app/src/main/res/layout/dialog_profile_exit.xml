@@ -1,41 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:background="@drawable/box_alert">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:includeFontPadding="false"
-        android:text="@string/undo_change"
-        android:textAlignment="center"
-        android:textColor="@color/general_theme_black"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@id/button_back"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+    <data>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_back"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_rectangle_round"
-        android:backgroundTint="@color/main_theme_blue"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:includeFontPadding="false"
-        android:text="@string/undo"
-        android:textColor="@color/general_theme_white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7"
-        app:layout_constraintWidth_percent="0.883" />
+        <variable
+            name="viewmodel"
+            type="com.gachon.ttuckttak.ui.setting.SettingsProfileViewmodel" />
+    </data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/box_alert">
+
+        <!-- 프로필 화면 나가기 제목 텍스트 -->
+        <TextView
+            android:id="@+id/textview_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:includeFontPadding="false"
+            android:text="@string/undo_change"
+            android:textAlignment="center"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 뒤로가기 버튼 -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp"
+            android:background="@drawable/bg_rectangle_round"
+            android:backgroundTint="@color/main_theme_blue"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
+            android:lineHeight="26sp"
+            android:onClick="@{() -> viewmodel.goBack()}"
+            android:text="@string/undo"
+            android:textColor="@color/general_theme_white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_exit"
+            app:layout_constraintWidth_percent="0.8833" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

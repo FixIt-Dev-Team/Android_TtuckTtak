@@ -11,7 +11,6 @@ import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart2Binding
-import com.gachon.ttuckttak.ui.login.LandingActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -80,7 +79,7 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
 
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                Log.e("JoinPart2Activity", "서버 통신 오류: ${e.message}")
                 showToast("이메일 인증 요청 실패")
             }
         }
@@ -116,8 +115,15 @@ class JoinPart2Activity : BaseActivity<ActivityJoinPart2Binding>(ActivityJoinPar
         startTimer()
     }
 
-    private fun updateTimerText() {
-        runOnUiThread { binding.textviewTimer.text = "${time / 60} : ${time % 60}" }
+    private fun updateTimerText() = with(binding){
+        runOnUiThread {
+            val min = time / 60
+            val sec = time % 60
+            if(sec < 10) {
+                textviewTimer.text = "${min} :" + "0" + "${sec}"
+            } else { textviewTimer.text = "${min} : ${sec}" }
+            //textviewTimer.text = "${time / 60} : ${time % 60}"
+        }
     }
 
     private fun handleTimerExpiration() = with(binding) {

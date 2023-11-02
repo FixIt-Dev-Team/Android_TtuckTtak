@@ -3,141 +3,100 @@ package com.gachon.ttuckttak.ui.setting
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import androidx.lifecycle.lifecycleScope
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.content.res.AppCompatResources
-import com.bumptech.glide.Glide
-import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.local.TokenManager
-import com.gachon.ttuckttak.data.local.UserManager
-import com.gachon.ttuckttak.databinding.ActivitySettingsProfileBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.activity.viewModels
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
-import com.gachon.ttuckttak.data.remote.dto.view.ProfileDto
-import com.gachon.ttuckttak.data.remote.service.MemberService
-import com.gachon.ttuckttak.data.remote.service.ViewService
+import com.gachon.ttuckttak.base.BaseActivity
+import com.gachon.ttuckttak.databinding.ActivitySettingsProfileBinding
 import com.gachon.ttuckttak.ui.login.ResetPwActivity
-import com.gachon.ttuckttak.utils.RegexUtil
+import com.gachon.ttuckttak.ui.setting.SettingsProfileViewmodel.NavigateTo.Before
+import com.gachon.ttuckttak.ui.setting.SettingsProfileViewmodel.NavigateTo.ResetPw
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
-import java.lang.Exception
-import javax.inject.Inject
+
 
 @AndroidEntryPoint
-class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(ActivitySettingsProfileBinding::inflate, TransitionMode.HORIZONTAL) {
+class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(
+    ActivitySettingsProfileBinding::inflate,
+    TransitionMode.HORIZONTAL
+) {
 
-    @Inject lateinit var userManager: UserManager
-    @Inject lateinit var tokenManager: TokenManager
-    @Inject lateinit var memberService: MemberService
-    @Inject lateinit var viewService: ViewService
+    private val viewModel: SettingsProfileViewmodel by viewModels()
 
     private val permission = Manifest.permission.READ_MEDIA_IMAGES
 
-    private var newNickname = false
-    private var newImage = false
-
     private var isLayoutVisible = false // layout alert 화면이 현재 보여지고 있는지
 
-    override fun initAfterBinding() = with(binding) {
-        setUi()
+    override fun initAfterBinding() {
+        //checkSelfPermission()
+        binding.viewmodel = viewModel
+        binding.lifecycleOwner = this // LiveData 관찰을 위한 lifecycleOwner 설정
+        binding.layoutAlert.viewmodel = viewModel
+        binding.layoutAlert.lifecycleOwner = this // LiveData 관찰을 위한 lifecycleOwner 설정
+        setObservers()
         setClickListener()
         setFocusListener()
         setTouchListener()
     }
 
-    private fun setUi() = with(binding) {
-        edittextNickname.setText(userManager.getUserName())
-        textviewUserEmail.text = userManager.getUserMail()
+    private fun setObservers() {
+        viewModel.viewEvent.observe(this@SettingsProfileActivity) { event ->
+            event.getContentIfNotHandled()?.let { navigateTo ->
+                when (navigateTo) {
+                    is Before -> finish()
+                    is ResetPw -> startNextActivity(ResetPwActivity::class.java)
+                }
+            }
+        }
 
-        if (userManager.getUserImageUrl().isNullOrEmpty()) {
-            imageProfile.setImageDrawable(AppCompatResources.getDrawable(this@SettingsProfileActivity, R.drawable.img_profile))
+        viewModel.nicknameErrorMessage.observe(this@SettingsProfileActivity) { message ->
+            binding.layoutNickname.setBackgroundResource(R.drawable.textbox_state_error)
+            binding.textviewNicknameErrorMessage.visibility = View.VISIBLE
+            binding.textviewNicknameErrorMessage.text = message
+        }
 
-        } else {
-            Glide.with(this@SettingsProfileActivity)
-                .load(userManager.getUserImageUrl())
-                .into(imageProfile)
+        // 일회성 show toast
+        lifecycleScope.launch {
+            viewModel.showToastEvent.collect { message ->
+                showToast(message)
+            }
         }
     }
 
     private fun setClickListener() = with(binding) {
         // 뒤로가기 버튼을 누르는 경우
         buttonBack.setOnClickListener {
-            // 저장 필요한 상태
-            if (newNickname || newImage) {
-                showLayout()
+            if (viewModel.changeDetected.value == true) { // 변경 사항이 존재한다면
+                showLayout() // 변경하지 않고 나가겠냐는 화면을 보여주고
 
-            } else {
-                // 저장 필요하지 않은 상태
-                finish()
-            }
-        }
-
-        // 팝업 뒤로 가기 버튼
-        layoutAlert.buttonBack.setOnClickListener {
-            finish()
-        }
-
-        // 저장 버튼
-        imagebuttonSave.setOnClickListener {
-            if (newImage) {
-                // 이미지 갱신 있는 경우
-                // TODO("이미지 리사이징 및 사진 업로드 문제 확인")
-                updateProfile(tokenManager.getAccessToken()!!)
-                newImage = false
-                newNickname = false
-
-            } else if (newNickname) {
-                // 닉네임만 갱신하는 경우
-                updateNickname(tokenManager.getAccessToken()!!)
-                newNickname = false
+            } else { // 변경 사항이 존재하지 않는다면
+                finish() // 해당 화면 종료
             }
         }
 
         // 프로필 사진 변경을 클릭하는 경우
         layoutProfile.setOnClickListener {
-            changeImage.launch(permission)
-        }
-
-        // 비밀번호 재설정 버튼
-        buttonPasswordReset.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                try {
-                    val response = memberService.changePw(userManager.getUserMail()!!)
-
-                    withContext(Dispatchers.Main) {
-                        // 전송 성공
-                        if (response.isSuccess) {
-                            val data = response.data!!
-                            Log.i(TAG, "이메일 전송: ${data.sendSuccess}")
-
-                            // 비밀번호 재설정 activity 실행
-                            val intent = Intent(this@SettingsProfileActivity, ResetPwActivity::class.java)
-                            intent.putExtra("email", userManager.getUserMail())
-                            startActivity(intent)
-
-                        } else {
-                            Log.e(TAG, "비밀번호 재설정 실패")
-                            Log.e(TAG, "${response.code} ${response.message}")
-                            showToast("비밀번호 재설정 실패")
-                        }
-                    }
-
-                } catch (e: Exception) {
-                    withContext(Dispatchers.Main) {
-                        Log.e(TAG, "서버 통신 오류: ${e.message}")
-                        showToast("비밀번호 재설정 실패")
-                    }
-                }
+            if(Build.VERSION.SDK_INT >= 33) {
+                changeImage.launch(permission)
+            } else {
+                checkSelfPermission()
             }
         }
     }
@@ -146,78 +105,41 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
         edittextNickname.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 layoutNickname.setBackgroundResource(R.drawable.textbox_state_normal)
-                textviewOverlapNickname.visibility = View.INVISIBLE
-            }
+                textviewNicknameErrorMessage.visibility = View.INVISIBLE
 
-            else {
+            } else {
                 val nickname = edittextNickname.text.toString()
-
-                // 닉네임이 기준에 맞지 않는 경우
-                if (!RegexUtil.isValidNicknameFormat(nickname)) {
-                    layoutNickname.setBackgroundResource(R.drawable.textbox_state_error)
-                    textviewOverlapNickname.visibility = View.VISIBLE
-                    textviewOverlapNickname.text = getString(R.string.invalid_nickname)
-                }
-
-                else {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        try {
-                            val response = memberService.checkNickname(nickname)
-                            Log.i("response", response.toString())
-
-                            runOnUiThread {
-                                if (response.isSuccess) {
-                                    // 닉네임이 중복되는 경우
-                                    if (!response.data!!.isAvailable) {
-                                        layoutNickname.setBackgroundResource(R.drawable.textbox_state_error)
-                                        textviewOverlapNickname.visibility = View.VISIBLE
-                                        textviewOverlapNickname.text = getString(R.string.overlap_nickname)
-                                    }
-
-                                    else { // 닉네임이 적절한 경우
-                                        newNickname = true
-                                        imagebuttonSave.isEnabled = true
-                                    }
-                                    // userManager.saveUserName(nickname) --> 저장 버튼을 클릭 했을 때 저장되도록
-
-                                } else {
-                                    showToast("DB Error")
-                                }
-                            }
-
-                        } catch (e: Exception) {
-                            runOnUiThread {
-                                Log.e("error", "서버 통신 오류: ${e.message}")
-                                showToast("닉네임 중복 확인 실패")
-                            }
-                        }
-                    }
-                }
+                viewModel.checkNicknameAvailable(nickname)
             }
         }
     }
 
-    private val readImage = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == Activity.RESULT_OK) {
-            val data = it.data
-            val imgUri = data?.data
+    private val changeImage =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (!isGranted) { // 권한이 주어지지 않은 경우
+                showToast("프로필 이미지 변경을 위해선 갤러리 권한이 필요합니다.")
 
-            binding.imageProfile.setImageURI(imgUri)
-
-            newImage = true
-            userManager.saveUserImagePath(getRealPathFromURI(imgUri!!))
+            } else { // 권한이 주어진 경우
+                val pick = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+                readImage.launch(pick)
+            }
         }
-    }
 
-    private val changeImage = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-        // 권한이 주어지지 않은 경우
-        if (!isGranted) {
-            showToast("프로필 이미지 변경을 위해선 갤러리 권한이 필요합니다.")
-            finish()
+    private val readImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val imgUri = it.data?.data
+
+                binding.imageviewProfile.setImageURI(imgUri)
+                viewModel.setNewProfileImg(getImageFromUri(imgUri!!))
+            }
         }
-        // 권한이 주어진 경우
-        val pick = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-        readImage.launch(pick)
+
+    private fun getImageFromUri(uri: Uri): MultipartBody.Part {
+        val path = getRealPathFromURI(uri)
+        val file = File(path)
+        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData("file", "newProfileImg", requestFile)
     }
 
     private fun getRealPathFromURI(uri: Uri): String {
@@ -227,69 +149,6 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
         cursor.close()
 
         return path
-    }
-
-    private fun updateNickname(token: String) = with(binding) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val response = viewService.updateUserInfo(
-                        authCode = token,
-                        reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!, userManager.getUserImageUrl()!!),
-                        file = null
-                )
-
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccess) {
-                        val data = response.data!!
-                        Log.i(TAG, "Upadated: ${data.isSuccess}")
-                        imagebuttonSave.isEnabled = true
-
-                    } else {
-                        Log.e(TAG, "유저 정보 업데이트 실패")
-                        Log.e(TAG, "${response.code} ${response.message}")
-                        showToast("유저 정보 업데이트 실패")
-                    }
-                }
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(TAG, "서버 통신 오류: ${e.message}")
-                    showToast("유저 정보 업데이트 실패")
-                }
-            }
-        }
-    }
-    private fun updateProfile(token: String) = with(binding) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                val file = File(userManager.getUserImagePath()!!)
-                val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                val response = viewService.updateUserInfo(
-                    authCode = token,
-                    reqDto = ProfileDto(userManager.getUserIdx()!!, userManager.getUserName()!!, userManager.getUserImageUrl()!!),
-                    file = MultipartBody.Part.create(requestFile)
-                )
-
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccess) {
-                        val data = response.data!!
-                        Log.i(TAG, "Upadated: ${data.isSuccess}")
-                        imagebuttonSave.isEnabled = true
-
-                    } else {
-                        Log.e(TAG, "유저 정보 업데이트 실패")
-                        Log.e(TAG, "${response.code} ${response.message}")
-                        showToast("유저 정보 업데이트 실패")
-                    }
-                }
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e(TAG, "서버 통신 오류: ${e.message}")
-                    showToast("유저 정보 업데이트 실패")
-                }
-            }
-        }
     }
 
     private fun setTouchListener() = with(binding) {
@@ -327,8 +186,25 @@ class SettingsProfileActivity : BaseActivity<ActivitySettingsProfileBinding>(Act
         }
     }
 
+    private fun checkSelfPermission() {
+        var temp = ""
 
-    companion object {
-        const val TAG = "PROFILE"
+        //파일 읽기 권한 확인
+        if (ContextCompat.checkSelfPermission(this@SettingsProfileActivity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            temp += Manifest.permission.READ_EXTERNAL_STORAGE + " "
+        }
+
+        //파일 쓰기 권한 확인
+        if (ContextCompat.checkSelfPermission(this@SettingsProfileActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " "
+        }
+
+        if (TextUtils.isEmpty(temp) == false) {
+            // 권한 요청
+            ActivityCompat.requestPermissions(this@SettingsProfileActivity, temp.trim { it <= ' ' }.split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray(), 1)
+        } else {
+            // 모두 허용 상태
+            showToast("권한을 모두 허용")
+        }
     }
 }

@@ -7,19 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.join.JoinPart3Activity">
 
+    <!-- 뷰 프로그래스 바 -->
     <View
-        android:layout_width="240dp"
-        android:layout_height="5dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/main_theme_blue"
-        app:layout_constraintBottom_toTopOf="@id/textview_join_membership"
+        app:layout_constraintHeight_percent="0.0063"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.66" />
 
+    <!-- 회원가입 제목 텍스트-->
     <TextView
         android:id="@+id/textview_join_membership"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:includeFontPadding="false"
+        android:lineHeight="23sp"
         android:text="@string/join_membership"
         android:textColor="@color/general_theme_black"
         android:textSize="16sp"
@@ -27,149 +32,204 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.0318" />
 
+    <!-- 뒤로 가기 버튼 -->
     <ImageButton
         android:id="@+id/imagebutton_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:backgroundTint="@android:color/transparent"
-        android:contentDescription="@string/blank_text"
+        android:contentDescription="@string/back_content_description"
+        android:onClick="@{() -> viewmodel.goBack()}"
         android:scaleType="centerInside"
         android:src="@drawable/ic_arrow_left"
         app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
-        app:layout_constraintEnd_toStartOf="@id/textview_join_membership"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0361"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
 
+    <!-- 닉네임 제목 텍스트 -->
     <TextView
         android:id="@+id/textview_join_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="131dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
+        android:lineHeight="20sp"
         android:text="@string/join_user_name"
         android:textColor="@color/general_theme_black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_back"
-        app:layout_constraintTop_toBottomOf="@id/imagebutton_back" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_join_membership"
+        app:layout_constraintVertical_bias="0.1992" />
 
+    <!-- 닉네임 입력 에딧 텍스트 -->
     <EditText
         android:id="@+id/edittext_name"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:autofillHints="@string/name_autofill"
         android:background="@drawable/textbox"
+        android:fontFamily="@font/noto_sans_kr_medium"
         android:hint="@string/user_name"
+        android:includeFontPadding="false"
         android:inputType="text"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
+        android:lineHeight="20sp"
+        android:paddingHorizontal="19dp"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_join_user_name"
-        app:layout_constraintWidth_percent="0.91" />
+        app:layout_constraintVertical_bias="0.0146"
+        app:layout_constraintWidth_percent="0.9111" />
 
+    <!-- 에러 메세지 텍스트 -->
     <TextView
         android:id="@+id/textview_nickname_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:includeFontPadding="false"
+        android:lineHeight="16sp"
         android:textColor="@color/general_theme_red"
-        android:textSize="12sp"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/edittext_name"
         app:layout_constraintTop_toBottomOf="@id/edittext_name"
+        app:layout_constraintVertical_bias="0.0061"
         tools:text="@string/overlap_nickname" />
 
+    <!-- 비밀번호 제목 텍스트 -->
     <TextView
         android:id="@+id/textview_join_user_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
+        android:lineHeight="20sp"
         android:text="@string/join_user_password"
         android:textColor="@color/general_theme_black"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/textview_join_user_name"
-        app:layout_constraintTop_toBottomOf="@id/edittext_name" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0972"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_name"
+        app:layout_constraintVertical_bias="0.0876" />
 
+    <!-- 비밀번호 입력 에딧 텍스트 -->
     <EditText
         android:id="@+id/edittext_password"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:autofillHints="@string/password_autofill"
         android:background="@drawable/textbox"
+        android:fontFamily="@font/noto_sans_kr_medium"
         android:hint="@string/pw"
+        android:includeFontPadding="false"
         android:inputType="textPassword"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
+        android:lineHeight="20sp"
+        android:paddingHorizontal="19dp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/edittext_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="@id/edittext_name"
-        app:layout_constraintTop_toBottomOf="@id/textview_join_user_password" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_join_user_password"
+        app:layout_constraintVertical_bias="0.0187"
+        app:layout_constraintWidth_percent="0.9111" />
 
+    <!-- 비밀번호 에러 텍스트 -->
     <TextView
         android:id="@+id/textview_password_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
+        android:fontFamily="@font/noto_sans_kr_regular"
         android:gravity="center"
+        android:includeFontPadding="false"
+        android:lineHeight="16sp"
         android:text="@string/password_rule"
         android:textColor="@color/general_theme_black"
-        android:textSize="12sp"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/edittext_password"
         app:layout_constraintStart_toStartOf="@id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
+        app:layout_constraintTop_toBottomOf="@id/edittext_password"
+        app:layout_constraintVertical_bias="0.0134" />
 
+    <!-- 비밀번호 확인 입력 에딧 텍스트  -->
     <EditText
         android:id="@+id/edittext_password_check"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="80dp"
+        android:autofillHints="@string/password_autofill"
         android:background="@drawable/textbox"
+        android:fontFamily="@font/noto_sans_kr_medium"
         android:hint="@string/password_check"
+        android:includeFontPadding="false"
         android:inputType="textPassword"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
+        android:lineHeight="20sp"
+        android:paddingHorizontal="19dp"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/edittext_password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="@id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_password_message"
+        app:layout_constraintVertical_bias="0.0313"
+        app:layout_constraintWidth_percent="0.9111" />
 
+    <!-- 비밀번호 확인 입력 텍스트 -->
     <TextView
         android:id="@+id/textview_check_password_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
+        android:lineHeight="16sp"
         android:text="@string/discordance_pw"
         android:textColor="@color/general_theme_red"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@id/edittext_password_check"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password_check" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9250"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_password_check"
+        app:layout_constraintVertical_bias="0.0069" />
 
+    <!-- 가입하기 버튼  -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_join"
         style="@style/DefaultButton"
-        android:layout_width="318dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
+        android:lineHeight="26sp"
         android:text="@string/join"
-        android:enabled="false"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/edittext_password_check"
-        app:layout_constraintStart_toStartOf="@id/edittext_password_check"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password_check" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edittext_password_check"
+        app:layout_constraintVertical_bias="0.3116"
+        app:layout_constraintWidth_percent="0.8833" />
 
+    <!-- 팝업  레이아웃 -->
     <include
         android:id="@+id/layout_alert"
         layout="@layout/dialog_agree_terms"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="283dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

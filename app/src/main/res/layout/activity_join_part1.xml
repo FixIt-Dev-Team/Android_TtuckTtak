@@ -1,107 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.join.JoinPart1Activity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-        android:layout_width="120dp"
-        android:layout_height="5dp"
-        android:background="@color/main_theme_blue"
-        app:layout_constraintBottom_toTopOf="@id/textview_join_membership"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/textview_join_membership"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/join_membership"
-        android:textColor="@color/general_theme_black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        <variable
+            name="viewmodel"
+            type="com.gachon.ttuckttak.ui.join.JoinPart1Viewmodel" />
+    </data>
 
-    <ImageButton
-        android:id="@+id/imagebutton_back"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@android:color/transparent"
-        android:contentDescription="@string/blank_text"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_arrow_left"
-        app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
-        app:layout_constraintEnd_toStartOf="@id/textview_join_membership"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.join.JoinPart1Activity">
 
-    <TextView
-        android:id="@+id/textview_join_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="289dp"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:text="@string/join_email"
-        android:textColor="@color/general_theme_black"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/textview_join_membership"
-        app:layout_constraintStart_toStartOf="@id/imagebutton_back"
-        app:layout_constraintTop_toBottomOf="@id/textview_join_membership" />
+        <!-- 뷰 프로그래스 바 -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/main_theme_blue"
+            app:layout_constraintHeight_percent="0.0063"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.33" />
 
-    <EditText
-        android:id="@+id/edittext_email"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/textbox"
-        android:hint="@string/user_email"
-        android:inputType="textEmailAddress"
-        android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_join_email"
-        app:layout_constraintWidth_percent="0.91" />
+        <!-- 회원가입 제목 텍스트-->
+        <TextView
+            android:id="@+id/textview_join_membership"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:includeFontPadding="false"
+            android:lineHeight="23sp"
+            android:text="@string/join_membership"
+            android:textColor="@color/general_theme_black"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0318" />
 
-    <TextView
-        android:id="@+id/textview_error_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_kr_bold"
-        android:textColor="@color/general_theme_red"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_email"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_email"
-        tools:text="@string/overlap_email" />
+        <!-- 뒤로 가기 버튼 -->
+        <ImageButton
+            android:id="@+id/imagebutton_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@android:color/transparent"
+            android:contentDescription="@string/back_content_description"
+            android:onClick="@{() -> viewmodel.goBack()}"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_left"
+            app:layout_constraintBottom_toBottomOf="@id/textview_join_membership"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0361"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_join_membership" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_send"
-        style="@style/DefaultButton"
-        android:layout_width="318dp"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/certification_code"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_email"
-        app:layout_constraintStart_toStartOf="@+id/edittext_email"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_email" />
+        <!-- 이메일 가입 설명 텍스트 -->
+        <TextView
+            android:id="@+id/textview_join_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_regular"
+            android:includeFontPadding="false"
+            android:lineHeight="20sp"
+            android:text="@string/join_email"
+            android:textColor="@color/general_theme_black"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0972"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_join_membership"
+            app:layout_constraintVertical_bias="0.2782" />
 
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- 이메일 입력 에딧 텍스트 -->
+        <EditText
+            android:id="@+id/edittext_email"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:autofillHints="@string/email_autofill"
+            android:background="@drawable/textbox"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:hint="@string/user_email"
+            android:includeFontPadding="false"
+            android:inputType="textEmailAddress"
+            android:lineHeight="20sp"
+            android:paddingHorizontal="19dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_join_email"
+            app:layout_constraintVertical_bias="0.0163"
+            app:layout_constraintWidth_percent="0.9111" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- 오류 메세지 텍스트 -->
+        <TextView
+            android:id="@+id/textview_error_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:includeFontPadding="false"
+            android:lineHeight="16sp"
+            android:textColor="@color/general_theme_red"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/edittext_email"
+            app:layout_constraintTop_toBottomOf="@id/edittext_email"
+            app:layout_constraintVertical_bias="0.0069"
+            tools:text="@string/overlap_email" />
+
+        <!-- 인증코드 보내기 버튼-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_send"
+            style="@style/DefaultButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:enabled="false"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
+            android:onClick="@{() ->viewmodel.sendEmailConfirmation(edittextEmail.getText().toString())}"
+            android:text="@string/certification_code"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.07"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edittext_email"
+            app:layout_constraintVertical_bias="0.5379"
+            app:layout_constraintWidth_percent="0.8833" />
+
+        <!-- TODO: 이게 뭔지 모르겠음 -->
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

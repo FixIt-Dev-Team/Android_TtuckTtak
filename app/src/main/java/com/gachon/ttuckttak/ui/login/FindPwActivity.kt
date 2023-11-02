@@ -1,76 +1,54 @@
 package com.gachon.ttuckttak.ui.login
 
-import android.content.Intent
-import android.util.Log
 import android.util.Patterns
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
-import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityFindPwBinding
+import com.gachon.ttuckttak.ui.login.FindPwViewmodel.NavigateTo.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FindPwActivity : BaseActivity<ActivityFindPwBinding>(ActivityFindPwBinding::inflate, TransitionMode.HORIZONTAL) {
 
-    @Inject lateinit var memberService: MemberService
+    private val viewModel: FindPwViewmodel by viewModels()
 
     override fun initAfterBinding() {
-        setClickListener()
+        binding.viewmodel = viewModel
+        setObservers()
         setFocusChangeListener()
     }
 
-    private fun setClickListener() = with(binding) {
-        buttonSend.setOnClickListener {
-            requestChangePw()
-        }
-
-        imagebuttonBack.setOnClickListener {
-            finish()
-        }
-    }
-
-    private fun requestChangePw() = with(binding) {
-        val email = edittextEmail.text.toString()
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                // 서버에 비밀번호 변경 전송 요청
-                val response = memberService.changePw(email)
-                Log.i("response", response.toString())
-
-                if (response.isSuccess) {
-                    moveToResetPwActivity(email)
-
-                } else {
-                    showError(code = response.code)
-                }
-
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    Log.e("FindPwActivity", "서버 통신 오류: ${e.message}")
-                    showToast("이메일 인증 요청 실패")
+    private fun setObservers() {
+        viewModel.viewEvent.observe(this@FindPwActivity) { event ->
+            event.getContentIfNotHandled()?.let { navigateTo ->
+                when (navigateTo) {
+                    is Before -> finish()
+                    is ResetPw -> startNextActivity(ResetPwActivity::class.java)
                 }
             }
         }
-    }
 
-    private fun moveToResetPwActivity(email: String) {
-        val intent = Intent(this@FindPwActivity, ResetPwActivity::class.java).apply {
-            putExtra("email", email)
+        lifecycleScope.launch {
+            // 서버 응답 코드를 구독하여 UI 업데이트 로직을 결정
+            viewModel.response.collect { response ->
+                if (response?.code == 400) { // 에러코드가 400인 경우, 에러 메시지 표시 함수 호출
+                    showNonExistingAccountError()
+                }
+            }
         }
-        startActivity(intent)
-    }
 
-    private suspend fun showError(code: Int) = withContext(Dispatchers.Main) {
-        when (code) {
-            400 -> showNonExistingAccountError()
+        lifecycleScope.launch {
+            // 토스트 메시지 내용을 구독하여 메시지를 보여준다
+            viewModel.showToastEvent.collect { message ->
+                if (message != null) {
+                    showToast(message)
+                }
+            }
         }
     }
 

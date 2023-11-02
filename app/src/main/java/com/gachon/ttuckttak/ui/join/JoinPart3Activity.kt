@@ -9,13 +9,13 @@ import androidx.lifecycle.lifecycleScope
 import com.gachon.ttuckttak.R
 import com.gachon.ttuckttak.base.BaseActivity
 import com.gachon.ttuckttak.base.BaseResponse
-import com.gachon.ttuckttak.data.local.TokenManager
 import com.gachon.ttuckttak.data.local.UserManager
 import com.gachon.ttuckttak.data.remote.dto.auth.LoginRes
 import com.gachon.ttuckttak.data.remote.dto.auth.SignUpReq
 import com.gachon.ttuckttak.data.remote.service.AuthService
 import com.gachon.ttuckttak.data.remote.service.MemberService
 import com.gachon.ttuckttak.databinding.ActivityJoinPart3Binding
+import com.gachon.ttuckttak.repository.auth.AuthRepository
 import com.gachon.ttuckttak.ui.login.LandingActivity
 import com.gachon.ttuckttak.ui.main.StartActivity
 import com.gachon.ttuckttak.ui.terms.TermsPromoteActivity
@@ -33,7 +33,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private var validNickname = false
     private val email: String by lazy { intent.getStringExtra("email")!! }
     @Inject lateinit var userManager: UserManager
-    @Inject lateinit var tokenManager: TokenManager
+    @Inject lateinit var authRepository: AuthRepository
     @Inject lateinit var authService: AuthService
     @Inject lateinit var memberService: MemberService
 
@@ -47,7 +47,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     }
 
     private fun setClickListener() = with(binding) {
-        imagebuttonBack.setOnClickListener { finish() }
+        imagebuttonBack.setOnClickListener { startActivityWithClear(LandingActivity::class.java) }
         buttonJoin.setOnClickListener { showLayout() }
 
         // 시작하기 버튼을 클릭한 경우
@@ -74,7 +74,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                    Log.e("JoinPart3Activity", "서버 통신 오류: ${e.message}")
                     showToast("회원가입 요청 실패")
                 }
             }
@@ -84,8 +84,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
     private suspend fun handleSignUpResponse(response: BaseResponse<LoginRes>) {
         with(response) {
             if (isSuccess) {
-                userManager.saveUserIdx(response.data!!.userIdx)
-                tokenManager.saveToken(response.data.tokenInfo)
+                authRepository.saveUserInfo(response.data!!)
                 startNextActivity(StartActivity::class.java)
 
             } else {
@@ -198,7 +197,7 @@ class JoinPart3Activity : BaseActivity<ActivityJoinPart3Binding>(ActivityJoinPar
                         } catch (e: Exception) {
                             runOnUiThread {
                                 validNickname = false
-                                Log.e(LandingActivity.TAG, "서버 통신 오류: ${e.message}")
+                                Log.e("JoinPart3Activity", "서버 통신 오류: ${e.message}")
                                 showToast("닉네임 사용 가능 요청 실패")
                             }
                         }
